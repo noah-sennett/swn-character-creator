@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Character Generator </title>
+    <link href="stylesheet.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <script src="js/charactersheet.js"></script>
+    <label for="name">Name</label>
+    <input id="name" type="text" size="9"></input>
+    <span style="display:inline-block; width: 30px;"></span>
+    <label for="class">Class</label>
+    <select id="class" onchange="(this.value=='Adventurer') ? showSubclasses(): hideSubclasses();">
+      <option value="warrior">Warrior</option>
+      <option value="Expert">Expert</option>
+      <option value="Psychic">Psychic</option>
+      <option value="Adventurer">Adventurer</option>
+    </select>
+    
+    <select id="adventurer_subclass">
+      <option value="war_exp">Warrior/Expert</option>
+      <option value="war_psy">Warrior/Psychic</option>
+      <option value="exp_psy">Expert/Psychic</option>
+    </select>
+
+    <br>
+    <br>
+
+    <button onclick="attrs.forEach(rollAttr);show14Attr();resetTemps();">Roll 3d6 in order</button> <br>
+
+    <div style="float:left" class="container">
+      <div class="item attr"> Strength</div>
+      <div class="item val">  <input type="number" id="strength_attr" min="3" max="18" onchange="updateMod('strength')"></div>
+      <div class="item mod"><span id="strength_mod">+0 </span></div>
+      <div class="item attr"> Dexterity</div>
+        <div class="item val">  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')"></div>
+      <div class="item mod"><span id="dexterity_mod">+0 </span></div>
+      <div class="item attr"> Constitution</div>
+      <div class="item val">  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')"></div>
+      <div class="item mod"><span id="constitution_mod">+0 </span></div>
+      <div class="item attr"> Intelligence</div>
+      <div class="item val">  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')"></div>
+      <div class="item mod"><span id="intelligence_mod">+0 </span></div>
+      <div class="item attr"> Wisdom</div>
+      <div class="item val">  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')"></div>
+      <div class="item mod"><span id="wisdom_mod">+0 </span></div>
+      <div class="item attr"> Charisma</div>
+      <div class="item val">  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')"></div>
+      <div class="item mod"><span id="charisma_mod">+0 </span></div>
+    </div>
+
+    <span style="display:inline-block; width: 30px;"></span>
+
+    <div id="14attr">
+      <label for="14attrList">Set one attribute to 14</label><br>
+      <select id="14attrList" onchange="attrTo14(this.value);">
+	<option value=""></option>
+	<option value="strength">Strength</option>
+	<option value="dexterity">Dexterity</option>
+	<option value="constitution">Constitution</option>
+	<option value="intelligence">Intelligence</option>
+	<option value="wisdom">Wisdom</option>
+	<option value="charisma">Charisma</option>
+      </select>
+    </div>
+      
+    <script>hide14Attr();hideSubclasses();</script>    
+<!-- <br><br> -->
+<!--     <div class="container"> -->
+<!--       <div class="item attr"> Strength</div> -->
+<!--       <div class="item val">  <select type="number" id="strength_attr" min="3" max="18"></div> -->
+<!--       <div class="item mod">+0</div> -->
+<!--       <div class="item attr"> Dexterity</div> -->
+<!--         <div class="item val">  <input type="number" id="dexterity_attr" min="3" max="18"></div> -->
+<!--       <div class="item mod">+0</div> -->
+<!--       <div class="item attr"> Constitution</div> -->
+<!--       <div class="item val">  <input type="number" id="constitution_attr" min="3" max="18"></div> -->
+<!--       <div class="item mod">+0</div> -->
+<!--       <div class="item attr"> Intelligence</div> -->
+<!--       <div class="item val">  <input type="number" id="intelligence_attr" min="3" max="18"></div> -->
+<!--       <div class="item mod">+0</div> -->
+<!--       <div class="item attr"> Wisdom</div> -->
+<!--       <div class="item val">  <input type="number" id="wisdom_attr" min="3" max="18"></div> -->
+<!--       <div class="item mod">+0</div> -->
+<!--       <div class="item attr"> Charisma</div> -->
+<!--       <div class="item val">  <input type="number" id="charisma_attr" min="3" max="18"></div> -->
+<!--       <div class="item mod">+0</div> -->
+<!--     </div> -->
+    
+  </body>
+</html>

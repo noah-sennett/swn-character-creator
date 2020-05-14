@@ -1,0 +1,28 @@
+.container {
+    display: inline-grid;
+    grid-template-columns: 85px 40px 20px;
+    row-gap: 15px;
+    column-gap: 10px;
+    grid-auto-rows: 10px;
+}
+
+.attr{
+    font-weight: bold;
+}
+
+.mod{
+    font-weight: bold;
+}
+
+.val {
+    font-weight: normal;
+}
+
+.14attr{
+    display: none;
+}
+
+
+input[type=number]{
+    width: 38px
+}
