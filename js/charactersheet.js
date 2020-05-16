@@ -1,5 +1,7 @@
 'use strict'
 
+// https://noah-sennett.github.io/swn-character-creator/js/backgrounds.json
+
 const attrs = ["strength","dexterity","constitution","intelligence","wisdom","charisma"];
 
 var tempAttr="";
@@ -184,4 +186,34 @@ function resetTemps(){
     tempSelections=["", "", "", "", "", ""];
 }
 
+
+//let backgroundURL = 'https://noah-sennett.github.io/swn-character-creator/js/backgrounds.json';
+let backgroundURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+
+function loadBackgrounds(){
+    let request = new XMLHttpRequest();
+    request.open('GET', backgroundURL);
+
+    request.responseType = 'json';
+
+
+    request.onload = function() {
+	const backgrounds = request.response;
+	alert(backgrounds);
+	populateBackgroundList(backgrounds);
+    }
+
+    request.send();
+}
+
+function populateBackgroundList(backgrounds) {
+    let elem = document.getElementById("backgrounds");
+
+//    for (var i=0; i<backgrounds.length; i++) {
+	var option = document.createElement("option");
+	option.text = backgrounds["barbarian"]["name"];
+	elem.add(option);
+  //  }
+
+}
 
