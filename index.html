@@ -3,6 +3,7 @@
   <head>
     <title> Character Generator </title>
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
+
   </head>
 
   <body>
@@ -27,9 +28,11 @@
     <br>
     <br>
 
-    <button onclick="attrs.forEach(rollAttr);show14Attr();resetTemps();">Roll 3d6 in order</button> <br>
+    <button onclick="attrs.forEach(rollAttr);hideAttrSelects();show14Attr();resetTemps();">Roll 3d6 in order</button>
+    <button onclick="attrs.forEach(resetAttr);hide14Attr();showAttrSelects();resetTemps();">Standard Array</button> <br><br>
+    
 
-    <div style="float:left" class="container">
+    <div style="float:left" class="attrBlock">
       <div class="item attr"> Strength</div>
       <div class="item val">  <input type="number" id="strength_attr" min="3" max="18" onchange="updateMod('strength')"></div>
       <div class="item mod"><span id="strength_mod">+0 </span></div>
@@ -52,7 +55,7 @@
 
     <span style="display:inline-block; width: 30px;"></span>
 
-    <div id="14attr">
+    <div id="14attr" style="float:left">
       <label for="14attrList">Set one attribute to 14</label><br>
       <select id="14attrList" onchange="attrTo14(this.value);">
 	<option value=""></option>
@@ -64,29 +67,94 @@
 	<option value="charisma">Charisma</option>
       </select>
     </div>
+
+    <div class="attrSelects" id="attr_selects" style="float:left">
+      <div>
+	<select id="strength_select" style="width: 38px" onchange="setAttr('strength',this.value); updateAttrSelects('strength',this.value);">
+	  <option value=""></option>
+	  <option value="14">14</option>
+	  <option value="12">12</option>
+	  <option value="11">11</option>
+	  <option value="10">10</option>
+	  <option value="9">9</option>
+	  <option value="7">7</option>
+	</select>
+      </div>
       
-    <script>hide14Attr();hideSubclasses();</script>    
-<!-- <br><br> -->
-<!--     <div class="container"> -->
-<!--       <div class="item attr"> Strength</div> -->
-<!--       <div class="item val">  <select type="number" id="strength_attr" min="3" max="18"></div> -->
-<!--       <div class="item mod">+0</div> -->
-<!--       <div class="item attr"> Dexterity</div> -->
-<!--         <div class="item val">  <input type="number" id="dexterity_attr" min="3" max="18"></div> -->
-<!--       <div class="item mod">+0</div> -->
-<!--       <div class="item attr"> Constitution</div> -->
-<!--       <div class="item val">  <input type="number" id="constitution_attr" min="3" max="18"></div> -->
-<!--       <div class="item mod">+0</div> -->
-<!--       <div class="item attr"> Intelligence</div> -->
-<!--       <div class="item val">  <input type="number" id="intelligence_attr" min="3" max="18"></div> -->
-<!--       <div class="item mod">+0</div> -->
-<!--       <div class="item attr"> Wisdom</div> -->
-<!--       <div class="item val">  <input type="number" id="wisdom_attr" min="3" max="18"></div> -->
-<!--       <div class="item mod">+0</div> -->
-<!--       <div class="item attr"> Charisma</div> -->
-<!--       <div class="item val">  <input type="number" id="charisma_attr" min="3" max="18"></div> -->
-<!--       <div class="item mod">+0</div> -->
-<!--     </div> -->
+      <div>
+	<select id="dexterity_select" style="width: 38px" onchange="setAttr('dexterity',this.value); updateAttrSelects('dexterity',this.value);">
+	  <option value=""></option>
+	  <option value="14">14</option>
+	  <option value="12">12</option>
+	  <option value="11">11</option>
+	  <option value="10">10</option>
+	  <option value="9">9</option>
+	  <option value="7">7</option>
+	</select>
+      </div>
+
+      <div>
+	<select id="constitution_select" style="width: 38px" onchange="setAttr('constitution',this.value); updateAttrSelects('constitution',this.value);">
+	  <option value=""></option>
+	  <option value="14">14</option>
+	  <option value="12">12</option>
+	  <option value="11">11</option>
+	  <option value="10">10</option>
+	  <option value="9">9</option>
+	  <option value="7">7</option>
+	</select>
+      </div>
+
+      <div>
+	<select id="intelligence_select" style="width: 38px" onchange="setAttr('intelligence',this.value); updateAttrSelects('intelligence',this.value);">
+	  <option value=""></option>
+	  <option value="14">14</option>
+	  <option value="12">12</option>
+	  <option value="11">11</option>
+	  <option value="10">10</option>
+	  <option value="9">9</option>
+	  <option value="7">7</option>
+	</select>
+      </div>
+
+      <div>
+	<select id="wisdom_select" style="width: 38px" onchange="setAttr('wisdom',this.value); updateAttrSelects('wisdom',this.value);">
+	  <option value=""></option>
+	  <option value="14">14</option>
+	  <option value="12">12</option>
+	  <option value="11">11</option>
+	  <option value="10">10</option>
+	  <option value="9">9</option>
+	  <option value="7">7</option>
+	</select>
+      </div>
+      
+      <div>
+	<select id="charisma_select" style="width: 38px" onchange="setAttr('charisma',this.value); updateAttrSelects('charisma',this.value);">
+	  <option value=""></option>
+	  <option value="14">14</option>
+	  <option value="12">12</option>
+	  <option value="11">11</option>
+	  <option value="10">10</option>
+	  <option value="9">9</option>
+	  <option value="7">7</option>
+	</select>
+      </div>
+    </div>
+
+
+
+<br><br>
+
+
+
+
+
+
+
+
+
+    <script>hide14Attr();hideAttrSelects();hideSubclasses();</script>    
     
   </body>
 </html>
