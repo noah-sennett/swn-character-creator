@@ -187,7 +187,8 @@ function resetTemps(){
 }
 
 let backgroundURL = 'https://noah-sennett.github.io/swn-character-creator/js/backgrounds.json';
-//let backgroundURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+
+var backgrounds;
 
 function loadBackgrounds(){
     let request = new XMLHttpRequest();
@@ -197,7 +198,7 @@ function loadBackgrounds(){
 
 
     request.onload = function() {
-	const backgrounds = request.response;
+	backgrounds = request.response;
 	populateBackgroundList(backgrounds);
     }
 
@@ -207,11 +208,29 @@ function loadBackgrounds(){
 function populateBackgroundList(backgrounds) {
     let elem = document.getElementById("backgrounds");
 
-//    for (var i=0; i<backgrounds.length; i++) {
+    var backgroundKeys=Object.keys(backgrounds);
+    
+    for (var key of backgroundKeys) {
 	var option = document.createElement("option");
-	option.text = backgrounds["barbarian"]["name"];
+	option.text = backgrounds[key]["name"];
+	option.value = key;
 	elem.add(option);
-  //  }
+    }
 
 }
+
+function displayBackground(background) {
+    let elemFreeSkill = document.getElementById("free_skill");
+    let elemBackgroundDescription = document.getElementById("background_description");
+
+    if (background==""){
+	elemFreeSkill.innerHTML = "";
+	elemBackgroundDescription.innerHTML = "";
+    }
+    else{
+	elemFreeSkill.innerHTML = backgrounds[background]["free_skill"];
+	elemBackgroundDescription.innerHTML = backgrounds[background]["description"];
+    }
+}
+
 
