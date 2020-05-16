@@ -1,0 +1,153 @@
+{
+    "administer":{
+	"name":"Administer",
+	"description":"Manage an organization, handle paperwork, analyze records, and keep an institution functioning on a daily basis. Roll it for bureaucratic expertise, organizational management, legal knowledge, dealing with government agencies, and understanding how institutions really work.",
+	"combat":false,
+	"psychic":false
+    },
+    "connect":{
+	"name":"Connect",
+	"description":"Find people who can be helpful to your purposes and get them to cooperate with you. Roll it to make useful connections with others, find people you know, know where to get illicit goods and services, and be familiar with foreign cultures and languages. You can use it in place of Talk for persuading people you find via this skill.",
+	"combat":false,
+	"psychic":false
+
+    },
+    "exert":{
+	"name":"Exert",
+	"description":"Apply trained speed, strength, or stamina in some feat of physical exertion. Roll it to run, jump, lift, swim, climb, throw, and so forth. You can use it as a combat skill when throwing things, though it doesn’t qualify as a combat skill for other ends.",
+	"combat":false,
+	"psychic":false
+    },
+    "fix":{
+	"name":"Fix",
+	"description":"Create and repair devices both simple and complex. How complex will depend on your character’s background; a lostworlder blacksmith is going to need some study time before he’s ready to fix that broken fusion reactor, though he can do it eventually. Roll it to fix things, build things, and identify what something is supposed to do.",
+	"combat":false,
+	"psychic":false
+    },
+    "heal":{
+	"name":"Heal",
+	"description":"Employ medical and psychological treatment for the injured or disturbed. Roll it to cure diseases, stabilize the critically injured, treat psychological disorders, or diagnose illnesses.",
+	"combat":false,
+	"psychic":false
+    },
+    "know":{
+	"name":"Know",
+	"description":"Know facts about academic or scientific fields. Roll it to understand planetary ecologies, remember relevant history, solve science mysteries, and know the basic facts about rare or esoteric topics.",
+	"combat":false,
+	"psychic":false
+    },
+    "lead":{
+	"name":"Lead",
+	"description":"Convince others to also do whatever it is you’re trying to do. Talk might persuade them that following you is smart, but Lead can make them do it even when they think it’s a bad idea. Roll it to lead troops in combat, convince others to follow you, or maintain morale and discipline.",
+	"combat":false,
+	"psychic":false
+    },
+    "notice":{
+	"name":"Notice",
+	"description":"Spot anomalies or interesting facts about your environment. Roll it for searching places, detecting ambushes, spotting things, and reading the emotional state of other people.",
+	"combat":false,
+	"psychic":false
+    },
+    "perform":{
+	"name":"Perform",
+	"description":"Exhibit some performative skill. Roll it to dance, sing, orate, act, or otherwise put on a convincing or emotionally moving performance.",
+	"combat":false,
+	"psychic":false
+    },
+    "pilot":{
+	"name":"Pilot",
+	"description":"Use this skill to pilot vehicles or ride beasts. Roll it to fly spaceships, drive vehicles, ride animals, or tend to basic vehicle repair. This skill doesn’t help you with things entirely outside the scope of your background or experience, though with some practice a PC can expand their expertise.",
+	"combat":false,
+	"psychic":false
+    },
+    "program":{
+	"name":"Program",
+	"description":"Operating or hacking computing and communications hardware. Roll it to program or hack computers, control computer-operated hardware, operate communications tech, or decrypt things.",
+	"combat":false,
+	"psychic":false
+    },
+    "punch":{
+	"name":"Punch",
+	"description":"Use it as a combat skill when fighting unarmed. If your PC means to make a habit of this rather than as a recourse of desperation, you should take the Unarmed Fighter focus described later.",
+	"combat":true,
+	"psychic":false
+    },
+    "shoot":{
+	"name":"Shoot",
+	"description":"Use it as a combat skill when using ranged weaponry, whether hurled rocks, bows, laser pistols, combat rifles, or ship’s gunnery.",
+	"combat":true,
+	"psychic":false
+    },
+    "sneak":{
+	"name":"Sneak",
+	"description":"Move without drawing notice. Roll it for stealth, disguise, infiltration, manual legerdemain, pickpocketing, and the defeat of security measures.",
+	"combat":false,
+	"psychic":false
+    },
+    "stab":{
+	"name":"Stab",
+	"description":"Use it as a combat skill when wielding melee weapons, whether primitive or complex.",
+	"combat":true,
+	"psychic":false
+    },
+    "survive":{
+	"name":"Survive",
+	"description":"Obtain the basics of food, water, and shelter in hostile environments, along with avoiding their natural perils. Roll it to handle animals, navigate difficult terrain, scrounge urban resources, make basic tools, and avoid wild beasts or gangs.",
+	"combat":false,
+	"psychic":false
+    },
+    "talk":{
+	"name":"Talk",
+	"description":"Convince other people of the facts you want them to believe. What they do with that conviction may not be completely predictable. Roll it to persuade, charm, or deceive others in conversation.",
+	"combat":false,
+	"psychic":false
+    },
+    "trade":{
+	"name":"Trade",
+	"description":"Find what you need on the market and sell what you have. Roll it to sell or buy things, figure out where to purchase hard-to-get or illicit goods, deal with customs agents, or run a business.",
+	"combat":false,
+	"psychic":false
+    },
+    "work":{
+	"name":"Work",
+	"description":"This is a catch-all skill for professions not represented by other skills. Roll it to work at a particular profession, art, or trade.",
+	"combat":false,
+	"psychic":false
+    },
+    "biopsionics":{
+	"name":"Biopsionics",
+	"description":"Master powers of physical repair, body augmentation, and shapeshifting.",
+	"combat":false,
+	"psychic":true
+    },
+    "metapsionics":{
+	"name":"Metapsionics",
+	"description":"Master powers that nullify, boost, and shape the use of other psychic abilities.",
+	"combat":false,
+	"psychic":true
+    },
+    "precognition":{
+	"name":"Precognition",
+	"description":"Master the ability to sense future events and control probability.",
+	"combat":false,
+	"psychic":true
+    },
+    "telekinesis":{
+	"name":"Telekinesis",
+	"description":"Master the remote control of kinetic energy to move objects and fabricate force constructs.",
+	"combat":false,
+	"psychic":true
+    },
+    "telepathy":{
+	"name":"Telepathy",
+	"description":"Master the reading and influencing of other sapient minds.",
+	"combat":false,
+	"psychic":true
+    },
+    "teleportation":{
+	"name":"Teleportation",
+	"description":"Master the arts of physical translocation of yourself and allies.",
+	"combat":false,
+	"psychic":true
+    }
+}
