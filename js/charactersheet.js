@@ -198,7 +198,6 @@ function loadBackgrounds(){
 
     request.onload = function() {
 	const backgrounds = request.response;
-	alert(backgrounds);
 	populateBackgroundList(backgrounds);
     }
 
