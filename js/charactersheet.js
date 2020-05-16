@@ -186,9 +186,8 @@ function resetTemps(){
     tempSelections=["", "", "", "", "", ""];
 }
 
-
-//let backgroundURL = 'https://noah-sennett.github.io/swn-character-creator/js/backgrounds.json';
-let backgroundURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+let backgroundURL = 'https://noah-sennett.github.io/swn-character-creator/js/backgrounds.json';
+//let backgroundURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
 
 function loadBackgrounds(){
     let request = new XMLHttpRequest();
