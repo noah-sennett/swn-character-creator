@@ -94,69 +94,70 @@
 	"quick_skills":["Pilot-0", "Fix-0", "Shoot or Trade-0"],
 	"growth":["+1 Any Stat", "+2 Physical Stat", "+2 Physical Stat", "+2 Mental Stat", "Connect", "Any Skill"],
 	"learning":["Connect", "Exert", "Fix", "Notice", "Pilot", "Pilot", "Shoot", "Trade"]
-    },
-    "politician":{
-	"name":,
-	"description":,
-	"free_skill":,
-	"quick_skills":[],
-	"growth":[],
-	"learning":[]
-    },
-    "scholar":{
-	"name":,
-	"description":,
-	"free_skill":,
-	"quick_skills":[],
-	"growth":[],
-	"learning":[]
-    },
-    "soldier":{
-	"name":,
-	"description":,
-	"free_skill":,
-	"quick_skills":[],
-	"growth":[],
-	"learning":[]
-    },
-    "spacer":{
-	"name":,
-	"description":,
-	"free_skill":,
-	"quick_skills":[],
-	"growth":[],
-	"learning":[]
-    },
-    "technician":{
-	"name":,
-	"description":,
-	"free_skill":,
-	"quick_skills":[],
-	"growth":[],
-	"learning":[]
-    },
-    "thug":{
-	"name":,
-	"description":,
-	"free_skill":,
-	"quick_skills":[],
-	"growth":[],
-	"learning":[]
-    },
-    "vagabond":{
-	"name":,
-	"description":,
-	"free_skill":,
-	"quick_skills":[],
-	"growth":[],
-	"learning":[]
-    },
-    "worker":{
-	"name":,
-	"description":,
-	"free_skill":,
-	"quick_skills":[],
-	"growth":[],
-	"learning":[]
     }
+    // ,
+    // "politician":{
+    // 	"name":,
+    // 	"description":,
+    // 	"free_skill":,
+    // 	"quick_skills":[],
+    // 	"growth":[],
+    // 	"learning":[]
+    // },
+    // "scholar":{
+    // 	"name":,
+    // 	"description":,
+    // 	"free_skill":,
+    // 	"quick_skills":[],
+    // 	"growth":[],
+    // 	"learning":[]
+    // },
+    // "soldier":{
+    // 	"name":,
+    // 	"description":,
+    // 	"free_skill":,
+    // 	"quick_skills":[],
+    // 	"growth":[],
+    // 	"learning":[]
+    // },
+    // "spacer":{
+    // 	"name":,
+    // 	"description":,
+    // 	"free_skill":,
+    // 	"quick_skills":[],
+    // 	"growth":[],
+    // 	"learning":[]
+    // },
+    // "technician":{
+    // 	"name":,
+    // 	"description":,
+    // 	"free_skill":,
+    // 	"quick_skills":[],
+    // 	"growth":[],
+    // 	"learning":[]
+    // },
+    // "thug":{
+    // 	"name":,
+    // 	"description":,
+    // 	"free_skill":,
+    // 	"quick_skills":[],
+    // 	"growth":[],
+    // 	"learning":[]
+    // },
+    // "vagabond":{
+    // 	"name":,
+    // 	"description":,
+    // 	"free_skill":,
+    // 	"quick_skills":[],
+    // 	"growth":[],
+    // 	"learning":[]
+    // },
+    // "worker":{
+    // 	"name":,
+    // 	"description":,
+    // 	"free_skill":,
+    // 	"quick_skills":[],
+    // 	"growth":[],
+    // 	"learning":[]
+    // }
 }
