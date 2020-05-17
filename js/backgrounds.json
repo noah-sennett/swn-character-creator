@@ -20,7 +20,7 @@
 	"description":"Your hero’s career was one of proffered pleasure. Simple prostitution is one form of this background, perhaps as an ordinary streetwalker, a part-time amateur with bills to pay, or an expensive companion to the wealthy, but other forms of satisfaction exist among the many worlds. Refined artists of conversation and grace command high fees in some societies, while others pay well for the simple company of certain men and women with the right bloodlines, special appearance, or auspicious personal qualities esteemed by their culture.",
 	"free_skill":"Perform-0",
 	"quick_skills":["Perform-0", "Notice-0", "Connect-0"],
-	"growth":["+1 Any Stat", "+2 Mental Stat", "+2 Mental Stat", "+2 Physical Stat", "Connect", "Any Skill"],
+	"growth":["+1 Any Stat", "+2 Mental", "+2 Mental", "+2 Physical", "Connect", "Any Skill"],
 	"learning":["Any Combat","Connect", "Exert", "Notice", "Perform", "Survive", "Talk", "Trade"]
     },
     "criminal":{
@@ -42,9 +42,9 @@
     "entertainer":{
 	"name":"Entertainer",
 	"description":"Singers, dancers, actors, poets, writers... the interstellar reaches teem with artists of unnumbered styles and mediums, some of which are only physically possible with advanced technological support. Your hero was a dedicated entertainer, one likely focused in a particular form of art. Patrons and talent scouts can be temperamental, however, and sometimes a budding artist needs to take steps to find their audience. Or at least, to find their audience’s money.",
-	"free_skill":"Peform-0",
+	"free_skill":"Perform-0",
 	"quick_skills":["Perform-0", "Talk-0", "Connect-0"],
-	"growth":["+1 Any Stat", "+2 Mental Stat", "+2 Mental Stat", "+2 Physical Stat", "Connect", "Any Skill"],
+	"growth":["+1 Any Stat", "+2 Mental", "+2 Mental", "+2 Physical", "Connect", "Any Skill"],
 	"learning":["Any Combat", "Connect", "Exert", "Notice", "Perform", "Perform", "Sneak", "Talk"]
     },
     "merchant":{
@@ -52,7 +52,7 @@
 	"description":"Your hero was or is a trader. Some merchants are mere peddlers and shopkeepers on primitive, low-tech worlds, while others are daring far traders who venture to distant worlds to bring home their alien treasures. The nature of trade varies widely among worlds. On some of them, it’s a business of soberly-dressed men and women ticking off trades on virtual terminals, while on others it is a more... active pursuit, requiring the judicious application of monoblades and deniable gunfire against competitors. Sometimes a deal goes bad or capital needs to be raised, and a merchant’s natural talents are turned toward the perils of adventure.",
 	"free_skill":"Trade-0",
 	"quick_skills":["Trade-0", "Talk-0", "Connect-0"],
-	"growth":["+1 Any Stat", "+2 Mental Stat", "+2 Mental Stat", "+2 Mental Stat", "Connect", "Any Skill"],
+	"growth":["+1 Any Stat", "+2 Mental", "+2 Mental", "+2 Mental", "Connect", "Any Skill"],
 	"learning":["Administer", "Any Combat", "Connect", "Fix", "Know", "Notice", "Trade", "Talk"]
     },
     "noble":{
@@ -60,7 +60,7 @@
 	"description":"Many planets are ruled by a class of nobles, and your hero was a member of one such exalted group. Such planets are often worlds of exquisite courtesy alloyed with utterly remorseless violence, and a misplaced word at the morning levee can result in an executioner’s monoblade at noon. Your hero has done something or been the victim of something to dislodge them from their comfortable place at court. Without their familiar allies, wealth, or influence, they must take a new place in the world, however distasteful that claiming might be.",
 	"free_skill":"Lead-0",
 	"quick_skills":["Lead-0", "Connect-0", "Administer-0"],
-	"growth":["+1 Any Stat", "+2 Mental Stat", "+2 Mental Stat", "+2 Mental Stat", "Connect", "Any Skill"],
+	"growth":["+1 Any Stat", "+2 Mental", "+2 Mental", "+2 Mental", "Connect", "Any Skill"],
 	"learning":["Administer", "Any Combat", "Connect", "Know", "Lead", "Notice", "Pilot", "Talk"]
     },
     "official":{
@@ -68,7 +68,7 @@
 	"description":"Most advanced worlds run on their bureaucracies, the legions of faceless men and women who fill unnumbered roles in keeping the government running as it should. Your hero was one such official. Some were law enforcement officers, others government office clerks or tax officials or trade inspectors. However necessary the work may be, it is often of unendurably tedious nature, and any man or woman with an adventurous spark to their blood will soon find themselves desperate for more exciting use of their talents.",
 	"free_skill":"Administer-0",
 	"quick_skills":["Administer-0","Talk-0","Connect-0"],
-	"growth":["+1 Any Stat", "+2 Mental Stat", "+2 Mental Stat", "+2 Mental Stat", "Connect", "Any Skill"],
+	"growth":["+1 Any Stat", "+2 Mental", "+2 Mental", "+2 Mental", "Connect", "Any Skill"],
 	"learning":["Administer", "Any Skill", "Connect", "Know", "Lead", "Notice", "Talk", "Trade"]
     },
     "peasant":{
@@ -76,7 +76,7 @@
 	"description":"A technologically-advanced world can usually produce all its necessary foodstuffs and basic resources with a handful of workers, the bulk of the labor being performed by agricultural bots. On more primitive worlds, or those with a natural environment that requires close personal attention to crops, a class of peasants will emerge. These men and women often become chattel, part and parcel of the land they occupy and traded among their betters like the farm equipment of richer worlds. Your hero was not satisfied with that life, and has done something to break free from their muddy and toilsome past.",
 	"free_skill":"Exert-0",
 	"quick_skills":["Exert-0","Sneak-0","Survive-0"],
-	"growth":["+1 Any Stat", "+2 Physical Stat", "+2 Physical Stat", "+2 Physical Stat", "Exert", "Any Skill"],
+	"growth":["+1 Any Stat", "+2 Physical", "+2 Physical", "+2 Physical", "Exert", "Any Skill"],
 	"learning":["Connect", "Exert", "Fix", "Notice", "Sneak", "Survive", "Trade", "Work"]
     },
     "physician":{
@@ -84,7 +84,7 @@
 	"description":"Bodies wear and break, even on worlds that possess the full resources of advanced postech medicine. Your hero was a physician, one trained to cure the maladies of the body or the afflictions of the mind. Some physicians are conventional health workers, while others are ship’s surgeons, military medics, missionary healers of an expanding faith, or dubious slum doctors who’ll graft over laser burns with no awkward questions asked. Wherever men and women go into danger, however, the skills of a physician are eagerly sought.",
 	"free_skill":"Heal-0",
 	"quick_skills":["Heal-0", "Know-0", "Notice-0"],
-	"growth":["+1 Any Stat", "+2 Physical Stat", "+2 Mental Stat", "+2 Mental Stat", "Connect", "Any Skill"],
+	"growth":["+1 Any Stat", "+2 Physical", "+2 Mental", "+2 Mental", "Connect", "Any Skill"],
 	"learning":["Administer", "Connect", "Fix", "Heal", "Know", "Notice", "Talk", "Trade"]
     },
     "pilot":{
@@ -92,7 +92,71 @@
 	"description":"A pilot’s role is a broad one in the far future. The most glamorous and talented navigate starships through the metadimensional storms of interstellar space, while less admired figures fly the innumerable intra-system shuttles and atmosphere craft that serve in most advanced systems. On other worlds, this career might reflect a long-haul trucker, or a horse-riding messenger, or an intrepid sailor on an alien sea. As the Pilot skill covers all these modes of transport, any character whose role revolves around vehicles or riding beasts might justify their selection of this career.",
 	"free_skill":"Pilot-0",
 	"quick_skills":["Pilot-0", "Fix-0", "Shoot or Trade-0"],
-	"growth":["+1 Any Stat", "+2 Physical Stat", "+2 Physical Stat", "+2 Mental Stat", "Connect", "Any Skill"],
+	"growth":["+1 Any Stat", "+2 Physical", "+2 Physical", "+2 Mental", "Connect", "Any Skill"],
 	"learning":["Connect", "Exert", "Fix", "Notice", "Pilot", "Pilot", "Shoot", "Trade"]
+    },
+    "politician":{
+	"name":"Politician",
+	"description":"The nature of a political career varies from world to world. On some, it’s much like one we’d recognize, with glad-handing voters, loud rallies, and quiet back room deals with supposed rivals in government. On others, it might involve a great deal more ceremonial combat, appeals to councils of elders, and success at ritual trials. Whatever the details, your hero was a politician in their home culture. Something went wrong, though, and the only way to fix it is to get clear of your constituents for a while and seek some alternative means of advancement.",
+	"free_skill":"Talk-0",
+	"quick_skills":["Talk-0", "Lead-0", "Connect-0"],
+	"growth":["+1 Any Stat", "+2 Mental", "+2 Mental", "+2 Mental", "Connect", "Any Skill"],
+	"learning":["Administer","Connect","Connect","Lead","Notice","Perform","Talk","Talk"]
+    },
+    "scholar":{
+	"name":"Scholar",
+	"description":"Scientists, sages, and professors all qualify under this career. Your hero was one such, a man or woman with a life dedicated to knowledge and understanding. It might have involved the technical expertise of a metadimensional structures engineer or the sacred memorization of the chronicles of some lostworlder sage-order, but your hero’s life was in learning. Sometimes that learning cannot be found in familiar surroundings, however, and for one reason or another, willing or not, your hero must venture out into the wider world.",
+	"free_skill":"Know-0",
+	"quick_skills":["Know-0","Connect-0","Administer-0"],
+	"growth":["+1 Any Stat", "+2 Mental", "+2 Mental", "+2 Mental", "Connect", "Any Skill"],
+	"learning":["Administer","Connect","Fix","Know","Notice","Perform","Program","Talk"]
+    },
+    "soldier":{
+	"name":"Soldier",
+	"description":"Whatever the technology or structure of their parent world, a soldier’s work is universal. Your hero was a professional fighter, whether that took the form of a barbarian noble’s thegn, a faceless conscript in a planetary army, or an elite soldier in the service of a megacorp’s private military. Whether it was because they were on the losing side, choosing to leave the service, or being forced to flee a cause they couldn’t fight for, they now find themselves navigating a world where their most salable skill is one that can cause them a great deal of trouble.",
+	"free_skill":"Any Combat-0",
+	"quick_skills":["Any Combat-0","Exert-0","Survive-0"],
+	"growth":["+1 Any Stat","+2 Physical", "+2 Physical", "+2 Physical", "Exert", "Any Skill"],
+	"learning":["Administer", "Any Combat", "Exert", "Fix", "Lead", "Notice", "Sneak", "Survive"]
+    },
+    "spacer":{
+	"name":"Spacer",
+	"description":"Almost every advanced world is highly dependent upon the resources that space flight brings them. Some of this work can be automated, but every really important task needs a flexible human operator to oversee the work. Your hero is one such spacer, either a worker who toils in the sky or a native void-born man or woman who has spent their entire life outside of natural gravity. It’s not uncommon for such workers to find better prospects in places where they can breathe without a vacc suit.",
+	"free_skill":"Fix-0",
+	"quick_skills":["Fix-0","Pilot-0","Program-0"],
+	"growth":["+1 Any Stat","+2 Physical", "+2 Physical", "+2 Mental", "Exert", "Any Skill"],
+	"learning":["Administer" , "Connect", "Exert","Fix","Know","Pilot","Program","Talk"]
+    },
+    "technician":{
+	"name":"Technician",
+	"description":"Old things break and new things need to be made. Whether a humble lostworlder blacksmith or an erudite astronautic engineer, your hero made a career out of building and mending the fruits of technology. While almost every society has a need for such services, not all of them treat their providers as generously as a technician might wish. Sometimes, these same talents can be turned toward less licit ends, and a skilled technician’s expertise is always useful to an adventuring group that plans to rely on anything more sophisticated than a sharpened stick.",
+	"free_skill":"Fix-0",
+	"quick_skills":["Fix-0","Exert-0","Notice-0"],
+	"growth":["+1 Any Stat","+2 Physical", "+2 Mental", "+2 Mental", "Connect", "Any Skill"],
+	"learning":["Administer", "Connect", "Exert", "Fix", "Fix", "Know", "Notice", "Pilot"]
+    },
+    "thug":{
+	"name":"Thug",
+	"description":"Your hero was a bruiser. They might have had a notional allegiance to some so-called “army”, or have been part of some crime boss’ strong-arm crew, or simply been a private contractor of misfortune for those who failed to pay up. They might have even been a fist in a righteous cause, defending their neighborhood from hostile outsiders or serving as informal muscle for a local leader in need of protection. Whatever the details, they’ve had to move on from their old life, and their new one is likely to involve a similar application of directed force.",
+	"free_skill":"Any Combat-0",
+	"quick_skills":["Any Combat-0", "Talk-0","Connect-0"],
+	"growth":["+1 Any Stat","+2 Mental", "+2 Physical", "+2 Physical", "Connect", "Any Skill"],
+	"learning":["Any Combat", "Connect", "Exert", "Notice", "Sneak", "Stab or Shoot", "Survive", "Talk"]
+    },
+    "vagabond":{
+	"name":"Vagabond",
+	"description":"A dilettante has money and friends; your hero simply has the road. Whether they were knocked loose from polite society at a young age or have recently found themselves cast out of a familiar life, they now roam the ways of the world and the spaces between. Some heroes find this life satisfying, with its constant novelty and the regular excitement of bare survival. Others long for a more stable arrangement, and are willing to lend their pragmatic talents to a group that offers some prospect of profit.",
+	"free_skill":"Survive-0",
+	"quick_skills":["Survive-0", "Sneak-0", "Notice-0"],
+	"growth":["+1 Any Stat","+2 Physical", "+2 Physical", "+2 Mental", "Exert", "Any Skill"],
+	"learning":["Any Combat", "Connect", "Notice", "Perform", "Pilot", "Sneak", "Survive", "Work"]
+    },
+    "worker":{
+	"name":"Worker",
+	"description":"Countless in number, every industrialized world has swarms of workers to operate the machines and perform the labor that keeps society functioning. Cooks, factory laborers, mine workers, personal servants, lawyers, clerks, and innumerable other roles are covered under this career. If your hero rolls or picks Work as a skill but has a career that would better fit another existing skill, they may substitute it accordingly. Thus, a wage-slave programmer might take Program instead of Work, while a lawyer would use Administer instead as a reflection of their litigious talent.",
+	"free_skill":"Work-0",
+	"quick_skills":["Work-0", "Connect-0", "Exert-0"],
+	"growth":["+1 Any Stat", "+1 Any Stat", "+1 Any Stat", "+1 Any Stat", "Exert", "Any Skill"],
+	"learning":["Administer", "Any Skill", "Connect", "Exert", "Fix", "Pilot", "Program", "Work"]
     }
 }
