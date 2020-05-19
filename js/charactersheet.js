@@ -1,6 +1,21 @@
 'use strict'
 
-// https://noah-sennett.github.io/swn-character-creator/js/backgrounds.json
+ $(document).ready(function () {
+     $('.dialog').dialog({
+         autoOpen: false,
+         title: 'Basic Dialog',
+	 buttons: [{
+	     text: "Done",
+	     click: function(){
+		 $(this).dialog("close");
+	     }
+	 }
+		  ]
+     });
+//     $('#contactUs').click(function () {
+//         $('#dialog').dialog('open');
+//     });
+ });
 
 const attrs = ["strength","dexterity","constitution","intelligence","wisdom","charisma"];
 
@@ -10,6 +25,17 @@ var tempAttrScore="";
 var tempSelections=["", "", "", "", "", ""];
 
 var remainingRolls=3;
+
+var combat_skill_bank = 0;
+var noncombat_skill_bank = 0;
+var psychic_skill_bank = 0;
+var any_skill_bank = 0;
+
+var combat_skill_remaining = 0;
+var noncombat_skill_remaining = 0;
+var psychic_skill_remaining = 0;
+var any_skill_remaining = 0;
+
 
 function rollDie(sides=6){
     return 1+Math.floor(sides*Math.random());
@@ -384,7 +410,6 @@ function updateSkillBoxes(boxID){
     var elemBox3 = document.getElementById(idPrefix+'3');
     var elemBox4 = document.getElementById(idPrefix+'4');
 
-    var elemTotal = document.getElementById(boxID.slice(0,-10)+'total');
     
     var elemBoxes = [elemBox0, elemBox1, elemBox2, elemBox3, elemBox4];
     
@@ -394,7 +419,6 @@ function updateSkillBoxes(boxID){
 	if (elemBox2.checked) elemBox1.checked=true;
 	if (elemBox1.checked) elemBox0.checked=true;
 	
-	elemTotal.innerHTML = idSuffix;
     }
     else{
 	if (!(elemBox0.checked)) elemBox1.checked=false;
@@ -402,14 +426,28 @@ function updateSkillBoxes(boxID){
 	if (!(elemBox2.checked)) elemBox3.checked=false;
 	if (!(elemBox3.checked)) elemBox4.checked=false;
 
-	if (idSuffix != '0'){
-	    elemTotal.innerHTML = parseInt(idSuffix)-1;
-	}
-	else{
-	    elemTotal.innerHTML = "";
-	}
 	
     }
+    updateSkillTotal(boxID.slice(0,-11));
+    
+}
+
+function updateSkillTotal(skill) {
+    
+    var elemTotal = document.getElementById(skill+'_total');
+
+    var elemBox0 = document.getElementById(skill+'_rank_box_0');
+    var elemBox1 = document.getElementById(skill+'_rank_box_1');
+    var elemBox2 = document.getElementById(skill+'_rank_box_2');
+    var elemBox3 = document.getElementById(skill+'_rank_box_3');
+    var elemBox4 = document.getElementById(skill+'_rank_box_4');
+
+    if (elemBox4.checked) elemTotal.innerHTML = "4";
+    if (!(elemBox4.checked)) elemTotal.innerHTML = "3";
+    if (!(elemBox3.checked)) elemTotal.innerHTML = "2";
+    if (!(elemBox2.checked)) elemTotal.innerHTML = "1";
+    if (!(elemBox1.checked)) elemTotal.innerHTML = "0";
+    if (!(elemBox0.checked)) elemTotal.innerHTML = "";
     
 }
 
@@ -420,6 +458,8 @@ function fixFreeSkill(background){
 	input.checked=false;
     }
 
+    if (skills == null) return; //In case this function is run before skills have been loaded
+	
     var skillKeys = Object.keys(skills);
     for (var skillKey of skillKeys){
 	var elem = document.getElementById(skillKey+'_total');
@@ -459,6 +499,10 @@ function showGrowthButtons(){
     remainingRolls = 3;
     elem1.removeAttribute("disabled")
     elem2.removeAttribute("disabled")
+    
+    fixFreeSkill(document.getElementById("backgrounds").value);
+
+    removeSkillDots();
 }
 
 function hideGrowthButtons(){
@@ -469,6 +513,10 @@ function hideGrowthButtons(){
 
     resetSelect(document.getElementById("growth"));
     resetSelect(document.getElementById("learning"));
+
+    fixFreeSkill(document.getElementById("backgrounds").value);
+
+    removeSkillDots();
 }
 
 function enableLearningChoices(){
@@ -476,12 +524,44 @@ function enableLearningChoices(){
     elemLearning.removeAttribute("disabled");
 }
 
+var popUpAnyStat = $('<div class="dialog">Strength<input type="radio" name="anystat"><br>Dexterity<input type="radio" name="anystat"><br>Constitution<input type="radio" name="anystat"><br>Intelligence<input type="radio" name="anystat"><br>Wisdom<input type="radio" name="anystat"><br>Charisma<input type="radio" name="anystat"></div>');
+var popUpPhysicalStat = $('<div class="dialog">Strength<input type="radio" name="physstat1"><input type="radio" name="physstat2"><br>Dexterity<input type="radio" name="physstat1"><input type="radio" name="physstat2"><br>Constitution<input type="radio" name="physstat1"><input type="radio" name="physstat2"></div>');
+var popUpMentalStat = $('<div>Intelligence<input type="radio" name="mentstat1"><input type="radio" name="mentstat2"><br>Wisdom<input type="radio" name="mentstat1"><input type="radio" name="mentstat2"><br>Charisma<input type="radio" name="mentstat1"><input type="radio" name="mentstat2"></div>');
+
+
 function rollGrowth(){
     let roll = rollDie(6);
     let elem = document.getElementById("growth");
     let elem2 = document.getElementById("learning");
     elem.options[roll-1].selected = "true";
 
+    var selection = elem.options[roll-1].value.toLowerCase();
+
+    if (selection.indexOf(" ")==-1) incrementSkill(selection);
+    
+    if (selection == "any skill"){
+	addAnySkill();
+    }
+    
+    if (selection == "+1 any stat"){
+	popUpAnyStat.dialog();
+//	alert($("input[name=anystat]:checked").val());
+    }
+    
+    if (selection == "+2 physical"){
+	popUpPhysicalStat.dialog();
+//	alert($("input[name=physstat1]:checked").val());
+//	alert($("input[name=physstat2]:checked").val());	
+    }
+    
+    if (selection == "+2 mental"){
+	popUpMentalStat.dialog();
+//	alert($("input[name=mentstat1]:checked").val());
+//	alert($("input[name=mentstat2]:checked").val());	
+
+    }
+
+    
     remainingRolls--;
     if (remainingRolls==0){
 	let elemGrowthButton = document.getElementById("growth_button");
@@ -496,6 +576,14 @@ function rollLearning(){
     let elem = document.getElementById("learning");
     elem.options[roll-1].selected = "true";
 
+    var skill=elem.options[roll-1].value.toLowerCase();
+    if (skill.indexOf(" ")==-1){
+	incrementSkill(skill);
+    }
+    
+    if (skill == "any combat") addCombatSkill();
+	
+    
     remainingRolls--;
     if (remainingRolls==0){
 	let elemGrowthButton = document.getElementById("growth_button");
@@ -519,3 +607,91 @@ function enableSkillChoiceButtons(background){
 	elemRoll.removeAttribute("disabled");
     }
 }
+
+function incrementSkill(skill){
+    
+    var elemBox0 = document.getElementById(skill+'_rank_box_0');
+    var elemBox1 = document.getElementById(skill+'_rank_box_1');
+
+    if (elemBox1.checked){
+	any_skill_bank++;
+	any_skill_remaining++;
+	addAnySkill();
+    }
+    else{
+	if(elemBox0.checked){
+	    elemBox1.checked=true;
+	    elemBox1.disabled=true;
+	}
+	else{
+	    elemBox0.checked=true;
+	    elemBox0.disabled=true;
+	}
+    }
+    updateSkillTotal(skill);
+}
+
+function addAnySkill(){
+    any_skill_bank++;
+    any_skill_remaining++;
+    var elem = document.getElementById("skill_bank");
+    var elemSkillDot = document.createElement("span");
+    elemSkillDot.setAttribute("class","bluedot");
+
+    elem.appendChild(elemSkillDot);
+}
+
+function addCombatSkill(){
+    combat_skill_bank++;
+    combat_skill_remaining++;
+    var elem = document.getElementById("skill_bank");
+    var elemSkillDot = document.createElement("span");
+    elemSkillDot.setAttribute("class","reddot");
+
+    elem.appendChild(elemSkillDot);
+}
+
+
+function addNonCombatSkill(){
+    noncombat_skill_bank++;
+    noncombat_skill_remaining++;
+    var elem = document.getElementById("skill_bank");
+    var elemSkillDot = document.createElement("span");
+    elemSkillDot.setAttribute("class","greendot");
+
+    elem.appendChild(elemSkillDot);
+}
+
+function addPsychicSkill(){
+    psychic_skill_bank++;
+    psychic_skill_remaining++;
+    var elem = document.getElementById("skill_bank");
+    var elemSkillDot = document.createElement("span");
+    elemSkillDot.setAttribute("class","purpledot");
+
+    elem.appendChild(elemSkillDot);
+}
+
+
+function removeSkillDots(){
+    var blueDots = document.getElementsByClassName("bluedot");
+    for (var dot of blueDots) dot.remove();
+    any_skill_bank=0;
+    any_skill_remaining=0;
+    
+    var redDots = document.getElementsByClassName("reddot");
+    for (var dot of redDots) dot.remove();
+    combat_skill_bank=0;
+    combat_skill_remaining=0;
+
+    var greenDots = document.getElementsByClassName("greendot");
+    for (var dot of greenDots) dot.remove();
+    noncombat_skill_bank=0;
+    noncombat_skill_remaining=0;
+
+    var purpleDots = document.getElementsByClassName("purpledot");
+    for (var dot of purpleDots) dot.remove();
+    psychic_skill_bank=0;
+    psychic_skill_remaining=0;
+}
+

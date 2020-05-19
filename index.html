@@ -4,10 +4,14 @@
     <title> Character Generator </title>
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
 
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/charactersheet.js"></script>
+    
   </head>
 
   <body>
-    <script src="js/charactersheet.js"></script>
     <label for="name">Name</label>
     <input id="name" type="text" size="9"></input>
     <span style="display:inline-block; width: 30px;"></span>
@@ -159,15 +163,15 @@
 
     <div>
       <p>Free Skill</p>
-      <p id="free_skill">test</p>
+      <p id="free_skill"></p>
     </div>
 
     <div>
       <textarea id="background_description" style="width:430px;height:200px"> </textarea>
     </div>
 
-    <button id="pick_skill" onclick="hideGrowthButtons();enableLearningChoices();" disabled="true">Pick 2 additional skills</button>
-    <button id="roll_skill" onclick="showGrowthButtons();" disabled="true">Roll 3 times on growth<br> and/or learning tables</button>
+    <button id="pick_skill" onclick="hideGrowthButtons();enableLearningChoices();" disabled="true">Pick 2 additional skills <br> from learning table</button>
+    <button id="roll_skill" onclick="showGrowthButtons();" disabled="true">Roll 3 times between growth<br> and learning tables</button>
 
     <button id="growth_button" onclick="rollGrowth();">Roll on growth table</button>
     <button id="learning_button" onclick="rollLearning();">Roll on learning table </button>
@@ -183,7 +187,12 @@
     </select>
     </div>
 
+    <div id="skill_bank">
+      <span>Available skills:</span>
+    </div>
+
     <script>hide14Attr();hideAttrSelects();hideSubclasses();hideGrowthButtons();</script>    
     
+    <div class="dialog">Strength<input type="radio" name="anystat"><br>Dexterity<input type="radio" name="anystat"><br>Constitution<input type="radio" name="anystat"><br>Intelligence<input type="radio" name="anystat"><br>Wisdom<input type="radio" name="anystat"><br>Charisma<input type="radio" name="anystat"></div>
   </body>
 </html>

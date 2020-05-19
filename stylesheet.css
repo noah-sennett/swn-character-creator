@@ -107,3 +107,35 @@ input[type=checkbox]{
   visibility: visible;
   opacity: 1;
 }
+
+.reddot {
+  height: 25px;
+  width: 25px;
+  background-color: #f00;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.greendot {
+  height: 25px;
+  width: 25px;
+  background-color: #0f0;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.bluedot {
+  height: 25px;
+  width: 25px;
+  background-color: #00f;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.purpledot {
+  height: 25px;
+  width: 25px;
+  background-color: #00f;
+  border-radius: 50%;
+  display: inline-block;
+}
