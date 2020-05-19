@@ -1,0 +1,41 @@
+{
+    "barbarian":{
+	"name":"Barbarian",
+	"items":["Spear (1d6+1 damage)", "Primitive hide armor (AC 13)", "Primitive shield (+1 AC)", "Knife (1d4 damage)", "Backpack (TL0)", "7 days rations", "20m rope", "500 credits"]
+    },
+    "blade":{
+	"name":"Blade",
+	"items":["Monoblade sword (1d8+1 damage)", "Woven Body Armor (AC 15)", "Secure Clothing (AC 13)", "Thermal knife (1d6 damage)", "Backpack (TL0)", "Compad", "Lazarus patch", "50 credits"]
+    },
+    "theif":{
+	"name":"Thief",
+	"items":["Laser pistol (1d6 damage)", "Armored undersuit (AC 13)", "Monoblade knife (1d6 damage)", "Climbing harness", "Low-light goggles", "2 type A cells", "Backpack (TL0)", "Compad", "Metatool", "25 credits"]
+    },
+    "hacker":{
+	"name":"Hacker",
+	"items":["Laser pistol (1d6 damage)", "Secure clothing (AC 13)", "Postech toolkit", "3 units of spare parts", "2 type A cells", "Dataslab", "Metatool", "2 line shunts", "100 credits"]
+    },
+    "gunslinger":{
+	"name":"Gunslinger",
+	"items":["Laser pistol (1d6 damage)", "Armored undersuit (AC 13)", "Monoblade knife (1d6 damage)", "8 type A cells", "Backpack (TL0)", "Compad", "100 credits"]
+    },
+    "soldier":{
+	"name":"Soldier",
+	"items":["Combat rifle (1d12 damage)", "Woven body armor (AC 15)", "Knife (1d4 damage)", "80 rounds ammo", "Backpack (TL0)", "Compad", "100 credits"]
+    },
+    "scout":{
+	"name":"Scout",
+	"items":["Laser rifle (1d10 damage)", "Armored vacc suit (AC 13)", "Knife (1d4 damage)", "Survey scanner", "Survival kit", "Binoculars (TL3)", "8 type A cells", "Backpack (TL0)", "Compad", "25 credits"]},
+    "medic":{
+	"name":"Medic",
+	"items":["Laser pistol (1d6 damage)", "Secure clothing (AC 13)", "4 Lazarus patches", "2 doses of Lift", "Backpack (TL0)", "Medkit", "Compad", "Bioscanner", "25 credits"]
+    },
+    "civilian":{
+	"name":"Civilian",
+	"items":["Secure clothing (AC 13)", "Compad", "700 credits"]
+    },
+    "technician":{
+	"name":"Technician",
+	"items": ["Laser pistol (1d6 damage)", "Armored undersuit (AC 13)", "Monoblade knife (1d6 damage)", "Postech toolkit", "6 units of spare parts", "4 type A cells", "Backpack (TL0)", "Dataslab", "Metatool", "200 credits"]
+    }
+}

@@ -219,6 +219,9 @@ var backgrounds;
 let skillURL = 'https://noah-sennett.github.io/swn-character-creator/js/skill.json';
 var skills;
 
+let fociURL = 'https://noah-sennett.github.io/swn-character-creator/js/foci.json';
+var foci;
+
 function loadBackgrounds(){
     let request = new XMLHttpRequest();
     request.open('GET', backgroundURL);
@@ -695,3 +698,17 @@ function removeSkillDots(){
     psychic_skill_remaining=0;
 }
 
+function loadFoci(){
+    let request = new XMLHttpRequest();
+    request.open('GET', fociURL);
+
+    request.responseType = 'json';
+
+
+    request.onload = function() {
+	foci = request.response;
+	generateSkillTable(foci);
+    }
+
+    request.send();
+}
