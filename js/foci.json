@@ -160,11 +160,10 @@
 	"type":"noncombat"
     },
     "tinker":{
-	"name":"Tinker"
+	"name":"Tinker",
 	"description":"You have a natural knack for modifying and improving equipment, as given in the rules on page 100.",
 	"level1":"Gain Fix as a bonus skill. Your Maintenance score is doubled, allowing you to maintain twice as many mods. Both ship and gear mods cost only half their usual price in credits, though pretech salvage requirements remain the same.",
-	"level2":"Your Fix skill is treated as one level higher for purposes of building and maintaining mods and calculating your Maintenance score. Advanced mods require one fewer pretech salvage part to
-make, down to a minimum of zero.",
+	"level2":"Your Fix skill is treated as one level higher for purposes of building and maintaining mods and calculating your Maintenance score. Advanced mods require one fewer pretech salvage part to make, down to a minimum of zero.",
 	"skill":"fix",
 	"type":"noncombat"
     },
@@ -178,8 +177,7 @@ make, down to a minimum of zero.",
     },
     "unique_gift":{
 	"name":"Unique Gift",
-	"description":"Whether due to exotic technological augmentation, a unique transhuman background, or a remarkable human talent, you have the ability to do something that’s
-simply impossible for a normal human. \n \t This is a special focus which serves as a catch-all for some novel power or background perk that doesn’t have a convenient fit in the existing rules. A transhuman who can function normally in lethal environments, a nanotech-laden experimental subject with a head full of exotic sensors, or a brilliant gravitic scientist who can fly thanks to their personal tech might all take this focus to cover their special abilities. \n \t It’s up to the GM to decide what’s reasonable and fair to be covered under this gift. If an ability is particularly powerful, it might require the user to take System Strain to use it, as described on page 32. \n \t As a general rule this ability should be better than a piece of gear the PC could buy for credits. The player is spending a very limited resource when they make this focus pick, so what they get should be good enough that they can’t just duplicate it with a fat bank account.",
+	"description":"Whether due to exotic technological augmentation, a unique transhuman background, or a remarkable human talent, you have the ability to do something that’s simply impossible for a normal human. \n \t This is a special focus which serves as a catch-all for some novel power or background perk that doesn’t have a convenient fit in the existing rules. A transhuman who can function normally in lethal environments, a nanotech-laden experimental subject with a head full of exotic sensors, or a brilliant gravitic scientist who can fly thanks to their personal tech might all take this focus to cover their special abilities. \n \t It’s up to the GM to decide what’s reasonable and fair to be covered under this gift. If an ability is particularly powerful, it might require the user to take System Strain to use it, as described on page 32. \n \t As a general rule this ability should be better than a piece of gear the PC could buy for credits. The player is spending a very limited resource when they make this focus pick, so what they get should be good enough that they can’t just duplicate it with a fat bank account.",
 	"level1":"",
 	"level2":"",
 	"skill":"",

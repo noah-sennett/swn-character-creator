@@ -707,8 +707,22 @@ function loadFoci(){
 
     request.onload = function() {
 	foci = request.response;
-	generateSkillTable(foci);
+	populateFociList(foci);
     }
 
     request.send();
+}
+
+function populateFociList(foci) {
+    let elem = document.getElementById("foci");
+
+    var fociKeys=Object.keys(foci);
+    
+    for (var key of fociKeys) {
+	var option = document.createElement("option");
+	option.text = foci[key]["name"];
+	option.value = key;
+	elem.add(option);
+    }
+
 }
