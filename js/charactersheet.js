@@ -260,8 +260,11 @@ function displayBackground(background) {
 	elemBackgroundDescription.innerHTML = "";
     }
     else{
+
+	var quickSkills = backgrounds[background]["quick_skills"];
+	
 	elemFreeSkill.innerHTML = backgrounds[background]["free_skill"];
-	elemBackgroundDescription.innerHTML = backgrounds[background]["description"];
+	elemBackgroundDescription.innerHTML = backgrounds[background]["description"]+"\n\nFree Skill: "+quickSkills[0]+"\n\nQuick Skills: "+quickSkills[0]+", "+quickSkills[1]+", "+quickSkills[2];
     }
 }
 
@@ -276,7 +279,7 @@ function populateLearning(background){
 	for (var opt of learningOptions){
 	    var option = document.createElement("option");
 	    option.text = opt;
-	    option.value = opt;
+	    option.value = opt.toLowerCase();
 	    elemLearning.add(option);
 	}
     }
@@ -293,7 +296,7 @@ function populateGrowth(background){
 	for (var opt of growthOptions){
 	    var option = document.createElement("option");
 	    option.text = opt;
-	    option.value = opt;
+	    option.value = opt.toLowerCase();
 	    elemGrowth.add(option);
 	}
     }
@@ -454,31 +457,37 @@ function updateSkillTotal(skill) {
     
 }
 
-function fixFreeSkill(background){
-    var allInputs = document.getElementsByTagName("input");
-    for (var input of allInputs){
-	input.disabled=false;
-	input.checked=false;
-    }
+// function fixFreeSkill(background){
+//     var allInputs = document.getElementsByTagName("input");
+//     for (var input of allInputs){
+// 	input.disabled=false;
+// 	input.checked=false;
+//     }
 
-    if (skills == null) return; //In case this function is run before skills have been loaded
+//     if (skills == null) return; //In case this function is run before skills have been loaded
 	
-    var skillKeys = Object.keys(skills);
-    for (var skillKey of skillKeys){
-	var elem = document.getElementById(skillKey+'_total');
-	elem.innerHTML="";
-    }
+//     var skillKeys = Object.keys(skills);
+//     for (var skillKey of skillKeys){
+// 	var elem = document.getElementById(skillKey+'_total');
+// 	elem.innerHTML="";
+//     }
     
     
-    if (background != ""){
-	var freeSkill = backgrounds[background]["free_skill"].slice(0,-2).toLowerCase();
-	var elemBox0 = document.getElementById(freeSkill+'_rank_box_0');
-	var elemTotal = document.getElementById(freeSkill+'_total');
-	elemBox0.checked=true;
-	elemBox0.disabled=true;
-	elemTotal.innerHTML = "0";
-    }
-}
+//     if (background != ""){
+// 	var freeSkill = backgrounds[background]["free_skill"].slice(0,-2).toLowerCase();
+
+// 	if (freeSkill.indexOf(" ") == -1){
+// 	    var elemBox0 = document.getElementById(freeSkill+'_rank_box_0');
+// 	    var elemTotal = document.getElementById(freeSkill+'_total');
+// 	    elemBox0.checked=true;
+// 	    elemBox0.disabled=true;
+// 	    elemTotal.innerHTML = "0";
+// 	}
+// 	else{
+// 	    addCombatSkill();
+// 	}
+//     }
+// }
 
 function resetSelect(elem){
     for (var option of elem.options){
@@ -503,7 +512,7 @@ function showGrowthButtons(){
     elem1.removeAttribute("disabled")
     elem2.removeAttribute("disabled")
     
-    fixFreeSkill(document.getElementById("backgrounds").value);
+    updateSkills();
 
     removeSkillDots();
 }
@@ -517,7 +526,7 @@ function hideGrowthButtons(){
     resetSelect(document.getElementById("growth"));
     resetSelect(document.getElementById("learning"));
 
-    fixFreeSkill(document.getElementById("backgrounds").value);
+    updateSkills();
 
     removeSkillDots();
 }
@@ -579,13 +588,10 @@ function rollLearning(){
     let elem = document.getElementById("learning");
     elem.options[roll-1].selected = "true";
 
-    var skill=elem.options[roll-1].value.toLowerCase();
-    if (skill.indexOf(" ")==-1){
-	incrementSkill(skill);
-    }
+
     
-    if (skill == "any combat") addCombatSkill();
-	
+    var skill=elem.options[roll-1].value.toLowerCase();
+    incrementSkill(skill);	
     
     remainingRolls--;
     if (remainingRolls==0){
@@ -612,26 +618,39 @@ function enableSkillChoiceButtons(background){
 }
 
 function incrementSkill(skill){
-    
-    var elemBox0 = document.getElementById(skill+'_rank_box_0');
-    var elemBox1 = document.getElementById(skill+'_rank_box_1');
+    if (skill.indexOf(" ")==-1){
 
-    if (elemBox1.checked){
-	any_skill_bank++;
-	any_skill_remaining++;
-	addAnySkill();
-    }
-    else{
-	if(elemBox0.checked){
-	    elemBox1.checked=true;
-	    elemBox1.disabled=true;
+	var elemBox0 = document.getElementById(skill+'_rank_box_0');
+	var elemBox1 = document.getElementById(skill+'_rank_box_1');
+	
+	if (elemBox1.checked){
+	    any_skill_bank++;
+	    any_skill_remaining++;
+	    addAnySkill();
 	}
 	else{
-	    elemBox0.checked=true;
-	    elemBox0.disabled=true;
+	    if(elemBox0.checked){
+		elemBox1.checked=true;
+		elemBox1.disabled=true;
+	    }
+	    else{
+		elemBox0.checked=true;
+		elemBox0.disabled=true;
+	    }
 	}
+	updateSkillTotal(skill);
     }
-    updateSkillTotal(skill);
+    else if (skill == "any combat"){
+	addCombatSkill();
+    }
+
+    else if (skill == "any noncombat"){
+	addNonCombatSkill();
+    }
+
+    else if (skill == "any psychic"){
+	addPsychicSkill();
+    }
 }
 
 function addAnySkill(){
@@ -715,7 +734,7 @@ function loadFoci(){
 
 function populateFociList(foci) {
     let elem = document.getElementById("foci");
-
+    
     var fociKeys=Object.keys(foci);
     
     for (var key of fociKeys) {
@@ -723,6 +742,53 @@ function populateFociList(foci) {
 	option.text = foci[key]["name"];
 	option.value = key;
 	elem.add(option);
+    }
+
+}
+
+function displayFoci(focus) {
+    let elemFociDescription = document.getElementById("foci_description");
+
+    if (focus==""){
+	elemFociDescription.innerHTML = "";
+    }
+    else{
+	elemFociDescription.innerHTML = foci[focus]["description"]+'\n\nLevel 1: '+foci[focus]["level1"]+'\n\nLevel 2: '+foci[focus]["level2"];
+    }
+}
+
+
+function updateSkills(){
+    var allInputs = document.getElementsByTagName("input");
+    for (var input of allInputs){
+	input.disabled=false;
+	input.checked=false;
+    }
+
+    if (skills == null) return; //In case this function is run before skills have been loaded
+	
+    var skillKeys = Object.keys(skills);
+    for (var skillKey of skillKeys){
+	var elem = document.getElementById(skillKey+'_total');
+	elem.innerHTML="";
+    }
+
+    var background = document.getElementById("backgrounds").value;
+    var focus = document.getElementById("foci").value;
+    var growthSelections = document.getElementById("growth").selectedOptions;
+    var learningSelections = document.getElementById("learning").selectedOptions;
+    
+    if (background != ""){
+	var freeSkill = backgrounds[background]["free_skill"].slice(0,-2).toLowerCase();
+	incrementSkill(freeSkill);
+    }
+
+    if (focus != ""){
+	var focusSkill = foci[focus]["skill"];
+	if (focusSkill != ""){
+	    incrementSkill(focusSkill);
+	
+	}
     }
 
 }

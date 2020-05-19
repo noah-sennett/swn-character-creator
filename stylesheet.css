@@ -135,7 +135,7 @@ input[type=checkbox]{
 .purpledot {
   height: 25px;
   width: 25px;
-  background-color: #00f;
+  background-color: #f0f;
   border-radius: 50%;
   display: inline-block;
 }

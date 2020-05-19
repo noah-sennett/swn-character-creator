@@ -140,7 +140,17 @@
 	  <option value="12">12</option>
 	  <option value="11">11</option>
 	  <option value="10">10</option>
-	  <option value="9">9</option>
+	  <option value="9">9</option	    var elemBox0 = document.getElementById(freeSkill+'_rank_box_0');
+	    var elemTotal = document.getElementById(freeSkill+'_total');
+	    elemBox0.checked=true;
+	    elemBox0.disabled=true;
+	    elemTotal.innerHTML = "0";
+	    var elemBox0 = document.getElementById(freeSkill+'_rank_box_0');
+	    var elemTotal = document.getElementById(freeSkill+'_total');
+	    elemBox0.checked=true;
+	    elemBox0.disabled=true;
+	    elemTotal.innerHTML = "0";
+>
 	  <option value="7">7</option>
 	</select>
       </div>
@@ -157,7 +167,7 @@
     <script> loadSkills(); </script>
     <script> loadFoci(); </script>
 
-    <select id="backgrounds" onchange="displayBackground(this.value);fixFreeSkill(this.value);populateLearning(this.value);populateGrowth(this.value);enableSkillChoiceButtons(this.value);">
+    <select id="backgrounds" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);enableSkillChoiceButtons(this.value);">
       <option value=""></option>
     </select>
 
@@ -168,7 +178,7 @@
     </div>
 
     <div>
-      <textarea id="background_description" style="width:430px;height:200px"> </textarea>
+      <textarea id="background_description" style="width:430px;height:300px"> </textarea>
     </div>
 
     <button id="pick_skill" onclick="hideGrowthButtons();enableLearningChoices();" disabled="true">Pick 2 additional skills <br> from learning table</button>
@@ -184,7 +194,7 @@
     </div>
 
     <div class="bloc">
-    <select id="learning" size="8" style="width:110px" disabled="true" multiple>
+    <select id="learning" size="8" style="width:110px" disabled="true" onchange="alert(this.value);incrementSkill(this.value);" multiple>
     </select>
     </div>
 
@@ -196,9 +206,13 @@
     
     <div class="dialog">Strength<input type="radio" name="anystat"><br>Dexterity<input type="radio" name="anystat"><br>Constitution<input type="radio" name="anystat"><br>Intelligence<input type="radio" name="anystat"><br>Wisdom<input type="radio" name="anystat"><br>Charisma<input type="radio" name="anystat"></div>
 
-    <select id="foci">
+    <select id="foci" onchange="displayFoci(this.value);updateSkills()">
       <option value=""></option>
     </select>
 
+    <div>
+      <textarea id="foci_description" style="width:430px;height:400px"> </textarea>
+    </div>
+    
   </body>
 </html>
