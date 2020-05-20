@@ -139,3 +139,11 @@ input[type=checkbox]{
   border-radius: 50%;
   display: inline-block;
 }
+
+.dialog_window {
+    background-color: #fff;
+    border-color: #000;
+    border-radius: 5px;
+}
+
+.no-close .ui-dialog-titlebar-close {display: none }

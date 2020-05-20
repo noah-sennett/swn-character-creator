@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/charactersheet.js"></script>
-    
+
   </head>
 
   <body>
@@ -38,22 +38,22 @@
 
     <div style="float:left" class="attrBlock">
       <div class="item attr"> Strength</div>
-      <div class="item val">  <input type="number" id="strength_attr" min="3" max="18" onchange="updateMod('strength')"></div>
+      <div class="item val">  <input type="number" id="strength_attr" min="3" max="18" onchange="updateMod('strength')" disabled="true"></div>
       <div class="item mod"><span id="strength_mod">+0 </span></div>
       <div class="item attr"> Dexterity</div>
-        <div class="item val">  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')"></div>
+        <div class="item val">  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"></div>
       <div class="item mod"><span id="dexterity_mod">+0 </span></div>
       <div class="item attr"> Constitution</div>
-      <div class="item val">  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')"></div>
+      <div class="item val">  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"></div>
       <div class="item mod"><span id="constitution_mod">+0 </span></div>
       <div class="item attr"> Intelligence</div>
-      <div class="item val">  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')"></div>
+      <div class="item val">  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"></div>
       <div class="item mod"><span id="intelligence_mod">+0 </span></div>
       <div class="item attr"> Wisdom</div>
-      <div class="item val">  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')"></div>
+      <div class="item val">  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"></div>
       <div class="item mod"><span id="wisdom_mod">+0 </span></div>
       <div class="item attr"> Charisma</div>
-      <div class="item val">  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')"></div>
+      <div class="item val">  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"></div>
       <div class="item mod"><span id="charisma_mod">+0 </span></div>
     </div>
 
@@ -140,29 +140,12 @@
 	  <option value="12">12</option>
 	  <option value="11">11</option>
 	  <option value="10">10</option>
-	  <option value="9">9</option	    var elemBox0 = document.getElementById(freeSkill+'_rank_box_0');
-	    var elemTotal = document.getElementById(freeSkill+'_total');
-	    elemBox0.checked=true;
-	    elemBox0.disabled=true;
-	    elemTotal.innerHTML = "0";
-	    var elemBox0 = document.getElementById(freeSkill+'_rank_box_0');
-	    var elemTotal = document.getElementById(freeSkill+'_total');
-	    elemBox0.checked=true;
-	    elemBox0.disabled=true;
-	    elemTotal.innerHTML = "0";
->
+	  <option value="9">9</option>
 	  <option value="7">7</option>
 	</select>
       </div>
     </div>
-
-
-
-
-    
-    
-
-    
+   
     <script> loadBackgrounds(); </script>
     <script> loadSkills(); </script>
     <script> loadFoci(); </script>
@@ -194,7 +177,7 @@
     </div>
 
     <div class="bloc">
-    <select id="learning" size="8" style="width:110px" disabled="true" onchange="alert(this.value);incrementSkill(this.value);" multiple>
+    <select id="learning" size="8" style="width:110px" disabled="true" multiple>
     </select>
     </div>
 
@@ -204,7 +187,6 @@
 
     <script>hide14Attr();hideAttrSelects();hideSubclasses();hideGrowthButtons();</script>    
     
-    <div class="dialog">Strength<input type="radio" name="anystat"><br>Dexterity<input type="radio" name="anystat"><br>Constitution<input type="radio" name="anystat"><br>Intelligence<input type="radio" name="anystat"><br>Wisdom<input type="radio" name="anystat"><br>Charisma<input type="radio" name="anystat"></div>
 
     <select id="foci" onchange="displayFoci(this.value);updateSkills()">
       <option value=""></option>
@@ -213,6 +195,28 @@
     <div>
       <textarea id="foci_description" style="width:430px;height:400px"> </textarea>
     </div>
+
+
+    <div class="dialog_window" id="anystat_dialog">
+      Strength <input type="radio" name="anystat" value="strength"><br>
+      Dexterity<input type="radio" name="anystat" value="dexterity"><br>
+      Constitution<input type="radio" name="anystat" value="constitution"><br>
+      Intelligence<input type="radio" name="anystat" value="intelligence"><br>
+      Wisdom<input type="radio" name="anystat" value="wisdom"><br>
+      Charisma<input type="radio" name="anystat" value="charisma">
+    </div>
+
+    <div class="dialog_window" id="physstat_dialog">
+      Strength<input type="radio" name="physstat1" value="strength"> <input type="radio" name="physstat2" value="strength"><br>
+      Dexterity<input type="radio" name="physstat1" value="dexterity"><input type="radio" name="physstat2" value="dexterity"><br>
+      Constitution<input type="radio" name="physstat1" value="constitution"><input type="radio" name="physstat2" value="constitution">
+    </div>
     
+    <div class="dialog_window" id="mentstat_dialog">
+      Intelligence<input type="radio" name="mentstat1" value="intelligence"><input type="radio" name="mentstat2" value="intelligence"><br>
+      Wisdom<input type="radio" name="mentstat1" value="wisdom"><input type="radio" name="mentstat2" value="wisdom"><br>
+      Charisma<input type="radio" name="mentstat1" value="charisma"><input type="radio" name="mentstat2" value="charisma">
+    </div>
+
   </body>
 </html>
