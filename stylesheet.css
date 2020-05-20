@@ -1,10 +1,38 @@
+.topRow {
+    display: grid;
+    grid-template-columns: 250px auto;
+}
+
+
+.topRowLeft {
+    display: grid;
+        grid-template-rows: 1.5em 2.5em 1.5em auto;
+}
+.topRowRight {
+    display: grid;
+    grid-template-rows: 1em auto 30px;
+}
+
+.skillBank{
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 5px;
+    align-self: center;
+
+    line-height:25px;
+}
+
 .attrBlock {
-    display: inline-grid;
-    grid-template-columns: 85px 40px 30px;
+    display: grid;
+    grid-template-columns: 85px 40px 25px 40px;
     row-gap: 15px;
     column-gap: 10px;
     grid-auto-rows: 10px;
+    position: relative;
+    top: 30px;
+
 }
+
 
 .attrSelects {
     display: grid;
@@ -34,4 +62,199 @@
 
 input[type=number]{
     width: 38px
+}
+
+input[type=checkbox]{
+    margin: 0px
+}
+
+.skillTable {
+    width: 545px;
+    display: grid;
+    grid-template-columns: 180px 160px 195px;
+    row-gap: 8px;
+    column-gap: 10px;
+    /* grid-auto-rows: 12px;  */
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.skillBlock {
+    display: grid;
+    grid-template-columns: 1fr 85px 10px;
+    column-gap: 2px;
+}
+
+
+.bloc {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  border: solid grey 1px;
+}
+
+.bloc select {
+  padding: 5px;
+  margin: -5px -20px -5px -5px;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black; */
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 2px;
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 85px;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* .tooltip .tooltiptext::after { */
+/*   content: ""; */
+/*   position: absolute; */
+/*   top: 100%; */
+/*   left: 50%; */
+/*   margin-left: -5px; */
+/*   border-width: 5px; */
+/*   border-style: solid; */
+/*   border-color: #555 transparent transparent transparent; */
+/* } */
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.reddot {
+  height: 25px;
+  width: 25px;
+  background-color: #9c0000;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.greendot {
+  height: 25px;
+  width: 25px;
+  background-color: #047d04;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.bluedot {
+  height: 25px;
+  width: 12.5px;
+
+  border-radius: 12.5px;
+  border-top-color: #047d04;
+  border-right-color: #9c0000;
+  border-left-color: #047d04;
+  border-bottom-color: #9c0000;
+  border-width: 12.5px;
+  border-style: solid;
+  height: 0px;
+  width: 0px;
+  
+  display: inline-block;
+  
+  /* Rotate the circle */
+  transform: rotate(-90deg);
+}
+
+.purpledot {
+  height: 25px;
+  width: 25px;
+  background-color: #0c11bd;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dialog_window {
+    background-color: #fff;
+    border-color: #000;
+    border-radius: 5px;
+}
+
+.no-close .ui-dialog-titlebar-close {display: none }
+
+
+.checkbox-label {
+    display: inline-block;
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 12px;
+    height: 12px;
+    width: 17px;
+    clear: both;
+}
+
+.checkbox-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-label .checkbox-custom {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 12px;
+    width: 12px;
+    background-color: #eee;
+    border-radius: 0px;
+    border: 1px solid #000;
+}
+
+.checkbox-label .underlay{
+    background-color: #eee
+}
+
+
+/* .checkbox-label input:checked ~ .checkbox-custom { */
+/*     background-color: #444; */
+/*     border-radius: 0px; */
+/*     opacity:1; */
+/*     border: 1px solid #000; */
+/* } */
+
+.checkbox-label input:checked ~ .checkbox-purple {
+    background-color: #0c11bd;
+
+}
+
+
+.checkbox-label input:checked ~ .checkbox-green {
+    background-color: #047d04;
+
+}
+
+.checkbox-label input:disabled ~ .checkbox-green {
+    opacity: 0.50;
+
+}
+
+
+.checkbox-label input:checked ~ .checkbox-red {
+    background-color: #9c0000;
+
+}
+
+
+.checkbox-label input:disabled ~ .checkbox-red {
+    opacity: 0.50;
+
 }
