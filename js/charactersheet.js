@@ -1,7 +1,13 @@
 'use strict'
 
 $(document).ready(function () {
-    $(".dialog_window").dialog({	    autoOpen: false});    
+    $(".dialog_window").dialog({autoOpen: false});
+
+    $( ".accordion" ).accordion({
+	collapsible: true,
+	active:false
+    });
+
 });
 
 const attrs = ["strength","dexterity","constitution","intelligence","wisdom","charisma"];
@@ -192,23 +198,28 @@ function hide14Attr(){
 }
 
 function showAttrSelects(){
-    let elem=document.getElementById("attr_selects");
-    elem.style.display= 'grid';
+    $(".attrSelects").show();
 }
 
 function hideAttrSelects(){
-    let elem=document.getElementById("attr_selects");
-    elem.style.display= 'none';
+    $(".attrSelects").hide();
 }
 
 function showSubclasses(){
     let elem=document.getElementById("adventurer_subclass");
     elem.style.display= 'inline-block';
+    
+    let elem2=document.getElementById("adventurer_subclass_mirror");
+    elem2.style.display= 'inline-block';
+
 }
 
 function hideSubclasses(){
     let elem=document.getElementById("adventurer_subclass");
     elem.style.display= 'none';
+
+    let elem2=document.getElementById("adventurer_subclass_mirror");
+    elem2.style.display= 'none';
 }
 
 function resetTemps(){
@@ -250,6 +261,7 @@ function loadBackgrounds(){
 
 function populateBackgroundList(backgrounds) {
     let elem = document.getElementById("backgrounds");
+    let elem2 = document.getElementById("backgrounds_mirror");
 
     var backgroundKeys=Object.keys(backgrounds);
     
@@ -258,12 +270,17 @@ function populateBackgroundList(backgrounds) {
 	option.text = backgrounds[key]["name"];
 	option.value = key;
 	elem.add(option);
+	
+	var option2 = document.createElement("option");
+	option2.text = backgrounds[key]["name"];
+	option2.value = key;
+	elem2.add(option2);
+
     }
 
 }
 
 function displayBackground(background) {
-    let elemFreeSkill = document.getElementById("free_skill");
     let elemBackgroundDescription = document.getElementById("background_description");
 
     background_skills = [];
@@ -275,7 +292,6 @@ function displayBackground(background) {
     attrBonuses = [0,0,0,0,0,0];
     
     if (background==""){
-	elemFreeSkill.innerHTML = "";
 	elemBackgroundDescription.innerHTML = "";
     }
     else{
@@ -284,7 +300,6 @@ function displayBackground(background) {
 	
 	var quickSkills = backgrounds[background]["quick_skills"];
 	
-	elemFreeSkill.innerHTML = backgrounds[background]["free_skill"];
 	elemBackgroundDescription.innerHTML = backgrounds[background]["description"]+"\n\nFree Skill: "+quickSkills[0]+"\n\nQuick Skills: "+quickSkills[0]+", "+quickSkills[1]+", "+quickSkills[2];
     }
 }
@@ -350,24 +365,25 @@ function loadSkills(){
 
 
 function generateSkillTable(skills){
-    var body = document.body; 
-    var tbl  = document.createElement('table');
-    tbl.style.width  = '600px';
-    tbl.style.border = '1px solid black';
+    var topRow = document.getElementById('topRowRight'); 
+    var tbl  = document.createElement('div');
+    //    tbl.style.width  = '600px';
+    //    tbl.style.border = '1px solid black';
+    tbl.setAttribute("class","skillTable");
 
     var skillKeys=Object.keys(skills);
 
     for(var i = 0; i < 9; i++){
-        var tr = tbl.insertRow();
+//        var tr = tbl.insertRow(-1);
         for(var j = 0; j < 3; j++){
-            var td = tr.insertCell();
+//            var td = tr.insertCell();
 	    var skillBlock = document.createElement('div');
 	    skillBlock.setAttribute("class","skillBlock");
 	    
 	    var skillName = document.createElement('div');
 	    var skillRank = document.createElement('div');
 	    var skillTotal = document.createElement('div');
-
+	    
 	    var skillKey;
 	    var node;
 	    var tooltipNode;
@@ -411,10 +427,32 @@ function generateSkillTable(skills){
 		var boxes = [box0, box1, box2, box3, box4];
 
 		for (var box of boxes){
+		    var checkboxLabel = document.createElement('label');
+		    checkboxLabel.setAttribute("class","checkbox-label");
+		    
 		    box.setAttribute("type","checkbox");
 		    box.setAttribute("id",skillKey+'_rank_box_'+parseInt(boxes.indexOf(box)));
 		    box.setAttribute("onchange","updateSkillBoxes(this.id);");
-		    skillRank.append(box);
+		    checkboxLabel.append(box);
+		    
+		    var innerSpan=document.createElement('span');
+		    var innerSpanUnderlay=document.createElement('span');
+
+		    if(skills[skillKey]["psychic"]){
+			innerSpan.setAttribute("class","checkbox-custom checkbox-purple");
+		    }
+		    else if(skills[skillKey]["combat"]){
+			innerSpan.setAttribute("class","checkbox-custom checkbox-red");
+		    }
+		    else{
+			innerSpan.setAttribute("class","checkbox-custom checkbox-green");
+		    }
+
+		    innerSpanUnderlay.setAttribute("class","checkbox-custom underlay");
+
+		    checkboxLabel.append(innerSpanUnderlay);
+		    checkboxLabel.append(innerSpan);
+		    skillRank.append(checkboxLabel);
 		}
 		
 		var tot=document.createTextNode("");
@@ -429,12 +467,14 @@ function generateSkillTable(skills){
 
 	    skillBlock.setAttribute("id",skillKey+'_box');
 	    
-            td.appendChild(skillBlock);
+            //td.appendChild(skillBlock);
+	    tbl.appendChild(skillBlock);
 	    //                td.style.border = '1px solid black';
             
         }
     }
-    body.appendChild(tbl);
+    var elemSkillBank = document.getElementById("skill_bank");
+    topRow.insertBefore(tbl,elemSkillBank);
 }
 
 
@@ -469,7 +509,7 @@ function updateSkillBoxes(boxID){
 			picked_skills.push(skill);
 		    }
 		    else{
-			alert("Too few available skill points!");
+			alert("Out of psychic skill points!");
 			break;
 		    }
 		}
@@ -479,7 +519,7 @@ function updateSkillBoxes(boxID){
 			picked_skills.push(skill);
 		    }
 		    else{
-			alert("Too few skill available points!");
+			alert("Out of combat skill points!");
 			break;
 		    }
 		}
@@ -489,7 +529,7 @@ function updateSkillBoxes(boxID){
 			picked_skills.push(skill);
 		    }
 		    else{
-			alert("Too few available skill points!");
+			alert("Out of noncombat skill points!");
 			break;
 		    }
 		}
@@ -813,20 +853,28 @@ function addAnySkill(){
     any_skill_bank++;
     any_skill_remaining++;
     var elem = document.getElementById("skill_bank");
-    var elemSkillDot = document.createElement("span");
+    var fillerElem = document.getElementById("bank_filler");
+    var elemSkillDot = document.createElement("div");
     elemSkillDot.setAttribute("class","bluedot");
 
-    elem.appendChild(elemSkillDot);
+    var oldStyle = elem.style.gridTemplateColumns;
+    elem.style.gridTemplateColumns=oldStyle.slice(0,-4)+' fit-content(200px) '+oldStyle.slice(-4);
+
+    elem.insertBefore(elemSkillDot,fillerElem);
 }
 
 function addCombatSkill(){
     combat_skill_bank++;
     combat_skill_remaining++;
     var elem = document.getElementById("skill_bank");
-    var elemSkillDot = document.createElement("span");
+    var fillerElem = document.getElementById("bank_filler");
+    var elemSkillDot = document.createElement("div");
     elemSkillDot.setAttribute("class","reddot");
 
-    elem.appendChild(elemSkillDot);
+    var oldStyle = elem.style.gridTemplateColumns;
+    elem.style.gridTemplateColumns=oldStyle.slice(0,-4)+' fit-content(200px) '+oldStyle.slice(-4);
+    
+    elem.insertBefore(elemSkillDot,fillerElem);
 }
 
 
@@ -834,20 +882,29 @@ function addNonCombatSkill(){
     noncombat_skill_bank++;
     noncombat_skill_remaining++;
     var elem = document.getElementById("skill_bank");
-    var elemSkillDot = document.createElement("span");
+    var fillerElem = document.getElementById("bank_filler");
+    var elemSkillDot = document.createElement("div");
     elemSkillDot.setAttribute("class","greendot");
+    
+    var oldStyle = elem.style.gridTemplateColumns;
+    elem.style.gridTemplateColumns=oldStyle.slice(0,-4)+' fit-content(200px) '+oldStyle.slice(-4);
 
-    elem.appendChild(elemSkillDot);
+
+    elem.insertBefore(elemSkillDot,fillerElem);
 }
 
 function addPsychicSkill(){
     psychic_skill_bank++;
     psychic_skill_remaining++;
     var elem = document.getElementById("skill_bank");
-    var elemSkillDot = document.createElement("span");
+    var fillerElem = document.getElementById("bank_filler");
+    var elemSkillDot = document.createElement("div");
     elemSkillDot.setAttribute("class","purpledot");
 
-    elem.appendChild(elemSkillDot);
+    var oldStyle = elem.style.gridTemplateColumns;
+    elem.style.gridTemplateColumns=oldStyle.slice(0,-4)+' fit-content(200px) '+oldStyle.slice(-4);
+    
+    elem.insertBefore(elemSkillDot,fillerElem);
 }
 
 function useAnySkill(){
@@ -856,6 +913,11 @@ function useAnySkill(){
     if (blueDots.length>0){
 	any_skill_remaining--;
 	blueDots[0].remove();
+	
+	var elem = document.getElementById("skill_bank");
+	var oldStyle = elem.style.gridTemplateColumns;
+	elem.setAttribute("style","grid-template-columns:"+oldStyle.slice(0,-23)+oldStyle.slice(-4)+";");
+
 	return true;
     }
     else{
@@ -869,6 +931,11 @@ function useCombatSkill(){
     if (redDots.length>0){
 	combat_skill_remaining--;
 	redDots[0].remove();
+
+	var elem = document.getElementById("skill_bank");
+	var oldStyle = elem.style.gridTemplateColumns;
+	elem.setAttribute("style","grid-template-columns:"+oldStyle.slice(0,-23)+oldStyle.slice(-4)+";");
+
 	return true;
     }
     else{
@@ -882,6 +949,11 @@ function useNonCombatSkill(){
     if (greenDots.length>0){
 	noncombat_skill_remaining--;
 	greenDots[0].remove();
+
+	var elem = document.getElementById("skill_bank");
+	var oldStyle = elem.style.gridTemplateColumns;
+	elem.setAttribute("style","grid-template-columns:"+oldStyle.slice(0,-23)+oldStyle.slice(-4)+";");
+	
 	return true;
     }
     else{
@@ -895,6 +967,12 @@ function usePsychicSkill(){
     if (purpleDots.length>0){
 	psychic_skill_remaining--;
 	purpleDots[0].remove();
+
+	var elem = document.getElementById("skill_bank");
+	var oldStyle = elem.style.gridTemplateColumns;
+	elem.setAttribute("style","grid-template-columns:"+oldStyle.slice(0,-23)+oldStyle.slice(-4)+";");
+
+	
 	return true;
     }
     else{
@@ -904,12 +982,6 @@ function usePsychicSkill(){
 
 
 function removeSkillDots(){
-    var blueDots = document.getElementsByClassName("bluedot");
-    while (blueDots.length>0) blueDots[0].remove();
-    any_skill_bank=0;
-    any_skill_remaining=0;
-    
-    addAnySkill();//Guaranteed free-skill
     
     var redDots = document.getElementsByClassName("reddot");
     while (redDots.length>0) redDots[0].remove();
@@ -925,6 +997,17 @@ function removeSkillDots(){
     while (purpleDots.length>0) purpleDots[0].remove();
     psychic_skill_bank=0;
     psychic_skill_remaining=0;
+
+    var elem = document.getElementById("skill_bank");
+    elem.setAttribute("style","grid-template-columns:fit-content(200px) 1fr;");
+
+    var blueDots = document.getElementsByClassName("bluedot");
+    while (blueDots.length>0) blueDots[0].remove();
+    any_skill_bank=0;
+    any_skill_remaining=0;
+    
+    addAnySkill();//Guaranteed free-skill
+
 }
 
 function loadFoci(){
@@ -999,3 +1082,38 @@ function updateSkills(){
     for (var attr of attrs) checkAttr(attr);
 }
 
+function updateMirrors(){
+    var elemClass = document.getElementById("class");
+    var elemClassMirror = document.getElementById("class_mirror");
+
+    var elemSubclass = document.getElementById("adventurer_subclass");
+    var elemSubclassMirror = document.getElementById("adventurer_subclass_mirror");
+
+    var elemBackgrounds = document.getElementById("backgrounds");
+    var elemBackgroundsMirror = document.getElementById("backgrounds_mirror");
+    
+    elemClassMirror.selectedIndex = elemClass.selectedIndex;
+    elemSubclassMirror.selectedIndex = elemSubclass.selectedIndex;
+    elemBackgroundsMirror.selectedIndex = elemBackgrounds.selectedIndex;
+
+    
+}
+
+function updateFromMirrors(){
+   var elemClass = document.getElementById("class");
+    var elemClassMirror = document.getElementById("class_mirror");
+
+    var elemSubclass = document.getElementById("adventurer_subclass");
+    var elemSubclassMirror = document.getElementById("adventurer_subclass_mirror");
+
+    var elemBackgrounds = document.getElementById("backgrounds");
+    var elemBackgroundsMirror = document.getElementById("backgrounds_mirror");
+    
+    elemClass.selectedIndex = elemClassMirror.selectedIndex;
+    elemSubclass.selectedIndex = elemSubclassMirror.selectedIndex;
+    elemBackgrounds.selectedIndex = elemBackgroundsMirror.selectedIndex;
+
+    $("#class").trigger('change');
+    $("#backgrounds").trigger('change');
+    
+}

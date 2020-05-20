@@ -1,200 +1,290 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> Character Generator </title>
+    <title> Character Builder </title>
+
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
-
-
+    
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="js/charactersheet.js"></script>
 
+    <script src="js/charactersheet.js"></script>
   </head>
 
   <body>
-    <label for="name">Name</label>
-    <input id="name" type="text" size="9"></input>
-    <span style="display:inline-block; width: 30px;"></span>
-    <label for="class">Class</label>
-    <select id="class" onchange="(this.value=='Adventurer') ? showSubclasses(): hideSubclasses();">
-      <option value="warrior">Warrior</option>
-      <option value="Expert">Expert</option>
-      <option value="Psychic">Psychic</option>
-      <option value="Adventurer">Adventurer</option>
-    </select>
+    <h1><i>Stars Without Number</i> Character Builder</h1>
+
     
-    <select id="adventurer_subclass">
-      <option value="war_exp">Warrior/Expert</option>
-      <option value="war_psy">Warrior/Psychic</option>
-      <option value="exp_psy">Expert/Psychic</option>
-    </select>
+    <div class="topRow" id="topRow">
+      <div class="topRowLeft" id="topRowLeft">
+	<div>
+	  <label for="name">Name</label>
+	  <input id="name" type="text" size="9"></input>
+	</div>
+	<div>
+	  <label for="name">Class</label>
+	  <select id="class_mirror" onchange="updateFromMirrors();">
+	    <option value=""></option>
+	    <option value="warrior">Warrior</option>
+	    <option value="Expert">Expert</option>
+	    <option value="Psychic">Psychic</option>
+	    <option value="Adventurer">Adventurer</option>
+	  </select>
+	  <br>
+	  <select id="adventurer_subclass_mirror" onchange="updateFromMirrors();">
+	    <option value=""></option>
+	    <option value="war_exp">Warrior/Expert</option>
+	    <option value="war_psy">Warrior/Psychic</option>
+	    <option value="exp_psy">Expert/Psychic</option>
+	  </select>
+	</div>
+	
+	<div>
+	  <label for="name">Background</label>
+	  <select id="backgrounds_mirror" onchange="updateFromMirrors();">
+	    	  <option value=""></option>
+	  </select>
 
-    <br>
-    <br>
+	</div>
 
-    <button onclick="attrs.forEach(rollAttr);hideAttrSelects();show14Attr();resetTemps();">Roll 3d6 in order</button>
-    <button onclick="attrs.forEach(resetAttr);hide14Attr();showAttrSelects();resetTemps();">Standard Array</button> <br><br>
-    
+	
+	
+      <div class="attrBlock">
+	<div class="item attr"> Strength</div>
+	<div class="item val">  <input type="number" id="strength_attr" min="3" max="18" onchange="updateMod('strength')" disabled="true"></div>
+	<div class="item mod"><span id="strength_mod">+0 </span></div>
+	<div>
+	  <select id="strength_select" class="attrSelects" style="width: 38px" onchange="setAttr('strength',this.value); updateAttrSelects('strength',this.value);">
+	    <option value=""></option>
+	    <option value="14">14</option>
+	    <option value="12">12</option>
+	    <option value="11">11</option>
+	    <option value="10">10</option>
+	    <option value="9">9</option>
+	    <option value="7">7</option>
+	  </select>
+	</div>
 
-    <div style="float:left" class="attrBlock">
-      <div class="item attr"> Strength</div>
-      <div class="item val">  <input type="number" id="strength_attr" min="3" max="18" onchange="updateMod('strength')" disabled="true"></div>
-      <div class="item mod"><span id="strength_mod">+0 </span></div>
-      <div class="item attr"> Dexterity</div>
-        <div class="item val">  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"></div>
-      <div class="item mod"><span id="dexterity_mod">+0 </span></div>
-      <div class="item attr"> Constitution</div>
-      <div class="item val">  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"></div>
-      <div class="item mod"><span id="constitution_mod">+0 </span></div>
-      <div class="item attr"> Intelligence</div>
-      <div class="item val">  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"></div>
-      <div class="item mod"><span id="intelligence_mod">+0 </span></div>
-      <div class="item attr"> Wisdom</div>
-      <div class="item val">  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"></div>
-      <div class="item mod"><span id="wisdom_mod">+0 </span></div>
-      <div class="item attr"> Charisma</div>
-      <div class="item val">  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"></div>
-      <div class="item mod"><span id="charisma_mod">+0 </span></div>
-    </div>
-
-    <span style="display:inline-block; width: 30px;"></span>
-
-    <div id="14attr" style="float:left">
-      <label for="14attrList">Set one attribute below to 14</label><br>
-      <select id="14attrList" onchange="attrTo14(this.value);">
-	<option value=""></option>
-	<option value="strength">Strength</option>
-	<option value="dexterity">Dexterity</option>
-	<option value="constitution">Constitution</option>
-	<option value="intelligence">Intelligence</option>
-	<option value="wisdom">Wisdom</option>
-	<option value="charisma">Charisma</option>
-      </select>
-    </div>
-
-    <div class="attrSelects" id="attr_selects" style="float:left">
-      <div>
-	<select id="strength_select" style="width: 38px" onchange="setAttr('strength',this.value); updateAttrSelects('strength',this.value);">
-	  <option value=""></option>
-	  <option value="14">14</option>
-	  <option value="12">12</option>
-	  <option value="11">11</option>
-	  <option value="10">10</option>
-	  <option value="9">9</option>
-	  <option value="7">7</option>
-	</select>
+	<div class="item attr"> Dexterity</div>
+	<div class="item val">  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"></div>
+	<div class="item mod"><span id="dexterity_mod">+0 </span></div>
+	<div>
+	  <select id="dexterity_select" class="attrSelects" style="width: 38px" onchange="setAttr('dexterity',this.value); updateAttrSelects('dexterity',this.value);">
+	    <option value=""></option>
+	    <option value="14">14</option>
+	    <option value="12">12</option>
+	    <option value="11">11</option>
+	    <option value="10">10</option>
+	    <option value="9">9</option>
+	    <option value="7">7</option>
+	  </select>
+	</div>
+	
+	<div class="item attr"> Constitution</div>
+	<div class="item val">  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"></div>
+	<div class="item mod"><span id="constitution_mod">+0 </span></div>
+	<div>
+	  <select id="constitution_select" class="attrSelects" style="width: 38px" onchange="setAttr('constitution',this.value); updateAttrSelects('constitution',this.value);">
+	    <option value=""></option>
+	    <option value="14">14</option>
+	    <option value="12">12</option>
+	    <option value="11">11</option>
+	    <option value="10">10</option>
+	    <option value="9">9</option>
+	    <option value="7">7</option>
+	  </select>
+	</div>
+	
+	<div class="item attr"> Intelligence</div>
+	<div class="item val">  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"></div>
+	<div class="item mod"><span id="intelligence_mod">+0 </span></div>
+	<div>
+	  <select id="intelligence_select" class="attrSelects" style="width: 38px" onchange="setAttr('intelligence',this.value); updateAttrSelects('intelligence',this.value);">
+	    <option value=""></option>
+	    <option value="14">14</option>
+	    <option value="12">12</option>
+	    <option value="11">11</option>
+	    <option value="10">10</option>
+	    <option value="9">9</option>
+	    <option value="7">7</option>
+	  </select>
+	</div>
+	
+	<div class="item attr"> Wisdom</div>
+	<div class="item val">  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"></div>
+	<div class="item mod"><span id="wisdom_mod">+0 </span></div>
+	<div>
+	  <select id="wisdom_select" class="attrSelects" style="width: 38px" onchange="setAttr('wisdom',this.value); updateAttrSelects('wisdom',this.value);">
+	    <option value=""></option>
+	    <option value="14">14</option>
+	    <option value="12">12</option>
+	    <option value="11">11</option>
+	    <option value="10">10</option>
+	    <option value="9">9</option>
+	    <option value="7">7</option>
+	  </select>
+	</div>
+	
+	<div class="item attr"> Charisma</div>
+	<div class="item val">  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"></div>
+	<div class="item mod"><span id="charisma_mod">+0 </span></div>
+	<div>
+	  <select id="charisma_select" class="attrSelects" style="width: 38px" onchange="setAttr('charisma',this.value); updateAttrSelects('charisma',this.value);">
+	    <option value=""></option>
+	    <option value="14">14</option>
+	    <option value="12">12</option>
+	    <option value="11">11</option>
+	    <option value="10">10</option>
+	    <option value="9">9</option>
+	    <option value="7">7</option>
+	  </select>
+	</div>
+	
+      </div>
+      </div>
+      <div id="topRowRight" class="topRowRight">
+	<div>
+	  Skill Rank
+	  </div>
+	<div id="skill_bank" class="skillBank" style="grid-template-columns: fit-content(200px) 1fr;">
+	  <div>Available skills:</div>
+	  <div id="bank_filler"></div>
+	</div>
+	
       </div>
       
-      <div>
-	<select id="dexterity_select" style="width: 38px" onchange="setAttr('dexterity',this.value); updateAttrSelects('dexterity',this.value);">
-	  <option value=""></option>
-	  <option value="14">14</option>
-	  <option value="12">12</option>
-	  <option value="11">11</option>
-	  <option value="10">10</option>
-	  <option value="9">9</option>
-	  <option value="7">7</option>
-	</select>
-      </div>
-
-      <div>
-	<select id="constitution_select" style="width: 38px" onchange="setAttr('constitution',this.value); updateAttrSelects('constitution',this.value);">
-	  <option value=""></option>
-	  <option value="14">14</option>
-	  <option value="12">12</option>
-	  <option value="11">11</option>
-	  <option value="10">10</option>
-	  <option value="9">9</option>
-	  <option value="7">7</option>
-	</select>
-      </div>
-
-      <div>
-	<select id="intelligence_select" style="width: 38px" onchange="setAttr('intelligence',this.value); updateAttrSelects('intelligence',this.value);">
-	  <option value=""></option>
-	  <option value="14">14</option>
-	  <option value="12">12</option>
-	  <option value="11">11</option>
-	  <option value="10">10</option>
-	  <option value="9">9</option>
-	  <option value="7">7</option>
-	</select>
-      </div>
-
-      <div>
-	<select id="wisdom_select" style="width: 38px" onchange="setAttr('wisdom',this.value); updateAttrSelects('wisdom',this.value);">
-	  <option value=""></option>
-	  <option value="14">14</option>
-	  <option value="12">12</option>
-	  <option value="11">11</option>
-	  <option value="10">10</option>
-	  <option value="9">9</option>
-	  <option value="7">7</option>
-	</select>
-      </div>
-      
-      <div>
-	<select id="charisma_select" style="width: 38px" onchange="setAttr('charisma',this.value); updateAttrSelects('charisma',this.value);">
-	  <option value=""></option>
-	  <option value="14">14</option>
-	  <option value="12">12</option>
-	  <option value="11">11</option>
-	  <option value="10">10</option>
-	  <option value="9">9</option>
-	  <option value="7">7</option>
-	</select>
-      </div>
-    </div>
-   
+    </div>      
+    
     <script> loadBackgrounds(); </script>
     <script> loadSkills(); </script>
     <script> loadFoci(); </script>
 
-    <select id="backgrounds" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);enableSkillChoiceButtons(this.value);">
-      <option value=""></option>
-    </select>
-
-
-    <div>
-      <p>Free Skill</p>
-      <p id="free_skill"></p>
-    </div>
-
-    <div>
-      <textarea id="background_description" style="width:430px;height:300px"> </textarea>
-    </div>
-
-    <button id="pick_skill" onclick="hideGrowthButtons();enableLearningChoices();" disabled="true">Pick 2 additional skills <br> from learning table</button>
-    <button id="roll_skill" onclick="showGrowthButtons();" disabled="true">Roll 3 times between growth<br> and learning tables</button>
-
-    <button id="growth_button" onclick="rollGrowth();">Roll on growth table</button>
-    <button id="learning_button" onclick="rollLearning();">Roll on learning table </button>
-
+    <br>
     
-    <div class="bloc">
-      <select id="growth" size="6" style="width:140px" disabled="true" multiple>
-      </select>
+    <div class="accordion">
+      <h3>1. Determine attributes </h3>
+      <div>
+	
+      <p>Roll your six <strong>attributes</strong> or assign them from an array, using Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma. Attributes reflect the basic potential of your hero. Roll 3d6 six times and assign them in order, or use an array of 14, 12, 11, 10, 9, 7 assigned as you wish. If you randomly roll your scores you may then pick one attribute to change to a score of 14.</p>
+	<button onclick="attrs.forEach(rollAttr);hideAttrSelects();show14Attr();resetTemps();">Roll 3d6 in order</button>
+	
+	<button onclick="attrs.forEach(resetAttr);hide14Attr();showAttrSelects();resetTemps();">Standard Array</button>
+	<br>
+	<div id="14attr" style="">
+	  <label for="14attrList">Set one attribute below to 14</label>
+	  <select id="14attrList" onchange="attrTo14(this.value);">
+	    <option value=""></option>
+	    <option value="strength">Strength</option>
+	    <option value="dexterity">Dexterity</option>
+	    <option value="constitution">Constitution</option>
+	    <option value="intelligence">Intelligence</option>
+	    <option value="wisdom">Wisdom</option>
+	    <option value="charisma">Charisma</option>
+	  </select>
+	</div>
+
+      </div>
+    </div>
+    <div class="accordion">
+      <h3>2. Choose background</h3>
+      <div>
+	<p>Pick a <strong>background</strong> from the list on page 9 [below], one that most closely reflects your hero’s past experiences. You gain the skill listed under the background name at level-0, which equates to an ordinary working knowledge of it.</p>
+	<select id="backgrounds" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);enableSkillChoiceButtons(this.value);updateMirrors();">
+	  <option value=""></option>
+	</select>
+	
+	<div>
+	  <textarea id="background_description" style="width:430px;height:300px"> </textarea>
+	</div>
+	
+      </div>
+    </div>
+    <div class="accordion">
+      <h3>3. Determine skills</h3>
+      <div>
+	<p>Decide whether to roll for additional skills or pick them.</p>
+	<p> <strong>If you pick skills</strong>, you can choose two more skills from the Learning table for your background [below], with the exception of entries that say “Any Skill”, which you may not pick. You cannot pick entries from the Growth table. If you’re not sure what to pick, just take the “Quick 	  Skills” listed for your background at level-0, which include your background’s beginning skill.</p>
+	<p><strong>If you choose to roll for your skills</strong>, you can roll up to three times, dividing up your rolls between the Growth and Learning tables as you wish. When you roll on the Growth table, some results may say “+2 Physical” or “+2 Mental”. In the former case, you can add two points to either Strength, Dexterity, or Constitution, or one point to two different stats. In the latter case, you can add two points to either Intelligence, Wisdom, or Charisma, or divide the bonus between two of them.</p>
+	<p>[Additionally], <strong>pick one non-psychic skill</strong> of your choice to reflect your hero’s outside interests, natural talents, hobby expertise, or other personal focus.</p>
+	<button id="pick_skill" onclick="hideGrowthButtons();enableLearningChoices();" disabled="true">Pick 2 additional skills <br> from learning table</button>
+	<button id="roll_skill" onclick="showGrowthButtons();" disabled="true">Roll 3 times between growth<br> and learning tables</button>
+	<br>
+	<button id="growth_button" onclick="rollGrowth();">Roll on growth table</button>
+	<button id="learning_button" onclick="rollLearning();">Roll on learning table </button>
+	
+	<br>
+	<div class="bloc">
+	  <select id="growth" size="6" style="width:140px" disabled="true" multiple>
+	  </select>
+	</div>
+	
+	<div class="bloc">
+	  <select id="learning" size="8" style="width:110px" disabled="true" multiple>
+	  </select>
+	</div>
+
+      </div>
+    </div>
+    <div class="accordion">
+      <h3>4. Choose class</h3>
+      <div>
+	<p>Choose your <strong>class</strong>, representing those talents you have that are most relevant to an adventurer’s lifestyle. If your hero isn’t well-described by Warrior, Expert, or Psychic, you can choose Adventurer and mix your class abilities.</p>
+	<select id="class" onchange="(this.value=='Adventurer') ? showSubclasses(): hideSubclasses(); updateMirrors();">
+	  <option value=""></option>
+	  <option value="warrior">Warrior</option>
+	  <option value="Expert">Expert</option>
+	  <option value="Psychic">Psychic</option>
+	  <option value="Adventurer">Adventurer</option>
+	</select>
+	
+	<select id="adventurer_subclass" onchange="updateMirrors();">
+	  <option value=""></option>
+	  <option value="war_exp">Warrior/Expert</option>
+	  <option value="war_psy">Warrior/Psychic</option>
+	  <option value="exp_psy">Expert/Psychic</option>
+	</select>
+
+      </div>
+    </div>
+    <div class="accordion">
+      <h3>5. Choose foci</h3>
+      <div>
+	<p>Choose your <strong>foci</strong>, representing the side talents or particular specializations of your hero. You can pick one level of a focus of your choice. Characters with the Expert class or the Partial Expert feature of the Adventurer class get one level of a non-combat, non-psychic focus for free in addition to this. They can spend both levels on the same focus, starting with level 2 in it if they wish. Characters with the Warrior class or Partial Warrior feature of the Adventurer class can do the same in choosing one level of a combat focus.</p>
+	<select id="foci" onchange="displayFoci(this.value);updateSkills()">
+	  <option value=""></option>
+	</select>
+
+	<div>
+	  <textarea id="foci_description" style="width:430px;height:400px"> </textarea>
+	</div>
+
+      </div>
+    </div>
+    <div class="accordion">
+      <h3>6. Roll hitpoints</h3>
+      <div>
+	<p>test</p>
+      </div>
+    </div>
+    <div class="accordion">
+      <h3>7. Choose equipment</h3>
+      <div>
+	<p>Choose one of the equipment packages on page 25 [below] or roll 2d6 x 100 to find out how many starting credits you have with which to buy gear.</p>
+      </div>
     </div>
 
-    <div class="bloc">
-    <select id="learning" size="8" style="width:110px" disabled="true" multiple>
-    </select>
+    <div class="accordion">
+      <h3>8. Add finishing touches</h3>
+      <div>
+	<p>test</p>
+      </div>
+
     </div>
 
-    <div id="skill_bank">
-      <span>Available skills:</span>
-    </div>
 
     <script>hide14Attr();hideAttrSelects();hideSubclasses();hideGrowthButtons();</script>    
     
 
-    <select id="foci" onchange="displayFoci(this.value);updateSkills()">
-      <option value=""></option>
-    </select>
-
-    <div>
-      <textarea id="foci_description" style="width:430px;height:400px"> </textarea>
-    </div>
 
 
     <div class="dialog_window" id="anystat_dialog">
@@ -216,7 +306,6 @@
       Intelligence<input type="radio" name="mentstat1" value="intelligence"><input type="radio" name="mentstat2" value="intelligence"><br>
       Wisdom<input type="radio" name="mentstat1" value="wisdom"><input type="radio" name="mentstat2" value="wisdom"><br>
       Charisma<input type="radio" name="mentstat1" value="charisma"><input type="radio" name="mentstat2" value="charisma">
-    </div>
-
+    </div>    
   </body>
 </html>

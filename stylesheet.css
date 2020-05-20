@@ -1,9 +1,36 @@
+.topRow {
+    display: grid;
+    grid-template-columns: 250px auto;
+}
+
+
+.topRowLeft {
+    display: grid;
+        grid-template-rows: 1.5em 2.5em 1.5em auto;
+}
+.topRowRight {
+    display: grid;
+    grid-template-rows: 1em auto 30px;
+}
+
+.skillBank{
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 5px;
+    align-self: center;
+
+    line-height:25px;
+}
+
 .attrBlock {
-    display: inline-grid;
-    grid-template-columns: 85px 40px 30px;
+    display: grid;
+    grid-template-columns: 85px 40px 25px 40px;
     row-gap: 15px;
     column-gap: 10px;
     grid-auto-rows: 10px;
+    position: relative;
+    top: 30px;
+
 }
 
 
@@ -42,17 +69,19 @@ input[type=checkbox]{
 }
 
 .skillTable {
-    display: inline-grid;
-    grid-template-columns: 180px 180px 180px;
-    row-gap: 15px;
+    width: 545px;
+    display: grid;
+    grid-template-columns: 180px 160px 195px;
+    row-gap: 8px;
     column-gap: 10px;
-    grid-auto-rows: 10px;
-    border: 2px solid gray;
+    /* grid-auto-rows: 12px;  */
+    border: 1px solid black;
+    padding: 8px;
 }
 
 .skillBlock {
-    display: inline-grid;
-    grid-template-columns: 85px 85px 10px;
+    display: grid;
+    grid-template-columns: 1fr 85px 10px;
     column-gap: 2px;
 }
 
@@ -77,7 +106,7 @@ input[type=checkbox]{
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 350px;
+  width: 300px;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -85,8 +114,8 @@ input[type=checkbox]{
   padding: 5px 2px;
   position: absolute;
   z-index: 1;
-  bottom: 125%;
-  left: 50%;
+  top: 100%;
+  left: 85px;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
@@ -111,7 +140,7 @@ input[type=checkbox]{
 .reddot {
   height: 25px;
   width: 25px;
-  background-color: #f00;
+  background-color: #9c0000;
   border-radius: 50%;
   display: inline-block;
 }
@@ -119,23 +148,35 @@ input[type=checkbox]{
 .greendot {
   height: 25px;
   width: 25px;
-  background-color: #0f0;
+  background-color: #047d04;
   border-radius: 50%;
   display: inline-block;
 }
 
 .bluedot {
   height: 25px;
-  width: 25px;
-  background-color: #00f;
-  border-radius: 50%;
+  width: 12.5px;
+
+  border-radius: 12.5px;
+  border-top-color: #047d04;
+  border-right-color: #9c0000;
+  border-left-color: #047d04;
+  border-bottom-color: #9c0000;
+  border-width: 12.5px;
+  border-style: solid;
+  height: 0px;
+  width: 0px;
+  
   display: inline-block;
+  
+  /* Rotate the circle */
+  transform: rotate(-90deg);
 }
 
 .purpledot {
   height: 25px;
   width: 25px;
-  background-color: #f0f;
+  background-color: #0c11bd;
   border-radius: 50%;
   display: inline-block;
 }
@@ -147,3 +188,73 @@ input[type=checkbox]{
 }
 
 .no-close .ui-dialog-titlebar-close {display: none }
+
+
+.checkbox-label {
+    display: inline-block;
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 12px;
+    height: 12px;
+    width: 17px;
+    clear: both;
+}
+
+.checkbox-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-label .checkbox-custom {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 12px;
+    width: 12px;
+    background-color: #eee;
+    border-radius: 0px;
+    border: 1px solid #000;
+}
+
+.checkbox-label .underlay{
+    background-color: #eee
+}
+
+
+/* .checkbox-label input:checked ~ .checkbox-custom { */
+/*     background-color: #444; */
+/*     border-radius: 0px; */
+/*     opacity:1; */
+/*     border: 1px solid #000; */
+/* } */
+
+.checkbox-label input:checked ~ .checkbox-purple {
+    background-color: #0c11bd;
+
+}
+
+
+.checkbox-label input:checked ~ .checkbox-green {
+    background-color: #047d04;
+
+}
+
+.checkbox-label input:disabled ~ .checkbox-green {
+    opacity: 0.50;
+
+}
+
+
+.checkbox-label input:checked ~ .checkbox-red {
+    background-color: #9c0000;
+
+}
+
+
+.checkbox-label input:disabled ~ .checkbox-red {
+    opacity: 0.50;
+
+}
