@@ -4,11 +4,15 @@
     <title> Character Builder </title>
 
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
+
     
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script src="js/charactersheet.js"></script>
+
+    
   </head>
 
   <body>
@@ -143,9 +147,15 @@
       </div>
       </div>
       <div id="topRowRight" class="topRowRight">
-	<div>
-	  Skill Rank
-	  </div>
+	<div style="display:inline-grid; grid-template-columns: 90px 101px 70px 100px 105px 101px;">
+	  <div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
+	  <div style="font-size:1.5em">Rank</div>
+	  <div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
+	  <div style="font-size:1.5em">Rank</div>
+	  <div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
+	  <div style="font-size:1.5em">Rank</div>
+
+	</div>
 	<div id="skill_bank" class="skillBank" style="grid-template-columns: fit-content(200px) 1fr;">
 	  <div>Available skills:</div>
 	  <div id="bank_filler"></div>
@@ -157,6 +167,7 @@
     
     <script> loadBackgrounds(); </script>
     <script> loadSkills(); </script>
+    <script> loadClasses(); </script>
     <script> loadFoci(); </script>
 
     <br>
@@ -165,13 +176,15 @@
       <h3>1. Determine attributes </h3>
       <div>
 	
-      <p>Roll your six <strong>attributes</strong> or assign them from an array, using Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma. Attributes reflect the basic potential of your hero. Roll 3d6 six times and assign them in order, or use an array of 14, 12, 11, 10, 9, 7 assigned as you wish. If you randomly roll your scores you may then pick one attribute to change to a score of 14.</p>
-	<button onclick="attrs.forEach(rollAttr);hideAttrSelects();show14Attr();resetTemps();">Roll 3d6 in order</button>
+	<p>Roll your six <strong>attributes</strong> or assign them from an array, using Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma. Attributes reflect the basic potential of your hero. Roll 3d6 six times and assign them in order, or use an array of 14, 12, 11, 10, 9, 7 assigned as you wish. If you randomly roll your scores you may then pick one attribute to change to a score of 14.</p>
+	<br>
+	<button onclick="attrs.forEach(rollAttr);hideAttrSelects();show14Attr();resetTemps();">Roll 3d6 in order</button> or
 	
 	<button onclick="attrs.forEach(resetAttr);hide14Attr();showAttrSelects();resetTemps();">Standard Array</button>
 	<br>
+	<br><br>
 	<div id="14attr" style="">
-	  <label for="14attrList">Set one attribute below to 14</label>
+	  <label for="14attrList">Select one attribute to set to 14</label>
 	  <select id="14attrList" onchange="attrTo14(this.value);">
 	    <option value=""></option>
 	    <option value="strength">Strength</option>
@@ -206,7 +219,10 @@
 	<p> <strong>If you pick skills</strong>, you can choose two more skills from the Learning table for your background [below], with the exception of entries that say “Any Skill”, which you may not pick. You cannot pick entries from the Growth table. If you’re not sure what to pick, just take the “Quick 	  Skills” listed for your background at level-0, which include your background’s beginning skill.</p>
 	<p><strong>If you choose to roll for your skills</strong>, you can roll up to three times, dividing up your rolls between the Growth and Learning tables as you wish. When you roll on the Growth table, some results may say “+2 Physical” or “+2 Mental”. In the former case, you can add two points to either Strength, Dexterity, or Constitution, or one point to two different stats. In the latter case, you can add two points to either Intelligence, Wisdom, or Charisma, or divide the bonus between two of them.</p>
 	<p>[Additionally], <strong>pick one non-psychic skill</strong> of your choice to reflect your hero’s outside interests, natural talents, hobby expertise, or other personal focus.</p>
-	<button id="pick_skill" onclick="hideGrowthButtons();enableLearningChoices();" disabled="true">Pick 2 additional skills <br> from learning table</button>
+
+	<p> To allocate available skills, click the corresponding box in the skill table above. </p>
+	  
+	<button id="pick_skill" onclick="hideGrowthButtons();enableLearningChoices();" disabled="true">Pick 2 additional skills <br> from learning table</button> or
 	<button id="roll_skill" onclick="showGrowthButtons();" disabled="true">Roll 3 times between growth<br> and learning tables</button>
 	<br>
 	<button id="growth_button" onclick="rollGrowth();">Roll on growth table</button>
@@ -229,7 +245,7 @@
       <h3>4. Choose class</h3>
       <div>
 	<p>Choose your <strong>class</strong>, representing those talents you have that are most relevant to an adventurer’s lifestyle. If your hero isn’t well-described by Warrior, Expert, or Psychic, you can choose Adventurer and mix your class abilities.</p>
-	<select id="class" onchange="(this.value=='Adventurer') ? showSubclasses(): hideSubclasses(); updateMirrors();">
+	<select id="class" onchange="(this.value=='Adventurer') ? showSubclasses(): hideSubclasses(); displayClass(this.value); updateMirrors();">
 	  <option value=""></option>
 	  <option value="warrior">Warrior</option>
 	  <option value="Expert">Expert</option>
@@ -243,6 +259,11 @@
 	  <option value="war_psy">Warrior/Psychic</option>
 	  <option value="exp_psy">Expert/Psychic</option>
 	</select>
+
+	<div>
+	  <textarea id="class_description" style="width:430px;height:400px"> </textarea>
+	</div>
+
 
       </div>
     </div>
@@ -288,24 +309,66 @@
 
 
     <div class="dialog_window" id="anystat_dialog">
-      Strength <input type="radio" name="anystat" value="strength"><br>
-      Dexterity<input type="radio" name="anystat" value="dexterity"><br>
-      Constitution<input type="radio" name="anystat" value="constitution"><br>
-      Intelligence<input type="radio" name="anystat" value="intelligence"><br>
-      Wisdom<input type="radio" name="anystat" value="wisdom"><br>
-      Charisma<input type="radio" name="anystat" value="charisma">
+      <label for="anystat_strength">+1 Strength </label>
+      <input type="radio" name="anystat" value="strength" id="anystat_strength">
+      <label for="anystat_dexterity">+1 Dexterity </label>
+      <input type="radio" name="anystat" value="dexterity" id="anystat_dexterity">
+      <label for="anystat_constitution">+1 Constitution </label>
+      <input type="radio" name="anystat" value="constitution" id="anystat_constitution">
+      <label for="anystat_intelligence">+1 Intelligence </label>
+      <input type="radio" name="anystat" value="intelligence" id="anystat_intelligence">
+      <label for="anystat_wisdom">+1 Wisdom </label>
+      <input type="radio" name="anystat" value="wisdom" id="anystat_wisdom">
+      <label for="anystat_charisma">+1 Charisma </label>
+      <input type="radio" name="anystat" value="charisma" id="anystat_charisma">
     </div>
 
     <div class="dialog_window" id="physstat_dialog">
-      Strength<input type="radio" name="physstat1" value="strength"> <input type="radio" name="physstat2" value="strength"><br>
-      Dexterity<input type="radio" name="physstat1" value="dexterity"><input type="radio" name="physstat2" value="dexterity"><br>
-      Constitution<input type="radio" name="physstat1" value="constitution"><input type="radio" name="physstat2" value="constitution">
+      <label for="physstat1_strength">+1 Strength </label>
+      <input type="radio" name="physstat1" value="strength" id="physstat1_strength">
+      <label for="physstat1_dexterity">+1 Dexterity </label>
+      <input type="radio" name="physstat1" value="dexterity" id="physstat1_dexterity">
+      <label for="physstat1_constitution">+1 Constitution </label>
+      <input type="radio" name="physstat1" value="constitution" id="physstat1_constitution">
+      <br>
+      <label for="physstat2_strength">+1 Strength </label>
+      <input type="radio" name="physstat2" value="strength" id="physstat2_strength">
+      <label for="physstat2_dexterity">+1 Dexterity </label>
+      <input type="radio" name="physstat2" value="dexterity" id="physstat2_dexterity">
+      <label for="physstat2_constitution">+1 Constitution </label>
+      <input type="radio" name="physstat2" value="constitution" id="physstat2_constitution">
+    </div>
+
+    <div class="dialog_window" id="mentstat_dialog">
+      <label for="mentstat1_intelligence">+1 Intelligence </label>
+      <input type="radio" name="mentstat1" value="intelligence" id="mentstat1_intelligence">
+      <label for="mentstat1_wisdom">+1 Wisdom </label>
+      <input type="radio" name="mentstat1" value="wisdom" id="mentstat1_wisdom">
+      <label for="mentstat1_charisma">+1 Charisma </label>
+      <input type="radio" name="mentstat1" value="charisma" id="mentstat1_charisma">
+      <br>
+      <label for="mentstat2_intelligence">+1 Intelligence </label>
+      <input type="radio" name="mentstat2" value="intelligence" id="mentstat2_intelligence">
+      <label for="mentstat2_wisdom">+1 Wisdom </label>
+      <input type="radio" name="mentstat2" value="wisdom" id="mentstat2_wisdom">
+      <label for="mentstat2_charisma">+1 Charisma </label>
+      <input type="radio" name="mentstat2" value="charisma" id="mentstat2_charisma">
     </div>
     
-    <div class="dialog_window" id="mentstat_dialog">
-      Intelligence<input type="radio" name="mentstat1" value="intelligence"><input type="radio" name="mentstat2" value="intelligence"><br>
-      Wisdom<input type="radio" name="mentstat1" value="wisdom"><input type="radio" name="mentstat2" value="wisdom"><br>
-      Charisma<input type="radio" name="mentstat1" value="charisma"><input type="radio" name="mentstat2" value="charisma">
+    <div class="dialog_window" id="punchstab_dialog">
+      <label for="punchstab_punch">Punch</label>
+      <input type="radio" name="punchstab" value="punch" id="punchstab_punch">
+      <label for="punchstab_stab">Stab</label>
+      <input type="radio" name="punchstab" value="stab" id="punchstab_stab">
     </div>    
+
+    <div class="dialog_window" id="stabshoot_dialog">
+      <label for="stabshoot_stab">Stab</label>
+      <input type="radio" name="stabshoot" value="stab" id="stabshoot_stab">
+      <label for="stabshoot_shoot">Shoot</label>
+      <input type="radio" name="stabshoot" value="shoot" id="stabshoot_shoot">
+    </div>    
+
+
   </body>
 </html>
