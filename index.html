@@ -247,7 +247,7 @@
       <h3>4. Choose class</h3>
       <div>
 	<p>Choose your <strong>class</strong>, representing those talents you have that are most relevant to an adventurer’s lifestyle. If your hero isn’t well-described by Warrior, Expert, or Psychic, you can choose Adventurer and mix your class abilities.</p>
-	<select id="class" onchange="(this.value=='Adventurer') ? showSubclasses(): hideSubclasses(); displayClass(this.value); updateMirrors();">
+	<select id="class" onchange="(this.value=='adventurer') ? showSubclasses(): hideSubclasses(); displayClass(); updateSkills(); updateMirrors();">
 	  <option value=""></option>
 	  <option value="warrior">Warrior</option>
 	  <option value="expert">Expert</option>
@@ -255,12 +255,13 @@
 	  <option value="adventurer">Adventurer</option>
 	</select>
 	
-	<select id="adventurer_subclass" onchange="updateMirrors();">
+	<select id="adventurer_subclass" onchange="displayClass(); updateSkills(); updateMirrors();">
 	  <option value=""></option>
 	  <option value="war_exp">Warrior/Expert</option>
 	  <option value="war_psy">Warrior/Psychic</option>
 	  <option value="exp_psy">Expert/Psychic</option>
 	</select>
+
 
 	<div id="class_description" style="width:430px;height:400px;border:1px solid black;overflow:scroll;">
 	</div>
@@ -272,7 +273,15 @@
       <h3>5. Choose foci</h3>
       <div>
 	<p>Choose your <strong>foci</strong>, representing the side talents or particular specializations of your hero. You can pick one level of a focus of your choice. Characters with the Expert class or the Partial Expert feature of the Adventurer class get one level of a non-combat, non-psychic focus for free in addition to this. They can spend both levels on the same focus, starting with level 2 in it if they wish. Characters with the Warrior class or Partial Warrior feature of the Adventurer class can do the same in choosing one level of a combat focus.</p>
-	<select id="foci" onchange="displayFoci(this.value);updateSkills()">
+	<select id="foci" onchange="displayFoci(this.value); isolateFoci(); updateSkills()">
+	  <option value=""></option>
+	</select>
+	
+	<select id="combat_foci" onchange="displayFoci(this.value); isolateFoci(); updateSkills()" style="display:none">
+	  <option value=""></option>
+	</select>
+	
+	<select id="noncombat_foci" onchange="displayFoci(this.value); isolateFoci(); updateSkills()" style="display:none">
 	  <option value=""></option>
 	</select>
 
@@ -283,20 +292,26 @@
       </div>
     </div>
     <div class="accordion">
-      <h3>6. Roll hitpoints</h3>
+      <h3>6. Choose psionic techniques</h3>
       <div>
 	<p>test</p>
       </div>
     </div>
     <div class="accordion">
-      <h3>7. Choose equipment</h3>
+      <h3>7. Roll hitpoints</h3>
+      <div>
+	<p>test</p>
+      </div>
+    </div>
+    <div class="accordion">
+      <h3>8. Choose equipment</h3>
       <div>
 	<p>Choose one of the equipment packages on page 25 [below] or roll 2d6 x 100 to find out how many starting credits you have with which to buy gear.</p>
       </div>
     </div>
 
     <div class="accordion">
-      <h3>8. Add finishing touches</h3>
+      <h3>9. Add finishing touches</h3>
       <div>
 	<p>test</p>
       </div>

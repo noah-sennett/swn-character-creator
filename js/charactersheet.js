@@ -42,6 +42,9 @@ var background_skills = [];
 var foci_skills = [];
 var growth_skills = [];
 var learning_skills = [];
+var class_skills = [];
+
+var class_foci = [];
 
 var attrBonuses = [0,0,0,0,0,0];
 var attrBases = ["","","","","",""];
@@ -1159,14 +1162,29 @@ function loadFoci(){
 
 function populateFociList(foci) {
     let elem = document.getElementById("foci");
+    let elem2 = document.getElementById("combat_foci");
+    let elem3 = document.getElementById("noncombat_foci");
     
     var fociKeys=Object.keys(foci);
     
     for (var key of fociKeys) {
 	var option = document.createElement("option");
+	var option2 = document.createElement("option");
+	var option3 = document.createElement("option");
+
 	option.text = foci[key]["name"];
+	option2.text = foci[key]["name"];
+	option3.text = foci[key]["name"];
+
 	option.value = key;
+	option2.value = key;
+	option3.value = key;
+
+	var type = foci[key]["type"];
+	
 	elem.add(option);
+	if(type == "combat" || type == "both") elem2.add(option2);
+	if(type == "noncombat" || type == "both") elem3.add(option3);
     }
 }
 
@@ -1207,7 +1225,7 @@ function updateSkills(){
 	elem.innerHTML="";
     }    
 
-    var total_skills = background_skills.concat(foci_skills,learning_skills,growth_skills);
+    var total_skills = background_skills.concat(foci_skills,learning_skills,growth_skills,class_skills);
     
     for (var skill of total_skills) incrementSkill(skill);
 
@@ -1264,11 +1282,20 @@ function loadClasses(){
     request.send();
 }
 
-function displayClass(Class) {
-    let elemClassDescription = document.getElementById("class_description");
+function displayClass() {
+    var elemClass = document.getElementById("class");
+    var elemSubClass = document.getElementById("adventurer_subclass");
 
+
+    var Class = elemClass.value;
+    var subClass = elemSubClass.value;
+    
+    let elemClassDescription = document.getElementById("class_description");
     if (Class==""){
 	elemClassDescription.innerHTML = "";
+	class_skills=["any psychic","any psychic"]
+	hideCombatFoci();
+	hideNonCombatFoci();
     }
     else{
 	elemClassDescription.innerHTML = classes[Class]["description"];
@@ -1287,9 +1314,10 @@ function displayClass(Class) {
 	    }
 	}
 	else{
+	    elemAbilities = document.createElement("p");
 	    var keys=Object.keys(abilities);
 	    for (var key of keys){
-		var elemPartialClass = document.createElement("p");
+		var elemPartialClass = document.createElement("h3");
 		var elemPartialClassAbility = document.createElement("p");
 		elemPartialClass.innerHTML = key;
 		elemPartialClassAbility.innerHTML = abilities[key];
@@ -1299,6 +1327,96 @@ function displayClass(Class) {
 	}
 	
 	elemClassDescription.appendChild(elemAbilities);
-	
+
+	if(Class=="psychic"){
+	    class_skills=["any psychic","any psychic"]
+	    hideCombatFoci();
+	    hideNonCombatFoci();
+	}
+	else if(Class=="warrior"){
+	    class_skills=[];
+	    showCombatFoci();
+	    hideNonCombatFoci();
+	}
+	else if(Class=="adventurer"){
+	    if(subClass=="war_exp"){
+		class_skills=[];
+		showCombatFoci();
+		showNonCombatFoci();
+	    }
+	    if(subClass.includes("war_psy")){
+		class_skills=["any psychic"];
+		showCombatFoci();
+		hideNonCombatFoci();
+	    }
+	    if(subClass.includes("exp_psy")){
+		class_skills=["any psychic"];
+		hideCombatFoci();
+		showNonCombatFoci();
+
+	    }
+	}
     }
+}
+
+function isolateFoci(){  
+    var elemFoci = document.getElementById("foci");
+    var elemCombatFoci = document.getElementById("combat_foci");
+    var elemNonCombatFoci = document.getElementById("noncombat_foci");
+
+    var fociOption = elemFoci.options[elemFoci.selectedIndex];
+    var combatFociOption = elemCombatFoci.options[elemCombatFoci.selectedIndex];
+    var nonCombatFociOption = elemNonCombatFoci.options[elemNonCombatFoci.selectedIndex];
+    
+    for (var opt of elemFoci.options){
+	if((opt.value==combatFociOption.value || opt.value==nonCombatFociOption.value) &&(opt.value != "")){
+	    opt.disabled="true";
+	}
+	else{
+	    opt.removeAttribute("disabled");
+	}
+    }
+    for (var opt of elemCombatFoci.options){
+	if((opt.value==fociOption.value || opt.value==nonCombatFociOption.value) &&(opt.value != "")){
+	    opt.disabled="true";
+	}
+	else{
+	    opt.removeAttribute("disabled");
+	}
+    }
+    for (var opt of elemNonCombatFoci.options){
+	if((opt.value==combatFociOption.value || opt.value==fociOption.value) &&(opt.value != "")){
+	    opt.disabled="true";
+	}
+	else{
+	    opt.removeAttribute("disabled");
+	}
+    }    
+}
+
+function showCombatFoci(){
+    var elem = document.getElementById("combat_foci");
+    elem.style.display = "inline";
+}
+
+function hideCombatFoci(){
+    var elem = document.getElementById("combat_foci");
+    elem.selectedIndex = 0;
+    elem.style.display = "none";
+    isolateFoci();
+
+}
+
+function showNonCombatFoci(){
+    var elem = document.getElementById("noncombat_foci");
+    elem.style.display = "inline";
+
+}
+
+function hideNonCombatFoci(){
+    var elem = document.getElementById("noncombat_foci");
+    elem.selectedIndex = 0;
+    elem.style.display = "none";
+    isolateFoci();
+
 }
