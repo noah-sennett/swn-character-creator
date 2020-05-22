@@ -3,10 +3,12 @@
   <head>
     <title> Character Builder </title>
 
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
 
     
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -30,9 +32,9 @@
 	  <select id="class_mirror" onchange="updateFromMirrors();">
 	    <option value=""></option>
 	    <option value="warrior">Warrior</option>
-	    <option value="Expert">Expert</option>
-	    <option value="Psychic">Psychic</option>
-	    <option value="Adventurer">Adventurer</option>
+	    <option value="expert">Expert</option>
+	    <option value="psychic">Psychic</option>
+	    <option value="adventurer">Adventurer</option>
 	  </select>
 	  <br>
 	  <select id="adventurer_subclass_mirror" onchange="updateFromMirrors();">
@@ -248,9 +250,9 @@
 	<select id="class" onchange="(this.value=='Adventurer') ? showSubclasses(): hideSubclasses(); displayClass(this.value); updateMirrors();">
 	  <option value=""></option>
 	  <option value="warrior">Warrior</option>
-	  <option value="Expert">Expert</option>
-	  <option value="Psychic">Psychic</option>
-	  <option value="Adventurer">Adventurer</option>
+	  <option value="expert">Expert</option>
+	  <option value="psychic">Psychic</option>
+	  <option value="adventurer">Adventurer</option>
 	</select>
 	
 	<select id="adventurer_subclass" onchange="updateMirrors();">
@@ -260,8 +262,7 @@
 	  <option value="exp_psy">Expert/Psychic</option>
 	</select>
 
-	<div>
-	  <textarea id="class_description" style="width:430px;height:400px"> </textarea>
+	<div id="class_description" style="width:430px;height:400px;border:1px solid black;overflow:scroll;">
 	</div>
 
 

@@ -1266,12 +1266,39 @@ function loadClasses(){
 
 function displayClass(Class) {
     let elemClassDescription = document.getElementById("class_description");
-    alert(classes);
-    
+
     if (Class==""){
 	elemClassDescription.innerHTML = "";
     }
     else{
 	elemClassDescription.innerHTML = classes[Class]["description"];
+
+	var elemAbilities;
+	
+	var abilities = classes[Class]["abilities"];
+	
+	if (Class!="adventurer"){
+	    elemAbilities = document.createElement("ul");
+	    
+	    for (var ability of abilities){
+		var elemAbility = document.createElement("li");
+		elemAbility.innerHTML = ability;
+		elemAbilities.appendChild(elemAbility);
+	    }
+	}
+	else{
+	    var keys=Object.keys(abilities);
+	    for (var key of keys){
+		var elemPartialClass = document.createElement("p");
+		var elemPartialClassAbility = document.createElement("p");
+		elemPartialClass.innerHTML = key;
+		elemPartialClassAbility.innerHTML = abilities[key];
+		elemAbilities.appendChild(elemPartialClass);
+		elemAbilities.appendChild(elemPartialClassAbility);
+	    }
+	}
+	
+	elemClassDescription.appendChild(elemAbilities);
+	
     }
 }
