@@ -1,13 +1,22 @@
 'use strict'
 
 $(document).ready(function () {
-    $(".dialog_window").dialog({autoOpen: false});
+    $(".dialog_window").dialog({
+	autoOpen: false,
+	closeOnEscape: false,
+	modal: true,
+	dialogClass: 'no-close',
+});
 
     $( ".accordion" ).accordion({
 	collapsible: true,
 	active:false
     });
 
+    $("input[type=radio]" ).checkboxradio({
+	icon:false
+    });
+    
 });
 
 const attrs = ["strength","dexterity","constitution","intelligence","wisdom","charisma"];
@@ -33,6 +42,9 @@ var background_skills = [];
 var foci_skills = [];
 var growth_skills = [];
 var learning_skills = [];
+var class_skills = [];
+
+var class_foci = [];
 
 var attrBonuses = [0,0,0,0,0,0];
 var attrBases = ["","","","","",""];
@@ -244,6 +256,9 @@ var skills;
 let fociURL = 'https://noah-sennett.github.io/swn-character-creator/js/foci.json';
 var foci;
 
+let classURL = 'https://noah-sennett.github.io/swn-character-creator/js/class.json';
+var classes;
+
 function loadBackgrounds(){
     let request = new XMLHttpRequest();
     request.open('GET', backgroundURL);
@@ -316,6 +331,7 @@ function populateLearning(background){
 	    var option = document.createElement("option");
 	    option.text = opt;
 	    option.value = opt.toLowerCase();
+	    if (option.value=="any skill") option.setAttribute("disabled","true");
 	    elemLearning.add(option);
 	}
     }
@@ -348,16 +364,6 @@ function loadSkills(){
     request.onload = function() {
 	skills = request.response;
 	generateSkillTable(skills);
-	// 	$('[id*=_rank_box_]').change(function(){
-	// 	    if(this.checked){
-	// 		allocateSkillDots($(this).attr("id"));
-	// 	    }
-	// 	    else{
-	// 		recoverSkillDots($(this).attr("id"));
-	// 	    }
-	// //	    alert("Clicked a skill box!");
-	// 	});
-
     }
 
     request.send();
@@ -367,16 +373,47 @@ function loadSkills(){
 function generateSkillTable(skills){
     var topRow = document.getElementById('topRowRight'); 
     var tbl  = document.createElement('div');
-    //    tbl.style.width  = '600px';
-    //    tbl.style.border = '1px solid black';
     tbl.setAttribute("class","skillTable");
+
+    for(var j = 0; j < 3; j++){
+	var skillBlock = document.createElement('div');
+	skillBlock.setAttribute("class","skillBlock");
+	
+	var skillName = document.createElement('div');
+	var skillRank = document.createElement('div');
+	var skillTotal = document.createElement('div');
+
+	skillRank.setAttribute("style","display:grid; grid-template-columns: repeat(5,1fr);");
+	
+	var lbl0=document.createElement('div');
+	var lbl1=document.createElement('div');
+	var lbl2=document.createElement('div');
+	var lbl3=document.createElement('div');
+	var lbl4=document.createElement('div');
+
+	lbl0.innerHTML = "0";
+	lbl1.innerHTML = "1";
+	lbl2.innerHTML = "2";
+	lbl3.innerHTML = "3";
+	lbl4.innerHTML = "4";	
+
+	skillRank.appendChild(lbl0);
+	skillRank.appendChild(lbl1);
+	skillRank.appendChild(lbl2);
+	skillRank.appendChild(lbl3);
+	skillRank.appendChild(lbl4);
+	
+	skillBlock.appendChild(skillName);
+	skillBlock.appendChild(skillRank);
+	skillBlock.appendChild(skillTotal);
+	
+	tbl.appendChild(skillBlock);
+    }
 
     var skillKeys=Object.keys(skills);
 
     for(var i = 0; i < 9; i++){
-//        var tr = tbl.insertRow(-1);
         for(var j = 0; j < 3; j++){
-//            var td = tr.insertCell();
 	    var skillBlock = document.createElement('div');
 	    skillBlock.setAttribute("class","skillBlock");
 	    
@@ -458,18 +495,24 @@ function generateSkillTable(skills){
 		var tot=document.createTextNode("");
 		
 		skillTotal.append(tot);
+
+		skillBlock.appendChild(skillName);
+		skillBlock.appendChild(skillRank);
+		skillBlock.appendChild(skillTotal);
+
+		skillBlock.setAttribute("id",skillKey+'_box');
+
 	    }
-
+	    else if(i==2 && j==2){
+		skillBlock.removeAttribute("class");
+		var psychicLabel = document.createElement("div");
+		psychicLabel.innerHTML = "Psychic";
+		psychicLabel.setAttribute("style","text-align: center; font-style:italic; font-weight:bold;");
+		skillBlock.appendChild(psychicLabel);
+	    }
 	    
-	    skillBlock.appendChild(skillName);
-	    skillBlock.appendChild(skillRank);
-	    skillBlock.appendChild(skillTotal);
-
-	    skillBlock.setAttribute("id",skillKey+'_box');
 	    
-            //td.appendChild(skillBlock);
 	    tbl.appendChild(skillBlock);
-	    //                td.style.border = '1px solid black';
             
         }
     }
@@ -662,8 +705,14 @@ function enableLearningChoices(){
     let elemLearning=document.getElementById("learning");
     elemLearning.removeAttribute("disabled");
 
-    learning_choice_index = [];
+    for (var opt of elemLearning.options){
+	if (opt.value == "any skill"){
+	    opt.setAttribute("disabled","true")
+	}
+    }
 
+    learning_choice_index = [];
+    $("#learning option").off("mousedown");
     $("#learning option").mousedown(function(e) {
 	e.preventDefault();
 	if(!(this.selected)){
@@ -678,8 +727,20 @@ function enableLearningChoices(){
 	    var ind = learning_choice_index.indexOf(Array.from(elemLearning.options).indexOf(this));
 	    learning_choice_index.splice(ind,1);
 	}
+
+	var temp =($("#learning").val());
+
+	if(temp==null) temp=[];
+
+	if (learning_skills.includes("stab")){
+	    temp[temp.indexOf("stab or shoot")] = "stab" 
+	}
+	if (learning_skills.includes("shoot")){
+	    temp[temp.indexOf("stab or shoot")] = "shoot" 
+	}
 	
-	learning_skills=($("#learning").val());
+	learning_skills = temp;
+
 	updateSkills();
 	return false;
     });
@@ -777,19 +838,17 @@ function incrementSkill(skill){
 	addPsychicSkill();
     }
     else if (skill == "+1 any stat"){
+	$('#anystat_dialog').dialog( "option", "width", 825 );
 	$('#anystat_dialog').dialog({
-	    //	    autoOpen: false,
-	    closeOnEscape: false,
-	    dialogClass: 'no-close',
 	    buttons: [{
-		text: "Done",
+		text: "Submit",
 		click: function(){
 		    var ind=growth_skills.indexOf("+1 any stat");
 		    var stat=$("input[name=anystat]:checked").val();
 		    if(stat != undefined){
 			attrBonuses[attrs.indexOf(stat)]++;
 			growth_skills[ind]=stat+' +1';
-			$("input[name=anystat]").prop("checked",false);
+			$("input[name=anystat]").prop("checked",false).change();
 			for (var attr of attrs) checkAttr(attr);
 			$(this).dialog("close");
 		    }
@@ -799,11 +858,8 @@ function incrementSkill(skill){
     }
     else if (skill == "+2 physical"){
 	$('#physstat_dialog').dialog({
-	    //	    autoOpen: false,
-	    closeOnEscape: false,
-	    dialogClass: 'no-close',
 	    buttons: [{
-		text: "Done",
+		text: "Submit",
 		click: function(){
 		    var ind=growth_skills.indexOf("+2 physical");
 		    var stat1=$("input[name=physstat1]:checked").val();
@@ -812,8 +868,8 @@ function incrementSkill(skill){
 			attrBonuses[attrs.indexOf(stat1)]++;
 			attrBonuses[attrs.indexOf(stat2)]++;
 			growth_skills[ind]=stat1+' +1 '+stat2+' +1 ';
-			$("input[name=physstat1]").prop("checked",false);
-			$("input[name=physstat2]").prop("checked",false);
+			$("input[name=physstat1]").prop("checked",false).change();
+			$("input[name=physstat2]").prop("checked",false).change();
 			for (var attr of attrs) checkAttr(attr);
 			$(this).dialog("close");
 		    }
@@ -823,10 +879,8 @@ function incrementSkill(skill){
     }
     else if (skill == "+2 mental"){
 	$('#mentstat_dialog').dialog({
-	    closeOnEscape: false,
-	    dialogClass: 'no-close',
 	    buttons: [{
-		text: "Done",
+		text: "Submit",
 		click: function(){
 		    var ind=growth_skills.indexOf("+2 mental");
 		    var stat1=$("input[name=mentstat1]:checked").val();
@@ -835,8 +889,8 @@ function incrementSkill(skill){
 			attrBonuses[attrs.indexOf(stat1)]++;
 			attrBonuses[attrs.indexOf(stat2)]++;
 			growth_skills[ind]=stat1+' +1 '+stat2+' +1';
-			$("input[name=mentstat1]").prop("checked",false);
-			$("input[name=mentstat2]").prop("checked",false);
+			$("input[name=mentstat1]").prop("checked",false).change();
+			$("input[name=mentstat2]").prop("checked",false).change();
 			for (var attr of attrs) checkAttr(attr);
 			$(this).dialog("close");
 		    }
@@ -845,7 +899,42 @@ function incrementSkill(skill){
 	}).dialog("open");
 	
     }
-
+    else if (skill == "punch or stab"){
+	$('#punchstab_dialog').dialog({
+	    buttons: [{
+		text: "Submit",
+		click: function(){
+		    var ind=foci_skills.indexOf("punch or stab");
+		    var choice=$("input[name=punchstab]:checked").val();
+		    if(choice != undefined){
+			foci_skills[ind]=choice;
+			$("input[name=punchstab]").prop("checked",false).change();
+			incrementSkill(choice);
+			$(this).dialog("close");
+		    }
+		}
+	    }]
+	}).dialog("open");
+	
+    }
+    else if (skill == "stab or shoot"){
+	$('#stabshoot_dialog').dialog({
+	    buttons: [{
+		text: "Submit",
+		click: function(){
+		    var ind=learning_skills.indexOf("stab or shoot");
+		    var choice=$("input[name=stabshoot]:checked").val();
+		    if(choice != undefined){
+			learning_skills[ind]=choice;
+			$("input[name=stabshoot]").prop("checked",false).change();
+			incrementSkill(choice);
+			$(this).dialog("close");
+		    }
+		}
+	    }]
+	}).dialog("open");
+	
+    }
 
 }
 
@@ -855,12 +944,24 @@ function addAnySkill(){
     var elem = document.getElementById("skill_bank");
     var fillerElem = document.getElementById("bank_filler");
     var elemSkillDot = document.createElement("div");
+    var elemSkillDotBox = document.createElement("div");
+
     elemSkillDot.setAttribute("class","bluedot");
+    elemSkillDotBox.setAttribute("class","dotbox");
+    elemSkillDotBox.setAttribute("style","height:"+window.getComputedStyle(elem).getPropertyValue('line-height'));
+
+    var tooltipNode = document.createElement('span');
+    tooltipNode.setAttribute("class","tooltiptext");
+    tooltipNode.innerHTML = "Allocate this to any non-psychic skill by clicking a box above.";
+
 
     var oldStyle = elem.style.gridTemplateColumns;
     elem.style.gridTemplateColumns=oldStyle.slice(0,-4)+' fit-content(200px) '+oldStyle.slice(-4);
 
-    elem.insertBefore(elemSkillDot,fillerElem);
+    elemSkillDotBox.appendChild(elemSkillDot);
+    elemSkillDotBox.appendChild(tooltipNode);
+    
+    elem.insertBefore(elemSkillDotBox,fillerElem);
 }
 
 function addCombatSkill(){
@@ -869,12 +970,23 @@ function addCombatSkill(){
     var elem = document.getElementById("skill_bank");
     var fillerElem = document.getElementById("bank_filler");
     var elemSkillDot = document.createElement("div");
+    var elemSkillDotBox = document.createElement("div");
     elemSkillDot.setAttribute("class","reddot");
+    elemSkillDotBox.setAttribute("class","dotbox");
+    elemSkillDotBox.setAttribute("style","height:"+window.getComputedStyle(elem).getPropertyValue('line-height'));
+
+    var tooltipNode = document.createElement('span');
+    tooltipNode.setAttribute("class","tooltiptext");
+    tooltipNode.innerHTML = "Allocate this to any combat skill by clicking a box above.";
 
     var oldStyle = elem.style.gridTemplateColumns;
     elem.style.gridTemplateColumns=oldStyle.slice(0,-4)+' fit-content(200px) '+oldStyle.slice(-4);
     
-    elem.insertBefore(elemSkillDot,fillerElem);
+    elemSkillDotBox.appendChild(elemSkillDot);
+    elemSkillDotBox.appendChild(tooltipNode);
+    
+    elem.insertBefore(elemSkillDotBox,fillerElem);
+
 }
 
 
@@ -884,13 +996,24 @@ function addNonCombatSkill(){
     var elem = document.getElementById("skill_bank");
     var fillerElem = document.getElementById("bank_filler");
     var elemSkillDot = document.createElement("div");
+    var elemSkillDotBox = document.createElement("div");
     elemSkillDot.setAttribute("class","greendot");
+    elemSkillDotBox.setAttribute("class","dotbox");
+    elemSkillDotBox.setAttribute("style","height:"+window.getComputedStyle(elem).getPropertyValue('line-height'));
+
+    var tooltipNode = document.createElement('span');
+    tooltipNode.setAttribute("class","tooltiptext");
+    tooltipNode.innerHTML = "Allocate this to any noncombat skill by clicking a box above.";
+
     
     var oldStyle = elem.style.gridTemplateColumns;
     elem.style.gridTemplateColumns=oldStyle.slice(0,-4)+' fit-content(200px) '+oldStyle.slice(-4);
 
 
-    elem.insertBefore(elemSkillDot,fillerElem);
+    elemSkillDotBox.appendChild(elemSkillDot);
+    elemSkillDotBox.appendChild(tooltipNode);
+    
+    elem.insertBefore(elemSkillDotBox,fillerElem);
 }
 
 function addPsychicSkill(){
@@ -899,12 +1022,24 @@ function addPsychicSkill(){
     var elem = document.getElementById("skill_bank");
     var fillerElem = document.getElementById("bank_filler");
     var elemSkillDot = document.createElement("div");
+    var elemSkillDotBox = document.createElement("div");
     elemSkillDot.setAttribute("class","purpledot");
+    elemSkillDotBox.setAttribute("class","dotbox");
+    elemSkillDotBox.setAttribute("style","height:"+window.getComputedStyle(elem).getPropertyValue('line-height'));
 
+    var tooltipNode = document.createElement('span');
+    tooltipNode.setAttribute("class","tooltiptext");
+    tooltipNode.innerHTML = "Allocate this to any psychic skill by clicking a box above.";
+
+    
     var oldStyle = elem.style.gridTemplateColumns;
     elem.style.gridTemplateColumns=oldStyle.slice(0,-4)+' fit-content(200px) '+oldStyle.slice(-4);
     
-    elem.insertBefore(elemSkillDot,fillerElem);
+    elemSkillDotBox.appendChild(elemSkillDot);
+    elemSkillDotBox.appendChild(tooltipNode);
+    
+    elem.insertBefore(elemSkillDotBox,fillerElem);
+
 }
 
 function useAnySkill(){
@@ -912,7 +1047,7 @@ function useAnySkill(){
     var blueDots = document.getElementsByClassName("bluedot");
     if (blueDots.length>0){
 	any_skill_remaining--;
-	blueDots[0].remove();
+	blueDots[0].parentElement.remove();
 	
 	var elem = document.getElementById("skill_bank");
 	var oldStyle = elem.style.gridTemplateColumns;
@@ -930,7 +1065,7 @@ function useCombatSkill(){
     var redDots = document.getElementsByClassName("reddot");
     if (redDots.length>0){
 	combat_skill_remaining--;
-	redDots[0].remove();
+	redDots[0].parentElement.remove();
 
 	var elem = document.getElementById("skill_bank");
 	var oldStyle = elem.style.gridTemplateColumns;
@@ -948,7 +1083,7 @@ function useNonCombatSkill(){
     var greenDots = document.getElementsByClassName("greendot");
     if (greenDots.length>0){
 	noncombat_skill_remaining--;
-	greenDots[0].remove();
+	greenDots[0].parentElement.remove();
 
 	var elem = document.getElementById("skill_bank");
 	var oldStyle = elem.style.gridTemplateColumns;
@@ -966,7 +1101,7 @@ function usePsychicSkill(){
     var purpleDots = document.getElementsByClassName("purpledot");
     if (purpleDots.length>0){
 	psychic_skill_remaining--;
-	purpleDots[0].remove();
+	purpleDots[0].parentElement.remove();
 
 	var elem = document.getElementById("skill_bank");
 	var oldStyle = elem.style.gridTemplateColumns;
@@ -984,17 +1119,17 @@ function usePsychicSkill(){
 function removeSkillDots(){
     
     var redDots = document.getElementsByClassName("reddot");
-    while (redDots.length>0) redDots[0].remove();
+    while (redDots.length>0) redDots[0].parentElement.remove();
     combat_skill_bank=0;
     combat_skill_remaining=0;
 
     var greenDots = document.getElementsByClassName("greendot");
-    while (greenDots.length>0) greenDots[0].remove();
+    while (greenDots.length>0) greenDots[0].parentElement.remove();
     noncombat_skill_bank=0;
     noncombat_skill_remaining=0;
 
     var purpleDots = document.getElementsByClassName("purpledot");
-    while (purpleDots.length>0) purpleDots[0].remove();
+    while (purpleDots.length>0) purpleDots[0].parentElement.remove();
     psychic_skill_bank=0;
     psychic_skill_remaining=0;
 
@@ -1002,7 +1137,7 @@ function removeSkillDots(){
     elem.setAttribute("style","grid-template-columns:fit-content(200px) 1fr;");
 
     var blueDots = document.getElementsByClassName("bluedot");
-    while (blueDots.length>0) blueDots[0].remove();
+    while (blueDots.length>0) blueDots[0].parentElement.remove();
     any_skill_bank=0;
     any_skill_remaining=0;
     
@@ -1027,14 +1162,29 @@ function loadFoci(){
 
 function populateFociList(foci) {
     let elem = document.getElementById("foci");
+    let elem2 = document.getElementById("combat_foci");
+    let elem3 = document.getElementById("noncombat_foci");
     
     var fociKeys=Object.keys(foci);
     
     for (var key of fociKeys) {
 	var option = document.createElement("option");
+	var option2 = document.createElement("option");
+	var option3 = document.createElement("option");
+
 	option.text = foci[key]["name"];
+	option2.text = foci[key]["name"];
+	option3.text = foci[key]["name"];
+
 	option.value = key;
+	option2.value = key;
+	option3.value = key;
+
+	var type = foci[key]["type"];
+	
 	elem.add(option);
+	if(type == "combat" || type == "both") elem2.add(option2);
+	if(type == "noncombat" || type == "both") elem3.add(option3);
     }
 }
 
@@ -1075,7 +1225,7 @@ function updateSkills(){
 	elem.innerHTML="";
     }    
 
-    var total_skills = background_skills.concat(foci_skills,learning_skills,growth_skills);
+    var total_skills = background_skills.concat(foci_skills,learning_skills,growth_skills,class_skills);
     
     for (var skill of total_skills) incrementSkill(skill);
 
@@ -1116,4 +1266,157 @@ function updateFromMirrors(){
     $("#class").trigger('change');
     $("#backgrounds").trigger('change');
     
+}
+
+function loadClasses(){
+    let request = new XMLHttpRequest();
+    request.open('GET', classURL);
+
+    request.responseType = 'json';
+
+
+    request.onload = function() {
+	classes = request.response;
+    }
+
+    request.send();
+}
+
+function displayClass() {
+    var elemClass = document.getElementById("class");
+    var elemSubClass = document.getElementById("adventurer_subclass");
+
+
+    var Class = elemClass.value;
+    var subClass = elemSubClass.value;
+    
+    let elemClassDescription = document.getElementById("class_description");
+    if (Class==""){
+	elemClassDescription.innerHTML = "";
+	class_skills=["any psychic","any psychic"]
+	hideCombatFoci();
+	hideNonCombatFoci();
+    }
+    else{
+	elemClassDescription.innerHTML = classes[Class]["description"];
+
+	var elemAbilities;
+	
+	var abilities = classes[Class]["abilities"];
+	
+	if (Class!="adventurer"){
+	    elemAbilities = document.createElement("ul");
+	    
+	    for (var ability of abilities){
+		var elemAbility = document.createElement("li");
+		elemAbility.innerHTML = ability;
+		elemAbilities.appendChild(elemAbility);
+	    }
+	}
+	else{
+	    elemAbilities = document.createElement("p");
+	    var keys=Object.keys(abilities);
+	    for (var key of keys){
+		var elemPartialClass = document.createElement("h3");
+		var elemPartialClassAbility = document.createElement("p");
+		elemPartialClass.innerHTML = key;
+		elemPartialClassAbility.innerHTML = abilities[key];
+		elemAbilities.appendChild(elemPartialClass);
+		elemAbilities.appendChild(elemPartialClassAbility);
+	    }
+	}
+	
+	elemClassDescription.appendChild(elemAbilities);
+
+	if(Class=="psychic"){
+	    class_skills=["any psychic","any psychic"]
+	    hideCombatFoci();
+	    hideNonCombatFoci();
+	}
+	else if(Class=="warrior"){
+	    class_skills=[];
+	    showCombatFoci();
+	    hideNonCombatFoci();
+	}
+	else if(Class=="adventurer"){
+	    if(subClass=="war_exp"){
+		class_skills=[];
+		showCombatFoci();
+		showNonCombatFoci();
+	    }
+	    if(subClass.includes("war_psy")){
+		class_skills=["any psychic"];
+		showCombatFoci();
+		hideNonCombatFoci();
+	    }
+	    if(subClass.includes("exp_psy")){
+		class_skills=["any psychic"];
+		hideCombatFoci();
+		showNonCombatFoci();
+
+	    }
+	}
+    }
+}
+
+function isolateFoci(){  
+    var elemFoci = document.getElementById("foci");
+    var elemCombatFoci = document.getElementById("combat_foci");
+    var elemNonCombatFoci = document.getElementById("noncombat_foci");
+
+    var fociOption = elemFoci.options[elemFoci.selectedIndex];
+    var combatFociOption = elemCombatFoci.options[elemCombatFoci.selectedIndex];
+    var nonCombatFociOption = elemNonCombatFoci.options[elemNonCombatFoci.selectedIndex];
+    
+    for (var opt of elemFoci.options){
+	if((opt.value==combatFociOption.value || opt.value==nonCombatFociOption.value) &&(opt.value != "")){
+	    opt.disabled="true";
+	}
+	else{
+	    opt.removeAttribute("disabled");
+	}
+    }
+    for (var opt of elemCombatFoci.options){
+	if((opt.value==fociOption.value || opt.value==nonCombatFociOption.value) &&(opt.value != "")){
+	    opt.disabled="true";
+	}
+	else{
+	    opt.removeAttribute("disabled");
+	}
+    }
+    for (var opt of elemNonCombatFoci.options){
+	if((opt.value==combatFociOption.value || opt.value==fociOption.value) &&(opt.value != "")){
+	    opt.disabled="true";
+	}
+	else{
+	    opt.removeAttribute("disabled");
+	}
+    }    
+}
+
+function showCombatFoci(){
+    var elem = document.getElementById("combat_foci");
+    elem.style.display = "inline";
+}
+
+function hideCombatFoci(){
+    var elem = document.getElementById("combat_foci");
+    elem.selectedIndex = 0;
+    elem.style.display = "none";
+    isolateFoci();
+
+}
+
+function showNonCombatFoci(){
+    var elem = document.getElementById("noncombat_foci");
+    elem.style.display = "inline";
+
+}
+
+function hideNonCombatFoci(){
+    var elem = document.getElementById("noncombat_foci");
+    elem.selectedIndex = 0;
+    elem.style.display = "none";
+    isolateFoci();
+
 }

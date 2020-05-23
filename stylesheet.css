@@ -6,11 +6,11 @@
 
 .topRowLeft {
     display: grid;
-        grid-template-rows: 1.5em 2.5em 1.5em auto;
+    grid-template-rows: 1.5em 2.5em 1.5em auto;
 }
 .topRowRight {
     display: grid;
-    grid-template-rows: 1em auto 30px;
+    grid-template-rows: 1.5em auto 30px;
 }
 
 .skillBank{
@@ -24,7 +24,7 @@
 
 .attrBlock {
     display: grid;
-    grid-template-columns: 85px 40px 25px 40px;
+    grid-template-columns: 85px 45px 23px 40px;
     row-gap: 15px;
     column-gap: 10px;
     grid-auto-rows: 10px;
@@ -69,14 +69,17 @@ input[type=checkbox]{
 }
 
 .skillTable {
-    width: 545px;
+    width: 555px;
     display: grid;
     grid-template-columns: 180px 160px 195px;
     row-gap: 8px;
     column-gap: 10px;
     /* grid-auto-rows: 12px;  */
     border: 1px solid black;
-    padding: 8px;
+    padding-top: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
 }
 
 .skillBlock {
@@ -121,21 +124,11 @@ input[type=checkbox]{
   transition: opacity 0.3s;
 }
 
-/* .tooltip .tooltiptext::after { */
-/*   content: ""; */
-/*   position: absolute; */
-/*   top: 100%; */
-/*   left: 50%; */
-/*   margin-left: -5px; */
-/*   border-width: 5px; */
-/*   border-style: solid; */
-/*   border-color: #555 transparent transparent transparent; */
-/* } */
-
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
+
 
 .reddot {
   height: 25px;
@@ -181,13 +174,44 @@ input[type=checkbox]{
   display: inline-block;
 }
 
+.dotbox {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black; */
+}
+
+.dotbox .tooltiptext {
+  visibility: hidden;
+  width: 400px;  
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 2px;
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 85px;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.dotbox:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
 .dialog_window {
     background-color: #fff;
-    border-color: #000;
+    border: 1px solid #000
     border-radius: 5px;
 }
 
 .no-close .ui-dialog-titlebar-close {display: none }
+
+.no-close .ui-dialog-titlebar { display: none }
 
 
 .checkbox-label {
@@ -258,3 +282,5 @@ input[type=checkbox]{
     opacity: 0.50;
 
 }
+
+div.ui-dialog {position:fixed;} 
