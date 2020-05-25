@@ -1367,8 +1367,12 @@ function displayClass() {
 	
 	var abilities = classes[Class]["abilities"];
 	
-	if (Class!="adventurer"){
+	if (Class.indexOf("_")==-1){
 	    elemAbilities = document.createElement("ul");
+	    
+	    var elemAbilitiesTitle = document.createElement("h4");
+	    elemAbilitiesTitle.innerHTML = "Class Abilities";
+	    elemClassDescription.appendChild(elemAbilitiesTitle);
 	    
 	    for (var ability of abilities){
 		var elemAbility = document.createElement("li");
@@ -1388,8 +1392,16 @@ function displayClass() {
 		elemAbilities.appendChild(elemPartialClassAbility);
 	    }
 	}
-	
+
+	var elemHPTitle = document.createElement("h4");
+	elemHPTitle.innerHTML = "Hit Points and Attack Bonus";
+
+	var elemHP = document.createElement("p");
+	elemHP.innerHTML = classes[Class]["hp"];
+
 	elemClassDescription.appendChild(elemAbilities);
+	elemClassDescription.appendChild(elemHPTitle);
+	elemClassDescription.appendChild(elemHP);
 
 	if(Class=="psychic"){
 	    class_skills=["any psychic","any psychic"];

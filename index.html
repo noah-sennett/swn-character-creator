@@ -31,13 +31,13 @@
 	  <label for="name">Class</label>
 	  <select id="class_mirror" onchange="updateFromMirrors(this.id);">
 	    <option value=""></option>
-	    <option value="warrior">Warrior</option>
 	    <option value="expert">Expert</option>
 	    <option value="psychic">Psychic</option>
+	    <option value="warrior">Warrior</option>	    
 	    <optgroup label="Adventurer">
-	      <option value="war_exp">Warrior/Expert</option>
-	      <option value="war_psy">Warrior/Psychic</option>
 	      <option value="exp_psy">Expert/Psychic</option>
+	      <option value="war_exp">Expert/Warrior</option>
+	      <option value="war_psy">Psychic/Warrior</option>
 	    </optgroup>
 	  </select>
 	</div>
@@ -248,13 +248,13 @@
 	<p>Choose your <strong>class</strong>, representing those talents you have that are most relevant to an adventurer’s lifestyle. If your hero isn’t well-described by Warrior, Expert, or Psychic, you can choose Adventurer and mix your class abilities.</p>
 	<select id="class" onchange=" displayClass(); updateSkills(); updateMirrors(this.id);">
 	  <option value=""></option>
-	  <option value="warrior">Warrior</option>
 	  <option value="expert">Expert</option>
 	  <option value="psychic">Psychic</option>
+	  <option value="warrior">Warrior</option>	    
 	  <optgroup label="Adventurer">
-	    <option value="war_exp">Warrior/Expert</option>
-	    <option value="war_psy">Warrior/Psychic</option>
 	    <option value="exp_psy">Expert/Psychic</option>
+	    <option value="war_exp">Expert/Warrior</option>
+	    <option value="war_psy">Psychic/Warrior</option>
 	  </optgroup>
 	</select>
 	
