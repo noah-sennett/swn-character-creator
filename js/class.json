@@ -13,7 +13,7 @@
 	"abilities":["Unlike Warriors or Experts, you are capable of learning psychic disciplines and their associated techniques, as described starting on page 28.",
 		     "When you pick this class, choose any two psychic skills as bonus skills. You can pick the same one twice to obtain level-1 proficiency in it and a free level-1 technique from that discipline.",
 		     "You have an Effort score, which can be used to fuel psychic abilities. Your maximum Effort is equal to 1 plus your highest psychic skill plus the better of your Wisdom or Constitution modifiers. Even with a penalty, your maximum Effort cannot be lower than 1."],
-	"hp":"Hit Points and Attack Bonus To get your starting maximum hit points, roll 1d6 and add your Constitution modifier, to a minimum of 1 hit point. Your attack bonus is equal to half your character level, rounded down, so it’s +0 at first level."
+	"hp":"To get your starting maximum hit points, roll 1d6 and add your Constitution modifier, to a minimum of 1 hit point. Your attack bonus is equal to half your character level, rounded down, so it’s +0 at first level."
     },
     "warrior":{
 	"name":"Warrior",
