@@ -1,3 +1,8 @@
+.descriptionBox{
+    border:1px solid black;
+    overflow:scroll;
+}
+
 .topRow {
     display: grid;
     grid-template-columns: 250px auto;
@@ -72,20 +77,21 @@ input[type=checkbox]{
     width: 555px;
     display: grid;
     grid-template-columns: 180px 160px 195px;
-    row-gap: 8px;
+    row-gap: 0px;
     column-gap: 10px;
     /* grid-auto-rows: 12px;  */
     border: 1px solid black;
     padding-top: 6px;
     padding-left: 8px;
     padding-right: 8px;
-    padding-bottom: 8px;
+    padding-bottom: 0px;
 }
 
 .skillBlock {
     display: grid;
     grid-template-columns: 1fr 85px 10px;
     column-gap: 2px;
+    margin-bottom: 8px;
 }
 
 
@@ -283,4 +289,5 @@ input[type=checkbox]{
 
 }
 
-div.ui-dialog {position:fixed;} 
+div.ui-dialog {
+    position:fixed;} 
