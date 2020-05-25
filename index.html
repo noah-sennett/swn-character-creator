@@ -18,494 +18,514 @@
   </head>
 
   <body>
-    <h1><i>Stars Without Number</i> Character Builder</h1>
-
-    
-    <div class="topRow" id="topRow">
-      <div class="topRowLeft" id="topRowLeft">
-	<div>
-	  <label for="name_mirror">Name</label>
-	  <input id="name_mirror" type="text" size="9" onchange="updateFromMirrors(this.id)"></input>
-	</div>
-	<div>
-	  <label for="name">Class</label>
-	  <select id="class_mirror" onchange="updateFromMirrors(this.id);">
-	    <option value=""></option>
-	    <option value="expert">Expert</option>
-	    <option value="psychic">Psychic</option>
-	    <option value="warrior">Warrior</option>	    
-	    <optgroup label="Adventurer">
-	      <option value="exp_psy">Expert/Psychic</option>
-	      <option value="war_exp">Expert/Warrior</option>
-	      <option value="war_psy">Psychic/Warrior</option>
-	    </optgroup>
-	  </select>
-	</div>
-	
-	<div>
-	  <label for="name">Background</label>
-	  <select id="backgrounds_mirror" onchange="updateFromMirrors(this.id);">
-	    	  <option value=""></option>
-	  </select>
-
-	</div>
-
-	
-	
-      <div class="attrBlock">
-	<div class="item attr"> Strength</div>
-	<div class="item val">  <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"></div>
-	<div class="item mod"><span id="strength_mod">+0 </span></div>
-	<div>
-	  <select id="strength_select" class="attrSelects" style="width: 38px" onchange="setAttr('strength',this.value); updateAttrSelects('strength',this.value);">
-	    <option value=""></option>
-	    <option value="14">14</option>
-	    <option value="12">12</option>
-	    <option value="11">11</option>
-	    <option value="10">10</option>
-	    <option value="9">9</option>
-	    <option value="7">7</option>
-	  </select>
-	</div>
-
-	<div class="item attr"> Dexterity</div>
-	<div class="item val">  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"></div>
-	<div class="item mod"><span id="dexterity_mod">+0 </span></div>
-	<div>
-	  <select id="dexterity_select" class="attrSelects" style="width: 38px" onchange="setAttr('dexterity',this.value); updateAttrSelects('dexterity',this.value);">
-	    <option value=""></option>
-	    <option value="14">14</option>
-	    <option value="12">12</option>
-	    <option value="11">11</option>
-	    <option value="10">10</option>
-	    <option value="9">9</option>
-	    <option value="7">7</option>
-	  </select>
-	</div>
-	
-	<div class="item attr"> Constitution</div>
-	<div class="item val">  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"></div>
-	<div class="item mod"><span id="constitution_mod">+0 </span></div>
-	<div>
-	  <select id="constitution_select" class="attrSelects" style="width: 38px" onchange="setAttr('constitution',this.value); updateAttrSelects('constitution',this.value);">
-	    <option value=""></option>
-	    <option value="14">14</option>
-	    <option value="12">12</option>
-	    <option value="11">11</option>
-	    <option value="10">10</option>
-	    <option value="9">9</option>
-	    <option value="7">7</option>
-	  </select>
-	</div>
-	
-	<div class="item attr"> Intelligence</div>
-	<div class="item val">  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"></div>
-	<div class="item mod"><span id="intelligence_mod">+0 </span></div>
-	<div>
-	  <select id="intelligence_select" class="attrSelects" style="width: 38px" onchange="setAttr('intelligence',this.value); updateAttrSelects('intelligence',this.value);">
-	    <option value=""></option>
-	    <option value="14">14</option>
-	    <option value="12">12</option>
-	    <option value="11">11</option>
-	    <option value="10">10</option>
-	    <option value="9">9</option>
-	    <option value="7">7</option>
-	  </select>
-	</div>
-	
-	<div class="item attr"> Wisdom</div>
-	<div class="item val">  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"></div>
-	<div class="item mod"><span id="wisdom_mod">+0 </span></div>
-	<div>
-	  <select id="wisdom_select" class="attrSelects" style="width: 38px" onchange="setAttr('wisdom',this.value); updateAttrSelects('wisdom',this.value);">
-	    <option value=""></option>
-	    <option value="14">14</option>
-	    <option value="12">12</option>
-	    <option value="11">11</option>
-	    <option value="10">10</option>
-	    <option value="9">9</option>
-	    <option value="7">7</option>
-	  </select>
-	</div>
-	
-	<div class="item attr"> Charisma</div>
-	<div class="item val">  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"></div>
-	<div class="item mod"><span id="charisma_mod">+0 </span></div>
-	<div>
-	  <select id="charisma_select" class="attrSelects" style="width: 38px" onchange="setAttr('charisma',this.value); updateAttrSelects('charisma',this.value);">
-	    <option value=""></option>
-	    <option value="14">14</option>
-	    <option value="12">12</option>
-	    <option value="11">11</option>
-	    <option value="10">10</option>
-	    <option value="9">9</option>
-	    <option value="7">7</option>
-	  </select>
-	</div>
-	
-      </div>
-      </div>
-      <div id="topRowRight" class="topRowRight">
-	<div style="display:inline-grid; grid-template-columns: 90px 101px 70px 100px 105px 101px;">
-	  <div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
-	  <div style="font-size:1.5em">Rank</div>
-	  <div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
-	  <div style="font-size:1.5em">Rank</div>
-	  <div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
-	  <div style="font-size:1.5em">Rank</div>
-
-	</div>
-	<div id="skill_bank" class="skillBank" style="grid-template-columns: fit-content(200px) 1fr;">
-	  <div>Available skills:</div>
-	  <div id="bank_filler"></div>
-	</div>
-	
-      </div>
-      
-    </div>      
-    
-    <script> loadBackgrounds(); </script>
-    <script> loadSkills(); </script>
-    <script> loadClasses(); </script>
-    <script> loadFoci(); </script>
-    <script> loadPsionics(); </script>
-    <script> loadPackages(); </script>
-
-    <br>
-    
-    <div class="accordion">
-      <h3>1. Determine attributes </h3>
-      <div>
-	
-	<p>Roll your six <strong>attributes</strong> or assign them from an array, using Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma. Attributes reflect the basic potential of your hero. Roll 3d6 six times and assign them in order, or use an array of 14, 12, 11, 10, 9, 7 assigned as you wish. If you randomly roll your scores you may then pick one attribute to change to a score of 14.</p>
-	<br>
-	<button onclick="attrs.forEach(rollAttr);hideAttrSelects();show14Attr();resetTemps();">Roll 3d6 in order</button> or
-	
-	<button onclick="attrs.forEach(resetAttr);hide14Attr();showAttrSelects();resetTemps();">Standard Array</button>
-	<br>
-	<br><br>
-	<div id="14attr" style="">
-	  <label for="14attrList">Select one attribute to set to 14</label>
-	  <select id="14attrList" onchange="attrTo14(this.value);">
-	    <option value=""></option>
-	    <option value="strength">Strength</option>
-	    <option value="dexterity">Dexterity</option>
-	    <option value="constitution">Constitution</option>
-	    <option value="intelligence">Intelligence</option>
-	    <option value="wisdom">Wisdom</option>
-	    <option value="charisma">Charisma</option>
-	  </select>
-	</div>
-
-      </div>
+    <div id="header" class="header">
+      <img src="assets/sky-star-atmosphere-constellation-aviation-space-1262201-pxhere.com_cropped.jpg" alt="nebula" class="headerbackground">
+      <img src="assets/title.png" alt="nebula" class="headertext">
     </div>
-    <div class="accordion">
-      <h3>2. Choose background</h3>
-      <div>
-	<p>Pick a <strong>background</strong> from the list on page 9 [below], one that most closely reflects your hero’s past experiences. You gain the skill listed under the background name at level-0, which equates to an ordinary working knowledge of it.</p>
-	<select id="backgrounds" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);enableSkillChoiceButtons(this.value);updateMirrors(this.id);">
-	  <option value=""></option>
-	</select>
-	
-	<div>
-	  <div id="background_description" class="descriptionBox"> </div>
-	</div>
-	
+    <div class="bodyGrid">
+      <div class="sidebar">
       </div>
-    </div>
-    <div class="accordion">
-      <h3>3. Determine skills</h3>
-      <div>
-	<p>Decide whether to roll for additional skills or pick them.</p>
-	<p> <strong>If you pick skills</strong>, you can choose two more skills from the Learning table for your background [below], with the exception of entries that say “Any Skill”, which you may not pick. You cannot pick entries from the Growth table. If you’re not sure what to pick, just take the “Quick 	  Skills” listed for your background at level-0, which include your background’s beginning skill.</p>
-	<p><strong>If you choose to roll for your skills</strong>, you can roll up to three times, dividing up your rolls between the Growth and Learning tables as you wish. When you roll on the Growth table, some results may say “+2 Physical” or “+2 Mental”. In the former case, you can add two points to either Strength, Dexterity, or Constitution, or one point to two different stats. In the latter case, you can add two points to either Intelligence, Wisdom, or Charisma, or divide the bonus between two of them.</p>
-	<p>[Additionally], <strong>pick one non-psychic skill</strong> of your choice to reflect your hero’s outside interests, natural talents, hobby expertise, or other personal focus.</p>
+      <div style="padding:10px">
+	<div class="topRow" id="topRow">
+	  <div class="topRowLeft" id="topRowLeft">
+	    <div>
+	      <label for="name_mirror">Name</label>
+	      <input id="name_mirror" type="text" size="9" onchange="updateFromMirrors(this.id)">
+	    </div>
+	    <div>
+	      <label for="name">Class</label>
+	      <select id="class_mirror" onchange="updateFromMirrors(this.id);">
+		<option value=""></option>
+		<option value="expert">Expert</option>
+		<option value="psychic">Psychic</option>
+		<option value="warrior">Warrior</option>	    
+		<optgroup label="Adventurer">
+		  <option value="exp_psy">Expert/Psychic</option>
+		  <option value="war_exp">Expert/Warrior</option>
+		  <option value="war_psy">Psychic/Warrior</option>
+		</optgroup>
+	      </select>
+	    </div>
+	    
+	    <div>
+	      <label for="name">Background</label>
+	      <select id="backgrounds_mirror" onchange="updateFromMirrors(this.id);">
+		<option value=""></option>
+	      </select>
 
-	<p> To allocate available skills, click the corresponding box in the skill table above. </p>
-	  
-	<button id="pick_skill" onclick="hideGrowthButtons();enableLearningChoices();" disabled="true">Pick 2 additional skills <br> from learning table</button> or
-	<button id="roll_skill" onclick="showGrowthButtons();" disabled="true">Roll 3 times between growth<br> and learning tables</button>
-	<br>
-	<button id="growth_button" onclick="rollGrowth();">Roll on growth table</button>
-	<button id="learning_button" onclick="rollLearning();">Roll on learning table </button>
-	
-	<br>
-	<div class="bloc">
-	  <select id="growth" size="6" style="width:140px" disabled="true" multiple>
-	  </select>
-	</div>
-	
-	<div class="bloc">
-	  <select id="learning" size="8" style="width:110px" disabled="true" multiple>
-	  </select>
-	</div>
+	    </div>
 
-      </div>
-    </div>
-    <div class="accordion">
-      <h3>4. Choose class</h3>
-      <div>
-	<p>Choose your <strong>class</strong>, representing those talents you have that are most relevant to an adventurer’s lifestyle. If your hero isn’t well-described by Warrior, Expert, or Psychic, you can choose Adventurer and mix your class abilities.</p>
-	<select id="class" onchange=" displayClass(); updateSkills(); updateMirrors(this.id);">
-	  <option value=""></option>
-	  <option value="expert">Expert</option>
-	  <option value="psychic">Psychic</option>
-	  <option value="warrior">Warrior</option>	    
-	  <optgroup label="Adventurer">
-	    <option value="exp_psy">Expert/Psychic</option>
-	    <option value="war_exp">Expert/Warrior</option>
-	    <option value="war_psy">Psychic/Warrior</option>
-	  </optgroup>
-	</select>
-	
-
-	<div id="class_description" class="descriptionBox">
-	</div>
-
-
-      </div>
-    </div>
-    <div class="accordion">
-      <h3>5. Choose foci</h3>
-      <div>
-	<p>Choose your <strong>foci</strong>, representing the side talents or particular specializations of your hero. You can pick one level of a focus of your choice. Characters with the Expert class or the Partial Expert feature of the Adventurer class get one level of a non-combat, non-psychic focus for free in addition to this. They can spend both levels on the same focus, starting with level 2 in it if they wish. Characters with the Warrior class or Partial Warrior feature of the Adventurer class can do the same in choosing one level of a combat focus.</p>
-
-	<div id="tabs">
-	  <ul>
-	    <li>
-	      <a href="#tab-1">
-		<div style="text-align:center">
-		<label for="foci">General Focus</label><br>
-		<select id="foci" onchange="displayFoci(this.value); isolateFoci(); updateSkills()">
+	    
+	    
+	    <div class="attrBlock">
+	      <div class="item attr"> Strength</div>
+	      <div class="item val">  <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"></div>
+	      <div class="item mod"><span id="strength_mod">+0 </span></div>
+	      <div>
+		<select id="strength_select" class="attrSelects" style="width: 38px" onchange="setAttr('strength',this.value); updateAttrSelects('strength',this.value);">
 		  <option value=""></option>
+		  <option value="14">14</option>
+		  <option value="12">12</option>
+		  <option value="11">11</option>
+		  <option value="10">10</option>
+		  <option value="9">9</option>
+		  <option value="7">7</option>
 		</select>
-		</div>
-	      </a>
-	    </li>
-	    <li>
-	      <a href="#tab-1">
-		<div style="text-align:center">
-		  <label for="combat_foci">Combat Focus</label><br>
-		  <select id="combat_foci" onchange="displayFoci(this.value); isolateFoci(); updateSkills()" style="display:none">
-		    <option value=""></option>
-		  </select>
-		</div>
-	      </a>
-	    </li>
-	    <li>
-	      <a href="#tab-1">
-		<div style="text-align:center">
-		  <label for="noncombat_foci">Non-combat Focus</label><br>
-		  <select id="noncombat_foci" onchange="displayFoci(this.value); isolateFoci(); updateSkills()" style="display:none">
-		    <option value=""></option>
-		  </select>
-		</div>
-		</a>
-	    </li>
-	  </ul>
-	<div id="tab-1">
-	  <div id="foci_description" class="descriptionBox"> </div>
-	</div>
-	</div>
-      </div>
-    </div>
-    <div class="accordion">
-      <h3>6. Choose psionic techniques</h3>
-      <div>
+	      </div>
+
+	      <div class="item attr"> Dexterity</div>
+	      <div class="item val">  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"></div>
+	      <div class="item mod"><span id="dexterity_mod">+0 </span></div>
+	      <div>
+		<select id="dexterity_select" class="attrSelects" style="width: 38px" onchange="setAttr('dexterity',this.value); updateAttrSelects('dexterity',this.value);">
+		  <option value=""></option>
+		  <option value="14">14</option>
+		  <option value="12">12</option>
+		  <option value="11">11</option>
+		  <option value="10">10</option>
+		  <option value="9">9</option>
+		  <option value="7">7</option>
+		</select>
+	      </div>
+	      
+	      <div class="item attr"> Constitution</div>
+	      <div class="item val">  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"></div>
+	      <div class="item mod"><span id="constitution_mod">+0 </span></div>
+	      <div>
+		<select id="constitution_select" class="attrSelects" style="width: 38px" onchange="setAttr('constitution',this.value); updateAttrSelects('constitution',this.value);">
+		  <option value=""></option>
+		  <option value="14">14</option>
+		  <option value="12">12</option>
+		  <option value="11">11</option>
+		  <option value="10">10</option>
+		  <option value="9">9</option>
+		  <option value="7">7</option>
+		</select>
+	      </div>
+	      
+	      <div class="item attr"> Intelligence</div>
+	      <div class="item val">  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"></div>
+	      <div class="item mod"><span id="intelligence_mod">+0 </span></div>
+	      <div>
+		<select id="intelligence_select" class="attrSelects" style="width: 38px" onchange="setAttr('intelligence',this.value); updateAttrSelects('intelligence',this.value);">
+		  <option value=""></option>
+		  <option value="14">14</option>
+		  <option value="12">12</option>
+		  <option value="11">11</option>
+		  <option value="10">10</option>
+		  <option value="9">9</option>
+		  <option value="7">7</option>
+		</select>
+	      </div>
+	      
+	      <div class="item attr"> Wisdom</div>
+	      <div class="item val">  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"></div>
+	      <div class="item mod"><span id="wisdom_mod">+0 </span></div>
+	      <div>
+		<select id="wisdom_select" class="attrSelects" style="width: 38px" onchange="setAttr('wisdom',this.value); updateAttrSelects('wisdom',this.value);">
+		  <option value=""></option>
+		  <option value="14">14</option>
+		  <option value="12">12</option>
+		  <option value="11">11</option>
+		  <option value="10">10</option>
+		  <option value="9">9</option>
+		  <option value="7">7</option>
+		</select>
+	      </div>
+	      
+	      <div class="item attr"> Charisma</div>
+	      <div class="item val">  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"></div>
+	      <div class="item mod"><span id="charisma_mod">+0 </span></div>
+	      <div>
+		<select id="charisma_select" class="attrSelects" style="width: 38px" onchange="setAttr('charisma',this.value); updateAttrSelects('charisma',this.value);">
+		  <option value=""></option>
+		  <option value="14">14</option>
+		  <option value="12">12</option>
+		  <option value="11">11</option>
+		  <option value="10">10</option>
+		  <option value="9">9</option>
+		  <option value="7">7</option>
+		</select>
+	      </div>
+	      
+	    </div>
+	  </div>
+	  <div id="topRowRight" class="topRowRight">
+	    <div style="display:inline-grid; grid-template-columns: 90px 101px 70px 100px 105px 101px;">
+	      <div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
+	      <div style="font-size:1.5em">Rank</div>
+	      <div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
+	      <div style="font-size:1.5em">Rank</div>
+	      <div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
+	      <div style="font-size:1.5em">Rank</div>
+
+	    </div>
+	    <div id="skill_bank" class="skillBank" style="grid-template-columns: fit-content(200px) 1fr;">
+	      <div>Available skills:</div>
+	      <div id="bank_filler"></div>
+	    </div>
+	    
+	  </div>
+	  
+	</div>      
 	
-	<div id="biopsionics_core_description" class="descriptionBox" style="display:none">
-	</div>
-	<select id="biopsionics_level1" onchange="displayTechniqueInfo('biopsionics',this.value)" style="display:none">
-	  <option value=""></option>
-	</select>
-	<div id="biopsionics_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
+	<script> loadBackgrounds(); </script>
+	<script> loadSkills(); </script>
+	<script> loadClasses(); </script>
+	<script> loadFoci(); </script>
+	<script> loadPsionics(); </script>
+	<script> loadPackages(); </script>
 
-	<div id="metapsionics_core_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
-	<select id="metapsionics_level1" onchange="displayTechniqueInfo('metapsionics',this.value)" style="display:none">
-	  <option value=""></option>
-	</select>
-	<div id="metapsionics_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
-
-	<div id="precognition_core_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
-	<select id="precognition_level1" onchange="displayTechniqueInfo('precognition',this.value)" style="display:none">
-	  <option value=""></option>
-	</select>
-	<div id="precognition_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
-
-	<div id="telekinesis_core_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
-	<select id="telekinesis_level1" onchange="displayTechniqueInfo('telekinesis',this.value)" style="display:none">
-	  <option value=""></option>
-	</select>
-	<div id="telekinesis_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
-
-	<div id="telepathy_core_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
-	<select id="telepathy_level1" onchange="displayTechniqueInfo('telepathy',this.value)" style="display:none">
-	  <option value=""></option>
-	</select>
-	<div id="telepathy_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
-
-	<div id="teleportation_core_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
-	<select id="teleportation_level1" onchange="displayTechniqueInfo('teleportation',this.value)" style="display:none">
-	  <option value=""></option>
-	</select>
-	<div id="teleportation_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
-	</div>
-      </div>
-    </div>
-    </div>
-    <div class="accordion">
-      <h3>7. Roll hitpoints</h3>
-      <div>
-	<p>
-	  Roll your maximum <strong>hit points</strong> on 1d6, adding your Constitution modifier. Even a penalty can’t reduce your hit points below 1. Warrior PCs and Adventurers with the Partial Warrior class option add 2 points to this total. Hit points indicate how close your hero is to being defeated.
-	  </p>
 	<br>
-	<button onclick="rollHP();totalHP();">Roll hit points</button>
-	<br>
-	<div style="display:inline-block; text-align:center;">
-	  <label for="hp_roll">Roll</label><br>
-	  <input type="number" id="hp_roll" disabled="true">
-	</div>
-	+
-	<div style="display:inline-block; text-align:center;">
-	  <label for="constitution_hp_bonus"> Con modifier</label><br>
-	  <input type="number" id="constitution_hp_bonus" disabled="true">
-	</div>
-	+
-	<div style="display:inline-block; text-align:center;">
-	  <label for="class_hp_bonus"> Class bonus </label><br>
-	  <input type="number" id="class_hp_bonus" disabled="true"> 
-	</div>
-	= <input type="number" id="hp_total" disabled="true">
-      </div>
-    </div>
-    <div class="accordion">
-      <h3>8. Choose equipment</h3>
-      <div>
-	<p>Choose one of the equipment packages on page 25 [below] or roll 2d6 x 100 to find out how many starting credits you have with which to buy gear.</p>
+	
+	<div class="accordion">
+	  <h3>1. Determine attributes </h3>
+	  <div>
+	    
+	    <p>The six attributes&mdash;Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma&mdash;reflect the raw potential of your hero. Select one of the methods below to assign your character's <strong>attribute scores</strong>: </p>
 
-	<select id="equipment_packages" onchange="displayEquipmentPackage(this.value)">
-	  <option value=""></option>
-	</select>
-	<div class="descriptionBox" id="equipment_packages_description" style="width:430px;height:400px;border:1px solid black;overflow:scroll;">
+	    <div style="width:100%; display:grid ; grid-template-columns:1fr 1fr; column-gap:10px;">
+	      <div>
+		<button onclick="attrs.forEach(rollAttr);hideAttrSelects();show14Attr();resetTemps();" style="width:100%">
+		  <h4>Random</h4>
+		  <p>		  Roll 3d6 for each attribute. You may then change one attribute's score to 14.</p>
+		</button>
+			    <div id="14attr" style="">
+	      <label for="14attrList">Select one attribute to set to 14</label>
+	      <select id="14attrList" onchange="attrTo14(this.value);">
+		<option value=""></option>
+		<option value="strength">Strength</option>
+		<option value="dexterity">Dexterity</option>
+		<option value="constitution">Constitution</option>
+		<option value="intelligence">Intelligence</option>
+		<option value="wisdom">Wisdom</option>
+		<option value="charisma">Charisma</option>
+	      </select>
+	    </div>
+
+	      </div>
+	      <div>
+		<button onclick="attrs.forEach(resetAttr);hide14Attr();showAttrSelects();resetTemps();">
+	      <h4>Fixed </h4>
+	      Assign scores attribute scores from the following list: 14, 12 11, 10, 9, 7</button>
+	      </div>
+	    </div>
+		<br>
+	    <br><br>
+
 	  </div>
-      </div>
-    </div>
-
-    <div class="accordion">
-      <h3>9. Add finishing touches</h3>
-      <div>
-	<label for="name">Name</label>	
-	<input id="name" type="text" size="9" onchange="updateMirrors(this.id)"></input>
-	<label for="homeworld">Homeworld</label>	
-	<input id="homeworld" type="text" size="9" onchange="updateMirrors(this.id)"></input>
-	<label for="employer">Employer</label>	
-	<input id="employer" type="text" size="9" onchange="updateMirrors(this.id)"></input><br>
-	<div style="display:inline-block">
-	  <label for="goals">Goals</label><br>
-	  <textarea id="goals" style="width:430px;height:400px;border:1px solid black;overflow:scroll;"></textarea>
+	</div>
+	<div class="accordion">
+	  <h3>2. Choose background</h3>
+	  <div>
+	    <p>Pick a <strong>background</strong> from the list on page 9 [below], one that most closely reflects your hero’s past experiences. You gain the skill listed under the background name at level-0, which equates to an ordinary working knowledge of it.</p>
+	    <select id="backgrounds" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);enableSkillChoiceButtons(this.value);updateMirrors(this.id);">
+	      <option value=""></option>
+	    </select>
+	    
+	    <div>
+	      <div id="background_description" class="descriptionBox"> </div>
+	    </div>
+	    
 	  </div>
+	</div>
+	<div class="accordion">
+	  <h3>3. Determine skills</h3>
+	  <div>
+	    <p>Decide whether to roll for additional skills or pick them.</p>
+	    <p> <strong>If you pick skills</strong>, you can choose two more skills from the Learning table for your background [below], with the exception of entries that say “Any Skill”, which you may not pick. You cannot pick entries from the Growth table. If you’re not sure what to pick, just take the “Quick 	  Skills” listed for your background at level-0, which include your background’s beginning skill.</p>
+	    <p><strong>If you choose to roll for your skills</strong>, you can roll up to three times, dividing up your rolls between the Growth and Learning tables as you wish. When you roll on the Growth table, some results may say “+2 Physical” or “+2 Mental”. In the former case, you can add two points to either Strength, Dexterity, or Constitution, or one point to two different stats. In the latter case, you can add two points to either Intelligence, Wisdom, or Charisma, or divide the bonus between two of them.</p>
+	    <p>[Additionally], <strong>pick one non-psychic skill</strong> of your choice to reflect your hero’s outside interests, natural talents, hobby expertise, or other personal focus.</p>
+
+	    <p> To allocate available skills, click the corresponding box in the skill table above. </p>
+	    
+	    <button id="pick_skill" onclick="hideGrowthButtons();enableLearningChoices();" disabled="true">Pick 2 additional skills <br> from learning table</button> or
+	    <button id="roll_skill" onclick="showGrowthButtons();" disabled="true">Roll 3 times between growth<br> and learning tables</button>
+	    <br>
+	    <button id="growth_button" onclick="rollGrowth();">Roll on growth table</button>
+	    <button id="learning_button" onclick="rollLearning();">Roll on learning table </button>
+	    
+	    <br>
+	    <div class="bloc">
+	      <select id="growth" size="6" style="width:140px" disabled="true" multiple>
+	      </select>
+	    </div>
+	    
+	    <div class="bloc">
+	      <select id="learning" size="8" style="width:110px" disabled="true" multiple>
+	      </select>
+	    </div>
+
+	  </div>
+	</div>
+	<div class="accordion">
+	  <h3>4. Choose class</h3>
+	  <div>
+	    <p>Choose your <strong>class</strong>, representing those talents you have that are most relevant to an adventurer’s lifestyle. If your hero isn’t well-described by Warrior, Expert, or Psychic, you can choose Adventurer and mix your class abilities.</p>
+	    <select id="class" onchange="tabulateFoci(); displayClass(); updateSkills(); updateMirrors(this.id);">
+	      <option value=""></option>
+	      <option value="expert">Expert</option>
+	      <option value="psychic">Psychic</option>
+	      <option value="warrior">Warrior</option>	    
+	      <optgroup label="Adventurer">
+		<option value="exp_psy">Expert/Psychic</option>
+		<option value="war_exp">Expert/Warrior</option>
+		<option value="war_psy">Psychic/Warrior</option>
+	      </optgroup>
+	    </select>
+	    
+
+	    <div id="class_description" class="descriptionBox">
+	    </div>
+
+
+	  </div>
+	</div>
+	<div class="accordion">
+	  <h3>5. Choose foci</h3>
+	  <div>
+	    <p>Choose your <strong>foci</strong>, representing the side talents or particular specializations of your hero. You can pick one level of a focus of your choice. Characters with the Expert class or the Partial Expert feature of the Adventurer class get one level of a non-combat, non-psychic focus for free in addition to this. They can spend both levels on the same focus, starting with level 2 in it if they wish. Characters with the Warrior class or Partial Warrior feature of the Adventurer class can do the same in choosing one level of a combat focus.</p>
+
+	    <div id="tabs">
+	      <ul>
+		<li id="foci_tab">
+		  <a href="#tab-1">
+		    <div style="text-align:center">
+		      <label for="foci">General Focus</label><br>
+		      <select id="foci" onchange="tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills()">
+			<option value=""></option>
+		      </select>
+		    </div>
+		  </a>
+		</li>
+		<li id="combat_foci_tab"  style="display:none">
+		  <a href="#tab-1">
+		    <div style="text-align:center">
+		      <label for="combat_foci">Combat Focus</label><br>
+		      <select id="combat_foci" onchange="tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills()">
+			<option value=""></option>
+		      </select>
+		    </div>
+		  </a>
+		</li>
+		<li id="noncombat_foci_tab" style="display:none">
+		  <a href="#tab-1">
+		    <div style="text-align:center">
+		      <label for="noncombat_foci">Non-combat Focus</label><br>
+		      <select id="noncombat_foci" onchange="tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills()">
+			<option value=""></option>
+		      </select>
+		    </div>
+		  </a>
+		</li>
+	      </ul>
+	      <div id="tab-1">
+		<div id="foci_description" class="descriptionBox"> </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="accordion">
+	  <h3>6. Choose psionic techniques</h3>
+	  <div>
+	    
+	    <div id="biopsionics_core_description" class="descriptionBox" style="display:none">
+	    </div>
+	    <select id="biopsionics_level1" onchange="displayTechniqueInfo('biopsionics',this.value)" style="display:none">
+	      <option value=""></option>
+	    </select>
+	    <div id="biopsionics_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+
+	    <div id="metapsionics_core_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+	    <select id="metapsionics_level1" onchange="displayTechniqueInfo('metapsionics',this.value)" style="display:none">
+	      <option value=""></option>
+	    </select>
+	    <div id="metapsionics_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+
+	    <div id="precognition_core_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+	    <select id="precognition_level1" onchange="displayTechniqueInfo('precognition',this.value)" style="display:none">
+	      <option value=""></option>
+	    </select>
+	    <div id="precognition_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+
+	    <div id="telekinesis_core_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+	    <select id="telekinesis_level1" onchange="displayTechniqueInfo('telekinesis',this.value)" style="display:none">
+	      <option value=""></option>
+	    </select>
+	    <div id="telekinesis_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+
+	    <div id="telepathy_core_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+	    <select id="telepathy_level1" onchange="displayTechniqueInfo('telepathy',this.value)" style="display:none">
+	      <option value=""></option>
+	    </select>
+	    <div id="telepathy_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+
+	    <div id="teleportation_core_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+	    <select id="teleportation_level1" onchange="displayTechniqueInfo('teleportation',this.value)" style="display:none">
+	      <option value=""></option>
+	    </select>
+	    <div id="teleportation_level1_description" class="descriptionBox" style="width:430px;height:400px;border:1px solid black;overflow:scroll;display:none">
+	    </div>
+	  </div>
+	</div>
+	<div class="accordion">
+	  <h3>7. Roll hitpoints</h3>
+	  <div>
+	    <p>
+	      Roll your maximum <strong>hit points</strong> on 1d6, adding your Constitution modifier. Even a penalty can’t reduce your hit points below 1. Warrior PCs and Adventurers with the Partial Warrior class option add 2 points to this total. Hit points indicate how close your hero is to being defeated.
+	    </p>
+	    <br>
+	    <button onclick="rollHP();totalHP();">Roll hit points</button>
+	    <br>
+	    <div style="display:inline-block; text-align:center;">
+	      <label for="hp_roll">Roll</label><br>
+	      <input type="number" id="hp_roll" disabled="true">
+	    </div>
+	    +
+	    <div style="display:inline-block; text-align:center;">
+	      <label for="constitution_hp_bonus"> Con modifier</label><br>
+	      <input type="number" id="constitution_hp_bonus" disabled="true">
+	    </div>
+	    +
+	    <div style="display:inline-block; text-align:center;">
+	      <label for="class_hp_bonus"> Class bonus </label><br>
+	      <input type="number" id="class_hp_bonus" disabled="true"> 
+	    </div>
+	    = <input type="number" id="hp_total" disabled="true">
+	  </div>
+	</div>
+	<div class="accordion">
+	  <h3>8. Choose equipment</h3>
+	  <div>
+	    <p>Choose one of the equipment packages on page 25 [below] or roll 2d6 x 100 to find out how many starting credits you have with which to buy gear.</p>
+
+	    <select id="equipment_packages" onchange="displayEquipmentPackage(this.value)">
+	      <option value=""></option>
+	    </select>
+	    <div class="descriptionBox" id="equipment_packages_description" style="width:430px;height:400px;border:1px solid black;overflow:scroll;">
+	    </div>
+	  </div>
+	</div>
+
+	<div class="accordion">
+	  <h3>9. Add finishing touches</h3>
+	  <div>
+	    <label for="name">Name</label>	
+	    <input id="name" type="text" size="9" onchange="updateMirrors(this.id)">
+	    <label for="homeworld">Homeworld</label>	
+	    <input id="homeworld" type="text" size="9" onchange="updateMirrors(this.id)">
+	    <label for="employer">Employer</label>	
+	    <input id="employer" type="text" size="9" onchange="updateMirrors(this.id)"><br>
+	    <div style="display:inline-block">
+	      <label for="goals">Goals</label><br>
+	      <textarea id="goals" style="width:430px;height:400px;border:1px solid black;overflow:scroll;"></textarea>
+	    </div>
+	  </div>
+
+	</div>
+
+
+	<script>hide14Attr();hideAttrSelects();hideGrowthButtons();</script>    
+	
+
+
+
+	<div class="dialog_window" id="anystat_dialog">
+	  Choose an attribute bonus.
+	  <fieldset>
+	    <legend>Bonus</legend>
+	    <label for="anystat_strength">+1 Strength </label>
+	    <input type="radio" name="anystat" value="strength" id="anystat_strength">
+	    <label for="anystat_dexterity">+1 Dexterity </label>
+	    <input type="radio" name="anystat" value="dexterity" id="anystat_dexterity">
+	    <label for="anystat_constitution">+1 Constitution </label>
+	    <input type="radio" name="anystat" value="constitution" id="anystat_constitution">
+	    <label for="anystat_intelligence">+1 Intelligence </label>
+	    <input type="radio" name="anystat" value="intelligence" id="anystat_intelligence">
+	    <label for="anystat_wisdom">+1 Wisdom </label>
+	    <input type="radio" name="anystat" value="wisdom" id="anystat_wisdom">
+	    <label for="anystat_charisma">+1 Charisma </label>
+	    <input type="radio" name="anystat" value="charisma" id="anystat_charisma">
+	  </fieldset>
+	</div>
+
+	<div class="dialog_window" id="physstat_dialog">
+	  Choose two attribute bonuses (the same attribute can be increased twice).
+	  <fieldset>
+	    <legend>Bonus 1</legend>
+	    <label for="physstat1_strength">+1 Strength </label>
+	    <input type="radio" name="physstat1" value="strength" id="physstat1_strength">
+	    <label for="physstat1_dexterity">+1 Dexterity </label>
+	    <input type="radio" name="physstat1" value="dexterity" id="physstat1_dexterity">
+	    <label for="physstat1_constitution">+1 Constitution </label>
+	    <input type="radio" name="physstat1" value="constitution" id="physstat1_constitution">
+	  </fieldset>
+	  <br>
+	  <fieldset>
+	    <legend>Bonus 2</legend>
+	    <label for="physstat2_strength">+1 Strength </label>
+	    <input type="radio" name="physstat2" value="strength" id="physstat2_strength">
+	    <label for="physstat2_dexterity">+1 Dexterity </label>
+	    <input type="radio" name="physstat2" value="dexterity" id="physstat2_dexterity">
+	    <label for="physstat2_constitution">+1 Constitution </label>
+	    <input type="radio" name="physstat2" value="constitution" id="physstat2_constitution">
+	  </fieldset>
+	</div>
+
+	<div class="dialog_window" id="mentstat_dialog">
+	  Choose two attribute bonuses (the same attribute can be increased twice).
+	  <fieldset>
+	    <legend>Bonus 1</legend>
+	    <label for="mentstat1_intelligence">+1 Intelligence </label>
+	    <input type="radio" name="mentstat1" value="intelligence" id="mentstat1_intelligence">
+	    <label for="mentstat1_wisdom">+1 Wisdom </label>
+	    <input type="radio" name="mentstat1" value="wisdom" id="mentstat1_wisdom">
+	    <label for="mentstat1_charisma">+1 Charisma </label>
+	    <input type="radio" name="mentstat1" value="charisma" id="mentstat1_charisma">
+	  </fieldset>
+	  <br>
+	  <fieldset>
+	    <legend>Bonus 2</legend>
+	    <label for="mentstat2_intelligence">+1 Intelligence </label>
+	    <input type="radio" name="mentstat2" value="intelligence" id="mentstat2_intelligence">
+	    <label for="mentstat2_wisdom">+1 Wisdom </label>
+	    <input type="radio" name="mentstat2" value="wisdom" id="mentstat2_wisdom">
+	    <label for="mentstat2_charisma">+1 Charisma </label>
+	    <input type="radio" name="mentstat2" value="charisma" id="mentstat2_charisma">
+	  </fieldset>
+	</div>
+	
+	<div class="dialog_window" id="punchstab_dialog">
+	  Choose one of the following skills.
+	  <label for="punchstab_punch">Punch</label>
+	  <input type="radio" name="punchstab" value="punch" id="punchstab_punch">
+	  <label for="punchstab_stab">Stab</label>
+	  <input type="radio" name="punchstab" value="stab" id="punchstab_stab">
+	</div>    
+
+	<div class="dialog_window" id="stabshoot_dialog">
+	  Choose one of the following skills.
+	  <label for="stabshoot_stab">Stab</label>
+	  <input type="radio" name="stabshoot" value="stab" id="stabshoot_stab">
+	  <label for="stabshoot_shoot">Shoot</label>
+	  <input type="radio" name="stabshoot" value="shoot" id="stabshoot_shoot">
+	</div>
+	
       </div>
-
+      <div class="sidebar">
+      </div>
     </div>
-
-
-    <script>hide14Attr();hideAttrSelects();hideGrowthButtons();</script>    
-    
-
-
-
-    <div class="dialog_window" id="anystat_dialog">
-      Choose an attribute bonus.
-      <fieldset>
-	<legend>Bonus</legend>
-	<label for="anystat_strength">+1 Strength </label>
-	<input type="radio" name="anystat" value="strength" id="anystat_strength">
-	<label for="anystat_dexterity">+1 Dexterity </label>
-	<input type="radio" name="anystat" value="dexterity" id="anystat_dexterity">
-	<label for="anystat_constitution">+1 Constitution </label>
-	<input type="radio" name="anystat" value="constitution" id="anystat_constitution">
-	<label for="anystat_intelligence">+1 Intelligence </label>
-	<input type="radio" name="anystat" value="intelligence" id="anystat_intelligence">
-	<label for="anystat_wisdom">+1 Wisdom </label>
-	<input type="radio" name="anystat" value="wisdom" id="anystat_wisdom">
-	<label for="anystat_charisma">+1 Charisma </label>
-	<input type="radio" name="anystat" value="charisma" id="anystat_charisma">
-      </fieldset>
+    <div class="footer">
     </div>
-
-    <div class="dialog_window" id="physstat_dialog">
-      Choose two attribute bonuses (the same attribute can be increased twice).
-      <fieldset>
-	<legend>Bonus 1</legend>
-	<label for="physstat1_strength">+1 Strength </label>
-	<input type="radio" name="physstat1" value="strength" id="physstat1_strength">
-	<label for="physstat1_dexterity">+1 Dexterity </label>
-	<input type="radio" name="physstat1" value="dexterity" id="physstat1_dexterity">
-	<label for="physstat1_constitution">+1 Constitution </label>
-	<input type="radio" name="physstat1" value="constitution" id="physstat1_constitution">
-      </fieldset>
-      <br>
-      <fieldset>
-	<legend>Bonus 2</legend>
-	<label for="physstat2_strength">+1 Strength </label>
-	<input type="radio" name="physstat2" value="strength" id="physstat2_strength">
-	<label for="physstat2_dexterity">+1 Dexterity </label>
-	<input type="radio" name="physstat2" value="dexterity" id="physstat2_dexterity">
-	<label for="physstat2_constitution">+1 Constitution </label>
-	<input type="radio" name="physstat2" value="constitution" id="physstat2_constitution">
-      </fieldset>
-    </div>
-
-    <div class="dialog_window" id="mentstat_dialog">
-      Choose two attribute bonuses (the same attribute can be increased twice).
-      <fieldset>
-	<legend>Bonus 1</legend>
-	<label for="mentstat1_intelligence">+1 Intelligence </label>
-	<input type="radio" name="mentstat1" value="intelligence" id="mentstat1_intelligence">
-	<label for="mentstat1_wisdom">+1 Wisdom </label>
-	<input type="radio" name="mentstat1" value="wisdom" id="mentstat1_wisdom">
-	<label for="mentstat1_charisma">+1 Charisma </label>
-	<input type="radio" name="mentstat1" value="charisma" id="mentstat1_charisma">
-      </fieldset>
-      <br>
-      <fieldset>
-	<legend>Bonus 2</legend>
-	<label for="mentstat2_intelligence">+1 Intelligence </label>
-	<input type="radio" name="mentstat2" value="intelligence" id="mentstat2_intelligence">
-	<label for="mentstat2_wisdom">+1 Wisdom </label>
-	<input type="radio" name="mentstat2" value="wisdom" id="mentstat2_wisdom">
-	<label for="mentstat2_charisma">+1 Charisma </label>
-	<input type="radio" name="mentstat2" value="charisma" id="mentstat2_charisma">
-      </fieldset>
-    </div>
-    
-    <div class="dialog_window" id="punchstab_dialog">
-      Choose one of the following skills.
-      <label for="punchstab_punch">Punch</label>
-      <input type="radio" name="punchstab" value="punch" id="punchstab_punch">
-      <label for="punchstab_stab">Stab</label>
-      <input type="radio" name="punchstab" value="stab" id="punchstab_stab">
-    </div>    
-
-    <div class="dialog_window" id="stabshoot_dialog">
-      Choose one of the following skills.
-      <label for="stabshoot_stab">Stab</label>
-      <input type="radio" name="stabshoot" value="stab" id="stabshoot_stab">
-      <label for="stabshoot_shoot">Shoot</label>
-      <input type="radio" name="stabshoot" value="shoot" id="stabshoot_shoot">
-    </div>    
-
-
   </body>
 </html>

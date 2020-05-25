@@ -1,17 +1,57 @@
+.header{
+    position: relative;
+    top: 0;
+    left: 0;
+    height:150px;
+}
+
+.headertext{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    height: 150px;
+    z-index:2;
+    display:block
+}
+
+.headerbackground{
+    display:block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    z-index:-1;
+}
+
 .descriptionBox{
     border:1px solid black;
     overflow:scroll;
 }
 
+.bodyGrid{
+    display: grid;
+    grid-template-columns: 1fr 840px 1fr;
+}
+
+.sidebar{
+    background:#161128;
+}
+
+.footer{
+    background:#161128;
+}
+
 .topRow {
     display: grid;
-    grid-template-columns: 250px auto;
+    grid-template-columns: 245px auto;
 }
 
 
 .topRowLeft {
     display: grid;
-    grid-template-rows: 1.5em 2.5em 1.5em auto;
+    grid-template-rows: 1.5em 1.5em 1.5em auto;
 }
 .topRowRight {
     display: grid;
@@ -66,7 +106,7 @@
 
 
 input[type=number]{
-    width: 38px
+    width: 30px
 }
 
 input[type=checkbox]{
@@ -291,3 +331,9 @@ input[type=checkbox]{
 
 div.ui-dialog {
     position:fixed;} 
+
+.ui-state-active {
+/*    color: #FFD5A4;*/
+    background: #8D41A2;
+    /* background: #161128; */
+}
