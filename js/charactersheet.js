@@ -775,6 +775,7 @@ function updateSkillBoxes(boxID){
 			picked_skills.push(skill);
 			var anyPsychic = displayTechniques(skill);
 			displayTechniquesTabs(anyPsychic);
+			$("#psionics_tabs").tabs("option","active",psionic_disciplines.indexOf(skill));
 		    }
 		    else{
 			alert("Out of psychic skill points!");
@@ -817,8 +818,13 @@ function updateSkillBoxes(boxID){
 			addPsychicSkill();
 			psychic_skill_bank--;
 			var anyPsychic = false;
-    			for(var discipline of psionic_disciplines) anyPsychic = (anyPsychic || displayTechniques(discipline));
+			var index = 0;
+    			for(var discipline of psionic_disciplines){
+			    anyPsychic = (displayTechniques(discipline)||anyPsychic);
+			    if( ! anyPsychic) index++;
+			}
 			displayTechniquesTabs(anyPsychic);
+			if(anyPsychic) $("#psionics_tabs").tabs("option","active",index);
 		    }
 		    else{
 			alert("Something went wrong!");
@@ -1553,7 +1559,7 @@ function updateSkills(){
 
     var anyPsychic = false;
     
-    for(var discipline of psionic_disciplines) anyPsychic = (anyPsychic || displayTechniques(discipline));    
+    for(var discipline of psionic_disciplines) anyPsychic = (displayTechniques(discipline)||anyPsychic);    
     displayTechniquesTabs(anyPsychic);
 }
 
