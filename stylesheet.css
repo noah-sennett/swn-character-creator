@@ -237,6 +237,7 @@ input[type=number] {
     row-gap: 2px;
     column-gap: 10px;
     grid-auto-rows: 22px;
+    padding:5px 0;
 }
 
 
