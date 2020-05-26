@@ -1,3 +1,142 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.collapsibleButton{
+    width: 100%;
+    position: relative;
+}
+
+.persistentText-default{
+    position: absolute;
+    width:100%;
+    text-align:center;      
+}
+
+.persistentText-active{
+    position: absolute;
+    width:100%;
+    text-align:center;      
+}
+
+.topText{
+    position: absolute;
+    width:100%;
+    text-align:center;      
+}
+
+.bottomText{
+    position: absolute;
+    width:100%;
+    text-align:center;      
+}
+
+.topLayer{
+    background-color: rgb(239, 239, 239);
+    height: 100%;
+    width:  100%;
+    position: absolute;
+    z-index:2;
+}
+
+.topLayer:hover{
+    background-color: rgb(229, 229, 229);
+}
+
+.topLayer:active{
+    background-color: #fff;
+}
+
+
+.bottomLayer{
+    background: #F4E2FC;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index:1;
+}
+
+
+.topLayer, .bottomLayer, .collapsibleButton{
+    border: 1px;
+    border-color: rgb(118, 118, 118);
+    border-radius: 3px;
+    border-style: outset;
+    border-image: initial;
+
+}
+
+
+.collapsibleButton-attr{
+    height:150px;
+}
+
+.persistentText-active-attr{
+    top:10px;
+}
+
+.persistentText-default-attr{
+    top:50px;
+}
+
+.topText-attr{
+    top:100px;
+}
+
+.bottomText-attr{
+    top:75px;
+}
+
+
+.collapsibleButton-skill{
+    height:320px;
+}
+
+.persistentText-active-skill{
+    top:10px;
+}
+
+.persistentText-default-skill{
+    top:100px;
+}
+
+.topText-skill{
+    top:200px;
+}
+
+.bottomText-skill{
+    top:50px;
+}
+
+.collapsibleButton-hp{
+    height:100px;
+}
+
+.persistentText-active-hp{
+    top:10px;
+}
+
+.persistentText-default-hp{
+    top:40px;
+}
+
+.topText-hp{
+    top:70px;
+}
+
+.bottomText-hp{
+    top:50px;
+}
+
+
 .header{
     position: relative;
     top: 0;
@@ -27,12 +166,14 @@
 
 .descriptionBox{
     border:1px solid black;
-    overflow:scroll;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: scroll; /* Add vertical scrollbar */
+    background: #F4E2FC;
 }
 
 .bodyGrid{
     display: grid;
-    grid-template-columns: 1fr 840px 1fr;
+    grid-template-columns: 1fr 850px 1fr;
 }
 
 .sidebar{
@@ -45,13 +186,13 @@
 
 .topRow {
     display: grid;
-    grid-template-columns: 245px auto;
+    grid-template-columns: 255px auto;
 }
 
 
 .topRowLeft {
     display: grid;
-    grid-template-rows: 1.5em 1.5em 1.5em auto;
+    grid-template-rows: 1.5em 1.5em 1.5em 1.5em auto 3em;
 }
 .topRowRight {
     display: grid;
@@ -67,24 +208,35 @@
     line-height:25px;
 }
 
-.attrBlock {
-    display: grid;
-    grid-template-columns: 85px 45px 23px 40px;
+.attrBlockWithSelects{
+    display:grid;
+    grid-template-columns: 183px 40px;
     row-gap: 15px;
     column-gap: 10px;
-    grid-auto-rows: 10px;
     position: relative;
-    top: 30px;
+    padding-bottom:10px;
+    padding-top:10px;
 
+}
+
+.attrBlock {
+    display: grid;
+    grid-template-columns: 82px 37px 33px;
+    row-gap: 2px;
+    column-gap: 10px;
+    position: relative;
+    grid-auto-rows: 22px;
+    border:1px solid black;
+    padding:5px
 }
 
 
 .attrSelects {
     display: grid;
     grid-template-columns: 40px;
-    row-gap: 15px;
+    row-gap: 2px;
     column-gap: 10px;
-    grid-auto-rows: 10px;
+    grid-auto-rows: 22px;
 }
 
 
@@ -131,7 +283,7 @@ input[type=checkbox]{
     display: grid;
     grid-template-columns: 1fr 85px 10px;
     column-gap: 2px;
-    margin-bottom: 8px;
+    margin-bottom: 9px;
 }
 
 
@@ -337,3 +489,58 @@ div.ui-dialog {
     background: #8D41A2;
     /* background: #161128; */
 }
+
+.ui-widget-header .ui-state-active{
+       background: #8D41A2;
+}
+
+.ui-widget-content .ui-state-active, .ui-button.ui-state-active:hover, .ui-button:active{
+    background: #8D41A2;
+}
+
+
+li#foci_tab, li#combat_foci_tab, li#noncombat_foci_tab {
+    width:32.5%; 
+    text-align: center;
+}
+
+li#biopsionics_tab, li#metapsionics_tab, li#precognition_tab, li#telekinesis_tab, li#telepathy_tab, li#teleportation_tab {
+    width:15.5%;
+    text-align: center;
+}
+
+.ui-tabs .ui-tabs-nav li a {
+    display: inline-block;
+    float: none;
+
+    text-decoration: none;
+    width: 100%;
+    heigth:100%;
+}
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+    padding: 0.5em 0em;
+}
+
+.adventurerOption{
+    color:#010101;
+}
+
+.techniqueLabel{
+    font-size: 1.3em;
+    font-style: italic;
+    margin-top:0
+}
+
+h4{
+    margin-top:0
+}
+
+h3{
+    margin-top:0
+}
+
+h2{
+    margin-top:0
+}
+

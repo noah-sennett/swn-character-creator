@@ -25,6 +25,149 @@ $(document).ready(function () {
 	    displayFoci($('#'+elemId).val());
 	}
     });
+
+    $( "#psionics_tabs" ).tabs();
+
+    var box1active = false;
+    var box2active =false;
+    
+    $("#rollAttrsButton").on("click",function(){
+	
+	if(!box1active){
+	    $(this).children(".topLayer").animate({
+		height:40
+	    },500);
+	    $("#rollAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#rollAttrsText").hide("blind",{},500);
+	}
+	
+	if(box2active){
+	    $("#fixAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#fixAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#fixAttrsText").show("blind",{},500);
+	}
+	
+	box1active = true;
+	box2active = false;
+	
+	
+    });
+    
+    $("#fixAttrsButton").on("click",function(){
+	
+	if(!box2active){
+	    $(this).children(".topLayer").animate({
+		height:40
+	    },500);
+	    $("#fixAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#fixAttrsText").hide("blind",{},500);
+	}
+	
+	if(box1active){
+	    $("#rollAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#rollAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#rollAttrsText").show("blind",{},500);
+	}
+	
+	box1active = false;
+	box2active = true;
+	
+	
+    });
+    
+    $("#rollAttrsTopLayer").on("click",function(){
+	attrs.forEach(rollAttr);hideAttrSelects();show14Attr();resetTemps();
+    });
+
+    $("#fixAttrsTopLayer").on("click",function(){
+	attrs.forEach(resetAttr);hide14Attr();showAttrSelects();resetTemps();
+    });
+
+    var box3active = false;
+    var box4active =false;
+    
+    $("#rollSkillsButton").on("click",function(){
+	
+	if(!box3active){
+	    $(this).children(".topLayer").animate({
+		height:40
+	    },500);
+	    $("#rollSkillsHeader").toggleClass("persistentText-default-skill persistentText-active-skill",500)
+	    $("#rollSkillsText").hide("blind",{},500);
+	}
+	
+	if(box4active){
+	    $("#pickSkillsButton").children(".topLayer").animate({
+		height:320
+	    },500);
+	    $("#pickSkillsHeader").toggleClass("persistentText-default-skill persistentText-active-skill",500)
+	    $("#pickSkillsText").show("blind",{},500);
+	}
+	
+	box3active = true;
+	box4active = false;
+	
+	
+    });
+    
+    $("#pickSkillsButton").on("click",function(){
+	
+	if(!box4active){
+	    $(this).children(".topLayer").animate({
+		height:40
+	    },500);
+	    $("#pickSkillsHeader").toggleClass("persistentText-default-skill persistentText-active-skill",500)
+	    $("#pickSkillsText").hide("blind",{},500);
+	}
+	
+	if(box3active){
+	    $("#rollSkillsButton").children(".topLayer").animate({
+		height:320
+	    },500);
+	    $("#rollSkillsHeader").toggleClass("persistentText-default-skill persistentText-active-skill",500)
+	    $("#rollSkillsText").show("blind",{},500);
+	}
+	
+	box3active = false;
+	box4active = true;
+	
+	
+    });
+    
+    $("#rollSkillsTopLayer").on("click",function(){
+	showGrowthButtons();
+    });
+
+    $("#pickSkillsTopLayer").on("click",function(){
+	hideGrowthButtons();
+	enableLearningChoices();
+    });
+
+    var box5active = false;
+    
+    $("#rollHPButton").on("click",function(){
+	
+	if(!box5active){
+	    $(this).children(".topLayer").animate({
+		height:40
+	    },500);
+	    $("#rollHPHeader").toggleClass("persistentText-default-hp persistentText-active-hp",500)
+	    $("#rollHPText").hide("blind",{},500);
+	}
+	
+	box5active = true;
+    });
+
+    $("#rollHPTopLayer").on("click",function(){
+	rollHP();
+	totalHP();
+    });
+
+
     
 });
 
@@ -65,6 +208,10 @@ var picked_foci = [];
 
 var learning_choice_index = [];
 
+var class_hp_bonus = 0;
+var foci_hp_bonus = 0;
+var foci_effort_bonus = 0;
+
 function rollDie(sides=6){
     return 1+Math.floor(sides*Math.random());
 }
@@ -87,6 +234,25 @@ function updateMod(attrname){
 	elemConMod.value = computeMod(total);
 	totalHP();
     }
+    computeEffort();
+    updateSavingThrows();
+}
+
+function updateSavingThrows(){
+    var strength = document.getElementById('strength_attr').value;
+    var dexterity = document.getElementById('dexterity_attr').value;
+    var constitution = document.getElementById('constitution_attr').value;
+    var intelligence = document.getElementById('intelligence_attr').value;
+    var wisdom = document.getElementById('wisdom_attr').value;
+    var charisma = document.getElementById('charisma_attr').value;
+    
+    var elemPhysical = document.getElementById("physical_saving_throw");
+    var elemMental = document.getElementById("mental_saving_throw");
+    var elemEvasion = document.getElementById("evasion_saving_throw");
+    
+    elemPhysical.innerHTML = 15-computeMod(Math.max(strength,constitution));
+    elemEvasion.innerHTML = 15-computeMod(Math.max(dexterity,intelligence));
+    elemMental.innerHTML = 15-computeMod(Math.max(wisdom,charisma));
 }
 
 function displayMod(roll){
@@ -331,7 +497,7 @@ function populateBackgroundList(backgrounds) {
 
 function displayBackground(background) {
     let elemBackgroundDescription = document.getElementById("background_description");
-
+    
     background_skills = [];
     learning_skills = [];
     growth_skills = [];
@@ -348,14 +514,19 @@ function displayBackground(background) {
 	
 	var quickSkills = backgrounds[background]["quick_skills"];
 
+	var elemHeading = document.createElement("h2");
 	var elemDescription = document.createElement("span");
 	var elemFreeSkill = document.createElement("p");
 	var elemQuickSkills = document.createElement("p");
 
+
+	
+	elemHeading.innerHTML = backgrounds[background]["name"];
 	elemDescription.innerHTML = backgrounds[background]["description"];
 	elemFreeSkill.innerHTML = "<strong>Free Skill</strong>: "+quickSkills[0];
 	elemQuickSkills.innerHTML = "<strong>Quick Skills</strong>: "+quickSkills[0]+", "+quickSkills[1]+", "+quickSkills[2];
 
+	elemBackgroundDescription.appendChild(elemHeading);
 	elemBackgroundDescription.appendChild(elemDescription);
 	elemBackgroundDescription.appendChild(elemFreeSkill);
 	elemBackgroundDescription.appendChild(elemQuickSkills);
@@ -580,6 +751,7 @@ function updateSkillBoxes(boxID){
     var elemBox4 = document.getElementById(idPrefix+'4');
 
     var elemClass = document.getElementById("class");
+
     var Class = elemClass.options[elemClass.selectedIndex].value;
     
     var elemBoxes = [elemBox0, elemBox1, elemBox2, elemBox3, elemBox4];
@@ -594,14 +766,15 @@ function updateSkillBoxes(boxID){
 	    }
 	    if(!(elemBoxes[i].checked)){
 		if (isPsychic){
-		    if ((getPsychicDisciplines().length > 0) && (skill!=getPsychicDisciplines()[0] && Class == "adventurer")){
+		    if ((getPsychicDisciplines().length > 0) && (skill!=getPsychicDisciplines()[0] && Class.includes("_psy"))){
 			alert("Partial Psychics can only learn one discipline");
 			break;	
 		    }
 		    if (usePsychicSkill()){		
 			elemBoxes[i].checked=true;
 			picked_skills.push(skill);
-			displayTechniques(skill);
+			var anyPsychic = displayTechniques(skill);
+			displayTechniquesTabs(anyPsychic);
 		    }
 		    else{
 			alert("Out of psychic skill points!");
@@ -643,7 +816,9 @@ function updateSkillBoxes(boxID){
 		    if(psychic_skill_remaining < psychic_skill_bank){
 			addPsychicSkill();
 			psychic_skill_bank--;
-			displayTechniques(skill);
+			var anyPsychic = false;
+    			for(var discipline of psionic_disciplines) anyPsychic = (anyPsychic || displayTechniques(discipline));
+			displayTechniquesTabs(anyPsychic);
 		    }
 		    else{
 			alert("Something went wrong!");
@@ -1236,8 +1411,10 @@ function populateFociList(foci) {
 	var type = foci[key]["type"];
 	
 	elem.add(option);
-	if(type == "combat" || type == "both") elem2.add(option2);
-	if(type == "noncombat" || type == "both") elem3.add(option3);
+	if((key!="psychic_training")&&(key!="wild_psychic_talent")){
+	    if(type == "combat" || type == "both") elem2.add(option2);
+	    if(type == "noncombat" || type == "both") elem3.add(option3);
+	}
     }
 }
 
@@ -1256,7 +1433,7 @@ function displayFoci(focus) {
     
     if(focus!=""){
 	
-	elemFociDescription.innerHTML = foci[focus]["description"]
+	elemFociDescription.innerHTML = "<h2>"+foci[focus]["name"]+"</h2>"+foci[focus]["description"];
 
 	var elemFocusLevel1 = document.createElement("p");
 	var elemFocusLevel2 = document.createElement("p");
@@ -1324,7 +1501,25 @@ function tabulateFoci(){
 		foci_skills.push(foci[nonCombatFociOption.value]["skill"]);
 	    }
 	}
-    }	
+    }
+
+    if (picked_foci.includes("die_hard")){
+	foci_hp_bonus = 2;
+    }
+    else{
+	foci_hp_bonus = 0;
+    }
+
+    if (picked_foci.includes("psychic_training")){
+	foci_effort_bonus = 1;
+    }
+    else{
+	foci_effort_bonus = 0;
+    }
+    
+    var elemClassBonus = document.getElementById('class_hp_bonus');
+    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
+	
 }
 
     
@@ -1356,7 +1551,10 @@ function updateSkills(){
 
     for (var attr of attrs) checkAttr(attr);
 
-    for(var discipline of psionic_disciplines) displayTechniques(discipline);
+    var anyPsychic = false;
+    
+    for(var discipline of psionic_disciplines) anyPsychic = (anyPsychic || displayTechniques(discipline));    
+    displayTechniquesTabs(anyPsychic);
 }
 
 function updateMirrors(id){
@@ -1414,24 +1612,32 @@ function optionsToValueArray(options){
 
 function displayClass() {
     var elemClass = document.getElementById("class");
-    
     var elemClassBonus = document.getElementById('class_hp_bonus');
-
+    var elemAttackBonus = document.getElementById('attack_bonus');
     
     var Class = elemClass.value;
 
     restrictFoci(Class);
     
-    let elemClassDescription = document.getElementById("class_description");
+    var elemClassDescription = document.getElementById("class_description");
+    elemClassDescription.innerHTML = "";
     if (Class==""){
-	elemClassDescription.innerHTML = "";
 	class_skills=[];
 	hideCombatFoci();
 	hideNonCombatFoci();
-	elemClassBonus.value = "";
+	class_hp_bonus = 0;
+	elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
+	elemAttackBonus.innerHTML = "+0";
     }
     else{
-	elemClassDescription.innerHTML = classes[Class]["description"];
+	var elemClassName = document.createElement("h2")
+	elemClassName.innerHTML = classes[Class]["name"];
+
+	var elemClassDescriptionText = document.createElement("p");
+	elemClassDescriptionText.innerHTML = classes[Class]["description"];
+
+	elemClassDescription.appendChild(elemClassName);
+	elemClassDescription.appendChild(elemClassDescriptionText);
 
 	var elemAbilities;
 	
@@ -1477,40 +1683,59 @@ function displayClass() {
 	    class_skills=["any psychic","any psychic"];
 	    hideCombatFoci();
 	    hideNonCombatFoci();
-	    elemClassBonus.value = "";	    
+	    class_hp_bonus = 0;
+	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
+	    elemAttackBonus.innerHTML = "+0";
 	}
 	else if(Class=="warrior"){
 	    class_skills=[];
 	    showCombatFoci();
 	    hideNonCombatFoci();
-	    elemClassBonus.value = 2;
+	    class_hp_bonus = 2;
+	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
+	    elemAttackBonus.innerHTML = "+1";
 	}
 	else if(Class=="expert"){
 	    class_skills=[];
 	    hideCombatFoci();
 	    showNonCombatFoci();
-	    elemClassBonus.value = "";
+	    class_hp_bonus = 0;
+	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
+	    elemAttackBonus.innerHTML = "+0";
 	}
 	else if(Class=="war_exp"){
 	    class_skills=[];
 	    showCombatFoci();
 	    showNonCombatFoci();
-	    elemClassBonus.value = 2;    
+	    class_hp_bonus = 2;
+	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
+	    elemAttackBonus.innerHTML = "+1";
 	}
 	else if(Class=="war_psy"){
-		class_skills=["any psychic"];
-		showCombatFoci();
-		hideNonCombatFoci();
-		elemClassBonus.value = 2;
+	    class_skills=["any psychic"];
+	    showCombatFoci();
+	    hideNonCombatFoci();
+	    class_hp_bonus = 2;
+	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
+	    elemAttackBonus.innerHTML = "+1";
 	}
 	else if(Class=="exp_psy"){
 	    class_skills=["any psychic"];
 	    hideCombatFoci();
 	    showNonCombatFoci();
-	    elemClassBonus.value = "";
+	    class_hp_bonus = 0;
+	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
+	    elemAttackBonus.innerHTML = "+0";
 	}
     }
     totalHP();
+    computeEffort();
+}
+
+function combineHPBonuses(class_bonus, foci_bonus){
+    var tot=parseInt(class_bonus)+parseInt(foci_bonus);
+    if (tot==0) return "";
+    return tot;
 }
 
 function restrictFoci(Class){
@@ -1619,10 +1844,15 @@ function populatePsionicsList(psionics) {
 	var elemCoreLevel0 = document.createElement("p");
 	var elemCoreLevel1 = document.createElement("p");
 	
-	elemCoreName.innerHTML = "Core Technique\u2014"+psionics[discipline]["core"]["name"];
+	elemCoreName.innerHTML = psionics[discipline]["core"]["name"];
 	elemCoreDescription.innerHTML = psionics[discipline]["core"]["description"];
 	elemCoreLevel0.innerHTML = "<strong>Level-0:</strong> "+psionics[discipline]["core"]["level0"];
 	elemCoreLevel1.innerHTML = "<strong>Level-1:</strong> "+psionics[discipline]["core"]["level1"];
+
+	elemCoreName.setAttribute("id",discipline+'_core_name');
+	elemCoreDescription.setAttribute("id",discipline+'_core_description_text');
+	elemCoreLevel0.setAttribute("id",discipline+'_core_level0_text');
+	elemCoreLevel1.setAttribute("id",discipline+'_core_level1_text');
 
 	elemCoreText.appendChild(elemCoreName);
 	elemCoreText.appendChild(elemCoreDescription);
@@ -1643,22 +1873,55 @@ function populatePsionicsList(psionics) {
 function displayTechniques(discipline){
     var elemRankBox0 = document.getElementById(discipline+'_rank_box_0');
     var elemRankBox1 = document.getElementById(discipline+'_rank_box_1');
+
+    var elemTab = document.getElementById(discipline+'_tab');
     
+    var elemHeading = document.getElementById(discipline+'_heading');
+    var elemCoreHeading = document.getElementById(discipline+'_core_heading');
     var elemCoreText = document.getElementById(discipline+'_core_description');
+    var elemCoreLevel1Text = document.getElementById(discipline+'_core_level1_text');
     var elemLevel1 = document.getElementById(discipline+'_level1');
+    var elemLevel1Heading = document.getElementById(discipline+'_level1_heading');
     var elemLevel1Text = document.getElementById(discipline+'_level1_description');
 
+
+    elemTab.style.display = 'none';
+    elemCoreHeading.style.display = 'none';
+    elemHeading.style.display = 'none';
     elemCoreText.style.display = 'none';
     elemLevel1.style.display = 'none';
     elemLevel1Text.style.display = 'none';
+    elemLevel1Heading.style.display = 'none';
 
     if (elemRankBox0.checked){
+	elemTab.style.display = 'block';
+	elemHeading.style.display = 'inline';
+	elemCoreHeading.style.display = 'block';
 	elemCoreText.style.display = 'block';
+	elemCoreLevel1Text.style.color = 'gray';
 	if(elemRankBox1.checked){
 	    elemLevel1.style.display = 'block';
+	    elemLevel1Heading.style.display = 'inline-block';
 	    elemLevel1Text.style.display = 'block';
+	    elemCoreLevel1Text.style.color = 'black';
 	}
-    }    
+	return true;
+    }
+    return false;
+}
+
+function displayTechniquesTabs(anyPsychic){
+    var elem = document.getElementById("psionics_tabs");
+    var elem2 = document.getElementById("psionics_instruction");
+
+    if (anyPsychic){
+	elem.style.display = "block";
+	elem2.style.display = "none";
+    }
+    else{
+	elem.style.display = "none";
+	elem2.style.display = "block";
+    }
 }
 
 function displayTechniqueInfo(discipline, technique){
@@ -1667,7 +1930,7 @@ function displayTechniqueInfo(discipline, technique){
 	elemLevel1Text.innerHTML = "";
     }
     else{
-	elemLevel1Text.innerHTML = psionics[discipline]["level1"][technique];
+	elemLevel1Text.innerHTML = "<h4>"+technique+"</h4>"+psionics[discipline]["level1"][technique];
     }
     
 }
@@ -1695,6 +1958,9 @@ function totalHP(){
     var elemClassBonus = document.getElementById('class_hp_bonus');
     var elemTotal = document.getElementById('hp_total');
 
+    var elemMirror1 = document.getElementById('hp_mirror1');
+    var elemMirror2 = document.getElementById('hp_mirror2');
+
     var roll = 0;
     var con = 0;
     var bonus = 0;
@@ -1705,9 +1971,13 @@ function totalHP(){
     
     if((elemRoll.value!="" || elemConMod.value!="") || elemClassBonus.value!=""){
 	elemTotal.value = Math.max(roll+con+bonus,1);
+	elemMirror1.innerHTML = Math.max(roll+con+bonus,1);
+	elemMirror2.innerHTML = Math.max(roll+con+bonus,1);
     }
     else{
 	elemTotal.value = "";
+	elemMirror1.innerHTML = "";
+	elemMirror2.innerHTML = "";
     }
 }
 
@@ -1737,6 +2007,17 @@ function populatePackagesList(packages) {
 	option.value = key;
 	elem.add(option);
     }
+
+    var optionSpacer = document.createElement("option");
+    optionSpacer.setAttribute("disabled","true");
+    optionSpacer.text = "";
+    optionSpacer.value = "";
+    elem.add(optionSpacer);
+    
+    var option = document.createElement("option");
+    option.text = "Custom";
+    option.value = "custom";
+    elem.add(option);
     
 }
 
@@ -1748,10 +2029,17 @@ function displayEquipmentPackage(Package){
     elemEquipmentPackageDescription.innerHTML = "";
     
     if (Package != ""){
-	for (var item of packages[Package]["items"]){
+	if(Package == "custom"){
 	    var elemItem = document.createElement("li");
-	    elemItem.innerHTML = item;
+	    elemItem.innerHTML = (rollDie(6)+rollDie(6))*100+" credits";
 	    packageList.appendChild(elemItem);
+	}
+	else{
+	    for (var item of packages[Package]["items"]){
+		var elemItem = document.createElement("li");
+		elemItem.innerHTML = item;
+		packageList.appendChild(elemItem);
+	    }
 	}
     }
     
@@ -1783,31 +2071,31 @@ function restrictFociPsychic(){
 	
     }
 
-    if((fociOption.value!="psychic_training") || (nonCombatFociOption.value!="psychic_training")){
-	elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
-    }
-    elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("wild_psychic_talent")].disabled="true";
+    // if((fociOption.value!="psychic_training") || (nonCombatFociOption.value!="psychic_training")){
+    // 	elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
+    // }
+    // elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("wild_psychic_talent")].disabled="true";
 
-    if(elemCombatFoci.selectedIndex == optionsToValueArray(elemCombatFoci.options).indexOf("wild_psychic_talent")){
-	elemCombatFoci.selectedIndex = 0;
-	while(foci_skills.indexOf("any psychic") > -1){
-	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
-	}
+    // if(elemCombatFoci.selectedIndex == optionsToValueArray(elemCombatFoci.options).indexOf("wild_psychic_talent")){
+    // 	elemCombatFoci.selectedIndex = 0;
+    // 	while(foci_skills.indexOf("any psychic") > -1){
+    // 	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
+    // 	}
 
-    }
+    // }
 
-    if((fociOption.value!="psychic_training") || (combatFociOption.value!="psychic_training")){
-	elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
-    }
-    elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("wild_psychic_talent")].disabled="true";
+    // if((fociOption.value!="psychic_training") || (combatFociOption.value!="psychic_training")){
+    // 	elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
+    // }
+    // elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("wild_psychic_talent")].disabled="true";
 
-    if(elemNonCombatFoci.selectedIndex == optionsToValueArray(elemNonCombatFoci.options).indexOf("wild_psychic_talent")){
-	elemNonCombatFoci.selectedIndex = 0;
-	while(foci_skills.indexOf("any psychic") > -1){
-	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
-	}
+    // if(elemNonCombatFoci.selectedIndex == optionsToValueArray(elemNonCombatFoci.options).indexOf("wild_psychic_talent")){
+    // 	elemNonCombatFoci.selectedIndex = 0;
+    // 	while(foci_skills.indexOf("any psychic") > -1){
+    // 	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
+    // 	}
 
-    }
+    // }
 
 }
 
@@ -1833,29 +2121,29 @@ function restrictFociNonPsychic(){
 	}
     }
     
-    elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")].disabled="true";
-    if((fociOption.value!="wild_psychic_talent") || (nonCombatFociOption.value!="wild_psychic_talent")){
-	elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
-    }
+    // elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")].disabled="true";
+    // if((fociOption.value!="wild_psychic_talent") || (nonCombatFociOption.value!="wild_psychic_talent")){
+    // 	elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
+    // }
 
-    if(elemCombatFoci.selectedIndex == optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")){
-	elemCombatFoci.selectedIndex = 0;
-	while(foci_skills.indexOf("any psychic") > -1){
-	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
-	}
-    }
+    // if(elemCombatFoci.selectedIndex == optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")){
+    // 	elemCombatFoci.selectedIndex = 0;
+    // 	while(foci_skills.indexOf("any psychic") > -1){
+    // 	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
+    // 	}
+    // }
     
-    elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("psychic_training")].disabled="true";
-    if((fociOption.value!="wild_psychic_talent") || (combatFociOption.value!="wild_psychic_talent")){
-	elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
-    }
+    // elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("psychic_training")].disabled="true";
+    // if((fociOption.value!="wild_psychic_talent") || (combatFociOption.value!="wild_psychic_talent")){
+    // 	elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
+    // }
 
-    if(elemNonCombatFoci.selectedIndex == optionsToValueArray(elemNonCombatFoci.options).indexOf("psychic_training")){
-	elemNonCombatFoci.selectedIndex = 0;
-	while(foci_skills.indexOf("any psychic") > -1){
-	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
-	}
-    }
+    // if(elemNonCombatFoci.selectedIndex == optionsToValueArray(elemNonCombatFoci.options).indexOf("psychic_training")){
+    // 	elemNonCombatFoci.selectedIndex = 0;
+    // 	while(foci_skills.indexOf("any psychic") > -1){
+    // 	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
+    // 	}
+    // }
 
 }
 
@@ -1868,10 +2156,23 @@ function unrestrictFoci(){
     elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
     elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
     
-    elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
-    elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
+    // elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
+    // elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
     
-    elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
-    elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
+    // elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
+    // elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
 
+}
+
+function computeEffort(){
+    var elemEffort = document.getElementById("effort");
+    var elemCon = document.getElementById("constitution_attr");
+    var elemWis = document.getElementById("wisdom_attr");
+    var elemClass = document.getElementById("class");
+
+    var maxEffort = 0;
+
+    if(elemClass.value.includes("psy")) maxEffort = Math.max(1,1 + foci_effort_bonus + computeMod(Math.max(elemCon.value,elemWis.value)));
+    
+    elemEffort.innerHTML = maxEffort;
 }
