@@ -720,10 +720,10 @@ function generateSkillTable(skills){
 
 	    }
 	    else if(i==2 && j==2){
-		skillBlock.removeAttribute("class");
+		skillBlock.setAttribute("class","heading");
 		var psychicLabel = document.createElement("div");
 		psychicLabel.innerHTML = "Psychic";
-		psychicLabel.setAttribute("style","text-align: center; font-style:italic; font-weight:bold;");
+		psychicLabel.setAttribute("style","text-align: center; font-style:italic;");
 		skillBlock.appendChild(psychicLabel);
 	    }
 	    
