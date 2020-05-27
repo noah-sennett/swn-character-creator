@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title> Character Builder </title>
 
-
+    <link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tinos&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    
+    
+    <!-- <link href="chrome.css" rel="stylesheet" type="text/css"> -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
 
@@ -12,6 +18,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    
     <script src="js/charactersheet.js"></script>
 
     
@@ -60,16 +67,16 @@
 	      </div>
 	      <div>
 		<label for="attack_bonus">Attack Bonus:</label>
-		<span id="attack_bonus" style="font-weight:bold">+0</span>
+		<span id="attack_bonus" class="mod">+0</span>
 	      </div>
 	    </div>
     
 
 	    <div class="attrBlockWithSelects">
 	    <div class="attrBlock">
-	      <div>Attribute  </div>
-	      <div>Score </div>
-	      <div>Mod </div>
+	      <div class="heading">Attribute  </div>
+	      <div class="heading">Score </div>
+	      <div class="heading">Mod </div>
 	      
 	      <div class="item attr"> Strength</div>
 	      <div class="item val">  <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"></div>
@@ -174,11 +181,11 @@
 
 	    
 	      <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;width:95%;height:1.5em">
-		<div> Saving</div>
-		<div style="text-align:center;"> Physical</div>
-		<div style="text-align:center;"> Evasion </div>
-		<div style="text-align:center;"> Mental </div>
-		<div> Throws </div>
+		<div class="heading"> Saving</div>
+		<div style="text-align:center;font-style:italic"> Physical</div>
+		<div style="text-align:center;font-style:italic"> Evasion </div>
+		<div style="text-align:center;font-style:italic"> Mental </div>
+		<div class="heading"> Throws </div>
 		<div id="physical_saving_throw" style="text-align:center;"> 15 </div>
 		<div id="evasion_saving_throw" style="text-align:center;"> 15 </div>
 		<div id="mental_saving_throw" style="text-align:center;"> 15 </div>
@@ -191,13 +198,14 @@
 	  </div>
 	  <div id="topRowRightContainer" style="position:relative">
 	    <div id="topRowRight" class="topRowRight">
+	      <!-- <div style="width:100%;height:10px;"></div> -->
 	      <div style="display:inline-grid; grid-template-columns: 90px 101px 70px 100px 105px 101px;">
-		<div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
-		<div style="font-size:1.5em">Rank</div>
-		<div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
-		<div style="font-size:1.5em">Rank</div>
-		<div style="font-size: 1.5em; padding-left: 8px"> Skill </div>
-		<div style="font-size:1.5em">Rank</div>
+		<div style="font-size: 1.5em; padding-left: 8px;" class="heading"> Skill </div>
+		<div style="font-size:1.5em" class="heading">Rank</div>
+		<div style="font-size: 1.5em; padding-left: 8px" class="heading"> Skill </div>
+		<div style="font-size:1.5em" class="heading">Rank</div>
+		<div style="font-size: 1.5em; padding-left: 8px" class="heading"> Skill </div>
+		<div style="font-size:1.5em" class="heading">Rank</div>
 		
 	      </div>
 	      <div id="skill_bank" class="skillBank" style="grid-template-columns: fit-content(200px) 1fr;">
@@ -205,7 +213,7 @@
 		<div id="bank_filler"></div>
 	      </div>
 	    </div>
-	    <div style="position:absolute;right:5px;bottom:24px">
+	    <div style="position:absolute;right:5px;bottom:13px">
 	      Psionic Effort: 0/<span id="effort">0</span>
 	    </div>
 	  </div>
@@ -278,7 +286,7 @@
 	  <div>
 	    <p>Pick the <strong>background</strong> from the list below that most closely reflects your hero’s past experiences. You gain rank-0 competency in the listed <strong> Free Skill </strong>, which equates to an ordinary working knowledge.</p>
 	    <div style="display:grid; grid-template-columns:120px auto;" id="backgroundPanel">
-	      <select id="backgrounds" size="16" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);updateMirrors(this.id);">
+	      <select id="backgrounds" size="15" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);updateMirrors(this.id);">
 		<option value="" disabled selected>Choose one</option>
 	      </select>
 	      
@@ -369,7 +377,7 @@
 	    <p>Choose your hero's <strong>class</strong>, representing their talents most relevant to adventuring. If your hero isn’t well-described as a Warrior, Expert, or Psychic, you can mix class abilities by choosing one of the Adventurer varieties.</p>
 	    <div style="display:grid; grid-template-columns:140px auto;" id="classPanel">
 
-	      <select id="class" onchange="tabulateFoci(); displayClass(); updateSkills(); updateMirrors(this.id);" size="16" style="overflow:hidden">
+	      <select id="class" onchange="tabulateFoci(); displayClass(); updateSkills(); updateMirrors(this.id);" size="15" style="overflow:hidden">
 		<option value="" disabled selected>Choose one</option>
 		<option value="expert">Expert</option>
 		<option value="psychic">Psychic</option>

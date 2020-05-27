@@ -1,3 +1,14 @@
+select:not([size]){
+/*     min-width: 100%;
+     width:inherit;*/
+     background: #fff;
+     height: 1.1em;
+     font-size: 15px;
+     padding:0px;
+     border:none;
+     box-shadow: 0px 0px 30px 20px rgba(255,255,255,0.5) inset,0px 0px 0px 1px #000;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -5,9 +16,30 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+input{
+    padding:1px 1px;
+}
+
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+body, option{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* select{ */
+/*       -webkit-appearance: none; */
+/*       appearance: none; */
+/* } */
+
+select option{
+    padding:0px !important;
+}
+
+.heading{
+    font-family: 'Bree Serif', serif;
 }
 
 .collapsibleButton{
@@ -196,7 +228,7 @@ input[type=number] {
 }
 .topRowRight {
     display: grid;
-    grid-template-rows: 1.5em auto 30px;
+    grid-template-rows: 1.8em auto 30px;
 }
 
 .skillBank{
@@ -242,11 +274,14 @@ input[type=number] {
 
 
 .attr{
-    font-weight: bold;
+    font-style:italic;
+    /*    font-family: 'Times New Roman', serif;*/
+    
 }
 
 .mod{
     font-weight: bold;
+    font-family: 'Times New Roman', serif;
 }
 
 .val {
@@ -274,7 +309,7 @@ input[type=checkbox]{
     column-gap: 10px;
     /* grid-auto-rows: 12px;  */
     border: 1px solid black;
-    padding-top: 6px;
+/*    padding-top: 6px;*/
     padding-left: 8px;
     padding-right: 8px;
     padding-bottom: 0px;
@@ -284,7 +319,7 @@ input[type=checkbox]{
     display: grid;
     grid-template-columns: 1fr 85px 10px;
     column-gap: 2px;
-    margin-bottom: 9px;
+    margin-bottom: 8px;
 }
 
 
@@ -489,6 +524,10 @@ div.ui-dialog {
 /*    color: #FFD5A4;*/
     background: #8D41A2;
     /* background: #161128; */
+}
+
+.ui-widget{
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .ui-widget-header .ui-state-active{
