@@ -282,10 +282,12 @@ select option{
 .mod{
     font-weight: bold;
     font-family: 'Times New Roman', serif;
+    text-align: center;
 }
 
 .val {
     font-weight: normal;
+    text-align:center;
 }
 
 .14attr{

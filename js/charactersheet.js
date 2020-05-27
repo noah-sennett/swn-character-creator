@@ -220,12 +220,12 @@ function rollAttr(attrname){
     let attrElem = document.getElementById(attrname+'_attr');
     let total = rollDie(6)+rollDie(6)+rollDie(6);
     attrBases[attrs.indexOf(attrname)] = total;
-    attrElem.value=total + attrBonuses[attrs.indexOf(attrname)];
+    attrElem.innerHTML=total + attrBonuses[attrs.indexOf(attrname)];
     updateMod(attrname,total);    
 }
 
 function updateMod(attrname){
-    let total = document.getElementById(attrname+'_attr').value;
+    let total = parseInt(document.getElementById(attrname+'_attr').innerHTML);
     let modElem = document.getElementById(attrname+'_mod');
     modElem.innerHTML= displayMod(total);
 
@@ -239,12 +239,12 @@ function updateMod(attrname){
 }
 
 function updateSavingThrows(){
-    var strength = document.getElementById('strength_attr').value;
-    var dexterity = document.getElementById('dexterity_attr').value;
-    var constitution = document.getElementById('constitution_attr').value;
-    var intelligence = document.getElementById('intelligence_attr').value;
-    var wisdom = document.getElementById('wisdom_attr').value;
-    var charisma = document.getElementById('charisma_attr').value;
+    var strength = parseInt(document.getElementById('strength_attr').innerHTML);
+    var dexterity = parseInt(document.getElementById('dexterity_attr').innerHTML);
+    var constitution = parseInt(document.getElementById('constitution_attr').innerHTML);
+    var intelligence = parseInt(document.getElementById('intelligence_attr').innerHTML);
+    var wisdom = parseInt(document.getElementById('wisdom_attr').innerHTML);
+    var charisma = parseInt(document.getElementById('charisma_attr').innerHTML);
     
     var elemPhysical = document.getElementById("physical_saving_throw");
     var elemMental = document.getElementById("mental_saving_throw");
@@ -256,7 +256,7 @@ function updateSavingThrows(){
 }
 
 function displayMod(roll){
-    if (roll == "") return "+0";
+    if (roll == ""|| isNaN(roll)) return "+0";
     if (roll >= 18) return "+2";
     if (roll >= 14) return "+1";
     if (roll >= 8) return "+0";
@@ -265,7 +265,7 @@ function displayMod(roll){
 }
 
 function computeMod(roll){
-    if (roll == "") return 0;
+    if (roll == "" || isNaN(roll)) return 0;
     if (roll >= 18) return 2;
     if (roll >= 14) return 1;
     if (roll >= 8) return 0;
@@ -279,10 +279,10 @@ function setAttr(attrname, newValue){
 	var ind=attrs.indexOf(attrname);
 	attrBases[ind] = newValue;
 	if(newValue !=""){
-	    attrElem.value= parseInt(newValue) + attrBonuses[ind];
+	    attrElem.innerHTML= parseInt(newValue) + attrBonuses[ind];
 	}
 	else{
-	    attrElem.value= newValue;
+	    attrElem.innerHTML= newValue;
 	}
 	updateMod(attrname, newValue);
     }
@@ -774,6 +774,7 @@ function updateSkillBoxes(boxID){
 			elemBoxes[i].checked=true;
 			picked_skills.push(skill);
 			var anyPsychic = displayTechniques(skill);
+			$('#psionics_tabs').tabs("option","active",psionic_disciplines.indexOf(skill));
 			displayTechniquesTabs(anyPsychic);
 		    }
 		    else{
@@ -817,7 +818,12 @@ function updateSkillBoxes(boxID){
 			addPsychicSkill();
 			psychic_skill_bank--;
 			var anyPsychic = false;
-    			for(var discipline of psionic_disciplines) anyPsychic = (anyPsychic || displayTechniques(discipline));
+			var index = 0;
+    			for(var discipline of psionic_disciplines){
+			    anyPsychic = (displayTechniques(discipline) || anyPsychic);
+			    if (!anyPsychic) index++;
+			}
+			if(anyPsychic) $('#psionics_tabs').tabs("option","active",index);
 			displayTechniquesTabs(anyPsychic);
 		    }
 		    else{
@@ -1553,7 +1559,7 @@ function updateSkills(){
 
     var anyPsychic = false;
     
-    for(var discipline of psionic_disciplines) anyPsychic = (anyPsychic || displayTechniques(discipline));    
+    for(var discipline of psionic_disciplines) anyPsychic = (displayTechniques(discipline) || anyPsychic);    
     displayTechniquesTabs(anyPsychic);
 }
 
@@ -2172,7 +2178,7 @@ function computeEffort(){
 
     var maxEffort = 0;
 
-    if(elemClass.value.includes("psy")) maxEffort = Math.max(1,1 + foci_effort_bonus + computeMod(Math.max(elemCon.value,elemWis.value)));
+    if(elemClass.value.includes("psy")) maxEffort = Math.max(1,1 + foci_effort_bonus + computeMod(Math.max(parseInt(elemCon.innerHTML),parseInt(elemWis.innerHTML))));
     
     elemEffort.innerHTML = maxEffort;
 }

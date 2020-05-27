@@ -79,27 +79,44 @@
 	      <div class="heading">Mod </div>
 	      
 	      <div class="item attr"> Strength</div>
-	      <div class="item val">  <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"></div>
+	      <div class="item val">  <span id="strength_attr"></span>
+		<!-- <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"> -->
+	      </div>
 	      <div class="item mod"><span id="strength_mod">+0 </span></div>
 
 	      <div class="item attr"> Dexterity</div>
-	      <div class="item val">  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"></div>
+	      <div class="item val">
+		<span id="dexterity_attr"></span>
+		<!-- <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"> -->
+	      </div>
 	      <div class="item mod"><span id="dexterity_mod">+0 </span></div>
 	      
 	      <div class="item attr"> Constitution</div>
-	      <div class="item val">  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"></div>
+	      <div class="item val">
+		<span id="constitution_attr"></span>
+		  <!-- <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"> -->
+	      </div>
 	      <div class="item mod"><span id="constitution_mod">+0 </span></div>
 	      	      
 	      <div class="item attr"> Intelligence</div>
-	      <div class="item val">  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"></div>
+	      <div class="item val">
+		<span id="intelligence_attr"></span>
+		<!-- <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"> -->
+	      </div>
 	      <div class="item mod"><span id="intelligence_mod">+0 </span></div>
 	      
 	      <div class="item attr"> Wisdom</div>
-	      <div class="item val">  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"></div>
+	      <div class="item val">
+		<span id="wisdom_attr"></span>
+		<!-- <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"> -->
+	      </div>
 	      <div class="item mod"><span id="wisdom_mod">+0 </span></div>
 	      
 	      <div class="item attr"> Charisma</div>
-	      <div class="item val">  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"></div>
+	      <div class="item val">
+		<span id="charisma_attr"></span>
+		<!-- <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"> -->
+	      </div>
 	      <div class="item mod"><span id="charisma_mod">+0 </span></div>
 	      
 	    </div>
@@ -233,7 +250,7 @@
 	  <h3>1. Determine attributes </h3>
 	  <div>
 	    
-	    <p>Six attributes&mdash;Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma&mdash;describe the raw potential of your hero. Select one of the methods below to assign your character's <strong>attribute scores</strong>. </p>
+	    <p>Six attributes&mdash;<i>Strength, Dexterity, Constitution, Intelligence, Wisdom,</i> and <i>Charisma</i>&mdash;describe the raw potential of your hero. Select one of the methods below to assign your character's <strong>attribute scores</strong>. </p>
 
 	    <div style="width:100%; display:grid ; grid-template-columns:1fr 1fr; column-gap:10px;">
 	      <div class="collapsibleButton collapsibleButton-attr" id="rollAttrsButton">
@@ -268,7 +285,7 @@
 		    <strong>Fixed</strong>
 		  </div>
 		  <div class="topText topText-attr" id="fixAttrsText">
-		    Assign attribute scores from the following list: 14, 12 11, 10, 9, 7.
+		    Assign attribute scores from the following list:<br>14, 12 11, 10, 9, 7.
 		  </div>
 		</div>
 		<div class="bottomLayer">
@@ -278,7 +295,7 @@
 		</div>
 	      </div>
 	    </div>
-
+	    <p>These attribute scores influence your hero's chances of success when employing their skills and abilities. When making a roll to perform a task, add the modifier <span class="heading">(Mod)</span> of the most applicable attribute to the result.<p>
 	  </div>
 	</div>
 	<div class="accordion">
