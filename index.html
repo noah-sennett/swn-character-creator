@@ -3,8 +3,7 @@
   <head>
     <title> Character Builder </title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tinos&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
     <!-- <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Source+Sans+Pro&display=swap" rel="stylesheet">
     
@@ -36,11 +35,11 @@
 	<div class="topRow" id="topRow">
 	  <div class="topRowLeft" id="topRowLeft">
 	    <div>
-	      <label for="name_mirror">Name:</label>
+	      <label for="name_mirror" class="heading">Name:</label>
 	      <input id="name_mirror" type="text" size="9" onchange="updateFromMirrors(this.id)">
 	    </div>
 	    <div>
-	      <label for="name">Class:</label>
+	      <label for="name" class="heading">Class:</label>
 	      <select id="class_mirror" onchange="updateFromMirrors(this.id);">
 		<option value=""></option>
 		<option value="expert">Expert</option>
@@ -54,7 +53,7 @@
 	    </div>
 	    
 	    <div>
-	      <label for="name">Background:</label>
+	      <label for="name" class="heading">Background:</label>
 	      <select id="backgrounds_mirror" onchange="updateFromMirrors(this.id);">
 		<option value=""></option>
 	      </select>
@@ -62,11 +61,11 @@
 
 	    <div style="display:grid;grid-template-columns:90px auto;column-gap:10px">
 	      <div>
-		<label for="hp_mirror1">HP:</label>
+		<label for="hp_mirror1" class="heading">HP:</label>
 		<span id="hp_mirror1" style="width:16px">1</span>/<span id="hp_mirror2" style="width:16px">1</span>
 	      </div>
 	      <div>
-		<label for="attack_bonus">Attack Bonus:</label>
+		<label for="attack_bonus" class="heading">Attack Bonus:</label>
 		<span id="attack_bonus" class="mod">+0</span>
 	      </div>
 	    </div>
@@ -78,41 +77,53 @@
 	      <div class="heading">Score </div>
 	      <div class="heading">Mod </div>
 	      
-	      <div class="item attr"> Strength</div>
+	      <div class="item attr tooltip"> Strength
+		<div class="tooltiptext"> Describes physical power, melee prowess, carrying capacity, etc.</div>
+	      </div>
 	      <div class="item val">  <span id="strength_attr"></span>
 		<!-- <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"> -->
 	      </div>
 	      <div class="item mod"><span id="strength_mod">+0 </span></div>
 
-	      <div class="item attr"> Dexterity</div>
+	      <div class="item attr tooltip"> Dexterity
+		<div class="tooltiptext"> Describes speed, evasiveness, coordination, etc.</div>
+	      </div>
 	      <div class="item val">
 		<span id="dexterity_attr"></span>
 		<!-- <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"> -->
 	      </div>
 	      <div class="item mod"><span id="dexterity_mod">+0 </span></div>
 	      
-	      <div class="item attr"> Constitution</div>
+	      <div class="item attr tooltip"> Constitution
+		<div class="tooltiptext">Describes hardiness, fortitude, survivability, etc. </div>
+	      </div>
 	      <div class="item val">
 		<span id="constitution_attr"></span>
 		  <!-- <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"> -->
 	      </div>
 	      <div class="item mod"><span id="constitution_mod">+0 </span></div>
 	      	      
-	      <div class="item attr"> Intelligence</div>
+	      <div class="item attr tooltip"> Intelligence
+		<div class="tooltiptext">Describes memory, critical thinking, education, etc. </div>
+		</div>
 	      <div class="item val">
 		<span id="intelligence_attr"></span>
 		<!-- <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"> -->
 	      </div>
 	      <div class="item mod"><span id="intelligence_mod">+0 </span></div>
 	      
-	      <div class="item attr"> Wisdom</div>
+	      <div class="item attr tooltip"> Wisdom
+		<div class="tooltiptext">Describes perception, intuition, judgement, etc. </div>
+	      </div>
 	      <div class="item val">
 		<span id="wisdom_attr"></span>
 		<!-- <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"> -->
 	      </div>
 	      <div class="item mod"><span id="wisdom_mod">+0 </span></div>
 	      
-	      <div class="item attr"> Charisma</div>
+	      <div class="item attr tooltip"> Charisma
+		<div class="tooltiptext" style="display:inline-block">Describes leadership, charm, prominence, etc.</div>
+	      </div>
 	      <div class="item val">
 		<span id="charisma_attr"></span>
 		<!-- <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"> -->
@@ -226,12 +237,12 @@
 		
 	      </div>
 	      <div id="skill_bank" class="skillBank" style="grid-template-columns: fit-content(200px) 1fr;">
-		<div>Available skills:</div>
+		<div class="heading">Available skills:</div>
 		<div id="bank_filler"></div>
 	      </div>
 	    </div>
 	    <div style="position:absolute;right:5px;bottom:13px">
-	      Psionic Effort: 0/<span id="effort">0</span>
+	      <span class="heading">Psionic Effort:</span> 0/<span id="effort">0</span>
 	    </div>
 	  </div>
 	  
@@ -800,12 +811,11 @@
 	  <label for="stabshoot_shoot">Shoot</label>
 	  <input type="radio" name="stabshoot" value="shoot" id="stabshoot_shoot">
 	</div>
-	
       </div>
       <div class="sidebar">
       </div>
     </div>
-    <div class="footer">
-    </div>
+    <!-- <div class="footer"> -->
+    <!-- </div> -->
   </body>
 </html>

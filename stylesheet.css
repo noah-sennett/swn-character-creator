@@ -16,6 +16,11 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+html, body{
+    height:100%;
+    width:100%;
+}
+
 input{
     padding:1px 1px;
 }
@@ -27,6 +32,12 @@ input[type=number] {
 
 body, option{
     font-family: 'Source Sans Pro', sans-serif;
+}
+
+body{
+    margin: 0;
+    background:#161128;
+    /* box-sizing: border-box; */
 }
 
 /* select{ */
@@ -208,6 +219,7 @@ select option{
 .bodyGrid{
     display: grid;
     grid-template-columns: 1fr 850px 1fr;
+    background:#fff;
 }
 
 .sidebar{
@@ -282,8 +294,9 @@ select option{
 }
 
 .mod{
-    font-weight: bold;
-    font-family: 'Times New Roman', serif;
+/*    font-weight: bold;*/
+    /*    font-family: 'Times New Roman', serif;*/
+    font-family: 'Play', sans-serif;
     text-align: center;
 }
 
@@ -476,9 +489,15 @@ input[type=checkbox]{
     left: 0px;
     height: 12px;
     width: 12px;
-    background-color: #eee;
+    background-color: rgb(239, 239, 239);
+/*    background-color: #eee;*/
     border-radius: 0px;
     border: 1px solid #000;
+}
+
+
+.checkbox-label .checkbox-custom:hover{
+    background-color: rgb(229, 229, 229);
 }
 
 .checkbox-label .underlay{
@@ -501,6 +520,21 @@ input[type=checkbox]{
 
 .checkbox-label input:checked ~ .checkbox-green {
     background-color: #047d04;
+
+}
+
+.checkbox-label input:checked:not([disabled]) ~ .checkbox-green:hover {
+    background-color: #046809;
+
+}
+
+.checkbox-label input:checked:not([disabled]) ~ .checkbox-red:hover {
+    background-color: #820207;
+
+}
+
+.checkbox-label input:checked:not([disabled]) ~ .checkbox-purple:hover {
+    background-color: #080D8B;
 
 }
 

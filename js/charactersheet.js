@@ -613,6 +613,13 @@ function generateSkillTable(skills){
 	lbl3.innerHTML = "3";
 	lbl4.innerHTML = "4";	
 
+	lbl0.setAttribute("class","mod");
+	lbl1.setAttribute("class","mod");
+	lbl2.setAttribute("class","mod");
+	lbl3.setAttribute("class","mod");
+	lbl4.setAttribute("class","mod");
+
+	
 	skillRank.appendChild(lbl0);
 	skillRank.appendChild(lbl1);
 	skillRank.appendChild(lbl2);
@@ -636,6 +643,8 @@ function generateSkillTable(skills){
 	    var skillName = document.createElement('div');
 	    var skillRank = document.createElement('div');
 	    var skillTotal = document.createElement('div');
+
+	    skillTotal.setAttribute("class","mod");
 	    
 	    var skillKey;
 	    var node;
