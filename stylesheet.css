@@ -50,19 +50,21 @@ select option{
 .persistentText-default{
     position: absolute;
     width:100%;
-    text-align:center;      
+    text-align:center;
+    font-size:1.3em
 }
 
 .persistentText-active{
     position: absolute;
     width:100%;
-    text-align:center;      
+    text-align:center;
+    font-size:1.4em
 }
 
 .topText{
     position: absolute;
     width:100%;
-    text-align:center;      
+    text-align:center;
 }
 
 .bottomText{
@@ -112,7 +114,7 @@ select option{
 }
 
 .persistentText-active-attr{
-    top:10px;
+    top:8px;
 }
 
 .persistentText-default-attr{
@@ -133,7 +135,7 @@ select option{
 }
 
 .persistentText-active-skill{
-    top:10px;
+    top:8px;
 }
 
 .persistentText-default-skill{
@@ -153,7 +155,7 @@ select option{
 }
 
 .persistentText-active-hp{
-    top:10px;
+    top:8px;
 }
 
 .persistentText-default-hp{
