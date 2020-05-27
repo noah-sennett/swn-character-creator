@@ -36,8 +36,16 @@
 	  <div class="topRowLeft" id="topRowLeft">
 	    <div>
 	      <label for="name_mirror" class="heading">Name:</label>
-	      <input id="name_mirror" type="text" size="9" onchange="updateFromMirrors(this.id)">
+	      <input id="name_mirror" type="text" size="12" onchange="updateFromMirrors(this.id)">
 	    </div>
+	    <div>
+	      <label for="name" class="heading">Background:</label>
+	      <select id="backgrounds_mirror" onchange="updateFromMirrors(this.id);">
+		<option value=""></option>
+	      </select>
+	    </div>
+
+
 	    <div>
 	      <label for="name" class="heading">Class:</label>
 	      <select id="class_mirror" onchange="updateFromMirrors(this.id);">
@@ -52,12 +60,6 @@
 	      </select>
 	    </div>
 	    
-	    <div>
-	      <label for="name" class="heading">Background:</label>
-	      <select id="backgrounds_mirror" onchange="updateFromMirrors(this.id);">
-		<option value=""></option>
-	      </select>
-	    </div>
 
 	    <div style="display:grid;grid-template-columns:90px auto;column-gap:10px">
 	      <div>
@@ -77,16 +79,18 @@
 	      <div class="heading">Score </div>
 	      <div class="heading">Mod </div>
 	      
-	      <div class="item attr tooltip"> Strength
-		<div class="tooltiptext"> Describes physical power, melee prowess, carrying capacity, etc.</div>
+	      <div class="item attr tooltip"> <span class="tooltip">Strength
+		  <div class="tooltiptext attribute" style="width:435px;left:65px;"> Describes physical power, melee prowess, carrying capacity, etc.</div>
+		</span>
 	      </div>
 	      <div class="item val">  <span id="strength_attr"></span>
 		<!-- <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"> -->
 	      </div>
 	      <div class="item mod"><span id="strength_mod">+0 </span></div>
 
-	      <div class="item attr tooltip"> Dexterity
-		<div class="tooltiptext"> Describes speed, evasiveness, coordination, etc.</div>
+	      <div class="item attr tooltip"> <span class="tooltip"> Dexterity
+		  <div class="tooltiptext attribute" style="width:325px;left:65px;"> Describes speed, evasiveness, coordination, etc.</div>
+		  </span>
 	      </div>
 	      <div class="item val">
 		<span id="dexterity_attr"></span>
@@ -94,8 +98,9 @@
 	      </div>
 	      <div class="item mod"><span id="dexterity_mod">+0 </span></div>
 	      
-	      <div class="item attr tooltip"> Constitution
-		<div class="tooltiptext">Describes hardiness, fortitude, survivability, etc. </div>
+	      <div class="item attr tooltip"> <span class="tooltip"> Constitution
+		  <div class="tooltiptext attribute" style="width:325px;left:90px;">Describes hardiness, fortitude, survivability, etc. </div>
+		  </span>
 	      </div>
 	      <div class="item val">
 		<span id="constitution_attr"></span>
@@ -103,8 +108,9 @@
 	      </div>
 	      <div class="item mod"><span id="constitution_mod">+0 </span></div>
 	      	      
-	      <div class="item attr tooltip"> Intelligence
-		<div class="tooltiptext">Describes memory, critical thinking, education, etc. </div>
+	      <div class="item attr tooltip"> <span class="tooltip"> Intelligence
+		  <div class="tooltiptext attribute" style="width:350px;left:87px;">Describes memory, critical thinking, education, etc. </div>
+		  </span>
 		</div>
 	      <div class="item val">
 		<span id="intelligence_attr"></span>
@@ -112,8 +118,9 @@
 	      </div>
 	      <div class="item mod"><span id="intelligence_mod">+0 </span></div>
 	      
-	      <div class="item attr tooltip"> Wisdom
-		<div class="tooltiptext">Describes perception, intuition, judgement, etc. </div>
+	      <div class="item attr tooltip"><span class="tooltip"> Wisdom
+		  <div class="tooltiptext attribute" style="width:325px;left:60px;">Describes perception, intuition, judgement, etc.</div>
+		  </span>
 	      </div>
 	      <div class="item val">
 		<span id="wisdom_attr"></span>
@@ -121,8 +128,9 @@
 	      </div>
 	      <div class="item mod"><span id="wisdom_mod">+0 </span></div>
 	      
-	      <div class="item attr tooltip"> Charisma
-		<div class="tooltiptext" style="display:inline-block">Describes leadership, charm, prominence, etc.</div>
+	      <div class="item attr"> <span class="tooltip">Charisma
+		  <div class="tooltiptext attribute" style="width:315px;left:70px;">Describes leadership, charm, prominence, etc.</div>
+		  </span>
 	      </div>
 	      <div class="item val">
 		<span id="charisma_attr"></span>
@@ -210,9 +218,15 @@
 	    
 	      <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;width:95%;height:1.5em">
 		<div class="heading"> Saving</div>
-		<div style="text-align:center;font-style:italic"> Physical</div>
-		<div style="text-align:center;font-style:italic"> Evasion </div>
-		<div style="text-align:center;font-style:italic"> Mental </div>
+		<div style="text-align:center;font-style:italic" class="tooltip"> Physical
+		  <div class="tooltiptext savingthrow" style="width:285px;left:-70px;">Withstand poison, disease, or exhaustion</div>
+		</div>
+		<div style="text-align:center;font-style:italic" class="tooltip"> Evasion 
+		  <div class="tooltiptext savingthrow" style="width:240px;left:-85px;">Dodge sudden perils or explosions</div>
+		</div>
+		<div style="text-align:center;font-style:italic" class="tooltip"> Mental 
+		  <div class="tooltiptext savingthrow" style="width:360px;left:-140px;">Resist psychic influence or mind-bending technology</div>
+		</div>
 		<div class="heading"> Throws </div>
 		<div id="physical_saving_throw" style="text-align:center;"> 15 </div>
 		<div id="evasion_saving_throw" style="text-align:center;"> 15 </div>

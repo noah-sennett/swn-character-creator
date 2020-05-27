@@ -321,7 +321,7 @@ input[type=checkbox]{
 .skillTable {
     width: 555px;
     display: grid;
-    grid-template-columns: 180px 160px 195px;
+    grid-template-columns: 180px 168px 195px;
     row-gap: 0px;
     column-gap: 10px;
     /* grid-auto-rows: 12px;  */
@@ -359,25 +359,51 @@ input[type=checkbox]{
 }
 
 .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 300px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 2px;
-  position: absolute;
-  z-index: 1;
-  top: 100%;
-  left: 85px;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
+    font-style:normal;
+    visibility: hidden;
+    width: 500px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 2px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+/*    left: 85px;*/
+/*    margin-left: -60px;*/
+    opacity: 0;
+    transition: opacity 0.3s;
+    display:inline-block;
+}
+
+.tooltip .leftcolumn {
+    left:-250px;
+}
+
+.tooltip .middlecolumn {
+    left:-250px;
+}
+
+.tooltip .rightcolumn {
+    left:-320px;
+}
+
+.tooltip .savingthrow {
+    top: -30px;
+}
+
+.tooltip .attribute {
+    top: -5px;
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+.tooltip:hover .tooltiptext:hover {
+  visibility: hidden;
+  opacity: 0;
 }
 
 

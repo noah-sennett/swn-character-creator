@@ -660,17 +660,30 @@ function generateSkillTable(skills){
 	    if ((j<2||i==0)|| i>2){
 		
 		skillName.setAttribute("id",skillKey+'_label');
-		skillName.setAttribute("class","tooltip");
 		skillTotal.setAttribute("id",skillKey+'_total');
-
-		node = document.createTextNode(skills[skillKey]["name"]);
-
+//		skillName.setAttribute("class","tooltip");
+		
+		//		node = document.createTextNode(skills[skillKey]["name"]);
+		node = document.createElement('span');
+		node.innerHTML = skills[skillKey]["name"];
+		node.setAttribute("class","tooltip");
+		
 		tooltipNode = document.createElement('span');
-		tooltipNode.setAttribute("class","tooltiptext");
 		tooltipNode.innerHTML = skills[skillKey]["description"];
-
+		switch(j){
+		case 0:
+		    tooltipNode.setAttribute("class","tooltiptext leftcolumn");
+		    break;
+		case 1:
+		    tooltipNode.setAttribute("class","tooltiptext middlecolumn");
+		    break;
+		case 2:
+		    tooltipNode.setAttribute("class","tooltiptext rightcolumn");
+		    break;		    
+		}
+		
 		skillName.appendChild(node);
-		skillName.appendChild(tooltipNode);
+		node.appendChild(tooltipNode);
 	    }
 	    else{
 		node = document.createTextNode("");
@@ -1101,6 +1114,7 @@ function incrementSkill(skill){
     }
     else if (skill == "+2 physical"){
 	$('#physstat_dialog').dialog({
+	    width: 440,
 	    buttons: [{
 		text: "Submit",
 		click: function(){
@@ -1122,6 +1136,7 @@ function incrementSkill(skill){
     }
     else if (skill == "+2 mental"){
 	$('#mentstat_dialog').dialog({
+	    width: 430,
 	    buttons: [{
 		text: "Submit",
 		click: function(){
