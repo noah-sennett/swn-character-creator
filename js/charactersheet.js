@@ -14,7 +14,7 @@ $(document).ready(function () {
 //             printContainer: true,      
 // 	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
 // //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-//             pageTitle: "UTOPIAN PRINT",             
+//             pageTitle: "",             
 //             removeInline: false,    
 //             printDelay: 3000,      
 //             header: null,        
@@ -2349,13 +2349,11 @@ function fillOutSheet(){
     var armor2_name = document.createElement("p");
     var armor2_AC = document.createElement("p");
     var credits =  document.createElement("p");
-    var technique1 = document.createElement("p");
-    var technique2 = document.createElement("p");
-    var technique3 = document.createElement("p");
+    var technique = document.createElement("p");
 
     var skillElements = [administer, connect, exert, fix, heal, know, lead, notice, perform, pilot, program, punch, shoot, sneak, stab, survive, talk, trade, work, biopsionics, metapsionics, precognition, telekinesis, telepathy, teleportation];
     
-    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC,credits, technique1, technique2, technique3].concat(skillElements);
+    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC,credits, technique].concat(skillElements);
     
     for (var element of formElements){
 	element.setAttribute("class","formText");
@@ -2674,30 +2672,46 @@ function fillOutSheet(){
 	break;
     }
 
-    var techniqueElems = [technique1, technique2, technique3];
-    var technique_texts = [];
+
+//    var technique_texts = [];
+
+    var technique_text = "";
     
     for(var discipline of psionic_disciplines){
 	var elemRankBox0 = document.getElementById(discipline+'_rank_box_0');
 	var elemRankBox1 = document.getElementById(discipline+'_rank_box_1');
 
-	
 	if (elemRankBox1.checked){
-	    technique_texts.push(psionics[discipline]["name"]+" 1");
+	    technique_text +="<strong><i>"+psionics[discipline]["name"]+"</i></strong><br><strong>"+psionics[discipline]["core"]["name"]+"</strong>: "+psionics[discipline]["core"]["descriptionabbreviated"]+"<br><i>Level-0</i>: "+psionics[discipline]["core"]["level0abbreviated"]+"<br><i>Level-1</i>: "+psionics[discipline]["core"]["level1abbreviated"]+"<br><br>";
+
+	    var level1technique = $("#"+discipline+"_level1").val();
+	    if(level1technique != null) {
+		technique_text+="<strong>"+level1technique+"</strong>: "+psionics[discipline]["level1abbreviated"][level1technique]+"<br><br>";
+	    }
 	    
 	}
 	else if (elemRankBox0.checked){
-	    technique_texts.push(psionics[discipline]["name"]+" 0");
+	    technique_text+="<strong><i>"+psionics[discipline]["name"]+"</i></strong><br><strong>"+psionics[discipline]["core"]["name"]+"</strong>: "+psionics[discipline]["core"]["descriptionabbreviated"]+"<br><i>Level-0</i>: "+psionics[discipline]["core"]["level0abbreviated"]+"<br><br>";
 	}
 
     }
 
-    alert(technique_texts);
+
     
-    for (var i = 0; i++; i< technique_texts.length){
-	techniqueElems[i].innerHTML = technique_texts[i];
-    }
-    
+    // for (var i = 0;i < 3; i++){
+    // 	if(i<technique_texts.length){
+    // 	    techniqueElems[i].innerHTML = technique_texts[i];
+    // 	}
+    // 	else{
+    // 	    techniqueElems[i].innerHTML = "";
+    // 	}
+    // }
+
+    // for (var i = 0;i < technique_texts.length; i++){
+    // 	technique_text = technique_text+technique_texts[i];
+    // }
+    technique.innerHTML = technique_text;
+
     
     positionElement(name,80,37);
     positionElement(background,207,58);
@@ -2782,9 +2796,9 @@ function fillOutSheet(){
 
     positionElement(credits , 285, 562);
 
-    positionElement(technique1, 534, 353,"font-size:8px;width:220px;");
-    positionElement(technique1, 534, 453,"font-size:8px;width:220px;");
-    positionElement(technique1, 534, 553,"font-size:8px;width:220px;");
+    positionElement(technique, 534, 355,"font-size:6px;width:240px;");
+    // positionElement(technique2, 534, 415,"font-size:6px;width:240px;");
+    // positionElement(technique3, 534, 475,"font-size:6px;width:240px;");
 
 }
 
