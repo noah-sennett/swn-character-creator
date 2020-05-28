@@ -167,8 +167,41 @@ $(document).ready(function () {
 	totalHP();
     });
 
-
+//    $('#name_mirror').addClass("ui-widget");;
+    $("#backgrounds_mirror").selectmenu({width:124.5}).selectmenu("menuWidget").addClass("overflow");
+    $("#class_mirror").selectmenu({width:174});
+    $("#14attrList").selectmenu({width:120});
+    $("select[id*=_select]").selectmenu({width:50});
+    $("select[id*=foci]").selectmenu({width:200}).selectmenu("menuWidget").addClass("overflow");
     
+    $("select[id*=mirror]").on("selectmenuchange",function(){
+	updateFromMirrors(this.id);
+    });
+
+    $("#14attrList").on("selectmenuchange",function(){
+	attrTo14(this.value);
+    });
+
+    $("select[id*=_select]").on("selectmenuchange",function(){
+	var attribute = (this.id).slice(0,-7);
+	setAttr(attribute,this.value);
+	updateAttrSelects(attribute,this.value);
+	$("select[id*=_select]").selectmenu("refresh");
+    });
+
+    $("select[id*=foci]").on("selectmenuchange",function(){
+	tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills();
+	$("select[id*=foci]").selectmenu("refresh");
+    });
+
+    $("#growth_button").on("click",function(){
+	rollGrowth();
+    });
+
+    $("#learning_button").on("click",function(){
+	rollLearning();
+    });
+						      
 });
 
 const attrs = ["strength","dexterity","constitution","intelligence","wisdom","charisma"];
@@ -1470,10 +1503,10 @@ function displayFoci(focus) {
 
 	elemFocusLevel2.setAttribute("id","focus_level_2");
 	if(countAppearances(focus,picked_foci)>1){
-	    elemFocusLevel2.setAttribute("style","color:black");
+	    elemFocusLevel2.setAttribute("style","opacity:1.");
 	}
 	else{
-	    elemFocusLevel2.setAttribute("style","color:gray");
+	    elemFocusLevel2.setAttribute("style","opacity:0.5");
 	}
 
 	if(foci[focus]["level1"] != "")	elemFocusLevel1.innerHTML = '<strong>Level 1</strong>: '+foci[focus]["level1"];
@@ -1594,6 +1627,8 @@ function updateMirrors(id){
 
     if (elem.tagName=="SELECT"){
 	elemMirror.selectedIndex = elem.selectedIndex;
+	$('#'+id+'_mirror').selectmenu().val(elem.value);
+	$('#'+id+'_mirror').selectmenu("refresh");
     }
     else if(elem.tagName=="INPUT"){
 	elemMirror.value = elem.value;
@@ -1609,7 +1644,8 @@ function updateFromMirrors(idMirror){
     var elemMirror = document.getElementById(idMirror);
 
     if (elem.tagName=="SELECT"){
-	elem.selectedIndex = elemMirror.selectedIndex;
+	//	elem.selectedIndex = elemMirror.selectedIndex;
+	elem.value = $('#'+idMirror).selectmenu().val();
 	$('#'+id).trigger('change');
     }
     else if(elem.tagName=="INPUT"){
@@ -1928,12 +1964,12 @@ function displayTechniques(discipline){
 	elemHeading.style.display = 'inline';
 	elemCoreHeading.style.display = 'block';
 	elemCoreText.style.display = 'block';
-	elemCoreLevel1Text.style.color = 'gray';
+	elemCoreLevel1Text.style.opacity = '0.5';
 	if(elemRankBox1.checked){
 	    elemLevel1.style.display = 'block';
 	    elemLevel1Heading.style.display = 'inline-block';
 	    elemLevel1Text.style.display = 'block';
-	    elemCoreLevel1Text.style.color = 'black';
+	    elemCoreLevel1Text.style.opacity = '1';
 	}
 	return true;
     }

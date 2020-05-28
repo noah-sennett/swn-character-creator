@@ -22,7 +22,6 @@
 
     
   </head>
-
   <body>
     <div id="header" class="header">
       <img src="assets/sky-star-atmosphere-constellation-aviation-space-1262201-pxhere.com_cropped.jpg" alt="nebula" class="headerbackground">
@@ -36,7 +35,7 @@
 	  <div class="topRowLeft" id="topRowLeft">
 	    <div>
 	      <label for="name_mirror" class="heading">Name:</label>
-	      <input id="name_mirror" type="text" size="12" onchange="updateFromMirrors(this.id)">
+	      <input id="name_mirror" type="text" size="12" onchange="updateFromMirrors(this.id)" style="width:168px;">
 	    </div>
 	    <div>
 	      <label for="name" class="heading">Background:</label>
@@ -255,7 +254,7 @@
 		<div id="bank_filler"></div>
 	      </div>
 	    </div>
-	    <div style="position:absolute;right:5px;bottom:13px">
+	    <div style="position:absolute;right:5px;bottom:12px">
 	      <span class="heading">Psionic Effort:</span> 0/<span id="effort">0</span>
 	    </div>
 	  </div>
@@ -328,12 +327,12 @@
 	  <div>
 	    <p>Pick the <strong>background</strong> from the list below that most closely reflects your hero’s past experiences. You gain rank-0 competency in the listed <strong> Free Skill </strong>, which equates to an ordinary working knowledge.</p>
 	    <div style="display:grid; grid-template-columns:120px auto;" id="backgroundPanel">
-	      <select id="backgrounds" size="15" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);updateMirrors(this.id);">
+	      <select id="backgrounds" style="height:327px;border:1px solid black;" size="15" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);updateMirrors(this.id);">
 		<option value="" disabled selected>Choose one</option>
 	      </select>
 	      
 	      <div>
-		<div id="background_description" class="descriptionBox" style="height:325px"> </div>
+		<div id="background_description" class="descriptionBox" style="height:325px;overflow:hidden;"> </div>
 	      </div>
 	    </div>
 	  </div>
@@ -384,8 +383,12 @@
 		  <div  class="bottomText bottomText-skill" id="rollSkillsDescription">
 		    <p> Roll up to three times, dividing your rolls between the Growth and Learning Tables as you wish.</p>
 		    <p> Some entries in the Growth Table may read “+2 Physical” or “+2 Mental”; if these are selected, add two points to a physical (Strength, Dexterity, Constitution) or mental (Intelligence, Wisdom, Charisma) attribute, accordingly. Alternatively, you can add one point to two different physical or mental attributes.</p>
-		    <button id="growth_button" onclick="rollGrowth();">Roll on Growth Table</button>
-		    <button id="learning_button" onclick="rollLearning();">Roll on Learning Table </button>
+		    <div style="display:grid;grid-template-columns: 1fr 1fr; column-gap:6px;padding:6px;">
+		      <div class="topLayer" id="growth_button" style="font-size:1.1em;width:100%;position:relative;"> <strong> Roll on Growth Table </strong></div>
+		      <div class="topLayer" id="learning_button" style="font-size:1.1em;width:100%;position:relative;"> <strong> Roll on Learning Table </strong></div>
+		    </div>
+		    <!-- <button id="growth_button" onclick="rollGrowth();">Roll on Growth Table</button> -->
+		    <!-- <button id="learning_button" onclick="rollLearning();">Roll on Learning Table </button> -->
 		  </div>
 		</div>
 	      </div>	    
@@ -419,7 +422,7 @@
 	    <p>Choose your hero's <strong>class</strong>, representing their talents most relevant to adventuring. If your hero isn’t well-described as a Warrior, Expert, or Psychic, you can mix class abilities by choosing one of the Adventurer varieties.</p>
 	    <div style="display:grid; grid-template-columns:140px auto;" id="classPanel">
 
-	      <select id="class" onchange="tabulateFoci(); displayClass(); updateSkills(); updateMirrors(this.id);" size="15" style="overflow:hidden">
+	      <select id="class" onchange="tabulateFoci(); displayClass(); updateSkills(); updateMirrors(this.id);" size="15" style="height:327px;border:1px solid black;overflow:hidden">
 		<option value="" disabled selected>Choose one</option>
 		<option value="expert">Expert</option>
 		<option value="psychic">Psychic</option>
@@ -544,7 +547,7 @@
 		<br>
 		<label for="biopsionicsLevel1Panel" class="techniqueLabel" id="biopsionics_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="biopsionicsLevel1Panel">
-		  <select id="biopsionics_level1" onchange="displayTechniqueInfo('biopsionics',this.value)" style="display:none;overflow:hidden" size="6">
+		  <select id="biopsionics_level1" onchange="displayTechniqueInfo('biopsionics',this.value)" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="biopsionics_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -560,7 +563,7 @@
 		<br>
 		<label for="metapsionicsLevel1Panel" class="techniqueLabel" id="metapsionics_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="metapsionicsLevel1Panel">
-		  <select id="metapsionics_level1" onchange="displayTechniqueInfo('metapsionics',this.value)" style="display:none;overflow:hidden" size="6">
+		  <select id="metapsionics_level1" onchange="displayTechniqueInfo('metapsionics',this.value)" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="metapsionics_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -576,7 +579,7 @@
 		<br>
 		<label for="precognitionLevel1Panel" class="techniqueLabel" id="precognition_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="precognitionLevel1Panel">
-		  <select id="precognition_level1" onchange="displayTechniqueInfo('precognition',this.value)" style="display:none;overflow:hidden" size="6">
+		  <select id="precognition_level1" onchange="displayTechniqueInfo('precognition',this.value)" style="display:none;overflow:hidden;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="precognition_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -592,7 +595,7 @@
 		<br>
 		<label for="telekinesisLevel1Panel" class="techniqueLabel" id="telekinesis_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="telekinesisLevel1Panel">
-		  <select id="telekinesis_level1" onchange="displayTechniqueInfo('telekinesis',this.value)" style="display:none;overflow:hidden" size="6">
+		  <select id="telekinesis_level1" onchange="displayTechniqueInfo('telekinesis',this.value)" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="telekinesis_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -608,7 +611,7 @@
 		<br>
 		<label for="telepathyLevel1Panel" class="techniqueLabel" id="telepathy_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="telepathyLevel1Panel">
-		  <select id="telepathy_level1" onchange="displayTechniqueInfo('telepathy',this.value)" style="display:none;overflow:hidden" size="6">
+		  <select id="telepathy_level1" onchange="displayTechniqueInfo('telepathy',this.value)" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="telepathy_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -624,7 +627,7 @@
 		<br>
 		<label for="teleportationLevel1Panel" class="techniqueLabel" id="teleportation_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="teleportationLevel1Panel">
-		  <select id="teleportation_level1" onchange="displayTechniqueInfo('teleportation',this.value)" style="display:none;overflow:hidden" size="6">
+		  <select id="teleportation_level1" onchange="displayTechniqueInfo('teleportation',this.value)" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="teleportation_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -690,7 +693,7 @@
 
 	    <div style="display:grid; grid-template-columns:100px auto;" id="equipmentPanel">
 
-	    <select id="equipment_packages" onchange="displayEquipmentPackage(this.value)" size="10" style="overflow:hidden">
+	    <select id="equipment_packages" onchange="displayEquipmentPackage(this.value)" size="10" style="overflow:hidden;height:272px;border:1px solid black;">
 	      <option value="" selected disabled>Choose one</option>
 	    </select>
 
@@ -712,7 +715,7 @@
 	    <div style="display:grid; grid-template-columns:1fr 1fr 1fr">
 	      <div>
 		<label for="name">Name</label>	
-		<input id="name" type="text" size="9" onchange="updateMirrors(this.id)">
+		<input id="name" type="text" size="9" onchange="updateMirrors(this.id)" style="width:168px;">
 	      </div>
 	      <div>
 		<label for="homeworld">Homeworld</label>	
