@@ -21,13 +21,27 @@ html, body{
     width:100%;
 }
 
+
 input{
     padding:1px 1px;
 }
 
+input[type=text]{
+    margin:0;
+    height:17px;
+    line-height:17px;
+    border: 1px solid black;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    padding:0;
+    width:140px;
+}
+
+
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
+    width: 30px
 }
 
 body, option{
@@ -44,10 +58,6 @@ body{
 /*       -webkit-appearance: none; */
 /*       appearance: none; */
 /* } */
-
-select option{
-    padding:0px !important;
-}
 
 .heading{
     font-family: 'Bree Serif', serif;
@@ -232,7 +242,8 @@ select option{
 
 .topRow {
     display: grid;
-    grid-template-columns: 255px auto;
+    grid-template-columns: 253px auto;
+    /* grid-template-columns: 255px auto; */
 }
 
 
@@ -310,10 +321,6 @@ select option{
 }
 
 
-input[type=number]{
-    width: 30px
-}
-
 input[type=checkbox]{
     margin: 0px
 }
@@ -321,14 +328,14 @@ input[type=checkbox]{
 .skillTable {
     width: 555px;
     display: grid;
-    grid-template-columns: 180px 168px 195px;
+    grid-template-columns: 180px 165px 195px;
     row-gap: 0px;
     column-gap: 10px;
     /* grid-auto-rows: 12px;  */
     border: 1px solid black;
 /*    padding-top: 6px;*/
     padding-left: 8px;
-    padding-right: 8px;
+    padding-right: 13px;
     padding-bottom: 0px;
 }
 
@@ -337,6 +344,7 @@ input[type=checkbox]{
     grid-template-columns: 1fr 85px 10px;
     column-gap: 2px;
     margin-bottom: 8px;
+    height:20px;
 }
 
 
@@ -633,18 +641,50 @@ li#biopsionics_tab, li#metapsionics_tab, li#precognition_tab, li#telekinesis_tab
 .techniqueLabel{
     font-size: 1.3em;
     font-style: italic;
-    margin-top:0
+    margin-top:0;
 }
 
 h4{
-    margin-top:0
+    margin-top:0;
 }
 
 h3{
-    margin-top:0
+    margin-top:0;
 }
 
 h2{
-    margin-top:0
+    margin-top:0;
 }
 
+.ui-selectmenu-button {
+    padding-top: 0;
+    padding-bottom:0;
+    padding-left:10px;
+    padding-right:0px;
+    margin: 0;
+    height: 18px;
+    /* box-sizing: border-box; */
+    border-radius: 0;
+}
+
+.ui-menu .ui-menu-item-wrapper{
+    padding-top: 1px;
+    padding-bottom:1px;
+    padding-left:2px;
+/*    height: 16.5px;*/
+}
+
+/* #class_mirror-menu .ui-widget-content .ui-state-disabled{ */
+#class_mirror-menu .ui-state-disabled{
+    color:black;
+    opacity: 1;
+    filter:none;
+}
+
+.overflow{
+    height:250px;
+}
+
+.noscroll{
+    overflow-y:none;
+}
