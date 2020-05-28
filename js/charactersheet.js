@@ -1,12 +1,39 @@
 'use strict'
 
 $(document).ready(function () {
+
+
+
+    $("button").click(function(){
+	fillOutSheet();
+//	$("#character_sheet").attr("style","display:block");
+        // $("#character_sheet").printThis({
+        //     debug: true,             
+        //     importCSS: true,            
+        //     importStyle: true,         
+        //     printContainer: true,      
+        //     loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css", 
+        //     pageTitle: "UTOPIAN PRINT",             
+        //     removeInline: false,    
+        //     printDelay: 500,      
+        //     header: null,        
+        //     footer: null,            
+        //     base: false ,              
+        //     formValues: true,          
+        //     canvas: false,              
+        //     doctypeString: "",      
+        //     removeScripts: false,       
+        //     copyTagClasses: false
+	// });
+    });             
+
+    
     $(".dialog_window").dialog({
 	autoOpen: false,
 	closeOnEscape: false,
 	modal: true,
 	dialogClass: 'no-close',
-});
+    });
 
     $( ".accordion" ).accordion({
 	collapsible: true,
@@ -2241,4 +2268,151 @@ function computeEffort(){
     if(elemClass.value.includes("psy")) maxEffort = Math.max(1,1 + foci_effort_bonus + computeMod(Math.max(parseInt(elemCon.innerHTML),parseInt(elemWis.innerHTML))));
     
     elemEffort.innerHTML = maxEffort;
+}
+
+function fillOutSheet(){
+    var elem = document.getElementById("character_sheet");  
+    $("#character_sheet p").remove();
+    
+    
+    var name = document.createElement("p");
+    var background = document.createElement("p");
+    var Class  = document.createElement("p");
+    var subclass  = document.createElement("p");
+    var level = document.createElement("p");
+    var homeworld = document.createElement("p");
+    var employer = document.createElement("p");
+    var species = document.createElement("p");
+    var hp = document.createElement("p");
+    var strain = document.createElement("p");
+    var physical = document.createElement("p");
+    var mental = document.createElement("p");
+    var evasion = document.createElement("p");
+    var strength = document.createElement("p");
+    var dexterity = document.createElement("p");
+    var constitution = document.createElement("p");
+    var intelligence = document.createElement("p");
+    var wisdom  = document.createElement("p");
+    var charisma  = document.createElement("p");
+    var effort = document.createElement("p");
+    var BAB = document.createElement("p");
+    var strength_mod = document.createElement("p");
+    var dexterity_mod = document.createElement("p");
+    var constitution_mod = document.createElement("p");
+    var intelligence_mod = document.createElement("p");
+    var wisdom_mod = document.createElement("p");
+    var charisma_mod = document.createElement("p");
+    var foci1 = document.createElement("p");
+    var foci1_level = document.createElement("p");
+    var foci2 = document.createElement("p");
+    var foci2_level = document.createElement("p");
+    var foci3 = document.createElement("p");
+    var foci3_level = document.createElement("p");
+
+    
+    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level];
+    
+    for (var element of formElements){
+	element.setAttribute("class","formText");
+	element.innerHTML = "test";
+	elem.appendChild(element);
+    }
+
+    name.innerHTML = $("#name").val();
+    background.innerHTML = $("#backgrounds_mirror option:selected").text();
+
+    if($("#class_mirror option:selected").text().includes("/")){
+	Class.innerHTML = "Adventurer";
+	subclass.innerHTML = ($("#class_mirror option:selected").text()+" ").slice(4,-1);
+	
+    }
+    else{
+	Class.innerHTML = $("#class_mirror option:selected").text();
+	subclass.innerHTML = "";
+    }
+
+    level.innerHTML="1";
+    homeworld.innerHTML = $("#homeworld").val();
+    employer.innerHTML = $("#employer").val();
+    species.innerHTML = $("#species").val();
+    hp.innerHTML = $("#hp_mirror1").html();
+    strain.innerHTML = $("#constitution_attr").html();
+    physical.innerHTML = $("#physical_saving_throw").html();
+    evasion.innerHTML = $("#evasion_saving_throw").html();
+    mental.innerHTML = $("#mental_saving_throw").html();
+    strength.innerHTML = $("#strength_attr").html();
+    strength_mod.innerHTML = $("#strength_mod").html();
+    dexterity.innerHTML = $("#dexterity_attr").html();
+    dexterity_mod.innerHTML = $("#dexterity_mod").html();
+    constitution.innerHTML = $("#constitution_attr").html();
+    constitution_mod.innerHTML = $("#constitution_mod").html();
+    intelligence.innerHTML = $("#intelligence_attr").html();
+    intelligence_mod.innerHTML = $("#intelligence_mod").html();
+    wisdom.innerHTML = $("#wisdom_attr").html();
+    wisdom_mod.innerHTML = $("#wisdom_mod").html();
+    charisma.innerHTML = $("#charisma_attr").html();
+    charisma_mod.innerHTML = $("#charisma_mod").html();
+    effort.innerHTML = $("#effort").html();
+    BAB.innerHTML = $("#attack_bonus").html();
+
+    var fociElems = [foci1, foci2, foci3];
+    var fociLevelElems = [foci1_level, foci2_level, foci3_level];
+    var usedFoci = [];
+    for (var i =0; i< 3; i++){
+	if(i< picked_foci.length){
+	    if(usedFoci.includes(picked_foci[i])){
+		fociElems[i].innerHTML = "<strong>"+foci[picked_foci[i]]["name"]+":</strong> "+foci[picked_foci[i]]["level2"];
+		fociLevelElems[i].innerHTML = "2";
+	    }
+	    else{
+		fociElems[i].innerHTML = "<strong>"+foci[picked_foci[i]]["name"]+":</strong> "+foci[picked_foci[i]]["level1"];
+		fociLevelElems[i].innerHTML = "1";
+	    }
+	    usedFoci.push(picked_foci[i]);
+	}
+	else{
+	    fociElems[i].innerHTML = "";
+	    fociLevelElems[i].innerHTML = "";
+	}
+    }
+    
+    positionElement(name,80,37);
+    positionElement(background,207,58);
+    positionElement(Class,207,128);
+    positionElement(subclass,164,146);
+    positionElement(level,198,177);
+    positionElement(homeworld,80,205);
+    positionElement(employer,80,226);
+    positionElement(species,80,247);
+    positionElement(hp, 654,43);
+    positionElement(strain, 652,128);
+    positionElement(physical, 549, 219);
+    positionElement(evasion, 593, 219);
+    positionElement(mental, 638, 219);
+    positionElement(strength, 726, 71);
+    positionElement(strength_mod, 748, 71);
+    positionElement(dexterity, 714, 99);
+    positionElement(dexterity_mod, 738, 99);
+    positionElement(constitution, 726, 127);
+    positionElement(constitution_mod, 748, 127);
+    positionElement(intelligence, 714, 156);
+    positionElement(intelligence_mod, 738, 156);
+    positionElement(wisdom, 726, 183);
+    positionElement(wisdom_mod, 748, 183);
+    positionElement(charisma, 714, 212);
+    positionElement(charisma_mod, 738, 212);
+    positionElement(effort, 764, 534);
+    positionElement(BAB,344,190);
+    positionElement(foci1, 280, 240,"font-size:8px;width:225px;");
+    positionElement(foci1_level, 510, 246);
+    positionElement(foci2, 280, 275,"font-size:8px;width:225px;");
+    positionElement(foci2_level, 510, 281);
+    positionElement(foci3, 280, 310,"font-size:8px;width:225px;");
+    positionElement(foci3_level, 510, 316);
+
+
+}
+
+function positionElement(elem,left,top,existingstyle=""){
+    elem.setAttribute("style",existingstyle+"left:"+left+"px;top:"+top+"px;");
 }
