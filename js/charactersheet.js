@@ -2348,11 +2348,14 @@ function fillOutSheet(){
     var armor1_AC  = document.createElement("p");
     var armor2_name = document.createElement("p");
     var armor2_AC = document.createElement("p");
-
+    var credits =  document.createElement("p");
+    var technique1 = document.createElement("p");
+    var technique2 = document.createElement("p");
+    var technique3 = document.createElement("p");
 
     var skillElements = [administer, connect, exert, fix, heal, know, lead, notice, perform, pilot, program, punch, shoot, sneak, stab, survive, talk, trade, work, biopsionics, metapsionics, precognition, telekinesis, telepathy, teleportation];
     
-    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC].concat(skillElements);
+    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC,credits, technique1, technique2, technique3].concat(skillElements);
     
     for (var element of formElements){
 	element.setAttribute("class","formText");
@@ -2458,6 +2461,7 @@ function fillOutSheet(){
 	armor1_AC.innerHTML = 14+dexterityMod;
 	armor2_AC.innerHTML = 13+dexterityMod;
 
+	credits.innerHTML = 500+" credits";
 	break;
     case "blade":
     	weapon1_name.innerHTML = "Monoblade sword";
@@ -2475,6 +2479,8 @@ function fillOutSheet(){
 	
 	armor1_AC.innerHTML = 15+dexterityMod;
 	armor2_AC.innerHTML = 13+dexterityMod;
+
+	credits.innerHTML = 50+" credits";
 	break;
     case "thief":
     	weapon1_name.innerHTML = "Laser pistol";
@@ -2492,6 +2498,8 @@ function fillOutSheet(){
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
 	armor2_AC.innerHTML = "";
+
+	credits.innerHTML = 25+" credits";
 	break;
     case "hacker":
     	weapon1_name.innerHTML = "Laser pistol";
@@ -2509,6 +2517,8 @@ function fillOutSheet(){
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
 	armor2_AC.innerHTML = "";
+
+	credits.innerHTML = 100+" credits";
 	break;
     case "gunslinger":
     	weapon1_name.innerHTML = "Laser pistol";
@@ -2526,6 +2536,8 @@ function fillOutSheet(){
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
 	armor2_AC.innerHTML = "";
+
+	credits.innerHTML = 100+" credits";
 	break;
     case "soldier":
     	weapon1_name.innerHTML = "Combat rifle";
@@ -2543,6 +2555,8 @@ function fillOutSheet(){
 	
 	armor1_AC.innerHTML = 15+dexterityMod;
 	armor2_AC.innerHTML = "";
+
+	credits.innerHTML = 100+" credits";
 	break;
     case "scout":
     	weapon1_name.innerHTML = "Laser rifle";
@@ -2560,6 +2574,8 @@ function fillOutSheet(){
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
 	armor2_AC.innerHTML = "";
+
+	credits.innerHTML = 25+" credits";
 	break;
     case "medic":
     	weapon1_name.innerHTML = "Laser pistol";
@@ -2577,6 +2593,8 @@ function fillOutSheet(){
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
 	armor2_AC.innerHTML = "";
+
+	credits.innerHTML = 25+" credits";
 	break;
     case "civilian":
     	weapon1_name.innerHTML = "";
@@ -2594,6 +2612,8 @@ function fillOutSheet(){
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
 	armor2_AC.innerHTML = "";
+
+	credits.innerHTML = 700+" credits";
 	break;
     case "technician":
     	weapon1_name.innerHTML = "Laser pistol";
@@ -2611,6 +2631,8 @@ function fillOutSheet(){
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
 	armor2_AC.innerHTML = "";
+
+	credits.innerHTML = 200+" credits";
 	break;
     case "custom":
     	weapon1_name.innerHTML = "";
@@ -2629,6 +2651,7 @@ function fillOutSheet(){
 	armor1_AC.innerHTML = "";
 	armor2_AC.innerHTML = "";
 
+	credits.innerHTML = $("#equipment_packages_description ul li").html();
 	break;
     default:
     	weapon1_name.innerHTML = "";
@@ -2646,10 +2669,36 @@ function fillOutSheet(){
 	
 	armor1_AC.innerHTML = "";
 	armor2_AC.innerHTML = "";
+
+	credits.innerHTML = "";
 	break;
-  	
     }
 
+    var techniqueElems = [technique1, technique2, technique3];
+    var technique_texts = [];
+    
+    for(var discipline of psionic_disciplines){
+	var elemRankBox0 = document.getElementById(discipline+'_rank_box_0');
+	var elemRankBox1 = document.getElementById(discipline+'_rank_box_1');
+
+	
+	if (elemRankBox1.checked){
+	    technique_texts.push(psionics[discipline]["name"]+" 1");
+	    
+	}
+	else if (elemRankBox0.checked){
+	    technique_texts.push(psionics[discipline]["name"]+" 0");
+	}
+
+    }
+
+    alert(technique_texts);
+    
+    for (var i = 0; i++; i< technique_texts.length){
+	techniqueElems[i].innerHTML = technique_texts[i];
+    }
+    
+    
     positionElement(name,80,37);
     positionElement(background,207,58);
     positionElement(Class,207,128);
@@ -2730,7 +2779,12 @@ function fillOutSheet(){
 
     positionElement(armor1_AC, 253, 492);
     positionElement(armor2_AC, 253, 528);
-  
+
+    positionElement(credits , 285, 562);
+
+    positionElement(technique1, 534, 353,"font-size:8px;width:220px;");
+    positionElement(technique1, 534, 453,"font-size:8px;width:220px;");
+    positionElement(technique1, 534, 553,"font-size:8px;width:220px;");
 
 }
 
