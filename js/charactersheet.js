@@ -6,27 +6,27 @@ $(document).ready(function () {
 
     $("button").click(function(){
 	fillOutSheet();
-// 	$("#character_sheet").show();
-//         $("#character_sheet").printThis({
-//             debug: false,             
-//             importCSS: false,            
-//             importStyle: false,         
-//             printContainer: true,      
-// 	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-// //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-//             pageTitle: "",             
-//             removeInline: false,    
-//             printDelay: 3000,      
-//             header: null,        
-//             footer: null,            
-//             base: false ,              
-//             formValues: true,          
-//             canvas: false,              
-//             doctypeString: "",      
-//             removeScripts: false,       
-//             copyTagClasses: false,
-// 	    afterPrint: function(){	$("#character_sheet").hide();}
-// 	});
+	$("#character_sheet").show();
+        $("#character_sheet").printThis({
+            debug: false,             
+            importCSS: false,            
+            importStyle: false,         
+            printContainer: true,      
+	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+//	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
+            pageTitle: "",             
+            removeInline: false,    
+            printDelay: 3000,      
+            header: null,        
+            footer: null,            
+            base: false ,              
+            formValues: true,          
+            canvas: false,              
+            doctypeString: "",      
+            removeScripts: false,       
+            copyTagClasses: false,
+	    afterPrint: function(){	$("#character_sheet").hide();}
+	});
 
     });             
 
