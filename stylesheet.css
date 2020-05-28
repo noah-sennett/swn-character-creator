@@ -110,6 +110,21 @@ body{
     background-color: rgb(229, 229, 229);
 }
 
+.deactivated{
+    background-color: rgb(239, 239, 239);
+    height: 100%;
+    width:  100%;
+    position: absolute;
+    z-index:2;
+    opacity:0.7;
+    border: 1px solid black;
+    border-radius: 3px;
+    border-style: outset;
+    border-image: initial;
+    
+}
+
+
 .topLayer:active{
     background-color: #fff;
 }
@@ -699,4 +714,19 @@ h2{
     position:absolute;
     font-family: 'Source Sans Pro', sans-serif;
     font-size:10px;
+}
+
+
+.fixedButton {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+@media print {
+    #character_sheet {
+        display: block;
+	position:relative;
+	width:800px
+   }
 }

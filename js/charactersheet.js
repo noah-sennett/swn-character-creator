@@ -6,25 +6,28 @@ $(document).ready(function () {
 
     $("button").click(function(){
 	fillOutSheet();
-//	$("#character_sheet").attr("style","display:block");
-        // $("#character_sheet").printThis({
-        //     debug: true,             
-        //     importCSS: true,            
-        //     importStyle: true,         
-        //     printContainer: true,      
-        //     loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css", 
-        //     pageTitle: "UTOPIAN PRINT",             
-        //     removeInline: false,    
-        //     printDelay: 500,      
-        //     header: null,        
-        //     footer: null,            
-        //     base: false ,              
-        //     formValues: true,          
-        //     canvas: false,              
-        //     doctypeString: "",      
-        //     removeScripts: false,       
-        //     copyTagClasses: false
-	// });
+	$("#character_sheet").show();
+        $("#character_sheet").printThis({
+            debug: false,             
+            importCSS: false,            
+            importStyle: false,         
+            printContainer: true,      
+	    //            loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
+            pageTitle: "UTOPIAN PRINT",             
+            removeInline: false,    
+            printDelay: 5000,      
+            header: null,        
+            footer: null,            
+            base: false ,              
+            formValues: true,          
+            canvas: false,              
+            doctypeString: "",      
+            removeScripts: false,       
+            copyTagClasses: false,
+	    afterPrint: function(){	$("#character_sheet").hide();}
+	});
+
     });             
 
     
@@ -198,10 +201,10 @@ $(document).ready(function () {
     $("#backgrounds_mirror").selectmenu({width:124.5}).selectmenu("menuWidget").addClass("overflow");
     $("#class_mirror").selectmenu({width:174});
     $("#14attrList").selectmenu({width:120});
-    $("select[id*=_select]").selectmenu({width:50});
-    $("select[id*=foci]").selectmenu({width:200}).selectmenu("menuWidget").addClass("overflow");
+    $("select[id*='_select']").selectmenu({width:50});
+    $("select[id*='foci']").selectmenu({width:200}).selectmenu("menuWidget").addClass("overflow");
     
-    $("select[id*=mirror]").on("selectmenuchange",function(){
+    $("select[id*='mirror']").on("selectmenuchange",function(){
 	updateFromMirrors(this.id);
     });
 
@@ -209,24 +212,24 @@ $(document).ready(function () {
 	attrTo14(this.value);
     });
 
-    $("select[id*=_select]").on("selectmenuchange",function(){
+    $("select[id*='_select']").on("selectmenuchange",function(){
 	var attribute = (this.id).slice(0,-7);
 	setAttr(attribute,this.value);
 	updateAttrSelects(attribute,this.value);
-	$("select[id*=_select]").selectmenu("refresh");
+	$("select[id*='_select']").selectmenu("refresh");
     });
 
-    $("select[id*=foci]").on("selectmenuchange",function(){
+    $("select[id*='foci']").on("selectmenuchange",function(){
 	tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills();
-	$("select[id*=foci]").selectmenu("refresh");
+	$("select[id*='foci']").selectmenu("refresh");
     });
 
     $("#growth_button").on("click",function(){
-	rollGrowth();
+	if ($("#growth_button").attr("class")=="topLayer") rollGrowth();
     });
 
     $("#learning_button").on("click",function(){
-	rollLearning();
+	if ($("#learning_button").attr("class")=="topLayer") rollLearning();
     });
 						      
 });
@@ -990,8 +993,8 @@ function showGrowthButtons(){
     
     
     remainingRolls = 3;
-    elem1.removeAttribute("disabled")
-    elem2.removeAttribute("disabled")
+    elem1.setAttribute("class","topLayer");
+    elem2.setAttribute("class","topLayer");
     
 
     updateSkills();
@@ -1002,8 +1005,8 @@ function showGrowthButtons(){
 function hideGrowthButtons(){
     let elem1=document.getElementById("growth_button");
     let elem2=document.getElementById("learning_button");
-    elem1.style.display= 'none';
-    elem2.style.display= 'none';
+//    elem1.style.display= 'none';
+//    elem2.style.display= 'none';
     
     resetSelect(document.getElementById("growth"));
     resetSelect(document.getElementById("learning"));
@@ -1080,8 +1083,8 @@ function rollGrowth(){
     if (remainingRolls==0){
 	let elemGrowthButton = document.getElementById("growth_button");
 	let elemLearningButton = document.getElementById("learning_button");
-	elemGrowthButton.setAttribute("disabled","true");
-	elemLearningButton.setAttribute("disabled","true");
+	elemGrowthButton.setAttribute("class","deactivated");
+	elemLearningButton.setAttribute("class","deactivated");
     }
 }
 
@@ -1100,8 +1103,8 @@ function rollLearning(){
     if (remainingRolls==0){
 	let elemGrowthButton = document.getElementById("growth_button");
 	let elemLearningButton = document.getElementById("learning_button");
-	elemGrowthButton.setAttribute("disabled","true");
-	elemLearningButton.setAttribute("disabled","true");
+	elemGrowthButton.setAttribute("class","deactivated");
+	elemLearningButton.setAttribute("class","deactivated");
     }   
 }
 
@@ -2308,9 +2311,44 @@ function fillOutSheet(){
     var foci2_level = document.createElement("p");
     var foci3 = document.createElement("p");
     var foci3_level = document.createElement("p");
+    var administer = document.createElement("p");
+    var connect = document.createElement("p");
+    var exert = document.createElement("p");
+    var fix = document.createElement("p");
+    var heal = document.createElement("p");
+    var know = document.createElement("p");
+    var lead = document.createElement("p");
+    var notice  = document.createElement("p");
+    var perform = document.createElement("p");
+    var pilot = document.createElement("p");
+    var program = document.createElement("p");
+    var punch = document.createElement("p");
+    var shoot = document.createElement("p");
+    var sneak = document.createElement("p");
+    var stab = document.createElement("p");
+    var survive = document.createElement("p");
+    var talk = document.createElement("p");
+    var trade = document.createElement("p");
+    var work = document.createElement("p");
+    var biopsionics = document.createElement("p");
+    var metapsionics = document.createElement("p");
+    var precognition = document.createElement("p");
+    var telekinesis = document.createElement("p");
+    var telepathy = document.createElement("p");
+    var teleportation = document.createElement("p");
+    var weapon1_name  = document.createElement("p");
+    var weapon1_bonus  = document.createElement("p");
+    var weapon1_damage = document.createElement("p");
+    var weapon1_shock  = document.createElement("p");
+    var weapon2_name  = document.createElement("p");
+    var weapon2_bonus  = document.createElement("p");
+    var weapon2_damage = document.createElement("p");
+    var weapon2_shock  = document.createElement("p");
 
+
+    var skillElements = [administer, connect, exert, fix, heal, know, lead, notice, perform, pilot, program, punch, shoot, sneak, stab, survive, talk, trade, work, biopsionics, metapsionics, precognition, telekinesis, telepathy, teleportation];
     
-    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level];
+    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock].concat(skillElements);
     
     for (var element of formElements){
 	element.setAttribute("class","formText");
@@ -2377,7 +2415,163 @@ function fillOutSheet(){
 	    fociLevelElems[i].innerHTML = "";
 	}
     }
+
+    var skillKeys = Object.keys(skills);
     
+    var zippedSkills = skillElements.map(function(e, i) {
+	return [e, skillKeys[i]];
+    });
+
+    for (var zip of zippedSkills){
+    	zip[0].innerHTML = $("#"+zip[1]+"_total").html();
+    }
+
+
+    var strengthMod = computeMod(parseInt(strength.innerHTML));
+    var dexterityMod = computeMod(parseInt(dexterity.innerHTML));
+    var attackMod = parseInt(($("#attack_bonus").html()).slice(1,2));
+    
+    var melee_bonus = attackMod+strengthMod;
+    var ranged_bonus = attackMod+dexterityMod;
+
+    var maxMod = Math.max(strengthMod,dexterityMod);
+    
+    switch($("#equipment_packages").val()){
+    case "barbarian":
+    	weapon1_name.innerHTML = "Spear";
+	weapon2_name.innerHTML = "Knife";
+
+	weapon1_damage.innerHTML = "1d6"+displayBonus((1+maxMod));
+	weapon1_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
+	weapon1_shock.innerHTML = "Shock: "+(2+maxMod)+"/AC13";
+    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod);
+	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	break;
+    case "blade":
+    	weapon1_name.innerHTML = "Monoblade sword";
+	weapon2_name.innerHTML = "Thermal knife";
+
+	weapon1_damage.innerHTML = "1d8"+displayBonus((1+maxMod));
+	weapon1_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
+	weapon1_shock.innerHTML = "Shock: "+(2+maxMod)+"/AC13";
+    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
+	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	break;
+    case "thief":
+    	weapon1_name.innerHTML = "Laser pistol";
+	weapon2_name.innerHTML = "Monoblade knife";
+
+	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod));
+	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
+	weapon1_shock.innerHTML = "";
+    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
+	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	break;
+    case "hacker":
+    	weapon1_name.innerHTML = "Laser pistol";
+	weapon2_name.innerHTML = "";
+
+	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod));
+	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
+	weapon1_shock.innerHTML = "";
+    	weapon2_damage.innerHTML = "";
+	weapon2_bonus.innerHTML = "";
+	weapon2_shock.innerHTML = "";
+	break;
+    case "gunslinger":
+    	weapon1_name.innerHTML = "Laser pistol";
+	weapon2_name.innerHTML = "Monoblade knife";
+
+	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod));
+	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
+	weapon1_shock.innerHTML = "";
+    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
+	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	break;
+    case "soldier":
+    	weapon1_name.innerHTML = "Combat rifle";
+	weapon2_name.innerHTML = "Knife";
+
+	weapon1_damage.innerHTML = "1d12"+displayBonus((dexterityMod));
+	weapon1_bonus.innerHTML = displayBonus((ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
+	weapon1_shock.innerHTML = "";
+    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod);
+	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	break;
+    case "scout":
+    	weapon1_name.innerHTML = "Laser rifle";
+	weapon2_name.innerHTML = "Knife";
+
+	weapon1_damage.innerHTML = "1d10"+displayBonus((dexterityMod));
+	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
+	weapon1_shock.innerHTML = "";
+    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod);
+	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	break;
+    case "medic":
+    	weapon1_name.innerHTML = "Laser pistol";
+	weapon2_name.innerHTML = "";
+
+	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod));
+	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
+	weapon1_shock.innerHTML = "";
+    	weapon2_damage.innerHTML = "";
+	weapon2_bonus.innerHTML = "";
+	weapon2_shock.innerHTML = "";
+	break;
+    case "civilian":
+    	weapon1_name.innerHTML = "";
+	weapon2_name.innerHTML = "";
+
+	weapon1_damage.innerHTML = "";
+	weapon1_bonus.innerHTML = "";
+	weapon1_shock.innerHTML = "";
+    	weapon2_damage.innerHTML = "";
+	weapon2_bonus.innerHTML = "";
+	weapon2_shock.innerHTML = "";
+	break;
+    case "technician":
+    	weapon1_name.innerHTML = "Laser pistol";
+	weapon2_name.innerHTML = "Monoblade knife";
+	
+	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod));
+	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
+	weapon1_shock.innerHTML = "";
+    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
+	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	break;
+    case "custom":
+    	weapon1_name.innerHTML = "";
+	weapon2_name.innerHTML = "";
+
+	weapon1_damage.innerHTML = "";
+	weapon1_bonus.innerHTML = "";
+	weapon1_shock.innerHTML = "";
+    	weapon2_damage.innerHTML = "";
+	weapon2_bonus.innerHTML = "";
+	weapon2_shock.innerHTML = "";
+	break;
+    default:
+    	weapon1_name.innerHTML = "";
+	weapon2_name.innerHTML = "";
+
+	weapon1_damage.innerHTML = "";
+	weapon1_bonus.innerHTML = "";
+	weapon1_shock.innerHTML = "";
+    	weapon2_damage.innerHTML = "";
+	weapon2_bonus.innerHTML = "";
+	weapon2_shock.innerHTML = "";
+	break;
+  	
+    }
+
     positionElement(name,80,37);
     positionElement(background,207,58);
     positionElement(Class,207,128);
@@ -2405,16 +2599,69 @@ function fillOutSheet(){
     positionElement(charisma_mod, 738, 212);
     positionElement(effort, 764, 534);
     positionElement(BAB,344,190);
-    positionElement(foci1, 280, 240,"font-size:8px;width:225px;");
+    positionElement(foci1, 280, 240,"font-size:8px;width:220px;");
     positionElement(foci1_level, 510, 246);
-    positionElement(foci2, 280, 275,"font-size:8px;width:225px;");
+    positionElement(foci2, 280, 275,"font-size:8px;width:220px;");
     positionElement(foci2_level, 510, 281);
-    positionElement(foci3, 280, 310,"font-size:8px;width:225px;");
+    positionElement(foci3, 280, 310,"font-size:8px;width:220px;");
     positionElement(foci3_level, 510, 316);
 
+
+    positionElement(administer, 343, 37);
+    positionElement(connect, 343, 51);
+    positionElement(exert, 343, 65);
+    positionElement(fix, 343, 79);
+    positionElement(heal, 343, 93);
+    positionElement(know, 343, 107);
+    positionElement(lead, 343, 121);
+    positionElement(notice, 343, 135);
+    positionElement(perform, 343, 149);
+
+    positionElement(pilot, 427, 37);
+    positionElement(program, 427, 51);
+    positionElement(punch, 427, 65);
+    positionElement(shoot, 427, 79);
+    positionElement(sneak, 427, 93);
+    positionElement(stab, 427, 107);
+    positionElement(survive, 427, 121);
+    positionElement(talk, 427, 135);
+    positionElement(trade, 427, 149);
+
+    positionElement(work, 511, 37);
+    positionElement(biopsionics, 511, 51);
+    positionElement(metapsionics, 511, 65);
+    positionElement(precognition, 511, 79);
+    positionElement(telekinesis, 511, 93);
+    positionElement(telepathy, 511, 107);
+    positionElement(teleportation, 511, 121);
+
+    positionElement(weapon1_name, 65, 290);
+    positionElement(weapon2_name, 65, 326);
+
+    positionElement(weapon1_bonus,205,296);
+    positionElement(weapon2_bonus,205,332);
+
+    positionElement(weapon1_damage,225,296);
+    positionElement(weapon2_damage,225,332);
+
+    positionElement(weapon1_shock,217,312,"font-size:8px;");
+    positionElement(weapon2_shock,217,348,"font-size:8px;");
+    
+  
 
 }
 
 function positionElement(elem,left,top,existingstyle=""){
     elem.setAttribute("style",existingstyle+"left:"+left+"px;top:"+top+"px;");
+}
+
+  
+function skillToAttackBonus(skillVal){
+    if (skillVal=="") return -1;
+    return parseInt(skillVal);
+}
+
+function displayBonus(val){
+    if (val <0) return "\u2212"+(-1*val);
+    return "+"+val
 }
