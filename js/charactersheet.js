@@ -6,27 +6,27 @@ $(document).ready(function () {
 
     $("button").click(function(){
 	fillOutSheet();
-	$("#character_sheet").show();
-        $("#character_sheet").printThis({
-            debug: false,             
-            importCSS: false,            
-            importStyle: false,         
-            printContainer: true,      
-	    //            loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-            pageTitle: "UTOPIAN PRINT",             
-            removeInline: false,    
-            printDelay: 5000,      
-            header: null,        
-            footer: null,            
-            base: false ,              
-            formValues: true,          
-            canvas: false,              
-            doctypeString: "",      
-            removeScripts: false,       
-            copyTagClasses: false,
-	    afterPrint: function(){	$("#character_sheet").hide();}
-	});
+// 	$("#character_sheet").show();
+//         $("#character_sheet").printThis({
+//             debug: false,             
+//             importCSS: false,            
+//             importStyle: false,         
+//             printContainer: true,      
+// 	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+// //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
+//             pageTitle: "UTOPIAN PRINT",             
+//             removeInline: false,    
+//             printDelay: 3000,      
+//             header: null,        
+//             footer: null,            
+//             base: false ,              
+//             formValues: true,          
+//             canvas: false,              
+//             doctypeString: "",      
+//             removeScripts: false,       
+//             copyTagClasses: false,
+// 	    afterPrint: function(){	$("#character_sheet").hide();}
+// 	});
 
     });             
 
@@ -2344,11 +2344,15 @@ function fillOutSheet(){
     var weapon2_bonus  = document.createElement("p");
     var weapon2_damage = document.createElement("p");
     var weapon2_shock  = document.createElement("p");
+    var armor1_name = document.createElement("p");
+    var armor1_AC  = document.createElement("p");
+    var armor2_name = document.createElement("p");
+    var armor2_AC = document.createElement("p");
 
 
     var skillElements = [administer, connect, exert, fix, heal, know, lead, notice, perform, pilot, program, punch, shoot, sneak, stab, survive, talk, trade, work, biopsionics, metapsionics, precognition, telekinesis, telepathy, teleportation];
     
-    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock].concat(skillElements);
+    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC].concat(skillElements);
     
     for (var element of formElements){
 	element.setAttribute("class","formText");
@@ -2447,6 +2451,13 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
 	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+
+	armor1_name.innerHTML = "Primitive hide armor w/ shield";
+	armor2_name.innerHTML = "Primitive hide armor";
+	
+	armor1_AC.innerHTML = 14+dexterityMod;
+	armor2_AC.innerHTML = 13+dexterityMod;
+
 	break;
     case "blade":
     	weapon1_name.innerHTML = "Monoblade sword";
@@ -2458,6 +2469,12 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
 	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+
+	armor1_name.innerHTML = "Woven body armor";
+	armor2_name.innerHTML = "Secure clothing";
+	
+	armor1_AC.innerHTML = 15+dexterityMod;
+	armor2_AC.innerHTML = 13+dexterityMod;
 	break;
     case "thief":
     	weapon1_name.innerHTML = "Laser pistol";
@@ -2469,6 +2486,12 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
 	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+
+	armor1_name.innerHTML = "Armored undersuit";
+	armor2_name.innerHTML = "";
+	
+	armor1_AC.innerHTML = 13+dexterityMod;
+	armor2_AC.innerHTML = "";
 	break;
     case "hacker":
     	weapon1_name.innerHTML = "Laser pistol";
@@ -2480,6 +2503,12 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "";
 	weapon2_bonus.innerHTML = "";
 	weapon2_shock.innerHTML = "";
+	
+	armor1_name.innerHTML = "Secure clothing";
+	armor2_name.innerHTML = "";
+	
+	armor1_AC.innerHTML = 13+dexterityMod;
+	armor2_AC.innerHTML = "";
 	break;
     case "gunslinger":
     	weapon1_name.innerHTML = "Laser pistol";
@@ -2491,6 +2520,12 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
 	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	
+	armor1_name.innerHTML = "Armored undersuit";
+	armor2_name.innerHTML = "";
+	
+	armor1_AC.innerHTML = 13+dexterityMod;
+	armor2_AC.innerHTML = "";
 	break;
     case "soldier":
     	weapon1_name.innerHTML = "Combat rifle";
@@ -2502,6 +2537,12 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
 	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	
+	armor1_name.innerHTML = "Woven body armor";
+	armor2_name.innerHTML = "";
+	
+	armor1_AC.innerHTML = 15+dexterityMod;
+	armor2_AC.innerHTML = "";
 	break;
     case "scout":
     	weapon1_name.innerHTML = "Laser rifle";
@@ -2513,6 +2554,12 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
 	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+
+	armor1_name.innerHTML = "Armored vacc suit";
+	armor2_name.innerHTML = "";
+	
+	armor1_AC.innerHTML = 13+dexterityMod;
+	armor2_AC.innerHTML = "";
 	break;
     case "medic":
     	weapon1_name.innerHTML = "Laser pistol";
@@ -2524,6 +2571,12 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "";
 	weapon2_bonus.innerHTML = "";
 	weapon2_shock.innerHTML = "";
+	
+	armor1_name.innerHTML = "Secure clothing";
+	armor2_name.innerHTML = "";
+	
+	armor1_AC.innerHTML = 13+dexterityMod;
+	armor2_AC.innerHTML = "";
 	break;
     case "civilian":
     	weapon1_name.innerHTML = "";
@@ -2535,6 +2588,12 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "";
 	weapon2_bonus.innerHTML = "";
 	weapon2_shock.innerHTML = "";
+		
+	armor1_name.innerHTML = "Secure clothing";
+	armor2_name.innerHTML = "";
+	
+	armor1_AC.innerHTML = 13+dexterityMod;
+	armor2_AC.innerHTML = "";
 	break;
     case "technician":
     	weapon1_name.innerHTML = "Laser pistol";
@@ -2546,6 +2605,12 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
 	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+		
+	armor1_name.innerHTML = "Armored undersuit";
+	armor2_name.innerHTML = "";
+	
+	armor1_AC.innerHTML = 13+dexterityMod;
+	armor2_AC.innerHTML = "";
 	break;
     case "custom":
     	weapon1_name.innerHTML = "";
@@ -2557,6 +2622,13 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "";
 	weapon2_bonus.innerHTML = "";
 	weapon2_shock.innerHTML = "";
+		
+	armor1_name.innerHTML = "";
+	armor2_name.innerHTML = "";
+	
+	armor1_AC.innerHTML = "";
+	armor2_AC.innerHTML = "";
+
 	break;
     default:
     	weapon1_name.innerHTML = "";
@@ -2568,6 +2640,12 @@ function fillOutSheet(){
     	weapon2_damage.innerHTML = "";
 	weapon2_bonus.innerHTML = "";
 	weapon2_shock.innerHTML = "";
+
+	armor1_name.innerHTML = "";
+	armor2_name.innerHTML = "";
+	
+	armor1_AC.innerHTML = "";
+	armor2_AC.innerHTML = "";
 	break;
   	
     }
@@ -2646,7 +2724,12 @@ function fillOutSheet(){
 
     positionElement(weapon1_shock,217,312,"font-size:8px;");
     positionElement(weapon2_shock,217,348,"font-size:8px;");
-    
+
+    positionElement(armor1_name, 65, 486);
+    positionElement(armor2_name, 65, 522);
+
+    positionElement(armor1_AC, 253, 492);
+    positionElement(armor2_AC, 253, 528);
   
 
 }
