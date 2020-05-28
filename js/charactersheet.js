@@ -2358,17 +2358,19 @@ function fillOutSheet(){
     var fociElems = [foci1, foci2, foci3];
     var fociLevelElems = [foci1_level, foci2_level, foci3_level];
     var usedFoci = [];
+    var sorted_picks = picked_foci;
+    sorted_picks.sort();
     for (var i =0; i< 3; i++){
-	if(i< picked_foci.length){
-	    if(usedFoci.includes(picked_foci[i])){
-		fociElems[i].innerHTML = "<strong>"+foci[picked_foci[i]]["name"]+":</strong> "+foci[picked_foci[i]]["level2"];
+	if(i< sorted_picks.length){
+	    if(usedFoci.includes(sorted_picks[i])){
+		fociElems[i].innerHTML = "<strong>"+foci[sorted_picks[i]]["name"]+":</strong> "+foci[sorted_picks[i]]["level2abbreviated"];
 		fociLevelElems[i].innerHTML = "2";
 	    }
 	    else{
-		fociElems[i].innerHTML = "<strong>"+foci[picked_foci[i]]["name"]+":</strong> "+foci[picked_foci[i]]["level1"];
+		fociElems[i].innerHTML = "<strong>"+foci[sorted_picks[i]]["name"]+":</strong> "+foci[sorted_picks[i]]["level1abbreviated"];
 		fociLevelElems[i].innerHTML = "1";
 	    }
-	    usedFoci.push(picked_foci[i]);
+	    usedFoci.push(sorted_picks[i]);
 	}
 	else{
 	    fociElems[i].innerHTML = "";
