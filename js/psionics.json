@@ -38,7 +38,7 @@
 	    "Synthetic Adaptation":"This is a particularly esoteric technique, one that requires the adept to have at least Program-0 or Fix-0 skill in order to master. With it, however, the metapsion has learned how to synergize with the quantum intelligence of a VI or True AI in order to apply Telepathy or Biopsion powers to their inanimate corpus. Only intelligent machines can be affected, as the technique requires a sentient mind to catalyze the effect.<br><br>    This synergy takes much of its force from the adept. Any System Strain the powers might inflict must be paid by the adept rather than the target."
 	},
 	"level1abbreviated":{
-	    "Cloak Powers":"Commit Effort to cloak your powers. Only a metapsion of equal or higher skill can detect their abilities; make an opposed Wis/Metapsionics roll to determine if the detection succeeds.",
+	    "Cloak Powers":"Commit Effort to cloak your powers. Only a metapsion of equal or higher skill can detect your abilities; make an opposed Wis/Metapsionics roll to determine if the detection succeeds.",
 	    "Mindtracing":"If you have detected psionic powers, commit Effort for the scene as an Instant action to see and hear through the senses of its user. You are aware their location and treat them as  visible for tje purposes your abilites. The connection lasts for one round.",
 	    "Synthetic Adaptation":"If the metapsion has at least Program-0 or Fix-0 skill, they may use their Telepathy and Biopsion powers on VI or True AI. Any System Strain must be paid by you rather than the target."
 	}
@@ -113,7 +113,7 @@
 	    "level1":"The psychic can teleport up to 100 meters.",
 	    "descriptionabbreviated":"By commiting Effort for the scene as a Main action, you can teleport to a location you have visited before or can currently see. You can choose to leave equipment behind or bring any mass you can carry with your natural strength. You instinctively abort any jump into solid matter, but must still Commit Effort. ",
 	    "level0abbreviated":"You can teleport up to 10 meters.",
-	    "level1abbreviated":"YOu can teleport up to 100 meters."}
+	    "level1abbreviated":"YOu can teleport up to 100 meters."
 	},
 	"level1":{
 	    "Proficient Apportation":"Personal Apportation now counts as a Move action, though it still can be performed only once per round. Apportations of 10 meters or less no longer require Effort to be Committed, though any augments to the technique must still be paid for normally.",
@@ -122,6 +122,6 @@
 	"level1abbreviated":{
 	    "Proficient Apportation":"Personal Apportation now counts as a Move action, but can only be used once per round. Apportations of 10 meters or less no longer require Effort.",
 	    "Spatial Awareness":"You may Commit Effort as an On Turn action to gain an complete awareness of your surroundings, roughly equivalent to sight out to 100 meters. It is blocked by solid objects.The sense lasts as long as the Effort remains Committed."
-    
+	}
     }
 }
