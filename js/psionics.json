@@ -5,12 +5,22 @@
 	    "name":"Psychic Succor",
 	    "description":"The adept’s touch stabilizes critically-wounded organisms. More sophisticated practitioners can heal tissue injuries, though curing diseases, detoxifying poisons, and fixing congenital deformities require additional techniques. Each use of Psychic Succor adds one point of System Strain to the target, or two points if they were mortally wounded at the time.<br><br>    Activating Psychic Succor requires the biopsion to Commit Effort for the day. Once used, they can continue to use it for the rest of that scene without Committing Effort again.",
 	    "level0":"The psychic’s touch can automatically stabilize a mortally-wounded target as a Main Action. This power must be used on a target within six rounds of their collapse, and does not function on targets that have been decapitated or killed by Heavy weapons. It’s the GM’s decision as to whether a target is intact enough for this power to work.",
-	    "level1":"As level-0, and heal 1d6+1 hit points of damage. If used on a mortally-wounded target, they revive with the rolled hit points and can act normally on the next round."},
+	    "level1":"As level-0, and heal 1d6+1 hit points of damage. If used on a mortally-wounded target, they revive with the rolled hit points and can act normally on the next round.",
+	    "descriptionabbreviated":"Commit effort for the day to stabilize and heal others. Each use adds one point of System Strain to the target. Once used, this is active for the rst of the scene without requiring more Effort.",
+	    "level0abbreviated":"Touch a mortally-wounded target to automatically stabilize them as a Main Action. This must be used within 6 rounds of their collapse, and does not work on targets decapitated or killed by Heavy Weapons.",
+	    "level1abbreviated":"As level-0, and heal 1d6+1 HP."
+	},
 	"level1":{
 	    "Mastered Succor":"The biopsion has developed a sophisticated mastery of their core ability, and they no longer need to Commit Effort to activate it, and may use it whenever they wish. The use of additional techniques that augment Psychic Succor might still require Effort to be Committed.",
 	    "Organic Purification Protocols":"The biopsion’s Psychic Succor now cures any poisons or diseases the subject may be suffering, albeit it requires Committing Effort for the day as an additional surcharge. Biowarfare organisms, exceptionally virulent diseases, or TL5 toxins may resist this curing, requiring a Wis/Biopsionics skill check at a difficulty of at least 10. Failure means that the adept cannot cure the target’s disease. This technique cannot cure congenital illnesses.",
-	    "Remote Repair":"Psychic Succor and other biopsionic techniques that normally require touch contact can now be applied at a distance up to 100 meters, provided the biopsion can see the target with their unaided vision. Hostile powers that normally require a hit roll will hit automatically. Each time this technique is used, Effort must be Com- mitted for the scene."
+	    "Remote Repair":"Psychic Succor and other biopsionic techniques that normally require touch contact can now be applied at a distance up to 100 meters, provided the biopsion can see the target with their unaided vision. Hostile powers that normally require a hit roll will hit automatically. Each time this technique is used, Effort must be Committed for the scene."
+	},
+	"level1abbreviated":{
+	    "Mastered Succor":"You no longer need to Commit Effort to activate Psychic Succor.",
+	    "Organic Purification Protocols":"You may Commit Effort for the day to have Psychic Succor cure poisons and diseases. Biowarfare organisms, exceptionally virulent diseases, or TL5 toxins require a Wis/Biopsionics skill check at DC 10+; failue means you cannot cure the malady.",
+	    "Remote Repair":"Psychic Succor and other biopsionic techniques can be applied at a distance up to 100 meters, provided the target is visible. Each time this is used, Effort must be committed for the scene."
 	}
+
     },
     "metapsionics":{
 	"name":"Metapsionics",
@@ -18,11 +28,19 @@
 	    "name":"Psychic Refinement",
 	    "description":"The metapsion gains improved mastery over their own powers and an innate sensitivity to the use of psionic abilities in their presence.",
 	    "level0":"The adept can visually and audibly detect the use of psychic powers. If both the source and target are visible to the metapsion, they can tell who’s using the power, even if it’s normally imperceptible. They gain a +2 bonus on any saving throw versus a psionic power.",
-	    "level1":"The metapsion’s maximum Effort increases by an additional point."},
+	    "level1":"The metapsion’s maximum Effort increases by an additional point.",
+	    "descriptionabbreviated":"Improve mastery of your powers and sensitivity of nearby psionics.",
+	    "level0abbreviated":"You can visually and audibly detect the use of psychic powers. If both source and target are visible, you can tell who's using the power. Additionally, gain +2 bonus on saving throws versus psionic powers.",
+	    "level1abbreviated":"Your maximum Effort increases by 1 point."},
 	"level1":{
 	    "Cloak Powers":"The metapsion can conceal their own psychic abilities from metapsionic senses. They must Commit Effort for as long as they wish to cloak their powers. While hidden, only a metapsion with equal or higher skill in Metapsionics can detect their abilities with their level-0 or level-2 Psychic Refinement abilities. In such cases, an opposed Wis/Metapsionics roll is made between the metapsion and the investigator. If the investigator wins, the cloak is pierced, while if the metapsion wins, the investigator’s Psychic Refinement remains oblivious.",
 	    "Mindtracing":"The metapsion can trace back the use of psionic powers they’ve noticed in their presence. By Committing Effort for the scene as an Instant action, they can see and hear through the senses of a user of a psychic power, gaining an intuitive awareness of their location and treating them as a visible target for purposes of their own abilities. Thus, if they see someone being affected by a telepathy power with no visible source, they can use this ability to briefly share the hidden telepath’s senses. If used on a target that is teleporting, they can perceive the teleporter’s view of their destination. Use on a metamorphically-shaped impostor would reveal the biopsion responsible for the change, and so forth. These shared senses last for only one round and do not interfere with the adept’s other actions.",
 	    "Synthetic Adaptation":"This is a particularly esoteric technique, one that requires the adept to have at least Program-0 or Fix-0 skill in order to master. With it, however, the metapsion has learned how to synergize with the quantum intelligence of a VI or True AI in order to apply Telepathy or Biopsion powers to their inanimate corpus. Only intelligent machines can be affected, as the technique requires a sentient mind to catalyze the effect.<br><br>    This synergy takes much of its force from the adept. Any System Strain the powers might inflict must be paid by the adept rather than the target."
+	},
+	"level1abbreviated":{
+	    "Cloak Powers":"Commit Effort to cloak your powers. Only a metapsion of equal or higher skill can detect their abilities; make an opposed Wis/Metapsionics roll to determine if the detection succeeds.",
+	    "Mindtracing":"If you have detected psionic powers, commit Effort for the scene as an Instant action to see and hear through the senses of its user. You are aware their location and treat them as  visible for tje purposes your abilites. The connection lasts for one round.",
+	    "Synthetic Adaptation":"If the metapsion has at least Program-0 or Fix-0 skill, they may use their Telepathy and Biopsion powers on VI or True AI. Any System Strain must be paid by you rather than the target."
 	}
     },
     "precognition":{
@@ -30,26 +48,40 @@
 	    "name":"Oracle",
 	    "description":"The precog gains a progressively-greater intuitive understanding of their own future. Each invocation of the Oracle technique requires a Main Action and that the user Commit Effort for the day. Once triggered, the adept gets a single brief vision related to the question about the future that they’re asking. This vision is always from their own personal vantage point and never reveals more than a minute of insight, though the psychic processes it almost instantly as part of the power’s use.<br><br>    The GM should answer the question as if the PC were about to perform the act or engage in the investigation pertinent to the question. Thus, if the adept wanted to know what pressing a button would do and the GM knows that it’s connected to a bomb, the psychic might get a vision of sudden death. If the bomb were on a time delay that extended past the time horizon of the oracle, however, the psychic might just see a vision of herself waiting patiently, with nothing happening.<br><br>    Visions should relate to actions and events, not abstract facts. Oracle couldn’t tell a psychic who the crime boss of a slum neighborhood is, for example, but it could give a vision of the psychic caught in the next bloody riot and the gang boss who’s directing the myriad thugs. It couldn’t reveal the name of a security guard, but it could show the seer the impending moment that the next guard patrol will enter the area the psychic plans to infiltrate. Only the most important or significant information is conveyed by the technique, even if multiple events of interest might transpire during the time horizon.<br><br>    Oracle can only be used on a given question or topic once until the situation changes substantially or a week goes by. The maximum time horizon of the Oracle increases as the adept’s Precognition skill improves.",
 	    "level0":"One minute into the future.",
-	    "level1":"One day into the future."
-	},
+	    "level1":"One day into the future.",
+	    "descriptionabbreviated":"Commit Effort for the day as a Main action to receive a brief vision related to a question about the future. The vision is from your personal vantage and never reveals more than a minute of insight. The GM should answer as if you were about to perform the act or engage in the investigation pertinet to the question. This power can only be used once on a given question until the situation changes substantially or a week goes by.",
+	    "level0abbreviated":"You glimpse one minute into the future.",
+	    "level1abbreviated":"You glimpse one day into the future."},
 	"level1":{
 	    "Intuitive Response":"As an Instant action, the precog can Commit Effort for the scene just before they roll initiative. Their initiative score is treated as one better than anyone else’s involved in the scene. If another participant has this power or some other ability that grants automatic initiative success, roll initiative normally to determine which of them goes first, and then the rest of the combatants act. This ability cannot be used if the precog has been surprised.",
 	    "Sense the Need":"At some point in the recent past, the psychic had a vague but intense premonition that a particular object would be needed. By triggering this power as an Instant action and Committing Effort for the day, the psychic can retroactively declare that they brought along any one object that they could have reasonably acquired and carried to this point. This object must be plausible given recent events; if the psychic has just been strip-searched, very few objects could reasonably have been kept, while a psychic who’s just passed through a weapons check couldn’t still have a loaded laser pistol.",
 	    "Terminal Reflection":"The psychic’s Oracle power automatically triggers as an Instant action moments before some unexpected danger or ambush, giving the precog a brief vision of the impending hazard. This warning comes just in time to avoid springing a trap or to negate combat surprise for the precog and their companions. If the psychic does not immediately Commit Effort for the day, this sense goes numb and this technique cannot be used for the rest of the day."
+	},
+	"level1abbreviated":{
+	    "Intuitive Response":"Commit Effort as an Instant action before rolling initiative. You initiative is treated as one better than anyone else's in the scene, unless they have equivalent abilities, in which case you both roll initiative normally to determine who acts first. This ability cannot be used if you are surprised.",
+	    "Sense the Need":"Commit Effort for the day as an Instant action to retroactively declare that you brought along an object you can could reasonably have acquired and carried to this point.",
+	    "Terminal Reflection":"Your Oracle power automatically triggers as an Instant action moments before unexpected danger or ambush, providing a brief vision of the impending hazard. If you do notimmediately Commit Effort for the day, this technique cannot be used for the rest of the day."
 	}
     },
     "telekinesis":{
 	"name":"Telekinesis",
 	"core":{
 	    "name":"Telekinetic Manipulation",
-	    "description":"The adept may Commit Effort for the scene as a Main Action to direct telekinetic force toward an object or person within unaided visual range or with tactile contact with the psychic. This force isn’t responsive enough to be effective as a weapon without further refinement of technique, and cannot cause damage to living or mobile targets. If used to crush or harm im- mobile unliving objects, it does 1d6 damage per skill level of the psychic per round of focus. Objects move at 20 meters per round when moved telekinetically.<br><br>    A telekinetic force can be maintained over multiple rounds without expending further actions, such as holding a metal platform in place under a group of allies, but the psychic cannot again activate this technique on a second object until they release the first.",
+	    "description":"The adept may Commit Effort for the scene as a Main Action to direct telekinetic force toward an object or person within unaided visual range or with tactile contact with the psychic. This force isn’t responsive enough to be effective as a weapon without further refinement of technique, and cannot cause damage to living or mobile targets. If used to crush or harm immobile unliving objects, it does 1d6 damage per skill level of the psychic per round of focus. Objects move at 20 meters per round when moved telekinetically.<br><br>    A telekinetic force can be maintained over multiple rounds without expending further actions, such as holding a metal platform in place under a group of allies, but the psychic cannot again activate this technique on a second object until they release the first.",
 	    "level0":"The psychic can exert force as if with one hand and their own strength.",
-	    "level1":"The psychic can manipulate objects as if with both hands and can lift up to two hundred kilograms with this ability."
+	    "level1":"The psychic can manipulate objects as if with both hands and can lift up to two hundred kilograms with this ability.",
+	    "descriptionabbreviated":"Commit Effort for the scene as a Main Action to direct telekinetic force toward an object or person within visual range. This cannot cause damage to living or moblie targets, but can do 1d6 per skill level per round to immobile unliving objects. The force can be maintained without expending further actions, but can only be activated once at a time.",
+	    "level0abbreviated":"You can exert force as if with 1 hand and your own strength.",
+	    "level1abbreviated":"You can manipulate objects if with 2 hands and lift 200 kg."
 	},
 	"level1":{
 	    "Kinetic Transversal":"The adept may Commit Effort as an On Turn action to move freely over vertical or overhanging surfaces as if they were flat ground, crossing any solid surface strong enough to bear five kilos of weight. They can also move over liquids at their full movement rate. This movement ability lasts as long as the Effort is committed.",
 	    "Pressure Field":"As an Instant action, the adept can manifest a protective force skin around their person equivalent to a vacc suit, maintaining pressure and temperature even in hard vacuum conditions. They can ignore temperatures at a range of plus or minus 100 degrees Celsius and automatically pressurize thin atmospheres for breathability, or filter particulates or airborne toxins. By Committing Effort for the scene, they can shield up to six comrades. This lasts until the user reclaims the Effort.",
-	    "Telekinetic Armory":"The adept may Commit Effort as an On Turn action to create both weapons and armor out of telekinetic force. These weapons are treated as tech level 4 and act as a rifle or any advanced melee weapon. Attack rolls can use either Dexterity, Wisdom, or Constitution modifiers, and may use the Telekinesis skill as the combat skill.<br><br>    Armor may be created as part of this power, granting the psychic a base Armor Class equal to 15 plus their Telekinesis skill level. This armor does not stack with conventional armor, but Dexterity or shields modify it as usual. The gear continues to exist as long as the psychic chooses to leave the Effort committed, and they may be invisible or visible at the psychic’s discretion."}
+	    "Telekinetic Armory":"The adept may Commit Effort as an On Turn action to create both weapons and armor out of telekinetic force. These weapons are treated as tech level 4 and act as a rifle or any advanced melee weapon. Attack rolls can use either Dexterity, Wisdom, or Constitution modifiers, and may use the Telekinesis skill as the combat skill.<br><br>    Armor may be created as part of this power, granting the psychic a base Armor Class equal to 15 plus their Telekinesis skill level. This armor does not stack with conventional armor, but Dexterity or shields modify it as usual. The gear continues to exist as long as the psychic chooses to leave the Effort committed, and they may be invisible or visible at the psychic’s discretion."},
+	"level1abbreviated":{
+	    "Kinetic Transversal":"Commit Effort as an On Turn action to move freely over vertical or overhanging surfaces that can bear 5kg as if they flat ground or over liquids.",
+	    "Pressure Field":"Commit Effort as an Instant action to manifest a protective force skin around their person equivalent to a vacc suit. You can also ignore temperatures at a range of plus or minus 100 degrees Celsius and can breathe thin atmospheres, or those with airborne toxins. Commit Effort for the scene, to can shield up to six comrades.",
+	    "Telekinetic Armory":"Commit Effort as an On Turn action to create weapons and armor out of telekinetic force. These weapons are treated as a TL4 and act as a rifle or advanced melee weapon. Attack rolls can use either Dexterity, Wisdom, or Constitution modifiers, and you may use Telekinesis as the combat skill. Armor may be created by this power grants an AC of 15+Telekinesis skill, and can be boosted by Dexterity and shield modifiers. Armor and weapons can be (in)visible at your discretion."}
     },
     "telepathy":{
 	"name":"Telepathy",
@@ -57,11 +89,18 @@
 	    "name":"Telepathic Contact",
 	    "description":"The telepath can obtain a progressively-deeper understanding of a sentient target’s thoughts. The target must be visible or otherwise perceptible to the telepath’s unaided senses. Opening a contact requires the telepath to Commit Effort for the day as a Main Action, and the contact lasts for a scene at most unless augmented by other techniques.<br><br>    The depth of contact that can be made depends on the psychic’s Telepathy skill. A single contact can use any or all of the effects permitted to a telepath of the user’s skill level. Basic forms of contact do not allow for a saving throw, though more advanced probes allow the target to make a Mental saving throw to resist. On a successful save, no form of this technique that allows a save can be used on them for the rest of the scene.",
 	    "level0":"Observe emotional states in a target. Intense emotions provide a single word or image related to the focus of the feelings.",
-	    "level1":"A shallow gestalt with the target’s language centers allows the telepath to understand any form of communication made by the target. If the psychic has the requisite body parts to speak the target’s language, they can communicate with it in turn."
+	    "level1":"A shallow gestalt with the target’s language centers allows the telepath to understand any form of communication made by the target. If the psychic has the requisite body parts to speak the target’s language, they can communicate with it in turn.",
+	    "descriptionabbreviated":"Commit Effort for the day as a Main Action to establish contact with a target for the rest of the scene. Basic forms of contact cannot be resisted, but more advanced probes allow the target to make a Mental saving throw to resist; if successful, no form of this technique can be used on them for this scene.",
+	    "level0abbreviated":"You observe emotional states in a target, providing a single word or image related to their feelings",
+	    "level1abbreviated":"You understand any form of communication made by the target, and can communicate in turn if you possess the required anatomy."
 	},
 	"level1":{
 	    "Facile Mind":"The telepath is practiced at opening a Telepathic Contact, and need only Commit Effort for the scene to do so, instead of Committing Effort for the day. If contacting an ally who has practiced the process with the psychic for at least a week, opening the contact normally requires no Effort at all. In both cases, if the telepath chooses to Commit Effort for the day, they can open a Telepathic Contact as an Instant action rather than a Main Action.",
 	    "Transmit Thought":"The telepath can send thoughts and images over a Telepathic Contact, allowing two-way communication with a willing target as an Instant action when desired."
+	},
+	"level1abbreviated":{
+	    "Facile Mind":"You only need to Commit Effort for the scene to establish Telepathic Contact, rather than for the day. If contacting an ally who has practiced the process with the psychic for at least a week, opening the contact normally requires no Effort at all. If the telepath chooses to Commit Effort for the day, they can open a Telepathic Contact as an Instant action rather than a Main Action.",
+	    "Transmit Thought":"You can establish 2-way Telepathic Contact, allowing for communication with a willing target, as an Instant action."
 	}
     },
     "teleportation":{
@@ -70,11 +109,18 @@
 	    "name":"Personal Apportation",
 	    "description":"The teleporter can translocate to another location they have either occupied before or can see with their unaided vision. Locations are fixed in reference to the nearest major gravity well. For example, it is not possible to teleport to the cockpit of a distant moving vehicle they once occupied, but they can teleport to another point on a planet’s surface even though the planet has since moved far through the stellar void.<br><br>    The core technique allows the teleporter to move himself and any mass he is able to carry with his own natural strength. Resisting targets cannot be carried along, and unresisting ones must be touched. A teleporter can leave any clothing, shackles, adhesions, or other matter behind when he teleports, but he cannot leave behind matter that has been inserted into his body, such as cybernetics or shrapnel. Matter cannot be partially left behind.<br><br>    A teleporter will instinctively abort any apportation that would leave him embedded in a solid object or in an environment of imminent physical harm. Any Committed Effort on such aborted jumps is wasted, as is any action spent triggering the power.<br><br>    The maximum range of Personal Apportation depends on the teleporter’s skill level. Teleporting with Personal Apportation counts as a Main Action and requires that the psychic Commit Effort for the scene.",
 	    "level0":"The psychic can teleport up to 10 meters.",
-	    "level1":"The psychic can teleport up to 100 meters."
+	    "level1":"The psychic can teleport up to 100 meters.",
+	    "descriptionabbreviated":"By commiting Effort for the scene as a Main action, you can teleport to a location you have visited before or can currently see. You can choose to leave equipment behind or bring any mass you can carry with your natural strength. You instinctively abort any jump into solid matter, but must still Commit Effort. ",
+	    "level0abbreviated":"You can teleport up to 10 meters.",
+	    "level1abbreviated":"YOu can teleport up to 100 meters."}
 	},
 	"level1":{
 	    "Proficient Apportation":"Personal Apportation now counts as a Move action, though it still can be performed only once per round. Apportations of 10 meters or less no longer require Effort to be Committed, though any augments to the technique must still be paid for normally.",
 	    "Spatial Awareness":"The psychic may Commit Effort as an On Turn action to gain an intuitive 360-degree awareness of their physical surroundings. The sense is roughly equivalent to sight out to 100 meters, though it cannot read text or distinguish colors. It is blocked by solid objects but is unimpeded by darkness, mist, blinding light, holograms, or optical illusions. The sense lasts as long as the Effort remains Committed to the technique."
-	}
+	},
+	"level1abbreviated":{
+	    "Proficient Apportation":"Personal Apportation now counts as a Move action, but can only be used once per round. Apportations of 10 meters or less no longer require Effort.",
+	    "Spatial Awareness":"You may Commit Effort as an On Turn action to gain an complete awareness of your surroundings, roughly equivalent to sight out to 100 meters. It is blocked by solid objects.The sense lasts as long as the Effort remains Committed."
+    
     }
 }
