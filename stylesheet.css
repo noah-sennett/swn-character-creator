@@ -16,6 +16,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+#class_description ul li{
+  margin: 5px 0;
+}
+
 html, body{
     height:100%;
     width:100%;
@@ -590,12 +594,12 @@ input[type=checkbox]{
 }
 
 div.ui-dialog {
-    position:fixed;} 
+    position:fixed;
+} 
 
 .ui-state-active {
-/*    color: #FFD5A4;*/
     background: #8D41A2;
-    /* background: #161128; */
+    border: 1px solid black;
 }
 
 .ui-widget{
@@ -603,11 +607,13 @@ div.ui-dialog {
 }
 
 .ui-widget-header .ui-state-active{
-       background: #8D41A2;
+    background: #8D41A2;
+    border: 1px solid black;
 }
 
 .ui-widget-content .ui-state-active, .ui-button.ui-state-active:hover, .ui-button:active{
     background: #8D41A2;
+    border: 1px solid black;
 }
 
 
@@ -632,6 +638,10 @@ li#biopsionics_tab, li#metapsionics_tab, li#precognition_tab, li#telekinesis_tab
 
 .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
     padding: 0.5em 0em;
+}
+
+.ui-visual-focus{
+    box-shadow: 0 0 3px 1px #F4E2FC;
 }
 
 .adventurerOption{
