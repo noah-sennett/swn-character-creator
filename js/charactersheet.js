@@ -1726,6 +1726,8 @@ function displayClass() {
 	class_hp_bonus = 0;
 	elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	elemAttackBonus.innerHTML = "+0";
+
+	$('#tabs').tabs('option', 'active',0) ;
     }
     else{
 	var elemClassName = document.createElement("h2")
@@ -1784,6 +1786,9 @@ function displayClass() {
 	    class_hp_bonus = 0;
 	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	    elemAttackBonus.innerHTML = "+0";
+	    
+            $('#tabs').tabs('option', 'active',0);
+	    
 	}
 	else if(Class=="warrior"){
 	    class_skills=[];
@@ -1792,6 +1797,8 @@ function displayClass() {
 	    class_hp_bonus = 2;
 	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	    elemAttackBonus.innerHTML = "+1";
+
+	    if($('#tabs').tabs('option', 'active')==2) $('#tabs').tabs('option', 'active',1) ;
 	}
 	else if(Class=="expert"){
 	    class_skills=[];
@@ -1800,6 +1807,8 @@ function displayClass() {
 	    class_hp_bonus = 0;
 	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	    elemAttackBonus.innerHTML = "+0";
+
+	    if($('#tabs').tabs('option', 'active')==1) $('#tabs').tabs('option', 'active',2) ;
 	}
 	else if(Class=="war_exp"){
 	    class_skills=[];
@@ -1816,6 +1825,8 @@ function displayClass() {
 	    class_hp_bonus = 2;
 	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	    elemAttackBonus.innerHTML = "+1";
+
+	    if($('#tabs').tabs('option', 'active')==2) $('#tabs').tabs('option', 'active',1) ;
 	}
 	else if(Class=="exp_psy"){
 	    class_skills=["any psychic"];
@@ -1824,6 +1835,8 @@ function displayClass() {
 	    class_hp_bonus = 0;
 	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	    elemAttackBonus.innerHTML = "+0";
+
+	    if($('#tabs').tabs('option', 'active')==1) $('#tabs').tabs('option', 'active',2) ;
 	}
     }
     totalHP();
