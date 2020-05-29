@@ -6,27 +6,52 @@ $(document).ready(function () {
 
     $("button").click(function(){
 	fillOutSheet();
-	$("#character_sheet").show();
-        $("#character_sheet").printThis({
-            debug: false,             
-            importCSS: false,            
-            importStyle: false,         
-            printContainer: true,      
-	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-//	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-            pageTitle: "",             
-            removeInline: false,    
-            printDelay: 3000,      
-            header: null,        
-            footer: null,            
-            base: false ,              
-            formValues: true,          
-            canvas: false,              
-            doctypeString: "",      
-            removeScripts: false,       
-            copyTagClasses: false,
-	    afterPrint: function(){	$("#character_sheet").hide();}
-	});
+// 	$("#character_sheet").show();
+// 	$("#character_sheet_img2").hide();
+//         $("#character_sheet").printThis({
+//             debug: false,             
+//             importCSS: false,            
+//             importStyle: false,         
+//             printContainer: true,      
+// 	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+// //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
+//             pageTitle: "",             
+//             removeInline: false,    
+//             printDelay: 3000,      
+//             header: null,        
+//             footer: null,            
+//             base: false ,              
+//             formValues: true,          
+//             canvas: false,              
+//             doctypeString: "",      
+//             removeScripts: false,       
+//             copyTagClasses: false,
+// 	    afterPrint: function(){
+// 		$("#character_sheet_img").hide();
+// 		$("#character_sheet_img2").show();
+// 		fillOutSheet_page2();
+// 		$("#character_sheet").printThis({
+// 		    debug: false,             
+// 		    importCSS: false,            
+// 		    importStyle: false,         
+// 		    printContainer: true,      
+// 		    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+// 		    //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
+// 		    pageTitle: "",             
+// 		    removeInline: false,    
+// 		    printDelay: 3000,      
+// 		    header: null,        
+// 		    footer: null,            
+// 		    base: false ,              
+// 		    formValues: true,          
+// 		    canvas: false,              
+// 		    doctypeString: "",      
+// 		    removeScripts: false,       
+// 		    copyTagClasses: false,
+// 		    afterPrint: function(){$("#character_sheet").hide();}
+// 		});
+// 	    }
+// 	});
 
     });             
 
@@ -2769,31 +2794,31 @@ function fillOutSheet(){
     technique.innerHTML = technique_text;
 
     
-    positionElement(name,80,37);
-    positionElement(background,207,58);
-    positionElement(Class,207,128);
-    positionElement(subclass,164,146);
-    positionElement(level,198,177);
-    positionElement(homeworld,80,205);
-    positionElement(employer,80,226);
-    positionElement(species,80,247);
-    positionElement(hp, 654,43);
-    positionElement(strain, 652,128);
-    positionElement(physical, 549, 219);
-    positionElement(evasion, 593, 219);
-    positionElement(mental, 638, 219);
-    positionElement(strength, 726, 71);
-    positionElement(strength_mod, 748, 71);
-    positionElement(dexterity, 714, 99);
-    positionElement(dexterity_mod, 738, 99);
-    positionElement(constitution, 726, 127);
-    positionElement(constitution_mod, 748, 127);
-    positionElement(intelligence, 714, 156);
-    positionElement(intelligence_mod, 738, 156);
-    positionElement(wisdom, 726, 183);
-    positionElement(wisdom_mod, 748, 183);
-    positionElement(charisma, 714, 212);
-    positionElement(charisma_mod, 738, 212);
+    positionElement(name,105,17);
+    positionElement(background,345,56);
+    positionElement(Class,344,186);
+    positionElement(subclass,265,216);
+    positionElement(level,326,276);
+    positionElement(homeworld,105,327);
+    positionElement(employer,105,366);
+    positionElement(species,105,405);
+    positionElement(hp, 1168,28);
+    positionElement(strain, 1168,185);
+    positionElement(physical, 976, 354);
+    positionElement(evasion, 1056, 354);
+    positionElement(mental, 1138, 354);
+    positionElement(strength, 1305, 82);
+    positionElement(strength_mod, 1344, 82);
+    positionElement(dexterity, 1280, 134);
+    positionElement(dexterity_mod, 1319, 134);
+    positionElement(constitution, 1305, 185);
+    positionElement(constitution_mod, 1344, 185);
+    positionElement(intelligence, 1280, 237);
+    positionElement(intelligence_mod, 1319, 237);
+    positionElement(wisdom, 1305, 289);
+    positionElement(wisdom_mod, 1344, 289);
+    positionElement(charisma, 1280, 341);
+    positionElement(charisma_mod, 1319, 341);
     positionElement(effort, 764, 534);
     positionElement(BAB,344,190);
     positionElement(foci1, 280, 240,"font-size:8px;width:220px;");
@@ -2871,4 +2896,10 @@ function skillToAttackBonus(skillVal){
 function displayBonus(val){
     if (val <0) return "\u2212"+(-1*val);
     return "+"+val
+}
+
+function fillOutSheet_page2(){
+    $("#character_sheet p").remove();
+
+    
 }
