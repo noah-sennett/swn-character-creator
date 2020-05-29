@@ -595,6 +595,7 @@ function displayBackground(background) {
 	elemBackgroundDescription.appendChild(elemQuickSkills);
 	
     }
+    showGrowthButtons();
 }
 
 function populateLearning(background){
