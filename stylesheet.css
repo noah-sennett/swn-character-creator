@@ -718,9 +718,10 @@ h2{
 
 
 .fixedButton {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
+    font-size: 1.2em;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
 }
 
 @media print {

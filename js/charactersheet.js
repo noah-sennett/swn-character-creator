@@ -945,6 +945,7 @@ function updateSkillBoxes(boxID){
 	}
     }
     updateSkillTotal(skill);
+    computeEffort();
     
 }
 
@@ -2167,6 +2168,8 @@ function restrictFociPsychic(){
 	
     }
 
+    $("#elemFoci").selectmenu("refresh");
+    
     // if((fociOption.value!="psychic_training") || (nonCombatFociOption.value!="psychic_training")){
     // 	elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
     // }
@@ -2216,6 +2219,8 @@ function restrictFociNonPsychic(){
 	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
 	}
     }
+
+    $("#elemFoci").selectmenu("refresh");
     
     // elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")].disabled="true";
     // if((fociOption.value!="wild_psychic_talent") || (nonCombatFociOption.value!="wild_psychic_talent")){
@@ -2267,8 +2272,21 @@ function computeEffort(){
     var elemClass = document.getElementById("class");
 
     var maxEffort = 0;
+    var maxPsychicSkill=0;
+    
+    for (var discipline of psionic_disciplines){
+	if($("#"+discipline+"_total").html()!=""){
+	    maxPsychicSkill= Math.max(maxPsychicSkill,parseInt($("#"+discipline+"_total").html()));
+	}
+    }
 
-    if(elemClass.value.includes("psy")) maxEffort = Math.max(1,1 + foci_effort_bonus + computeMod(Math.max(parseInt(elemCon.innerHTML),parseInt(elemWis.innerHTML))));
+    if(elemClass.value.includes("psy")){
+	maxEffort = Math.max(1,1 + maxPsychicSkill + foci_effort_bonus + computeMod(Math.max(parseInt(elemCon.innerHTML),parseInt(elemWis.innerHTML))));
+    }
+    else if(picked_foci.includes("wild_psychic_talent")){
+	maxEffort = 1;
+    }
+	    
     
     elemEffort.innerHTML = maxEffort;
 }
