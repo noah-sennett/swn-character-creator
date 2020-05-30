@@ -5,28 +5,53 @@ $(document).ready(function () {
 
 
     $("button").click(function(){
-	fillOutSheet();
-	$("#character_sheet").show();
-        $("#character_sheet").printThis({
-            debug: false,             
-            importCSS: false,            
-            importStyle: false,         
-            printContainer: true,      
-	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-//	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-            pageTitle: "",             
-            removeInline: false,    
-            printDelay: 3000,      
-            header: null,        
-            footer: null,            
-            base: false ,              
-            formValues: true,          
-            canvas: false,              
-            doctypeString: "",      
-            removeScripts: false,       
-            copyTagClasses: false,
-	    afterPrint: function(){	$("#character_sheet").hide();}
-	});
+	fillOutSheetPage1();
+// 	$("#character_sheet").show();
+// 	$("#character_sheet_img2").hide();
+//         $("#character_sheet").printThis({
+//             debug: false,             
+//             importCSS: false,            
+//             importStyle: false,         
+//             printContainer: true,      
+// 	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+// //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
+//             pageTitle: "",             
+//             removeInline: false,    
+//             printDelay: 3000,      
+//             header: null,        
+//             footer: null,            
+//             base: false ,              
+//             formValues: true,          
+//             canvas: false,              
+//             doctypeString: "",      
+//             removeScripts: false,       
+//             copyTagClasses: false,
+// 	    afterPrint: function(){
+// 		$("#character_sheet_img").hide();
+// 		$("#character_sheet_img2").show();
+// 		fillOutSheetPage2();
+// 		$("#character_sheet").printThis({
+// 		    debug: false,             
+// 		    importCSS: false,            
+// 		    importStyle: false,         
+// 		    printContainer: true,      
+// 		    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+// 		    //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
+// 		    pageTitle: "",             
+// 		    removeInline: false,    
+// 		    printDelay: 3000,      
+// 		    header: null,        
+// 		    footer: null,            
+// 		    base: false ,              
+// 		    formValues: true,          
+// 		    canvas: false,              
+// 		    doctypeString: "",      
+// 		    removeScripts: false,       
+// 		    copyTagClasses: false,
+// 		    afterPrint: function(){$("#character_sheet").hide();}
+// 		});
+// 	    }
+// 	});
 
     });             
 
@@ -202,7 +227,7 @@ $(document).ready(function () {
     $("#class_mirror").selectmenu({width:174});
     $("#14attrList").selectmenu({width:120});
     $("select[id*='_select']").selectmenu({width:50});
-    $("select[id*='foci']").selectmenu({width:200}).selectmenu("menuWidget").addClass("overflow");
+//    $("select[id*='foci']").selectmenu({width:200}).selectmenu("menuWidget").addClass("overflow");
     
     $("select[id*='mirror']").on("selectmenuchange",function(){
 	updateFromMirrors(this.id);
@@ -219,10 +244,10 @@ $(document).ready(function () {
 	$("select[id*='_select']").selectmenu("refresh");
     });
 
-    $("select[id*='foci']").on("selectmenuchange",function(){
-	tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills();
-	$("select[id*='foci']").selectmenu("refresh");
-    });
+    // $("select[id*='foci']").on("selectmenuchange",function(){
+    // 	tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills();
+    // 	$("select[id*='foci']").selectmenu("refresh");
+    // });
 
     $("#growth_button").on("click",function(){
 	if ($("#growth_button").attr("class")=="topLayer") rollGrowth();
@@ -595,6 +620,7 @@ function displayBackground(background) {
 	elemBackgroundDescription.appendChild(elemQuickSkills);
 	
     }
+    showGrowthButtons();
 }
 
 function populateLearning(background){
@@ -945,6 +971,7 @@ function updateSkillBoxes(boxID){
 	}
     }
     updateSkillTotal(skill);
+    computeEffort();
     
 }
 
@@ -1724,6 +1751,8 @@ function displayClass() {
 	class_hp_bonus = 0;
 	elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	elemAttackBonus.innerHTML = "+0";
+
+	$('#tabs').tabs('option', 'active',0) ;
     }
     else{
 	var elemClassName = document.createElement("h2")
@@ -1782,6 +1811,9 @@ function displayClass() {
 	    class_hp_bonus = 0;
 	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	    elemAttackBonus.innerHTML = "+0";
+	    
+            $('#tabs').tabs('option', 'active',0);
+	    
 	}
 	else if(Class=="warrior"){
 	    class_skills=[];
@@ -1790,6 +1822,8 @@ function displayClass() {
 	    class_hp_bonus = 2;
 	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	    elemAttackBonus.innerHTML = "+1";
+
+	    if($('#tabs').tabs('option', 'active')==2) $('#tabs').tabs('option', 'active',1) ;
 	}
 	else if(Class=="expert"){
 	    class_skills=[];
@@ -1798,6 +1832,8 @@ function displayClass() {
 	    class_hp_bonus = 0;
 	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	    elemAttackBonus.innerHTML = "+0";
+
+	    if($('#tabs').tabs('option', 'active')==1) $('#tabs').tabs('option', 'active',2) ;
 	}
 	else if(Class=="war_exp"){
 	    class_skills=[];
@@ -1814,6 +1850,8 @@ function displayClass() {
 	    class_hp_bonus = 2;
 	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	    elemAttackBonus.innerHTML = "+1";
+
+	    if($('#tabs').tabs('option', 'active')==2) $('#tabs').tabs('option', 'active',1) ;
 	}
 	else if(Class=="exp_psy"){
 	    class_skills=["any psychic"];
@@ -1822,6 +1860,8 @@ function displayClass() {
 	    class_hp_bonus = 0;
 	    elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	    elemAttackBonus.innerHTML = "+0";
+
+	    if($('#tabs').tabs('option', 'active')==1) $('#tabs').tabs('option', 'active',2) ;
 	}
     }
     totalHP();
@@ -2153,20 +2193,38 @@ function restrictFociPsychic(){
     var combatFociOption = elemCombatFoci.options[elemCombatFoci.selectedIndex];
     var nonCombatFociOption = elemNonCombatFoci.options[elemNonCombatFoci.selectedIndex];
     
-    if((combatFociOption.value!="psychic_training") || (nonCombatFociOption.value!="psychic_training")){
-	elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
-    }
-    elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("wild_psychic_talent")].disabled="true";
-
+//    $("#elemFoci").selectmenu("destroy");
+    
+    elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
+    
+    elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("wild_psychic_talent")].disabled="disabled";
+    
     if(elemFoci.selectedIndex == optionsToValueArray(elemFoci.options).indexOf("wild_psychic_talent")){
 	elemFoci.selectedIndex = 0;
-
+	displayFoci("");
+	
 	while(foci_skills.indexOf("any psychic") > -1){
 	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
 	}
-	
     }
 
+//    $("#elemFoci").selectmenu("refresh");
+//    $("#elemFoci").selectmenu();
+
+    // if((combatFociOption.value!="psychic_training") || (nonCombatFociOption.value!="psychic_training")){
+    // 	elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
+    // }
+    // elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("wild_psychic_talent")].disabled="true";
+
+    // if(elemFoci.selectedIndex == optionsToValueArray(elemFoci.options).indexOf("wild_psychic_talent")){
+    // 	elemFoci.selectedIndex = 0;
+
+    // 	while(foci_skills.indexOf("any psychic") > -1){
+    // 	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
+    // 	}
+	
+    // }
+    
     // if((fociOption.value!="psychic_training") || (nonCombatFociOption.value!="psychic_training")){
     // 	elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
     // }
@@ -2205,17 +2263,23 @@ function restrictFociNonPsychic(){
     var combatFociOption = elemCombatFoci.options[elemCombatFoci.selectedIndex];
     var nonCombatFociOption = elemNonCombatFoci.options[elemNonCombatFoci.selectedIndex];
 
-    elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("psychic_training")].disabled="true";
-    if((combatFociOption.value!="wild_psychic_talent") || (nonCombatFociOption.value!="wild_psychic_talent")){
-	elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
-    }
+    //$("#elemFoci").selectmenu("destroy");
+    
+    elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("psychic_training")].disabled="disabled";
 
+    elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
+        
     if(elemFoci.selectedIndex == optionsToValueArray(elemFoci.options).indexOf("psychic_training")){
 	elemFoci.selectedIndex = 0;
+	displayFoci("");
+	
 	while(foci_skills.indexOf("any psychic") > -1){
 	    foci_skills.splice(foci_skills.indexOf("any psychic"),1);
 	}
     }
+
+//    $("#elemFoci").selectmenu("refresh");
+//    $("#elemFoci").selectmenu();
     
     // elemCombatFoci.options[optionsToValueArray(elemCombatFoci.options).indexOf("psychic_training")].disabled="true";
     // if((fociOption.value!="wild_psychic_talent") || (nonCombatFociOption.value!="wild_psychic_talent")){
@@ -2248,6 +2312,8 @@ function unrestrictFoci(){
     var elemFoci = document.getElementById('foci');
     var elemCombatFoci = document.getElementById('combat_foci');
     var elemNonCombatFoci = document.getElementById('noncombat_foci');
+
+    //    $("#elemFoci").selectmenu("destroy");
     
     elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
     elemFoci.options[optionsToValueArray(elemFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
@@ -2258,6 +2324,8 @@ function unrestrictFoci(){
     // elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("psychic_training")].removeAttribute("disabled");
     // elemNonCombatFoci.options[optionsToValueArray(elemNonCombatFoci.options).indexOf("wild_psychic_talent")].removeAttribute("disabled");
 
+//    $("#elemFoci").selectmenu();
+
 }
 
 function computeEffort(){
@@ -2267,15 +2335,29 @@ function computeEffort(){
     var elemClass = document.getElementById("class");
 
     var maxEffort = 0;
+    var maxPsychicSkill=0;
+    
+    for (var discipline of psionic_disciplines){
+	if($("#"+discipline+"_total").html()!=""){
+	    maxPsychicSkill= Math.max(maxPsychicSkill,parseInt($("#"+discipline+"_total").html()));
+	}
+    }
 
-    if(elemClass.value.includes("psy")) maxEffort = Math.max(1,1 + foci_effort_bonus + computeMod(Math.max(parseInt(elemCon.innerHTML),parseInt(elemWis.innerHTML))));
+    if(elemClass.value.includes("psy")){
+	maxEffort = Math.max(1,1 + maxPsychicSkill + foci_effort_bonus + computeMod(Math.max(parseInt(elemCon.innerHTML),parseInt(elemWis.innerHTML))));
+    }
+    else if(picked_foci.includes("wild_psychic_talent")){
+	maxEffort = 1;
+    }
+	    
     
     elemEffort.innerHTML = maxEffort;
 }
 
-function fillOutSheet(){
+function fillOutSheetPage1(){
     var elem = document.getElementById("character_sheet");  
     $("#character_sheet p").remove();
+    $("#character_sheet #form_portrait").remove();
     
     
     var name = document.createElement("p");
@@ -2351,16 +2433,21 @@ function fillOutSheet(){
     var credits =  document.createElement("p");
     var technique = document.createElement("p");
 
+    var portrait = document.createElement("img");
+
+
     var skillElements = [administer, connect, exert, fix, heal, know, lead, notice, perform, pilot, program, punch, shoot, sneak, stab, survive, talk, trade, work, biopsionics, metapsionics, precognition, telekinesis, telepathy, teleportation];
     
     var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC,credits, technique].concat(skillElements);
     
     for (var element of formElements){
 	element.setAttribute("class","formText");
-	element.innerHTML = "test";
+	element.setAttribute("id","form_element_"+formElements.indexOf(element));
 	elem.appendChild(element);
     }
 
+    elem.appendChild(portrait);
+    
     name.innerHTML = $("#name").val();
     background.innerHTML = $("#backgrounds_mirror option:selected").text();
 
@@ -2419,8 +2506,8 @@ function fillOutSheet(){
 	    fociElems[i].innerHTML = "";
 	    fociLevelElems[i].innerHTML = "";
 	}
-    }
-
+    }  
+    
     var skillKeys = Object.keys(skills);
     
     var zippedSkills = skillElements.map(function(e, i) {
@@ -2653,27 +2740,25 @@ function fillOutSheet(){
 	break;
     default:
     	weapon1_name.innerHTML = "";
-	weapon2_name.innerHTML = "";
+    	weapon2_name.innerHTML = "";
 
-	weapon1_damage.innerHTML = "";
-	weapon1_bonus.innerHTML = "";
-	weapon1_shock.innerHTML = "";
+    	weapon1_damage.innerHTML = "";
+    	weapon1_bonus.innerHTML = "";
+    	weapon1_shock.innerHTML = "";
     	weapon2_damage.innerHTML = "";
-	weapon2_bonus.innerHTML = "";
-	weapon2_shock.innerHTML = "";
+    	weapon2_bonus.innerHTML = "";
+    	weapon2_shock.innerHTML = "";
 
-	armor1_name.innerHTML = "";
-	armor2_name.innerHTML = "";
+    	armor1_name.innerHTML = "";
+    	armor2_name.innerHTML = "";
 	
-	armor1_AC.innerHTML = "";
-	armor2_AC.innerHTML = "";
+    	armor1_AC.innerHTML = "";
+    	armor2_AC.innerHTML = "";
 
-	credits.innerHTML = "";
-	break;
+    	credits.innerHTML = "";
+    	break;
     }
 
-
-//    var technique_texts = [];
 
     var technique_text = "";
     
@@ -2697,113 +2782,429 @@ function fillOutSheet(){
     }
 
 
-    
-    // for (var i = 0;i < 3; i++){
-    // 	if(i<technique_texts.length){
-    // 	    techniqueElems[i].innerHTML = technique_texts[i];
-    // 	}
-    // 	else{
-    // 	    techniqueElems[i].innerHTML = "";
-    // 	}
-    // }
-
-    // for (var i = 0;i < technique_texts.length; i++){
-    // 	technique_text = technique_text+technique_texts[i];
-    // }
     technique.innerHTML = technique_text;
 
+    portrait.setAttribute("id","form_portrait");
+    portrait.src = $("#portrait_holder").attr("src");
+    portrait.setAttribute("style","max-height:253px; max-width:236px; height:auto; width:auto;left:5px;top:82px;position:absolute;");
+    centerPortrait(portrait);
     
-    positionElement(name,80,37);
-    positionElement(background,207,58);
-    positionElement(Class,207,128);
-    positionElement(subclass,164,146);
-    positionElement(level,198,177);
-    positionElement(homeworld,80,205);
-    positionElement(employer,80,226);
-    positionElement(species,80,247);
-    positionElement(hp, 654,43);
-    positionElement(strain, 652,128);
-    positionElement(physical, 549, 219);
-    positionElement(evasion, 593, 219);
-    positionElement(mental, 638, 219);
-    positionElement(strength, 726, 71);
-    positionElement(strength_mod, 748, 71);
-    positionElement(dexterity, 714, 99);
-    positionElement(dexterity_mod, 738, 99);
-    positionElement(constitution, 726, 127);
-    positionElement(constitution_mod, 748, 127);
-    positionElement(intelligence, 714, 156);
-    positionElement(intelligence_mod, 738, 156);
-    positionElement(wisdom, 726, 183);
-    positionElement(wisdom_mod, 748, 183);
-    positionElement(charisma, 714, 212);
-    positionElement(charisma_mod, 738, 212);
-    positionElement(effort, 764, 534);
-    positionElement(BAB,344,190);
-    positionElement(foci1, 280, 240,"font-size:8px;width:220px;");
-    positionElement(foci1_level, 510, 246);
-    positionElement(foci2, 280, 275,"font-size:8px;width:220px;");
-    positionElement(foci2_level, 510, 281);
-    positionElement(foci3, 280, 310,"font-size:8px;width:220px;");
-    positionElement(foci3_level, 510, 316);
+    positionElement(name,105,17);
+    positionElement(background,345,56);
+    positionElement(Class,344,186);
+    positionElement(subclass,265,216);
+    positionElement(level,326,276);
+    positionElement(homeworld,105,327);
+    positionElement(employer,105,366);
+    positionElement(species,105,405);
+    positionElement(hp, 1168,28);
+    positionElement(strain, 1168,185);
+    positionElement(physical, 976, 354);
+    positionElement(evasion, 1056, 354);
+    positionElement(mental, 1138, 354);
+    positionElement(strength, 1305, 82);
+    positionElement(strength_mod, 1344, 82);
+    positionElement(dexterity, 1280, 134);
+    positionElement(dexterity_mod, 1319, 134);
+    positionElement(constitution, 1305, 185);
+    positionElement(constitution_mod, 1344, 185);
+    positionElement(intelligence, 1280, 237);
+    positionElement(intelligence_mod, 1319, 237);
+    positionElement(wisdom, 1305, 289);
+    positionElement(wisdom_mod, 1344, 289);
+    positionElement(charisma, 1280, 341);
+    positionElement(charisma_mod, 1319, 341);
+    positionElement(effort, 1370, 936);
+    positionElement(BAB,595,302);
+    positionElement(foci1, 482, 396,"font-size:18px;width:405px;");
+    positionElement(foci1_level, 903, 407);
+    positionElement(foci2, 482, 461,"font-size:18px;width:405px;");
+    positionElement(foci2_level, 903, 472);
+    positionElement(foci3, 482, 526,"font-size:18px;width:405px;");
+    positionElement(foci3_level, 903, 537);
 
+    for (var fociElem of fociElems){
+	shrinkText(fociElem, 55, formElements);
+    }
+    
 
-    positionElement(administer, 343, 37);
-    positionElement(connect, 343, 51);
-    positionElement(exert, 343, 65);
-    positionElement(fix, 343, 79);
-    positionElement(heal, 343, 93);
-    positionElement(know, 343, 107);
-    positionElement(lead, 343, 121);
-    positionElement(notice, 343, 135);
-    positionElement(perform, 343, 149);
+    positionElement(administer, 598, 17);
+    positionElement(connect, 598, 42);
+    positionElement(exert, 598, 68);
+    positionElement(fix, 598, 94);
+    positionElement(heal, 598, 120);
+    positionElement(know, 598, 146);
+    positionElement(lead, 598, 172);
+    positionElement(notice, 598, 198);
+    positionElement(perform, 598, 224);
 
-    positionElement(pilot, 427, 37);
-    positionElement(program, 427, 51);
-    positionElement(punch, 427, 65);
-    positionElement(shoot, 427, 79);
-    positionElement(sneak, 427, 93);
-    positionElement(stab, 427, 107);
-    positionElement(survive, 427, 121);
-    positionElement(talk, 427, 135);
-    positionElement(trade, 427, 149);
+    positionElement(pilot, 754, 17);
+    positionElement(program, 754, 42);
+    positionElement(punch, 754, 68);
+    positionElement(shoot, 754, 94);
+    positionElement(sneak, 754, 120);
+    positionElement(stab, 754, 146);
+    positionElement(survive, 754, 172);
+    positionElement(talk, 754, 198);
+    positionElement(trade, 754, 224);
 
-    positionElement(work, 511, 37);
-    positionElement(biopsionics, 511, 51);
-    positionElement(metapsionics, 511, 65);
-    positionElement(precognition, 511, 79);
-    positionElement(telekinesis, 511, 93);
-    positionElement(telepathy, 511, 107);
-    positionElement(teleportation, 511, 121);
+    positionElement(work, 910, 17);
+    positionElement(biopsionics, 910, 42);
+    positionElement(metapsionics, 910, 68);
+    positionElement(precognition, 910, 94);
+    positionElement(telekinesis, 910, 120);
+    positionElement(telepathy, 910, 146);
+    positionElement(teleportation, 910, 172);
 
-    positionElement(weapon1_name, 65, 290);
-    positionElement(weapon2_name, 65, 326);
+    for (var elem of skillElements){
+	centerElement(elem, formElements);
+    }
+    
+    positionElement(weapon1_name, 80, 485);
+    positionElement(weapon2_name, 80, 550);
 
-    positionElement(weapon1_bonus,205,296);
-    positionElement(weapon2_bonus,205,332);
+    positionElement(weapon1_bonus,350,495);
+    positionElement(weapon2_bonus,350,560);
+    centerElement(weapon1_bonus,formElements);
+    centerElement(weapon2_bonus,formElements);
 
-    positionElement(weapon1_damage,225,296);
-    positionElement(weapon2_damage,225,332);
+    positionElement(weapon1_damage,385, 495);
+    positionElement(weapon2_damage,385, 560);
 
-    positionElement(weapon1_shock,217,312,"font-size:8px;");
-    positionElement(weapon2_shock,217,348,"font-size:8px;");
+    positionElement(weapon1_shock,370,530,"font-size:14px;");
+    positionElement(weapon2_shock,370,595,"font-size:14px;");
 
-    positionElement(armor1_name, 65, 486);
-    positionElement(armor2_name, 65, 522);
+    positionElement(armor1_name, 80, 847);
+    positionElement(armor2_name, 80, 912);
 
-    positionElement(armor1_AC, 253, 492);
-    positionElement(armor2_AC, 253, 528);
+    positionElement(armor1_AC, 440, 858);
+    positionElement(armor2_AC, 440, 923);
+    centerElement(armor1_AC,formElements);
+    centerElement(armor2_AC,formElements);
 
-    positionElement(credits , 285, 562);
+    positionElement(credits , 490, 978);
 
-    positionElement(technique, 534, 355,"font-size:6px;width:240px;");
-    // positionElement(technique2, 534, 415,"font-size:6px;width:240px;");
-    // positionElement(technique3, 534, 475,"font-size:6px;width:240px;");
-
+    positionElement(technique, 944, 610,"font-size:17px;width:450px;");
+    shrinkText(technique,330,formElements);
+    
 }
+
+function fillOutSheetPage2(){
+    var elem = document.getElementById("character_sheet");  
+    $("#character_sheet p").remove();
+
+    var goals = document.createElement("p");
+    var notes = document.createElement("p");
+    var stowedEquipment1 = document.createElement("p");
+    var stowedEquipment2 = document.createElement("p");
+    var stowedEquipment3 = document.createElement("p");
+    var stowedEquipment4 = document.createElement("p");
+    var stowedEquipment5 = document.createElement("p");
+    var stowedEquipment6 = document.createElement("p");
+    var stowedEquipment7 = document.createElement("p");
+    var stowedEquipment8 = document.createElement("p");
+    var stowedEquipment9 = document.createElement("p");
+    var stowedEquipment10 = document.createElement("p");
+    var stowedEquipment11 = document.createElement("p");
+    var stowedEquipment12 = document.createElement("p");
+    var stowedEquipment13 = document.createElement("p");
+    var stowedEquipment14 = document.createElement("p");
+    var stowedEquipment15 = document.createElement("p");
+    var stowedEquipment16 = document.createElement("p");
+    var stowedEquipment17 = document.createElement("p");
+    var stowedEquipment18 = document.createElement("p");
+    var encumberance1 = document.createElement("p");
+    var encumberance2 = document.createElement("p");
+    var encumberance3 = document.createElement("p");
+    var encumberance4 = document.createElement("p");
+    var encumberance5 = document.createElement("p");
+    var encumberance6 = document.createElement("p");
+    var encumberance7 = document.createElement("p");
+    var encumberance8 = document.createElement("p");
+    var encumberance9 = document.createElement("p");
+    var encumberance10 = document.createElement("p");
+    var encumberance11 = document.createElement("p");
+    var encumberance12 = document.createElement("p");
+    var encumberance13 = document.createElement("p");
+    var encumberance14 = document.createElement("p");
+    var encumberance15 = document.createElement("p");
+    var encumberance16 = document.createElement("p");
+    var encumberance17 = document.createElement("p");
+    var encumberance18 = document.createElement("p");
+    var otherEquipment1 = document.createElement("p");
+    var otherEquipment2 = document.createElement("p");
+    var otherEquipment3 = document.createElement("p");
+    var otherEquipment4 = document.createElement("p");
+    var otherEquipment5 = document.createElement("p");
+
+    var encumberanceElements = [encumberance1, encumberance2, encumberance3, encumberance4, encumberance5, encumberance6, encumberance7, encumberance8, encumberance9, encumberance10, encumberance11, encumberance12, encumberance13, encumberance14, encumberance15, encumberance16, encumberance17, encumberance18];
+    var formElements = [goals, notes, stowedEquipment1, stowedEquipment2, stowedEquipment3, stowedEquipment4, stowedEquipment5, stowedEquipment6, stowedEquipment7, stowedEquipment8, stowedEquipment9, stowedEquipment10, stowedEquipment11, stowedEquipment12, stowedEquipment13, stowedEquipment14, stowedEquipment15, stowedEquipment16, stowedEquipment17, stowedEquipment18, otherEquipment1, otherEquipment1, otherEquipment2, otherEquipment3, otherEquipment4, otherEquipment5].concat(encumberanceElements);
+
+
+    for (var element of formElements){
+	element.setAttribute("class","formText");
+	element.setAttribute("id","form_element_"+formElements.indexOf(element));
+	elem.appendChild(element);
+    }
+
+
+    goals.innerHTML = $("#goals").val();
+    notes.innerHTML = $("#notes").val();
+    
+    switch($("#equipment_packages").val()){
+    case "barbarian":
+    	stowedEquipment1.innerHTML = "Spear";
+	stowedEquipment2.innerHTML = "Primitive hide armor";
+	stowedEquipment3.innerHTML = "Primitive shield";
+	stowedEquipment4.innerHTML = "Knife";
+	stowedEquipment5.innerHTML = "Backpack (TL0)";
+	stowedEquipment6.innerHTML = "7 days rations";
+	stowedEquipment7.innerHTML = "20m rope";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "1";
+	encumberance3.innerHTML = "2";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "1";
+	encumberance6.innerHTML = "3";
+	encumberance7.innerHTML = "2";
+	
+	break;
+    case "blade":
+	stowedEquipment1.innerHTML = "Monoblade sword";
+	stowedEquipment2.innerHTML = "Woven body armor";
+	stowedEquipment3.innerHTML = "Secure clothing";
+	stowedEquipment4.innerHTML = "Thermal knife";
+	stowedEquipment5.innerHTML = "Backpack (TL0)";
+	stowedEquipment6.innerHTML = "Lazarus patch";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "2";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "1";
+	encumberance6.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+	
+	break;
+    case "thief":
+	stowedEquipment1.innerHTML = "Laser pistol";
+	stowedEquipment2.innerHTML = "Armored undersuit";
+	stowedEquipment3.innerHTML = "Monoblade knife";
+	stowedEquipment4.innerHTML = "Climbing harness";
+	stowedEquipment5.innerHTML = "Low-light goggles";
+	stowedEquipment6.innerHTML = "2 type A cells";
+	stowedEquipment7.innerHTML = "Backpack (TL0)";
+	stowedEquipment8.innerHTML = "Metatool";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "0";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "1";
+	encumberance6.innerHTML = "1";
+	encumberance7.innerHTML = "1";
+	encumberance8.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+	break;
+    case "hacker":
+	stowedEquipment1.innerHTML = "Laser pistol";
+	stowedEquipment2.innerHTML = "Secure clothing";
+	stowedEquipment3.innerHTML = "Postech toolkit";
+	stowedEquipment4.innerHTML = "3 units of spare parts";
+	stowedEquipment5.innerHTML = "2 type A cells";
+	stowedEquipment6.innerHTML = "Dataslab";
+	stowedEquipment7.innerHTML = "Metatool";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "1";
+	encumberance3.innerHTML = "3";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "1";
+	encumberance6.innerHTML = "1";
+	encumberance7.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "2 line shunts";
+	break;
+    case "gunslinger":
+	stowedEquipment1.innerHTML = "Laser pistol";
+	stowedEquipment2.innerHTML = "Armored undersuit";
+	stowedEquipment3.innerHTML = "Monoblade knife";
+	stowedEquipment4.innerHTML = "8 type A cells";
+	stowedEquipment5.innerHTML = "Backpack (TL0)";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "0";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "3";
+	encumberance5.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+	break;
+    case "soldier":
+	stowedEquipment1.innerHTML = "Combat rifle";
+	stowedEquipment2.innerHTML = "Woven body armor";
+	stowedEquipment3.innerHTML = "Knife";
+	stowedEquipment4.innerHTML = "80 rounds ammo";
+	stowedEquipment5.innerHTML = "Backpack (TL0)";
+
+	encumberance1.innerHTML = "2";
+	encumberance2.innerHTML = "2";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "2";
+	encumberance5.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+
+	break;
+    case "scout":
+	stowedEquipment1.innerHTML = "Laser rifle";
+	stowedEquipment2.innerHTML = "Armored vacc suit";
+	stowedEquipment3.innerHTML = "Knife";
+	stowedEquipment4.innerHTML = "Survey scanner";
+	stowedEquipment5.innerHTML = "Binoculars (TL3)";
+	stowedEquipment6.innerHTML = "8 type A cells";
+	stowedEquipment7.innerHTML = "Backpack (TL0)";
+
+	encumberance1.innerHTML = "2";
+	encumberance2.innerHTML = "2";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "1";
+	encumberance6.innerHTML = "3";
+	encumberance7.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+	break;
+    case "medic":
+	stowedEquipment1.innerHTML = "Laser pistol";
+	stowedEquipment2.innerHTML = "Secure clothing";
+	stowedEquipment3.innerHTML = "4 Lazarus patches";
+	stowedEquipment4.innerHTML = "Backpack (TL0)";
+	stowedEquipment5.innerHTML = "Medkit";
+	stowedEquipment6.innerHTML = "Bioscanner";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "1";
+	encumberance3.innerHTML = "2";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "2";
+	encumberance6.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "2 doses of Lift";
+	otherEquipment2.innerHTML = "Compad";
+
+	break;
+    case "civilian":
+	stowedEquipment1.innerHTML = "Secure clothing";
+
+	encumberance1.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+	break;
+    case "technician":
+	stowedEquipment1.innerHTML = "Laser pistol";
+	stowedEquipment2.innerHTML = "Armored undersuit";
+	stowedEquipment3.innerHTML = "Monoblade knife";
+	stowedEquipment4.innerHTML = "Postech toolkit";
+	stowedEquipment5.innerHTML = "6 units of spare parts";
+	stowedEquipment6.innerHTML = "4 type A cells";
+	stowedEquipment7.innerHTML = "Backpack (TL0)";
+	stowedEquipment8.innerHTML = "Dataslab";
+	stowedEquipment9.innerHTML = "Metatool";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "0";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "3";
+	encumberance5.innerHTML = "2";
+	encumberance6.innerHTML = "2";
+	encumberance7.innerHTML = "1";
+	encumberance8.innerHTML = "1";
+	encumberance9.innerHTML = "1";
+
+
+	break;
+    case "custom":
+	break;
+    default:
+    	break;
+    }
+
+    positionElement(goals,944, 840, "font-size:18px;width:450px;");
+    shrinkText(goals, 200, formElements);
+
+    positionElement(notes,482, 10, "font-size:18px;width:450px;");
+    shrinkText(notes, 280, formElements);
+
+    positionElement(stowedEquipment1, 5, 5);
+    positionElement(stowedEquipment2, 5, 31);
+    positionElement(stowedEquipment3, 5, 57);
+    positionElement(stowedEquipment4, 5, 83);
+    positionElement(stowedEquipment5, 5, 109);
+    positionElement(stowedEquipment6, 5, 135);
+    positionElement(stowedEquipment7, 5, 161);
+    positionElement(stowedEquipment8, 5, 187);
+    positionElement(stowedEquipment9, 5, 213);
+    positionElement(stowedEquipment10, 5, 239);
+    positionElement(stowedEquipment11, 5, 265);
+    positionElement(stowedEquipment12, 5, 291);
+    positionElement(stowedEquipment13, 5, 317);
+    positionElement(stowedEquipment14, 5, 343);
+    positionElement(stowedEquipment15, 5, 369);
+    positionElement(stowedEquipment16, 5, 395);
+    positionElement(stowedEquipment17, 5, 421);
+    positionElement(stowedEquipment18, 5, 447);
+
+    positionElement(encumberance1, 446, 5);
+    positionElement(encumberance2, 446, 31);
+    positionElement(encumberance3, 446, 57);
+    positionElement(encumberance4, 446, 83);
+    positionElement(encumberance5, 446, 109);
+    positionElement(encumberance6, 446, 135);
+    positionElement(encumberance7, 446, 161);
+    positionElement(encumberance8, 446, 187);
+    positionElement(encumberance9, 446, 213);
+    positionElement(encumberance10, 446, 239);
+    positionElement(encumberance11, 446, 265);
+    positionElement(encumberance12, 446, 291);
+    positionElement(encumberance13, 446, 317);
+    positionElement(encumberance14, 446, 343);
+    positionElement(encumberance15, 446, 369);
+    positionElement(encumberance16, 446, 395);
+    positionElement(encumberance17, 446, 421);
+    positionElement(encumberance18, 446, 447);
+
+    for (var element of encumberanceElements){
+	centerElement(element, formElements);
+    }
+
+    positionElement(otherEquipment1, 5, 511);
+    positionElement(otherEquipment2, 5, 537);
+    positionElement(otherEquipment3, 5, 563);
+    positionElement(otherEquipment4, 5, 589);
+    positionElement(otherEquipment5, 5, 615);
+    
+}
+
 
 function positionElement(elem,left,top,existingstyle=""){
     elem.setAttribute("style",existingstyle+"left:"+left+"px;top:"+top+"px;");
+}
+
+function shrinkText(elem, maxHeight, formElements){
+    var currFontSize = parseInt((elem.style.fontSize).slice(0,-2));
+    var currTop = parseInt((elem.style.top).slice(0,-2));
+
+    while (($("#form_element_"+formElements.indexOf(elem)).height()>maxHeight)&& currFontSize>1){
+	currFontSize--;
+	currTop++;
+	elem.style.fontSize = currFontSize+"px";
+	elem.style.top = currTop+"px";
+    }
+    
 }
 
   
@@ -2815,4 +3216,13 @@ function skillToAttackBonus(skillVal){
 function displayBonus(val){
     if (val <0) return "\u2212"+(-1*val);
     return "+"+val
+}
+
+function centerElement(elem,formElements){
+    elem.style.left = (parseInt(elem.style.left.slice(0,-2))-($("#form_element_"+formElements.indexOf(elem)).width())/2)+"px";
+}
+
+function centerPortrait(portrait){
+    portrait.style.left = (parseInt(portrait.style.left.slice(0,-2))+(236-portrait.clientWidth)/2)+"px";
+    portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(253-portrait.clientHeight)/2)+"px";
 }

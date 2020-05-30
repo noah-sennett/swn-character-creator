@@ -286,7 +286,7 @@ body{
 
 .attrBlockWithSelects{
     display:grid;
-    grid-template-columns: 183px 40px;
+    grid-template-columns: 186px 40px;
     row-gap: 15px;
     column-gap: 10px;
     position: relative;
@@ -297,7 +297,7 @@ body{
 
 .attrBlock {
     display: grid;
-    grid-template-columns: 82px 37px 33px;
+    grid-template-columns: 82px 37px 36px;
     row-gap: 2px;
     column-gap: 10px;
     position: relative;
@@ -332,7 +332,8 @@ body{
 
 .val {
     font-weight: normal;
-    text-align:center;
+    text-align:right;
+    padding-right:3px;
 }
 
 .14attr{
@@ -713,14 +714,15 @@ h2{
 .formText{
     position:absolute;
     font-family: 'Source Sans Pro', sans-serif;
-    font-size:10px;
+    font-size:22px;
 }
 
 
 .fixedButton {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
+    font-size: 1.2em;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
 }
 
 @media print {

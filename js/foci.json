@@ -57,7 +57,7 @@
 	"skill":"connect",
 	"type":"noncombat",
 	"level1abbreviated":"Connect +1. If you've spent a week in a location, you can call on one favor per game day from web of contacts.",
-	"level2abbreviated":"Once per game session, you meet an aquaintance willing to do modest favors for you."
+	"level2abbreviated":"Once per game session, you meet an acquaintance willing to do modest favors for you."
     },
     "die_hard":{
 	"name":"Die Hard",
@@ -125,7 +125,9 @@
 	"level1":"You have an innate Armor Class of 15 plus half your character level, rounded up.",
 	"level2":"Your abilities are so effective that they render you immune to unarmed attacks or primitive weaponry as if you wore powered armor.",
 	"skill":"",
-	"type":"both"
+	"type":"both",
+	"level1abbreviated":"You have an innate Armor Class of 15 plus half your character level, rounded up.",
+	"level2abbrevited":"You are immune to unarmed attacks or primitive weaponry as if you wore powered armor."
     },
     "psychic_training":{
 	"name":"Psychic Training",
@@ -135,7 +137,7 @@
 	"skill":"any psychic",
 	"type":"both",
 	"level1abbreviated":"Any psychic +1. If this improves it to level-1 proficiency, gain a level-1 technique. Your maximum Effort increases by 1.",
-	"level2abbreviated":"When you advance a level, gain one skill point usuable only towards discipline you choose with the level 1 focus. These points are awarded retroactively, too."
+	"level2abbreviated":"When you advance a level, gain one skill point usable only towards discipline you choose with the level 1 focus. These points are awarded retroactively, too."
     },
     "savage_fray":{
 	"name":"Savage Fray",
@@ -165,7 +167,7 @@
 	"skill":"shoot",
 	"type":"combat",
 	"level1abbreviated":"Shoot +1. When making an Execution Attack or target shooting, roll 3d6 and drop the lowest die.",
-	"level2abbreviated":"Targets hit by your Execution Attack take -4 penaly on Physical saving throw to survive; even on success, they take double the normal damage."
+	"level2abbreviated":"Targets hit by your Execution Attack take -4 penalty on Physical saving throw to survive; even on success, they take double the normal damage."
     },
     "specialist":{
 	"name":"Specialist",
@@ -195,7 +197,7 @@
 	"level2":"Double your Pilot skill for all spike drill-related skill checks. Spike drives of ships you navigate are treated as one level higher; thus, a drive-1 is treated as a drive-2, up to a maximum of drive-7. Spike drills you personally oversee take only half the time they would otherwise require.",
 	"skill":"pilot",
 	"type":"noncombat",
-	"level1abbreviated":"Pilot +1. You automatically succedd spike drill-related skill checks of DC 10 or less.",
+	"level1abbreviated":"Pilot +1. You automatically succeed spike drill-related skill checks of DC 10 or less.",
 	"level2abbreviated":"Double your Pilot skill for spike drill-related skill checks. Spike drives of ships you navigate are treated as one level higher. Spike drills you oversee take half normal time."
     },
     "tinker":{
@@ -236,7 +238,7 @@
 	"skill":"survive",
 	"type":"noncombat",
 	"level1abbreviated":"Survive +1. You can convey basics ideas in all common languages and can always find free transport for you and a small group.",
-	"level2abbreviated":"You can forge or obtain travel papers for the party in 1d6 hours. They stand up to normal scrutiny, but require Int/Administer vs. Wis/Notice if examined by an official if PC is wanted by the state for some crime. Transportation you find for the party is at least as fast as a dedicated charter."
+	"level2abbreviated":"Forge/obtain travel papers for the party in 1d6 hours that stand up to normal scrutiny. If wanted criminals, make a Int/Administer vs. Wis/Notice to fool an official. Transportation found for the party is at least as fast as a dedicated charter."
     },
     "wild_psychic_talent":{
 	"name":"Wild Psychic Talent",
