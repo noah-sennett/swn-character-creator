@@ -2438,6 +2438,7 @@ function fillOutSheet(){
     
     for (var element of formElements){
 	element.setAttribute("class","formText");
+	element.setAttribute("id","form_element_"+formElements.indexOf(element));
 	element.innerHTML = "test";
 	elem.appendChild(element);
     }
@@ -2500,8 +2501,8 @@ function fillOutSheet(){
 	    fociElems[i].innerHTML = "";
 	    fociLevelElems[i].innerHTML = "";
 	}
-    }
-
+    }  
+    
     var skillKeys = Object.keys(skills);
     
     var zippedSkills = skillElements.map(function(e, i) {
@@ -2819,15 +2820,22 @@ function fillOutSheet(){
     positionElement(wisdom_mod, 1344, 289);
     positionElement(charisma, 1280, 341);
     positionElement(charisma_mod, 1319, 341);
-    positionElement(effort, 764, 534);
-    positionElement(BAB,344,190);
-    positionElement(foci1, 280, 240,"font-size:8px;width:220px;");
-    positionElement(foci1_level, 510, 246);
-    positionElement(foci2, 280, 275,"font-size:8px;width:220px;");
-    positionElement(foci2_level, 510, 281);
-    positionElement(foci3, 280, 310,"font-size:8px;width:220px;");
-    positionElement(foci3_level, 510, 316);
+    positionElement(effort, 1370, 936);
+    positionElement(BAB,595,302);
+    positionElement(foci1, 482, 402,"font-size:14px;width:405px;");
+    positionElement(foci1_level, 903, 407);
+    positionElement(foci2, 482, 467,"font-size:14px;width:405px;");
+    positionElement(foci2_level, 903, 472);
+    positionElement(foci3, 482, 532,"font-size:14px;width:405px;");
+    positionElement(foci3_level, 903, 537);
 
+    for (var fociElem of fociElems){
+	if($("#form_element_"+formElements.indexOf(fociElem)).height()>55){
+	    fociElem.style.fontSize = "12px";
+	    fociElem.style.top = (parseInt(fociElem.style.top.slice(0,-2))+5)+"px";
+	}
+    }
+    
 
     positionElement(administer, 343, 37);
     positionElement(connect, 343, 51);
