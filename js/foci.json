@@ -210,7 +210,7 @@
 	"level1abbreviated":"Fix +1. Double your Maintenance score. Ship and gear mods cost half their usual credit price.",
 	"level2abbreviated":"Your Fix skill is treated as one level higher for building and maintaining mods and calculation Maintenance score. Advanced mods require one fewer pretech salvage."
     },
-    "unarmed_combat":{
+    "unarmed_combatant":{
 	"name":"Unarmed Combatant",
 	"description":"Your empty hands are more dangerous than knives and guns in the grip of the less gifted. Your unarmed attacks are counted as melee weapons when it comes to binding up opponents wielding rifles and similar long arms, though you need at least one hand free to do so.",
 	"level1":"Gain Punch as a bonus skill. Your unarmed attacks become more dangerous as your Punch skill increases. At level-0, they do 1d6 damage. At level-1, they do 1d8 damage. At level-2 they do 1d10, level-3 does 1d12, and level-4 does 1d12+1. At Punch-1 or better, they have the Shock quality equal to your Punch skill against AC 15 or less. While you normally add your Punch skill level to any unarmed damage, don’t add it twice to this Shock damage.",

@@ -3,17 +3,12 @@
   <head>
     <title> Character Builder </title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Play&family=Source+Sans+Pro&display=swap" rel="stylesheet">
     
     
-    <!-- <link href="chrome.css" rel="stylesheet" type="text/css"> -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
-
     
-
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -71,169 +66,169 @@
 		<span id="attack_bonus" class="mod">+0</span>
 	      </div>
 	    </div>
-    
+	    
 
 	    <div class="attrBlockWithSelects">
-	    <div class="attrBlock">
-	      <div class="heading">Attribute  </div>
-	      <div class="heading">Score </div>
-	      <div class="heading">Mod </div>
-	      
-	      <div class="item attr tooltip"> <span class="tooltip">Strength
-		  <div class="tooltiptext attribute" style="width:435px;left:65px;"> Describes physical power, melee prowess, carrying capacity, etc.</div>
-		</span>
-	      </div>
-	      <div class="item val">  <span id="strength_attr"></span>
-		<!-- <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"> -->
-	      </div>
-	      <div class="item mod"><span id="strength_mod">+0 </span></div>
-
-	      <div class="item attr tooltip"> <span class="tooltip"> Dexterity
-		  <div class="tooltiptext attribute" style="width:325px;left:65px;"> Describes speed, evasiveness, coordination, etc.</div>
-		  </span>
-	      </div>
-	      <div class="item val">
-		<span id="dexterity_attr"></span>
-		<!-- <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"> -->
-	      </div>
-	      <div class="item mod"><span id="dexterity_mod">+0 </span></div>
-	      
-	      <div class="item attr tooltip"> <span class="tooltip"> Constitution
-		  <div class="tooltiptext attribute" style="width:325px;left:90px;">Describes hardiness, fortitude, survivability, etc. </div>
-		  </span>
-	      </div>
-	      <div class="item val">
-		<span id="constitution_attr"></span>
-		  <!-- <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"> -->
-	      </div>
-	      <div class="item mod"><span id="constitution_mod">+0 </span></div>
-	      	      
-	      <div class="item attr tooltip"> <span class="tooltip"> Intelligence
-		  <div class="tooltiptext attribute" style="width:350px;left:87px;">Describes memory, critical thinking, education, etc. </div>
-		  </span>
-		</div>
-	      <div class="item val">
-		<span id="intelligence_attr"></span>
-		<!-- <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"> -->
-	      </div>
-	      <div class="item mod"><span id="intelligence_mod">+0 </span></div>
-	      
-	      <div class="item attr tooltip"><span class="tooltip"> Wisdom
-		  <div class="tooltiptext attribute" style="width:325px;left:60px;">Describes perception, intuition, judgement, etc.</div>
-		  </span>
-	      </div>
-	      <div class="item val">
-		<span id="wisdom_attr"></span>
-		<!-- <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"> -->
-	      </div>
-	      <div class="item mod"><span id="wisdom_mod">+0 </span></div>
-	      
-	      <div class="item attr"> <span class="tooltip">Charisma
-		  <div class="tooltiptext attribute" style="width:315px;left:70px;">Describes leadership, charm, prominence, etc.</div>
-		  </span>
-	      </div>
-	      <div class="item val">
-		<span id="charisma_attr"></span>
-		<!-- <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"> -->
-	      </div>
-	      <div class="item mod"><span id="charisma_mod">+0 </span></div>
-	      
-	    </div>
-	    <div class="attrSelects">
-	      <div class="attrSelectsItem"> </div>
-	      <div>
-		<select id="strength_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('strength',this.value); updateAttrSelects('strength',this.value);">
-		  <option value=""></option>
-		  <option value="14">14</option>
-		  <option value="12">12</option>
-		  <option value="11">11</option>
-		  <option value="10">10</option>
-		  <option value="9">9</option>
-		  <option value="7">7</option>
-		</select>
-	      </div>
-	      <div>
-		<select id="dexterity_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('dexterity',this.value); updateAttrSelects('dexterity',this.value);">
-		  <option value=""></option>
-		  <option value="14">14</option>
-		  <option value="12">12</option>
-		  <option value="11">11</option>
-		  <option value="10">10</option>
-		  <option value="9">9</option>
-		  <option value="7">7</option>
-		</select>
-	      </div>
-
-	      <div>
-		<select id="constitution_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('constitution',this.value); updateAttrSelects('constitution',this.value);">
-		  <option value=""></option>
-		  <option value="14">14</option>
-		  <option value="12">12</option>
-		  <option value="11">11</option>
-		  <option value="10">10</option>
-		  <option value="9">9</option>
-		  <option value="7">7</option>
-		</select>
-	      </div>
-
-	      <div>
-		<select id="intelligence_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('intelligence',this.value); updateAttrSelects('intelligence',this.value);">
-		  <option value=""></option>
-		  <option value="14">14</option>
-		  <option value="12">12</option>
-		  <option value="11">11</option>
-		  <option value="10">10</option>
-		  <option value="9">9</option>
-		  <option value="7">7</option>
-		</select>
-	      </div>
-
-	      <div>
-		<select id="wisdom_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('wisdom',this.value); updateAttrSelects('wisdom',this.value);">
-		  <option value=""></option>
-		  <option value="14">14</option>
-		  <option value="12">12</option>
-		  <option value="11">11</option>
-		  <option value="10">10</option>
-		  <option value="9">9</option>
-		  <option value="7">7</option>
-		</select>
-	      </div>
-
-	      <div>
-		<select id="charisma_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('charisma',this.value); updateAttrSelects('charisma',this.value);">
-		  <option value=""></option>
-		  <option value="14">14</option>
-		  <option value="12">12</option>
-		  <option value="11">11</option>
-		  <option value="10">10</option>
-		  <option value="9">9</option>
-		  <option value="7">7</option>
-		</select>
-	      </div>
-
-	    </div>
-	    </div>
-
-	    
-	      <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;width:95%;height:1.5em">
-		<div class="heading"> Saving</div>
-		<div style="text-align:center;font-style:italic" class="tooltip"> Physical
-		  <div class="tooltiptext savingthrow" style="width:285px;left:-70px;">Withstand poison, disease, or exhaustion</div>
-		</div>
-		<div style="text-align:center;font-style:italic" class="tooltip"> Evasion 
-		  <div class="tooltiptext savingthrow" style="width:240px;left:-85px;">Dodge sudden perils or explosions</div>
-		</div>
-		<div style="text-align:center;font-style:italic" class="tooltip"> Mental 
-		  <div class="tooltiptext savingthrow" style="width:360px;left:-140px;">Resist psychic influence or mind-bending technology</div>
-		</div>
-		<div class="heading"> Throws </div>
-		<div id="physical_saving_throw" style="text-align:center;"> 15 </div>
-		<div id="evasion_saving_throw" style="text-align:center;"> 15 </div>
-		<div id="mental_saving_throw" style="text-align:center;"> 15 </div>
-		  
+	      <div class="attrBlock">
+		<div class="heading">Attribute  </div>
+		<div class="heading">Score </div>
+		<div class="heading">Mod </div>
 		
+		<div class="item attr tooltip"> <span class="tooltip">Strength
+		    <div class="tooltiptext attribute" style="width:435px;left:65px;"> Describes physical power, melee prowess, carrying capacity, etc.</div>
+		  </span>
+		</div>
+		<div class="item val">  <span id="strength_attr"></span>
+		  <!-- <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"> -->
+		</div>
+		<div class="item mod"><span id="strength_mod">+0 </span></div>
+
+		<div class="item attr tooltip"> <span class="tooltip"> Dexterity
+		    <div class="tooltiptext attribute" style="width:325px;left:65px;"> Describes speed, evasiveness, coordination, etc.</div>
+		  </span>
+		</div>
+		<div class="item val">
+		  <span id="dexterity_attr"></span>
+		  <!-- <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"> -->
+		</div>
+		<div class="item mod"><span id="dexterity_mod">+0 </span></div>
+		
+		<div class="item attr tooltip"> <span class="tooltip"> Constitution
+		    <div class="tooltiptext attribute" style="width:325px;left:90px;">Describes hardiness, fortitude, survivability, etc. </div>
+		  </span>
+		</div>
+		<div class="item val">
+		  <span id="constitution_attr"></span>
+		  <!-- <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"> -->
+		</div>
+		<div class="item mod"><span id="constitution_mod">+0 </span></div>
+	      	
+		<div class="item attr tooltip"> <span class="tooltip"> Intelligence
+		    <div class="tooltiptext attribute" style="width:350px;left:87px;">Describes memory, critical thinking, education, etc. </div>
+		  </span>
+		</div>
+		<div class="item val">
+		  <span id="intelligence_attr"></span>
+		  <!-- <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"> -->
+		</div>
+		<div class="item mod"><span id="intelligence_mod">+0 </span></div>
+		
+		<div class="item attr tooltip"><span class="tooltip"> Wisdom
+		    <div class="tooltiptext attribute" style="width:325px;left:60px;">Describes perception, intuition, judgement, etc.</div>
+		  </span>
+		</div>
+		<div class="item val">
+		  <span id="wisdom_attr"></span>
+		  <!-- <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"> -->
+		</div>
+		<div class="item mod"><span id="wisdom_mod">+0 </span></div>
+		
+		<div class="item attr"> <span class="tooltip">Charisma
+		    <div class="tooltiptext attribute" style="width:315px;left:70px;">Describes leadership, charm, prominence, etc.</div>
+		  </span>
+		</div>
+		<div class="item val">
+		  <span id="charisma_attr"></span>
+		  <!-- <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"> -->
+		</div>
+		<div class="item mod"><span id="charisma_mod">+0 </span></div>
+		
+	      </div>
+	      <div class="attrSelects">
+		<div class="attrSelectsItem"> </div>
+		<div>
+		  <select id="strength_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('strength',this.value); updateAttrSelects('strength',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+		<div>
+		  <select id="dexterity_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('dexterity',this.value); updateAttrSelects('dexterity',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+
+		<div>
+		  <select id="constitution_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('constitution',this.value); updateAttrSelects('constitution',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+
+		<div>
+		  <select id="intelligence_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('intelligence',this.value); updateAttrSelects('intelligence',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+
+		<div>
+		  <select id="wisdom_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('wisdom',this.value); updateAttrSelects('wisdom',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+
+		<div>
+		  <select id="charisma_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('charisma',this.value); updateAttrSelects('charisma',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+
+	      </div>
+	    </div>
+
 	    
+	    <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;width:95%;height:1.5em">
+	      <div class="heading"> Saving</div>
+	      <div style="text-align:center;font-style:italic" class="tooltip"> Physical
+		<div class="tooltiptext savingthrow" style="width:285px;left:-70px;">Withstand poison, disease, or exhaustion</div>
+	      </div>
+	      <div style="text-align:center;font-style:italic" class="tooltip"> Evasion 
+		<div class="tooltiptext savingthrow" style="width:240px;left:-85px;">Dodge sudden perils or explosions</div>
+	      </div>
+	      <div style="text-align:center;font-style:italic" class="tooltip"> Mental 
+		<div class="tooltiptext savingthrow" style="width:360px;left:-140px;">Resist psychic influence or mind-bending technology</div>
+	      </div>
+	      <div class="heading"> Throws </div>
+	      <div id="physical_saving_throw" style="text-align:center;"> 15 </div>
+	      <div id="evasion_saving_throw" style="text-align:center;"> 15 </div>
+	      <div id="mental_saving_throw" style="text-align:center;"> 15 </div>
+	      
+	      
+	      
 	    </div>
 
 	    
@@ -343,9 +338,9 @@
 	  <div>
 	    <div style="display:grid;grid-template-columns: auto 230px;column-gap:20px ">
 	      <div>
-	      <p>Once you pick a background, your hero gains several skills associated with their past. The <strong>Growth</strong> and <strong>Learning Tables</strong> to the right encapsulate the possible abilities their background can confer.</p>
-	      <p>Select one of the methods below to determine these skills.</p>
-	      <p>Your hero gains an additional non-psychic skill reflecting their natural talents or outside interests. Select this skill directly on the skill table at the top of the page.</p>
+		<p>Once you pick a background, your hero gains several skills associated with their past. The <strong>Growth</strong> and <strong>Learning Tables</strong> to the right encapsulate the possible abilities their background can confer.</p>
+		<p>Select one of the methods below to determine these skills.</p>
+		<p>Your hero gains an additional non-psychic skill reflecting their natural talents or outside interests. Select this skill directly on the skill table at the top of the page.</p>
 	      </div>
 	      <div style="display:grid; grid-template-columns:1fr 1fr;column-gap:10px">
 
@@ -429,9 +424,9 @@
 		<option value="psychic">Psychic</option>
 		<option value="warrior">Warrior</option>	    
 		<option value="adventurer" class="adventurerOption" disabled>Adventurer:</option>
-		  <option value="exp_psy">&nbsp;&nbsp;&nbsp;&nbsp;Expert/Psychic</option>
-		  <option value="war_exp">&nbsp;&nbsp;&nbsp;&nbsp;Expert/Warrior</option>
-		  <option value="war_psy">&nbsp;&nbsp;&nbsp;&nbsp;Psychic/Warrior</option>
+		<option value="exp_psy">&nbsp;&nbsp;&nbsp;&nbsp;Expert/Psychic</option>
+		<option value="war_exp">&nbsp;&nbsp;&nbsp;&nbsp;Expert/Warrior</option>
+		<option value="war_psy">&nbsp;&nbsp;&nbsp;&nbsp;Psychic/Warrior</option>
 	      </select>
 	      
 	      
@@ -638,7 +633,7 @@
 
 	    </div>
 
-	      <p id="psionics_instruction"> <i>Select psychic skills on the skill table above to gain psionic techniques.</i></p>
+	    <p id="psionics_instruction"> <i>Select psychic skills on the skill table above to gain psionic techniques.</i></p>
 
 	  </div>
 	  
@@ -646,45 +641,45 @@
 	<div class="accordion">
 	  <h3>7. Roll hit points</h3>
 	  <div>
-	    	    <p> Your hero's <strong>hit points</strong> represent their overall health, stamina, and luck. If brought to zero hit points, your hero is defeated; whether they are dead, dying, unconscious, or merely incapacitated depends on how their hit points are lost.</p> 
+	    <p> Your hero's <strong>hit points</strong> represent their overall health, stamina, and luck. If brought to zero hit points, your hero is defeated; whether they are dead, dying, unconscious, or merely incapacitated depends on how their hit points are lost.</p> 
 
-	  <div style="display:grid;grid-template-columns:auto 370px;column-gap:15px">
-	    <div>
-	    To determine your hero's maximum hit points, roll 1d6 and add your Constitution modifer to the result. Warrior characters and Adventurers with the Partial Warrior class option add two points to this total.
+	    <div style="display:grid;grid-template-columns:auto 370px;column-gap:15px">
+	      <div>
+		To determine your hero's maximum hit points, roll 1d6 and add your Constitution modifer to the result. Warrior characters and Adventurers with the Partial Warrior class option add two points to this total.
 
-	    <p>No penalty can reduce your maximum hit points below one.</p>
+		<p>No penalty can reduce your maximum hit points below one.</p>
+	      </div>
+	      <div class="collapsibleButton collapsibleButton-hp" id="rollHPButton">
+		<div class="topLayer" id="rollHPTopLayer">
+		  <div class="persistentText-default persistentText-default-hp" id="rollHPHeader">
+		    <strong>Roll hit points</strong>
+		  </div>
+		  <div class="topText topText-hp" id="rollHPText">
+		  </div>
+		</div>
+		<div class="bottomLayer">
+		  <div  class="bottomText bottomText-hp" id="rollHPDescription">
+		    <div style="display:inline-block; text-align:center;">
+		      <label for="hp_roll">Roll</label><br>
+		      <input type="number" id="hp_roll" disabled="true">
+		    </div>
+		    +
+		    <div style="display:inline-block; text-align:center;">
+		      <label for="constitution_hp_bonus"> Con modifier</label><br>
+		      <input type="number" id="constitution_hp_bonus" disabled="true">
+		    </div>
+		    +
+		    <div style="display:inline-block; text-align:center;">
+		      <label for="class_hp_bonus"> Class/Foci bonus </label><br>
+		      <input type="number" id="class_hp_bonus" disabled="true"> 
+		    </div>
+		    = <input type="number" id="hp_total" disabled="true">		    
+		  </div>
+		</div>
+	      </div>	    
 	    </div>
-	    <div class="collapsibleButton collapsibleButton-hp" id="rollHPButton">
-	      <div class="topLayer" id="rollHPTopLayer">
-		<div class="persistentText-default persistentText-default-hp" id="rollHPHeader">
-		  <strong>Roll hit points</strong>
-		</div>
-		<div class="topText topText-hp" id="rollHPText">
-		</div>
-	      </div>
-	      <div class="bottomLayer">
-		<div  class="bottomText bottomText-hp" id="rollHPDescription">
-		  <div style="display:inline-block; text-align:center;">
-		    <label for="hp_roll">Roll</label><br>
-		    <input type="number" id="hp_roll" disabled="true">
-		  </div>
-		  +
-		  <div style="display:inline-block; text-align:center;">
-		    <label for="constitution_hp_bonus"> Con modifier</label><br>
-		    <input type="number" id="constitution_hp_bonus" disabled="true">
-		  </div>
-		  +
-		  <div style="display:inline-block; text-align:center;">
-		    <label for="class_hp_bonus"> Class/Foci bonus </label><br>
-		    <input type="number" id="class_hp_bonus" disabled="true"> 
-		  </div>
-		  = <input type="number" id="hp_total" disabled="true">		    
-		</div>
-	      </div>
-	    </div>	    
 	  </div>
-	  </div>
-	  </div>
+	</div>
 	<div class="accordion">
 	  <h3>8. Choose equipment</h3>
 	  <div>
@@ -694,12 +689,12 @@
 
 	    <div style="display:grid; grid-template-columns:100px auto;" id="equipmentPanel">
 
-	    <select id="equipment_packages" onchange="displayEquipmentPackage(this.value)" size="10" style="overflow:hidden;height:272px;border:1px solid black;">
-	      <option value="" selected disabled>Choose one</option>
-	    </select>
+	      <select id="equipment_packages" onchange="displayEquipmentPackage(this.value)" size="10" style="overflow:hidden;height:272px;border:1px solid black;">
+		<option value="" selected disabled>Choose one</option>
+	      </select>
 
-	    <div class="descriptionBox" id="equipment_packages_description" style="height:270px;">
-	    </div>
+	      <div class="descriptionBox" id="equipment_packages_description" style="height:270px;">
+	      </div>
 	    </div>
 	    
 	    
@@ -739,7 +734,7 @@
 		<p><input type="file"  accept="image/*" name="portrait" id="portrait" style="display: none;" onchange="loadFile(event)" ></p>
 	      </div>
 	      <div>
-		<p><i>(Use aspect ratio close to 1:1 for best results)</i><p>
+		<p><i>(Use a picture with aspect ratio close to 1:1 for best results)</i><p>
 	      </div>
 	    </div>
 
@@ -857,9 +852,6 @@
 	  <input type="radio" name="stabshoot" value="shoot" id="stabshoot_shoot">
 	</div>
 	<button class="fixedButton">Print Character Sheet</button>
-        <!-- <script> -->
-	<!--   fillOutSheet(); -->
-        <!-- </script> -->
 
       </div>
       <div class="sidebar">
@@ -867,15 +859,10 @@
 
     </div>
 
-      	<div  id="character_sheet" style="display:block;position:relative;width:1400px"> 
-	  <img src="https://noah-sennett.github.io/swn-character-creator/assets/StarsWithoutNumberRevised-Character_Sheet-Form.png" alt="Character Sheet" style="width:100%;display:block;" id="character_sheet_img">
-	  <img src="https://noah-sennett.github.io/swn-character-creator/assets/StarsWithoutNumberRevised-Character_Sheet-Form_page2.png" alt="Character Sheet" style="width:100%;display:none;" id="character_sheet_img2">
-	</div>
-	<script>
-	  fillOutSheetPage2();
-	</script>
+    <div  id="character_sheet" style="display:block;position:relative;width:1400px"> 
+      <img src="https://noah-sennett.github.io/swn-character-creator/assets/StarsWithoutNumberRevised-Character_Sheet-Form.png" alt="Character Sheet" style="width:100%;display:none" id="character_sheet_img">
+      <img src="https://noah-sennett.github.io/swn-character-creator/assets/StarsWithoutNumberRevised-Character_Sheet-Form_page2.png" alt="Character Sheet" style="width:100%;display:none;" id="character_sheet_img2">
+    </div>
 
-    <!-- <div class="footer"> -->
-    <!-- </div> -->
   </body>
 </html>

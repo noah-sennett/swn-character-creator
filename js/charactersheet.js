@@ -6,52 +6,52 @@ $(document).ready(function () {
 
     $("button").click(function(){
 	fillOutSheetPage1();
-// 	$("#character_sheet").show();
-// 	$("#character_sheet_img2").hide();
-//         $("#character_sheet").printThis({
-//             debug: false,             
-//             importCSS: false,            
-//             importStyle: false,         
-//             printContainer: true,      
-// 	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-// //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-//             pageTitle: "",             
-//             removeInline: false,    
-//             printDelay: 3000,      
-//             header: null,        
-//             footer: null,            
-//             base: false ,              
-//             formValues: true,          
-//             canvas: false,              
-//             doctypeString: "",      
-//             removeScripts: false,       
-//             copyTagClasses: false,
-// 	    afterPrint: function(){
-// 		$("#character_sheet_img").hide();
-// 		$("#character_sheet_img2").show();
-// 		fillOutSheetPage2();
-// 		$("#character_sheet").printThis({
-// 		    debug: false,             
-// 		    importCSS: false,            
-// 		    importStyle: false,         
-// 		    printContainer: true,      
-// 		    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-// 		    //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-// 		    pageTitle: "",             
-// 		    removeInline: false,    
-// 		    printDelay: 3000,      
-// 		    header: null,        
-// 		    footer: null,            
-// 		    base: false ,              
-// 		    formValues: true,          
-// 		    canvas: false,              
-// 		    doctypeString: "",      
-// 		    removeScripts: false,       
-// 		    copyTagClasses: false,
-// 		    afterPrint: function(){$("#character_sheet").hide();}
-// 		});
-// 	    }
-// 	});
+//	$("#character_sheet").show();
+	$("#character_sheet_img").show();
+	$("#character_sheet_img2").hide();
+        $("#character_sheet").printThis({
+            debug: false,             
+            importCSS: false,            
+            importStyle: false,         
+            printContainer: true,      
+	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+//	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
+            pageTitle: "",             
+            removeInline: false,    
+            printDelay: 4000,      
+            header: null,        
+            footer: null,            
+            base: false ,              
+            formValues: true,          
+            canvas: false,              
+            doctypeString: "",      
+            removeScripts: false,       
+            copyTagClasses: false,
+	    afterPrint: function(){
+		$("#character_sheet_img").hide();
+		$("#character_sheet_img2").show();
+		fillOutSheetPage2();
+		$("#character_sheet").printThis({
+		    debug: false,             
+		    importCSS: false,            
+		    importStyle: false,         
+		    printContainer: true,      
+		    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+		    pageTitle: "",             
+		    removeInline: false,    
+		    printDelay: 4000,      
+		    header: null,        
+		    footer: null,            
+		    base: false ,              
+		    formValues: true,          
+		    canvas: false,              
+		    doctypeString: "",      
+		    removeScripts: false,       
+		    copyTagClasses: false
+//		    afterPrint: function(){$("#character_sheet").hide();}
+		});
+	    }
+	});
 
     });             
 
@@ -299,6 +299,7 @@ var learning_choice_index = [];
 var class_hp_bonus = 0;
 var foci_hp_bonus = 0;
 var foci_effort_bonus = 0;
+var technique_effort_bonus = 0;
 
 function rollDie(sides=6){
     return 1+Math.floor(sides*Math.random());
@@ -758,6 +759,7 @@ function generateSkillTable(skills){
 		node.setAttribute("class","tooltip");
 		
 		tooltipNode = document.createElement('span');
+		tooltipNode.setAttribute("id",skillKey+'_tooltip');
 		tooltipNode.innerHTML = skills[skillKey]["description"];
 		switch(j){
 		case 0:
@@ -770,6 +772,7 @@ function generateSkillTable(skills){
 		    tooltipNode.setAttribute("class","tooltiptext rightcolumn");
 		    break;		    
 		}
+
 		
 		skillName.appendChild(node);
 		node.appendChild(tooltipNode);
@@ -845,6 +848,15 @@ function generateSkillTable(skills){
     }
     var elemSkillBank = document.getElementById("skill_bank");
     topRow.insertBefore(tbl,elemSkillBank);
+
+    for (var key of skillKeys){
+	var tooltipNode = document.getElementById(key+"_tooltip");
+	if(tooltipNode.offsetWidth >520){
+		    tooltipNode.style.width = "520px";
+		    tooltipNode.style.whiteSpace = "normal";
+	}
+    }
+
 }
 
 
@@ -886,7 +898,7 @@ function updateSkillBoxes(boxID){
 			picked_skills.push(skill);
 			var anyPsychic = displayTechniques(skill);
 			$('#psionics_tabs').tabs("option","active",psionic_disciplines.indexOf(skill));
-			displayTechniquesTabs(anyPsychic);
+			displayTechniquesTabs(anyPsychic);		
 		    }
 		    else{
 			alert("Out of psychic skill points!");
@@ -971,6 +983,10 @@ function updateSkillBoxes(boxID){
 	}
     }
     updateSkillTotal(skill);
+
+    technique_effort_bonus = 0;
+    if($("#metapsionics_total").html() == "1") technique_effort_bonus = 2;
+	
     computeEffort();
     
 }
@@ -2344,7 +2360,7 @@ function computeEffort(){
     }
 
     if(elemClass.value.includes("psy")){
-	maxEffort = Math.max(1,1 + maxPsychicSkill + foci_effort_bonus + computeMod(Math.max(parseInt(elemCon.innerHTML),parseInt(elemWis.innerHTML))));
+	maxEffort = Math.max(1,1 + maxPsychicSkill + foci_effort_bonus + technique_effort_bonus + computeMod(Math.max(parseInt(elemCon.innerHTML),parseInt(elemWis.innerHTML))));
     }
     else if(picked_foci.includes("wild_psychic_talent")){
 	maxEffort = 1;
@@ -2426,27 +2442,35 @@ function fillOutSheetPage1(){
     var weapon2_bonus  = document.createElement("p");
     var weapon2_damage = document.createElement("p");
     var weapon2_shock  = document.createElement("p");
+    var weapon3_name  = document.createElement("p");
+    var weapon3_bonus  = document.createElement("p");
+    var weapon3_damage = document.createElement("p");
+    var weapon3_shock  = document.createElement("p");
     var armor1_name = document.createElement("p");
     var armor1_AC  = document.createElement("p");
     var armor2_name = document.createElement("p");
     var armor2_AC = document.createElement("p");
+    var armor3_name = document.createElement("p");
+    var armor3_AC  = document.createElement("p");
+    var armor4_name = document.createElement("p");
+    var armor4_AC = document.createElement("p");
     var credits =  document.createElement("p");
     var technique = document.createElement("p");
+    var range_close = document.createElement("p");
+    var range_far = document.createElement("p");
 
     var portrait = document.createElement("img");
 
 
     var skillElements = [administer, connect, exert, fix, heal, know, lead, notice, perform, pilot, program, punch, shoot, sneak, stab, survive, talk, trade, work, biopsionics, metapsionics, precognition, telekinesis, telepathy, teleportation];
     
-    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC,credits, technique].concat(skillElements);
+    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC, armor3_name, armor3_AC, armor4_name, armor4_AC,credits, technique, range_close, range_far].concat(skillElements);
     
     for (var element of formElements){
 	element.setAttribute("class","formText");
 	element.setAttribute("id","form_element_"+formElements.indexOf(element));
 	elem.appendChild(element);
     }
-
-    elem.appendChild(portrait);
     
     name.innerHTML = $("#name").val();
     background.innerHTML = $("#backgrounds_mirror option:selected").text();
@@ -2527,24 +2551,70 @@ function fillOutSheetPage1(){
     var ranged_bonus = attackMod+dexterityMod;
 
     var maxMod = Math.max(strengthMod,dexterityMod);
+
+    var stab_bonus = 0;
+    var shoot_bonus = 0;
+    var shock_bonus = 0;
+    var innate_AC = 0;
+    var unarmed_base;
+    var unarmed_shock;
+
+   
+    if(picked_foci.includes("armsman")) stab_bonus = parseInt(stab.innerHTML);
+    if(picked_foci.includes("gunslinger")) shoot_bonus = parseInt(shoot.innerHTML);
+
+    var count=0;
+    for (var foci_choice of picked_foci){
+	if (foci_choice=="shocking_assault") count++
+    }
+
+    if(count == 2) shock_bonus = 2;
+    
+    if(picked_foci.includes("unarmed_combatant")){
+	switch(punch.innerHTML){
+	case "0":
+	    unarmed_base = "1d6";
+	    unarmed_shock = "";
+	    break;
+	case "1":
+	    unarmed_base = "1d8";
+	    unarmed_shock = "Shock: "+(1+maxMod+shock_bonus)+"/AC15";
+	    break;
+	}
+    }
+    else{
+	unarmed_base = "1d2";
+	unarmed_shock = "";
+    }
+
+    if(picked_foci.includes("ironhide")){
+	innate_AC = 16;
+    }
+    else{
+	innate_AC = 10;
+    }
     
     switch($("#equipment_packages").val()){
     case "barbarian":
     	weapon1_name.innerHTML = "Spear";
 	weapon2_name.innerHTML = "Knife";
 
-	weapon1_damage.innerHTML = "1d6"+displayBonus((1+maxMod));
+	weapon1_damage.innerHTML = "1d6"+displayBonus((1+maxMod+stab_bonus));
 	weapon1_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon1_shock.innerHTML = "Shock: "+(2+maxMod)+"/AC13";
-    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod);
+	weapon1_shock.innerHTML = "Shock: "+(2+maxMod+stab_bonus+shock_bonus)+"/AC13";
+    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod+stab_bonus);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
 
 	armor1_name.innerHTML = "Primitive hide armor w/ shield";
 	armor2_name.innerHTML = "Primitive hide armor";
+	armor3_name.innerHTML = "Unarmored w/ shield"
+	armor4_name.innerHTML = "Unarmored"
 	
 	armor1_AC.innerHTML = 14+dexterityMod;
 	armor2_AC.innerHTML = 13+dexterityMod;
+	armor3_AC.innerHTML = innate_AC+dexterityMod+1;
+	armor4_AC.innerHTML = innate_AC+dexterityMod;
 
 	credits.innerHTML = 500+" credits";
 	break;
@@ -2552,18 +2622,20 @@ function fillOutSheetPage1(){
     	weapon1_name.innerHTML = "Monoblade sword";
 	weapon2_name.innerHTML = "Thermal knife";
 
-	weapon1_damage.innerHTML = "1d8"+displayBonus((1+maxMod));
+	weapon1_damage.innerHTML = "1d8"+displayBonus((1+maxMod+stab_bonus));
 	weapon1_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon1_shock.innerHTML = "Shock: "+(2+maxMod)+"/AC13";
-    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
+	weapon1_shock.innerHTML = "Shock: "+(2+maxMod+stab_bonus+shock_bonus)+"/AC13";
+    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod+stab_bonus);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
 
 	armor1_name.innerHTML = "Woven body armor";
 	armor2_name.innerHTML = "Secure clothing";
+	armor3_name.innerHTML = "Unarmored";
 	
 	armor1_AC.innerHTML = 15+dexterityMod;
 	armor2_AC.innerHTML = 13+dexterityMod;
+	armor3_AC.innerHTML = innate_AC+dexterityMod;
 
 	credits.innerHTML = 50+" credits";
 	break;
@@ -2571,18 +2643,21 @@ function fillOutSheetPage1(){
     	weapon1_name.innerHTML = "Laser pistol";
 	weapon2_name.innerHTML = "Monoblade knife";
 
-	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod));
+	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod+shoot_bonus));
 	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
 	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
+    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod+stab_bonus);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
-
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
+	
+	range_close.innerHTML = "100";
+	range_far.innerHTML = "300";
+	
 	armor1_name.innerHTML = "Armored undersuit";
-	armor2_name.innerHTML = "";
+	armor2_name.innerHTML = "Unarmored";
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = "";
+	armor2_AC.innerHTML = innate_AC+dexterityMod;
 
 	credits.innerHTML = 25+" credits";
 	break;
@@ -2590,18 +2665,21 @@ function fillOutSheetPage1(){
     	weapon1_name.innerHTML = "Laser pistol";
 	weapon2_name.innerHTML = "";
 
-	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod));
+	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod+shoot_bonus));
 	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
 	weapon1_shock.innerHTML = "";
     	weapon2_damage.innerHTML = "";
 	weapon2_bonus.innerHTML = "";
 	weapon2_shock.innerHTML = "";
-	
+
+	range_close.innerHTML = "100";
+	range_far.innerHTML = "300";
+
 	armor1_name.innerHTML = "Secure clothing";
-	armor2_name.innerHTML = "";
+	armor2_name.innerHTML = "Unarmored";
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = "";
+	armor2_AC.innerHTML = innate_AC+dexterityMod;
 
 	credits.innerHTML = 100+" credits";
 	break;
@@ -2609,18 +2687,21 @@ function fillOutSheetPage1(){
     	weapon1_name.innerHTML = "Laser pistol";
 	weapon2_name.innerHTML = "Monoblade knife";
 
-	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod));
+	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod+shoot_bonus));
 	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
 	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
+    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod+stab_bonus);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
 	
 	armor1_name.innerHTML = "Armored undersuit";
-	armor2_name.innerHTML = "";
+	armor2_name.innerHTML = "Unarmored";
+
+	range_close.innerHTML = "100";
+	range_far.innerHTML = "300";
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = "";
+	armor2_AC.innerHTML = innate_AC+dexterityMod;
 
 	credits.innerHTML = 100+" credits";
 	break;
@@ -2628,18 +2709,21 @@ function fillOutSheetPage1(){
     	weapon1_name.innerHTML = "Combat rifle";
 	weapon2_name.innerHTML = "Knife";
 
-	weapon1_damage.innerHTML = "1d12"+displayBonus((dexterityMod));
+	weapon1_damage.innerHTML = "1d12"+displayBonus((dexterityMod+shoot_bonus));
 	weapon1_bonus.innerHTML = displayBonus((ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
 	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod);
+    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod+stab_bonus);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
-	
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
+
+	range_close.innerHTML = "100";
+	range_far.innerHTML = "300";
+
 	armor1_name.innerHTML = "Woven body armor";
-	armor2_name.innerHTML = "";
+	armor2_name.innerHTML = "Unarmored";
 	
 	armor1_AC.innerHTML = 15+dexterityMod;
-	armor2_AC.innerHTML = "";
+	armor2_AC.innerHTML = innate_AC+dexterityMod;
 
 	credits.innerHTML = 100+" credits";
 	break;
@@ -2647,18 +2731,21 @@ function fillOutSheetPage1(){
     	weapon1_name.innerHTML = "Laser rifle";
 	weapon2_name.innerHTML = "Knife";
 
-	weapon1_damage.innerHTML = "1d10"+displayBonus((dexterityMod));
+	weapon1_damage.innerHTML = "1d10"+displayBonus((dexterityMod+shoot_bonus));
 	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
 	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod);
+    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod+stab_bonus);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
+
+	range_close.innerHTML = "300";
+	range_far.innerHTML = "500";
 
 	armor1_name.innerHTML = "Armored vacc suit";
-	armor2_name.innerHTML = "";
+	armor2_name.innerHTML = "Unarmored";
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = "";
+	armor2_AC.innerHTML = innate_AC+dexterityMod;
 
 	credits.innerHTML = 25+" credits";
 	break;
@@ -2666,18 +2753,21 @@ function fillOutSheetPage1(){
     	weapon1_name.innerHTML = "Laser pistol";
 	weapon2_name.innerHTML = "";
 
-	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod));
+	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod+shoot_bonus));
 	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
 	weapon1_shock.innerHTML = "";
     	weapon2_damage.innerHTML = "";
 	weapon2_bonus.innerHTML = "";
 	weapon2_shock.innerHTML = "";
+
+	range_close.innerHTML = "100";
+	range_far.innerHTML = "300";
 	
 	armor1_name.innerHTML = "Secure clothing";
-	armor2_name.innerHTML = "";
+	armor2_name.innerHTML = "Unarmored";
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = "";
+	armor2_AC.innerHTML = innate_AC+dexterityMod;
 
 	credits.innerHTML = 25+" credits";
 	break;
@@ -2693,10 +2783,10 @@ function fillOutSheetPage1(){
 	weapon2_shock.innerHTML = "";
 		
 	armor1_name.innerHTML = "Secure clothing";
-	armor2_name.innerHTML = "";
+	armor2_name.innerHTML = "Unarmored";
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = "";
+	armor2_AC.innerHTML = innate_AC+dexterityMod;
 
 	credits.innerHTML = 700+" credits";
 	break;
@@ -2704,18 +2794,21 @@ function fillOutSheetPage1(){
     	weapon1_name.innerHTML = "Laser pistol";
 	weapon2_name.innerHTML = "Monoblade knife";
 	
-	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod));
+	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod+shoot_bonus));
 	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
 	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod);
+    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod+stab_bonus);
 	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod)+"/AC15";
+	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
 		
+	range_close.innerHTML = "100";
+	range_far.innerHTML = "300";
+
 	armor1_name.innerHTML = "Armored undersuit";
-	armor2_name.innerHTML = "";
+	armor2_name.innerHTML = "Unarmored";
 	
 	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = "";
+	armor2_AC.innerHTML = innate_AC+dexterityMod;
 
 	credits.innerHTML = 200+" credits";
 	break;
@@ -2730,10 +2823,10 @@ function fillOutSheetPage1(){
 	weapon2_bonus.innerHTML = "";
 	weapon2_shock.innerHTML = "";
 		
-	armor1_name.innerHTML = "";
+	armor1_name.innerHTML = "Unarmored";
 	armor2_name.innerHTML = "";
 	
-	armor1_AC.innerHTML = "";
+	armor1_AC.innerHTML = innate_AC+dexterityMod;
 	armor2_AC.innerHTML = "";
 
 	credits.innerHTML = $("#equipment_packages_description ul li").html();
@@ -2749,16 +2842,43 @@ function fillOutSheetPage1(){
     	weapon2_bonus.innerHTML = "";
     	weapon2_shock.innerHTML = "";
 
-    	armor1_name.innerHTML = "";
-    	armor2_name.innerHTML = "";
+	armor1_name.innerHTML = "Unarmored";
+	armor2_name.innerHTML = "";
 	
-    	armor1_AC.innerHTML = "";
-    	armor2_AC.innerHTML = "";
+	armor1_AC.innerHTML = innate_AC+dexterityMod;
+	armor2_AC.innerHTML = "";
 
     	credits.innerHTML = "";
     	break;
     }
 
+    if(punch.innerHTML !=""){    
+
+	if((weapon1_name.innerHTML !="")){
+
+	    if(weapon2_name.innerHTML !=""){
+		
+		weapon3_name.innerHTML = "Unarmed attack";
+		weapon3_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(punch.innerHTML)));
+		weapon3_damage.innerHTML = unarmed_base + displayBonus(maxMod+parseInt(punch.innerHTML));
+		weapon3_shock.innerHTML = unarmed_shock;
+	    }
+	    else{
+		weapon2_name.innerHTML = "Unarmed attack";
+		weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(punch.innerHTML)));
+		weapon2_damage.innerHTML = unarmed_base + displayBonus(maxMod+parseInt(punch.innerHTML));
+		weapon2_shock.innerHTML = unarmed_shock;
+	    }
+	}
+	else{
+	    weapon1_name.innerHTML = "Unarmed attack";
+	    weapon1_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(punch.innerHTML)));
+	    weapon1_damage.innerHTML = unarmed_base + displayBonus(maxMod+parseInt(punch.innerHTML));
+	    weapon1_shock.innerHTML = unarmed_shock;
+	}
+	
+    }
+    
 
     var technique_text = "";
     
@@ -2781,14 +2901,19 @@ function fillOutSheetPage1(){
 
     }
 
-
     technique.innerHTML = technique_text;
 
     portrait.setAttribute("id","form_portrait");
-    portrait.src = $("#portrait_holder").attr("src");
-    portrait.setAttribute("style","max-height:253px; max-width:236px; height:auto; width:auto;left:5px;top:82px;position:absolute;");
-    centerPortrait(portrait);
-    
+    var portraitSource = $("#portrait_holder").attr('src');
+    // For some browsers, `attr` is undefined; for others,
+    // `attr` is false.  Check for both.
+    if (typeof attr !== typeof undefined && attr !== false) {
+	portrait.src = $("#portrait_holder").attr("src");
+	portrait.setAttribute("style","max-height:253px; max-width:236px; height:auto; width:auto;left:5px;top:82px;position:absolute;");
+	centerPortrait(portrait);
+	elem.appendChild(portrait);
+    }
+	
     positionElement(name,105,17);
     positionElement(background,345,56);
     positionElement(Class,344,186);
@@ -2797,31 +2922,47 @@ function fillOutSheetPage1(){
     positionElement(homeworld,105,327);
     positionElement(employer,105,366);
     positionElement(species,105,405);
-    positionElement(hp, 1168,28);
-    positionElement(strain, 1168,185);
-    positionElement(physical, 976, 354);
-    positionElement(evasion, 1056, 354);
-    positionElement(mental, 1138, 354);
-    positionElement(strength, 1305, 82);
+    positionElement(hp, 1173,29);
+    centerElement(hp,formElements);
+    positionElement(strain, 1173,185);
+    centerElement(strain,formElements);
+    positionElement(physical, 985, 354);
+    centerElement(physical, formElements);
+    positionElement(evasion, 1065, 354);
+    centerElement(evasion,formElements);
+    positionElement(mental, 1147, 354);
+    centerElement(mental, formElements);
+    positionElement(strength, 1312, 82);
+    centerElement(strength, formElements);
     positionElement(strength_mod, 1344, 82);
-    positionElement(dexterity, 1280, 134);
+    positionElement(dexterity, 1287, 134);
+    centerElement(dexterity, formElements);
     positionElement(dexterity_mod, 1319, 134);
-    positionElement(constitution, 1305, 185);
+    positionElement(constitution, 1312, 185);
+    centerElement(constitution, formElements);
     positionElement(constitution_mod, 1344, 185);
-    positionElement(intelligence, 1280, 237);
+    positionElement(intelligence, 1287, 237);
+    centerElement(intelligence, formElements);
     positionElement(intelligence_mod, 1319, 237);
-    positionElement(wisdom, 1305, 289);
+    positionElement(wisdom, 1312, 289);
+    centerElement(wisdom, formElements);
     positionElement(wisdom_mod, 1344, 289);
-    positionElement(charisma, 1280, 341);
+    positionElement(charisma, 1287, 341);
+    centerElement(charisma, formElements);
     positionElement(charisma_mod, 1319, 341);
-    positionElement(effort, 1370, 936);
-    positionElement(BAB,595,302);
-    positionElement(foci1, 482, 396,"font-size:18px;width:405px;");
-    positionElement(foci1_level, 903, 407);
-    positionElement(foci2, 482, 461,"font-size:18px;width:405px;");
-    positionElement(foci2_level, 903, 472);
-    positionElement(foci3, 482, 526,"font-size:18px;width:405px;");
-    positionElement(foci3_level, 903, 537);
+    positionElement(effort, 1379, 936);
+    centerElement(effort,formElements);
+    positionElement(BAB,605,302);
+    centerElement(BAB, formElements);
+    positionElement(foci1, 482, 397,"font-size:18px;width:405px;");
+    positionElement(foci1_level, 920, 407);
+    centerElement(foci1_level, formElements);
+    positionElement(foci2, 482, 462,"font-size:18px;width:405px;");
+    positionElement(foci2_level, 920, 472);
+    centerElement(foci1_level, formElements);
+    positionElement(foci3, 482, 527,"font-size:18px;width:405px;");
+    positionElement(foci3_level, 920, 537);
+    centerElement(foci1_level, formElements);
 
     for (var fociElem of fociElems){
 	shrinkText(fociElem, 55, formElements);
@@ -2862,18 +3003,26 @@ function fillOutSheetPage1(){
     
     positionElement(weapon1_name, 80, 485);
     positionElement(weapon2_name, 80, 550);
+    positionElement(weapon3_name, 80, 615);
 
     positionElement(weapon1_bonus,350,495);
     positionElement(weapon2_bonus,350,560);
+    positionElement(weapon3_bonus,350,625);
     centerElement(weapon1_bonus,formElements);
     centerElement(weapon2_bonus,formElements);
+    centerElement(weapon3_bonus,formElements);
 
     positionElement(weapon1_damage,385, 495);
     positionElement(weapon2_damage,385, 560);
+    positionElement(weapon3_damage,385, 625);
 
     positionElement(weapon1_shock,370,530,"font-size:14px;");
     positionElement(weapon2_shock,370,595,"font-size:14px;");
+    positionElement(weapon3_shock,370,660,"font-size:14px;");
 
+    positionElement(range_close,272,496,"font-size:14px;");
+    positionElement(range_far,304,496,"font-size:14px;");
+    
     positionElement(armor1_name, 80, 847);
     positionElement(armor2_name, 80, 912);
 
@@ -2892,6 +3041,7 @@ function fillOutSheetPage1(){
 function fillOutSheetPage2(){
     var elem = document.getElementById("character_sheet");  
     $("#character_sheet p").remove();
+    $("#character_sheet #form_portrait").remove();
 
     var goals = document.createElement("p");
     var notes = document.createElement("p");
@@ -3209,7 +3359,7 @@ function shrinkText(elem, maxHeight, formElements){
 
   
 function skillToAttackBonus(skillVal){
-    if (skillVal=="") return -1;
+    if (skillVal=="") return -2;
     return parseInt(skillVal);
 }
 
