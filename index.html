@@ -715,29 +715,51 @@
 	    <div style="display:grid; grid-template-columns:1fr 1fr">
 	      <div>
 		<label for="name">Name</label>	
-		<input id="name" type="text" size="9" onchange="updateMirrors(this.id)" style="width:168px;">
+		<input id="name" type="text" onchange="updateMirrors(this.id)" style="width:168px;">
 	      </div>
 	      <div>
 		<label for="homeworld">Homeworld</label>	
-		<input id="homeworld" type="text" size="9">
+		<input id="homeworld" type="text">
 	      </div>
 	      <div>
 		<label for="employer">Employer</label>	
-		<input id="employer" type="text" size="9">
+		<input id="employer" type="text">
 	      </div>
 
 	      <div>
 		<label for="species">Species</label>	
-		<input id="species" type="text" size="9">
+		<input id="species" type="text">
 	      </div>
 
+	      <br>
 	    </div>
+	    <div style="display:grid;text-align:left">
+	      <div>
+		<label for="portrait" style="width:170px;height:1.3em;padding:3px;z-index:0" class="topLayer">Upload character portrait</label>
+		<p><input type="file"  accept="image/*" name="portrait" id="portrait" style="display: none;" onchange="loadFile(event)" ></p>
+	      </div>
+	      <div>
+		<p><i>(Use aspect ratio close to 1:1 for best results)</i><p>
+	      </div>
+	    </div>
+
+	    <p><img id="portrait_holder" style="display:none;"></p>
+
+	    <script>
+	      var loadFile = function(event) {
+	      var image = document.getElementById('portrait_holder');
+	      image.src = URL.createObjectURL(event.target.files[0]);
+	      };
+	    </script>
+	    
+
 	    <br>
 	    <div style="display:grid; grid-template-columns:1fr 1fr;column-gap:10px">
 	      <div style="display:inline-block">
 		<label for="goals">Goals</label><br>
 		<textarea id="goals" style="width:100%;height:100px"></textarea>
 	      </div>
+	      
 	      <div style="display:inline-block">
 		<label for="notes">Notes</label><br>
 		<textarea id="notes" style="width:100%;height:100px"></textarea>
@@ -846,8 +868,8 @@
     </div>
 
       	<div  id="character_sheet" style="display:block;position:relative;width:1400px"> 
-	  <img src="https://noah-sennett.github.io/swn-character-creator/assets/StarsWithoutNumberRevised-Character_Sheet-Form.png" alt="Character Sheet" style="width:100%;display:none;" id="character_sheet_img">
-	  <img src="https://noah-sennett.github.io/swn-character-creator/assets/StarsWithoutNumberRevised-Character_Sheet-Form_page2.png" alt="Character Sheet" style="width:100%;display:block;" id="character_sheet_img2">
+	  <img src="https://noah-sennett.github.io/swn-character-creator/assets/StarsWithoutNumberRevised-Character_Sheet-Form.png" alt="Character Sheet" style="width:100%;display:block;" id="character_sheet_img">
+	  <img src="https://noah-sennett.github.io/swn-character-creator/assets/StarsWithoutNumberRevised-Character_Sheet-Form_page2.png" alt="Character Sheet" style="width:100%;display:none;" id="character_sheet_img2">
 	</div>
 	<script>
 	  fillOutSheetPage2();

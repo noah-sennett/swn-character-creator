@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 
     $("button").click(function(){
-	fillOutSheetPage2();
+	fillOutSheetPage1();
 // 	$("#character_sheet").show();
 // 	$("#character_sheet_img2").hide();
 //         $("#character_sheet").printThis({
@@ -29,7 +29,7 @@ $(document).ready(function () {
 // 	    afterPrint: function(){
 // 		$("#character_sheet_img").hide();
 // 		$("#character_sheet_img2").show();
-// 		fillOutSheet_page2();
+// 		fillOutSheetPage2();
 // 		$("#character_sheet").printThis({
 // 		    debug: false,             
 // 		    importCSS: false,            
@@ -2357,6 +2357,7 @@ function computeEffort(){
 function fillOutSheetPage1(){
     var elem = document.getElementById("character_sheet");  
     $("#character_sheet p").remove();
+    $("#character_sheet #form_portrait").remove();
     
     
     var name = document.createElement("p");
@@ -2432,6 +2433,9 @@ function fillOutSheetPage1(){
     var credits =  document.createElement("p");
     var technique = document.createElement("p");
 
+    var portrait = document.createElement("img");
+
+
     var skillElements = [administer, connect, exert, fix, heal, know, lead, notice, perform, pilot, program, punch, shoot, sneak, stab, survive, talk, trade, work, biopsionics, metapsionics, precognition, telekinesis, telepathy, teleportation];
     
     var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC,credits, technique].concat(skillElements);
@@ -2439,10 +2443,11 @@ function fillOutSheetPage1(){
     for (var element of formElements){
 	element.setAttribute("class","formText");
 	element.setAttribute("id","form_element_"+formElements.indexOf(element));
-	element.innerHTML = "test";
 	elem.appendChild(element);
     }
 
+    elem.appendChild(portrait);
+    
     name.innerHTML = $("#name").val();
     background.innerHTML = $("#backgrounds_mirror option:selected").text();
 
@@ -2779,6 +2784,10 @@ function fillOutSheetPage1(){
 
     technique.innerHTML = technique_text;
 
+    portrait.setAttribute("id","form_portrait");
+    portrait.src = $("#portrait_holder").attr("src");
+    portrait.setAttribute("style","max-height:253px; max-width:236px; height:auto; width:auto;left:5px;top:82px;position:absolute;");
+    centerPortrait(portrait);
     
     positionElement(name,105,17);
     positionElement(background,345,56);
@@ -2876,7 +2885,6 @@ function fillOutSheetPage1(){
     positionElement(credits , 490, 978);
 
     positionElement(technique, 944, 610,"font-size:17px;width:450px;");
-
     shrinkText(technique,330,formElements);
     
 }
@@ -2936,14 +2944,12 @@ function fillOutSheetPage2(){
     for (var element of formElements){
 	element.setAttribute("class","formText");
 	element.setAttribute("id","form_element_"+formElements.indexOf(element));
-	element.innerHTML = "test";
 	elem.appendChild(element);
     }
 
+
     goals.innerHTML = $("#goals").val();
     notes.innerHTML = $("#notes").val();
-
-    alert($("#equipment_packages").val());
     
     switch($("#equipment_packages").val()){
     case "barbarian":
@@ -3195,7 +3201,6 @@ function shrinkText(elem, maxHeight, formElements){
     while (($("#form_element_"+formElements.indexOf(elem)).height()>maxHeight)&& currFontSize>1){
 	currFontSize--;
 	currTop++;
-//	alert("Shrinking to "+currFontSize+" px font!");
 	elem.style.fontSize = currFontSize+"px";
 	elem.style.top = currTop+"px";
     }
@@ -3215,4 +3220,9 @@ function displayBonus(val){
 
 function centerElement(elem,formElements){
     elem.style.left = (parseInt(elem.style.left.slice(0,-2))-($("#form_element_"+formElements.indexOf(elem)).width())/2)+"px";
+}
+
+function centerPortrait(portrait){
+    portrait.style.left = (parseInt(portrait.style.left.slice(0,-2))+(236-portrait.clientWidth)/2)+"px";
+    portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(253-portrait.clientHeight)/2)+"px";
 }
