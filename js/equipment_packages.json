@@ -5,9 +5,9 @@
     },
     "blade":{
 	"name":"Blade",
-	"items":["Monoblade sword (1d8+1 damage)", "Woven Body Armor (AC 15)", "Secure Clothing (AC 13)", "Thermal knife (1d6 damage)", "Backpack (TL0)", "Compad", "Lazarus patch", "50 credits"]
+	"items":["Monoblade sword (1d8+1 damage)", "Woven body armor (AC 15)", "Secure clothing (AC 13)", "Thermal knife (1d6 damage)", "Backpack (TL0)", "Compad", "Lazarus patch", "50 credits"]
     },
-    "theif":{
+    "thief":{
 	"name":"Thief",
 	"items":["Laser pistol (1d6 damage)", "Armored undersuit (AC 13)", "Monoblade knife (1d6 damage)", "Climbing harness", "Low-light goggles", "2 type A cells", "Backpack (TL0)", "Compad", "Metatool", "25 credits"]
     },

@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 
     $("button").click(function(){
-	fillOutSheet();
+	fillOutSheetPage2();
 // 	$("#character_sheet").show();
 // 	$("#character_sheet_img2").hide();
 //         $("#character_sheet").printThis({
@@ -2354,7 +2354,7 @@ function computeEffort(){
     elemEffort.innerHTML = maxEffort;
 }
 
-function fillOutSheet(){
+function fillOutSheetPage1(){
     var elem = document.getElementById("character_sheet");  
     $("#character_sheet p").remove();
     
@@ -2735,27 +2735,25 @@ function fillOutSheet(){
 	break;
     default:
     	weapon1_name.innerHTML = "";
-	weapon2_name.innerHTML = "";
+    	weapon2_name.innerHTML = "";
 
-	weapon1_damage.innerHTML = "";
-	weapon1_bonus.innerHTML = "";
-	weapon1_shock.innerHTML = "";
+    	weapon1_damage.innerHTML = "";
+    	weapon1_bonus.innerHTML = "";
+    	weapon1_shock.innerHTML = "";
     	weapon2_damage.innerHTML = "";
-	weapon2_bonus.innerHTML = "";
-	weapon2_shock.innerHTML = "";
+    	weapon2_bonus.innerHTML = "";
+    	weapon2_shock.innerHTML = "";
 
-	armor1_name.innerHTML = "";
-	armor2_name.innerHTML = "";
+    	armor1_name.innerHTML = "";
+    	armor2_name.innerHTML = "";
 	
-	armor1_AC.innerHTML = "";
-	armor2_AC.innerHTML = "";
+    	armor1_AC.innerHTML = "";
+    	armor2_AC.innerHTML = "";
 
-	credits.innerHTML = "";
-	break;
+    	credits.innerHTML = "";
+    	break;
     }
 
-
-//    var technique_texts = [];
 
     var technique_text = "";
     
@@ -2779,19 +2777,6 @@ function fillOutSheet(){
     }
 
 
-    
-    // for (var i = 0;i < 3; i++){
-    // 	if(i<technique_texts.length){
-    // 	    techniqueElems[i].innerHTML = technique_texts[i];
-    // 	}
-    // 	else{
-    // 	    techniqueElems[i].innerHTML = "";
-    // 	}
-    // }
-
-    // for (var i = 0;i < technique_texts.length; i++){
-    // 	technique_text = technique_text+technique_texts[i];
-    // }
     technique.innerHTML = technique_text;
 
     
@@ -2822,77 +2807,399 @@ function fillOutSheet(){
     positionElement(charisma_mod, 1319, 341);
     positionElement(effort, 1370, 936);
     positionElement(BAB,595,302);
-    positionElement(foci1, 482, 402,"font-size:14px;width:405px;");
+    positionElement(foci1, 482, 396,"font-size:18px;width:405px;");
     positionElement(foci1_level, 903, 407);
-    positionElement(foci2, 482, 467,"font-size:14px;width:405px;");
+    positionElement(foci2, 482, 461,"font-size:18px;width:405px;");
     positionElement(foci2_level, 903, 472);
-    positionElement(foci3, 482, 532,"font-size:14px;width:405px;");
+    positionElement(foci3, 482, 526,"font-size:18px;width:405px;");
     positionElement(foci3_level, 903, 537);
 
     for (var fociElem of fociElems){
-	if($("#form_element_"+formElements.indexOf(fociElem)).height()>55){
-	    fociElem.style.fontSize = "12px";
-	    fociElem.style.top = (parseInt(fociElem.style.top.slice(0,-2))+5)+"px";
-	}
+	shrinkText(fociElem, 55, formElements);
     }
     
 
-    positionElement(administer, 343, 37);
-    positionElement(connect, 343, 51);
-    positionElement(exert, 343, 65);
-    positionElement(fix, 343, 79);
-    positionElement(heal, 343, 93);
-    positionElement(know, 343, 107);
-    positionElement(lead, 343, 121);
-    positionElement(notice, 343, 135);
-    positionElement(perform, 343, 149);
+    positionElement(administer, 598, 17);
+    positionElement(connect, 598, 42);
+    positionElement(exert, 598, 68);
+    positionElement(fix, 598, 94);
+    positionElement(heal, 598, 120);
+    positionElement(know, 598, 146);
+    positionElement(lead, 598, 172);
+    positionElement(notice, 598, 198);
+    positionElement(perform, 598, 224);
 
-    positionElement(pilot, 427, 37);
-    positionElement(program, 427, 51);
-    positionElement(punch, 427, 65);
-    positionElement(shoot, 427, 79);
-    positionElement(sneak, 427, 93);
-    positionElement(stab, 427, 107);
-    positionElement(survive, 427, 121);
-    positionElement(talk, 427, 135);
-    positionElement(trade, 427, 149);
+    positionElement(pilot, 754, 17);
+    positionElement(program, 754, 42);
+    positionElement(punch, 754, 68);
+    positionElement(shoot, 754, 94);
+    positionElement(sneak, 754, 120);
+    positionElement(stab, 754, 146);
+    positionElement(survive, 754, 172);
+    positionElement(talk, 754, 198);
+    positionElement(trade, 754, 224);
 
-    positionElement(work, 511, 37);
-    positionElement(biopsionics, 511, 51);
-    positionElement(metapsionics, 511, 65);
-    positionElement(precognition, 511, 79);
-    positionElement(telekinesis, 511, 93);
-    positionElement(telepathy, 511, 107);
-    positionElement(teleportation, 511, 121);
+    positionElement(work, 910, 17);
+    positionElement(biopsionics, 910, 42);
+    positionElement(metapsionics, 910, 68);
+    positionElement(precognition, 910, 94);
+    positionElement(telekinesis, 910, 120);
+    positionElement(telepathy, 910, 146);
+    positionElement(teleportation, 910, 172);
 
-    positionElement(weapon1_name, 65, 290);
-    positionElement(weapon2_name, 65, 326);
+    for (var elem of skillElements){
+	centerElement(elem, formElements);
+    }
+    
+    positionElement(weapon1_name, 80, 485);
+    positionElement(weapon2_name, 80, 550);
 
-    positionElement(weapon1_bonus,205,296);
-    positionElement(weapon2_bonus,205,332);
+    positionElement(weapon1_bonus,350,495);
+    positionElement(weapon2_bonus,350,560);
+    centerElement(weapon1_bonus,formElements);
+    centerElement(weapon2_bonus,formElements);
 
-    positionElement(weapon1_damage,225,296);
-    positionElement(weapon2_damage,225,332);
+    positionElement(weapon1_damage,385, 495);
+    positionElement(weapon2_damage,385, 560);
 
-    positionElement(weapon1_shock,217,312,"font-size:8px;");
-    positionElement(weapon2_shock,217,348,"font-size:8px;");
+    positionElement(weapon1_shock,370,530,"font-size:14px;");
+    positionElement(weapon2_shock,370,595,"font-size:14px;");
 
-    positionElement(armor1_name, 65, 486);
-    positionElement(armor2_name, 65, 522);
+    positionElement(armor1_name, 80, 847);
+    positionElement(armor2_name, 80, 912);
 
-    positionElement(armor1_AC, 253, 492);
-    positionElement(armor2_AC, 253, 528);
+    positionElement(armor1_AC, 440, 858);
+    positionElement(armor2_AC, 440, 923);
+    centerElement(armor1_AC,formElements);
+    centerElement(armor2_AC,formElements);
 
-    positionElement(credits , 285, 562);
+    positionElement(credits , 490, 978);
 
-    positionElement(technique, 534, 355,"font-size:6px;width:240px;");
-    // positionElement(technique2, 534, 415,"font-size:6px;width:240px;");
-    // positionElement(technique3, 534, 475,"font-size:6px;width:240px;");
+    positionElement(technique, 944, 610,"font-size:17px;width:450px;");
 
+    shrinkText(technique,330,formElements);
+    
 }
+
+function fillOutSheetPage2(){
+    var elem = document.getElementById("character_sheet");  
+    $("#character_sheet p").remove();
+
+    var goals = document.createElement("p");
+    var notes = document.createElement("p");
+    var stowedEquipment1 = document.createElement("p");
+    var stowedEquipment2 = document.createElement("p");
+    var stowedEquipment3 = document.createElement("p");
+    var stowedEquipment4 = document.createElement("p");
+    var stowedEquipment5 = document.createElement("p");
+    var stowedEquipment6 = document.createElement("p");
+    var stowedEquipment7 = document.createElement("p");
+    var stowedEquipment8 = document.createElement("p");
+    var stowedEquipment9 = document.createElement("p");
+    var stowedEquipment10 = document.createElement("p");
+    var stowedEquipment11 = document.createElement("p");
+    var stowedEquipment12 = document.createElement("p");
+    var stowedEquipment13 = document.createElement("p");
+    var stowedEquipment14 = document.createElement("p");
+    var stowedEquipment15 = document.createElement("p");
+    var stowedEquipment16 = document.createElement("p");
+    var stowedEquipment17 = document.createElement("p");
+    var stowedEquipment18 = document.createElement("p");
+    var encumberance1 = document.createElement("p");
+    var encumberance2 = document.createElement("p");
+    var encumberance3 = document.createElement("p");
+    var encumberance4 = document.createElement("p");
+    var encumberance5 = document.createElement("p");
+    var encumberance6 = document.createElement("p");
+    var encumberance7 = document.createElement("p");
+    var encumberance8 = document.createElement("p");
+    var encumberance9 = document.createElement("p");
+    var encumberance10 = document.createElement("p");
+    var encumberance11 = document.createElement("p");
+    var encumberance12 = document.createElement("p");
+    var encumberance13 = document.createElement("p");
+    var encumberance14 = document.createElement("p");
+    var encumberance15 = document.createElement("p");
+    var encumberance16 = document.createElement("p");
+    var encumberance17 = document.createElement("p");
+    var encumberance18 = document.createElement("p");
+    var otherEquipment1 = document.createElement("p");
+    var otherEquipment2 = document.createElement("p");
+    var otherEquipment3 = document.createElement("p");
+    var otherEquipment4 = document.createElement("p");
+    var otherEquipment5 = document.createElement("p");
+
+    var encumberanceElements = [encumberance1, encumberance2, encumberance3, encumberance4, encumberance5, encumberance6, encumberance7, encumberance8, encumberance9, encumberance10, encumberance11, encumberance12, encumberance13, encumberance14, encumberance15, encumberance16, encumberance17, encumberance18];
+    var formElements = [goals, notes, stowedEquipment1, stowedEquipment2, stowedEquipment3, stowedEquipment4, stowedEquipment5, stowedEquipment6, stowedEquipment7, stowedEquipment8, stowedEquipment9, stowedEquipment10, stowedEquipment11, stowedEquipment12, stowedEquipment13, stowedEquipment14, stowedEquipment15, stowedEquipment16, stowedEquipment17, stowedEquipment18, otherEquipment1, otherEquipment1, otherEquipment2, otherEquipment3, otherEquipment4, otherEquipment5].concat(encumberanceElements);
+
+
+    for (var element of formElements){
+	element.setAttribute("class","formText");
+	element.setAttribute("id","form_element_"+formElements.indexOf(element));
+	element.innerHTML = "test";
+	elem.appendChild(element);
+    }
+
+    goals.innerHTML = $("#goals").val();
+    notes.innerHTML = $("#notes").val();
+
+    alert($("#equipment_packages").val());
+    
+    switch($("#equipment_packages").val()){
+    case "barbarian":
+    	stowedEquipment1.innerHTML = "Spear";
+	stowedEquipment2.innerHTML = "Primitive hide armor";
+	stowedEquipment3.innerHTML = "Primitive shield";
+	stowedEquipment4.innerHTML = "Knife";
+	stowedEquipment5.innerHTML = "Backpack (TL0)";
+	stowedEquipment6.innerHTML = "7 days rations";
+	stowedEquipment7.innerHTML = "20m rope";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "1";
+	encumberance3.innerHTML = "2";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "1";
+	encumberance6.innerHTML = "3";
+	encumberance7.innerHTML = "2";
+	
+	break;
+    case "blade":
+	stowedEquipment1.innerHTML = "Monoblade sword";
+	stowedEquipment2.innerHTML = "Woven body armor";
+	stowedEquipment3.innerHTML = "Secure clothing";
+	stowedEquipment4.innerHTML = "Thermal knife";
+	stowedEquipment5.innerHTML = "Backpack (TL0)";
+	stowedEquipment6.innerHTML = "Lazarus patch";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "2";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "1";
+	encumberance6.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+	
+	break;
+    case "thief":
+	stowedEquipment1.innerHTML = "Laser pistol";
+	stowedEquipment2.innerHTML = "Armored undersuit";
+	stowedEquipment3.innerHTML = "Monoblade knife";
+	stowedEquipment4.innerHTML = "Climbing harness";
+	stowedEquipment5.innerHTML = "Low-light goggles";
+	stowedEquipment6.innerHTML = "2 type A cells";
+	stowedEquipment7.innerHTML = "Backpack (TL0)";
+	stowedEquipment8.innerHTML = "Metatool";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "0";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "1";
+	encumberance6.innerHTML = "1";
+	encumberance7.innerHTML = "1";
+	encumberance8.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+	break;
+    case "hacker":
+	stowedEquipment1.innerHTML = "Laser pistol";
+	stowedEquipment2.innerHTML = "Secure clothing";
+	stowedEquipment3.innerHTML = "Postech toolkit";
+	stowedEquipment4.innerHTML = "3 units of spare parts";
+	stowedEquipment5.innerHTML = "2 type A cells";
+	stowedEquipment6.innerHTML = "Dataslab";
+	stowedEquipment7.innerHTML = "Metatool";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "1";
+	encumberance3.innerHTML = "3";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "1";
+	encumberance6.innerHTML = "1";
+	encumberance7.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "2 line shunts";
+	break;
+    case "gunslinger":
+	stowedEquipment1.innerHTML = "Laser pistol";
+	stowedEquipment2.innerHTML = "Armored undersuit";
+	stowedEquipment3.innerHTML = "Monoblade knife";
+	stowedEquipment4.innerHTML = "8 type A cells";
+	stowedEquipment5.innerHTML = "Backpack (TL0)";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "0";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "3";
+	encumberance5.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+	break;
+    case "soldier":
+	stowedEquipment1.innerHTML = "Combat rifle";
+	stowedEquipment2.innerHTML = "Woven body armor";
+	stowedEquipment3.innerHTML = "Knife";
+	stowedEquipment4.innerHTML = "80 rounds ammo";
+	stowedEquipment5.innerHTML = "Backpack (TL0)";
+
+	encumberance1.innerHTML = "2";
+	encumberance2.innerHTML = "2";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "2";
+	encumberance5.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+
+	break;
+    case "scout":
+	stowedEquipment1.innerHTML = "Laser rifle";
+	stowedEquipment2.innerHTML = "Armored vacc suit";
+	stowedEquipment3.innerHTML = "Knife";
+	stowedEquipment4.innerHTML = "Survey scanner";
+	stowedEquipment5.innerHTML = "Binoculars (TL3)";
+	stowedEquipment6.innerHTML = "8 type A cells";
+	stowedEquipment7.innerHTML = "Backpack (TL0)";
+
+	encumberance1.innerHTML = "2";
+	encumberance2.innerHTML = "2";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "1";
+	encumberance6.innerHTML = "3";
+	encumberance7.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+	break;
+    case "medic":
+	stowedEquipment1.innerHTML = "Laser pistol";
+	stowedEquipment2.innerHTML = "Secure clothing";
+	stowedEquipment3.innerHTML = "4 Lazarus patches";
+	stowedEquipment4.innerHTML = "Backpack (TL0)";
+	stowedEquipment5.innerHTML = "Medkit";
+	stowedEquipment6.innerHTML = "Bioscanner";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "1";
+	encumberance3.innerHTML = "2";
+	encumberance4.innerHTML = "1";
+	encumberance5.innerHTML = "2";
+	encumberance6.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "2 doses of Lift";
+	otherEquipment2.innerHTML = "Compad";
+
+	break;
+    case "civilian":
+	stowedEquipment1.innerHTML = "Secure clothing";
+
+	encumberance1.innerHTML = "1";
+
+	otherEquipment1.innerHTML = "Compad";
+	break;
+    case "technician":
+	stowedEquipment1.innerHTML = "Laser pistol";
+	stowedEquipment2.innerHTML = "Armored undersuit";
+	stowedEquipment3.innerHTML = "Monoblade knife";
+	stowedEquipment4.innerHTML = "Postech toolkit";
+	stowedEquipment5.innerHTML = "6 units of spare parts";
+	stowedEquipment6.innerHTML = "4 type A cells";
+	stowedEquipment7.innerHTML = "Backpack (TL0)";
+	stowedEquipment8.innerHTML = "Dataslab";
+	stowedEquipment9.innerHTML = "Metatool";
+
+	encumberance1.innerHTML = "1";
+	encumberance2.innerHTML = "0";
+	encumberance3.innerHTML = "1";
+	encumberance4.innerHTML = "3";
+	encumberance5.innerHTML = "2";
+	encumberance6.innerHTML = "2";
+	encumberance7.innerHTML = "1";
+	encumberance8.innerHTML = "1";
+	encumberance9.innerHTML = "1";
+
+
+	break;
+    case "custom":
+	break;
+    default:
+    	break;
+    }
+
+    positionElement(goals,944, 840, "font-size:18px;width:450px;");
+    shrinkText(goals, 200, formElements);
+
+    positionElement(notes,482, 10, "font-size:18px;width:450px;");
+    shrinkText(notes, 280, formElements);
+
+    positionElement(stowedEquipment1, 5, 5);
+    positionElement(stowedEquipment2, 5, 31);
+    positionElement(stowedEquipment3, 5, 57);
+    positionElement(stowedEquipment4, 5, 83);
+    positionElement(stowedEquipment5, 5, 109);
+    positionElement(stowedEquipment6, 5, 135);
+    positionElement(stowedEquipment7, 5, 161);
+    positionElement(stowedEquipment8, 5, 187);
+    positionElement(stowedEquipment9, 5, 213);
+    positionElement(stowedEquipment10, 5, 239);
+    positionElement(stowedEquipment11, 5, 265);
+    positionElement(stowedEquipment12, 5, 291);
+    positionElement(stowedEquipment13, 5, 317);
+    positionElement(stowedEquipment14, 5, 343);
+    positionElement(stowedEquipment15, 5, 369);
+    positionElement(stowedEquipment16, 5, 395);
+    positionElement(stowedEquipment17, 5, 421);
+    positionElement(stowedEquipment18, 5, 447);
+
+    positionElement(encumberance1, 446, 5);
+    positionElement(encumberance2, 446, 31);
+    positionElement(encumberance3, 446, 57);
+    positionElement(encumberance4, 446, 83);
+    positionElement(encumberance5, 446, 109);
+    positionElement(encumberance6, 446, 135);
+    positionElement(encumberance7, 446, 161);
+    positionElement(encumberance8, 446, 187);
+    positionElement(encumberance9, 446, 213);
+    positionElement(encumberance10, 446, 239);
+    positionElement(encumberance11, 446, 265);
+    positionElement(encumberance12, 446, 291);
+    positionElement(encumberance13, 446, 317);
+    positionElement(encumberance14, 446, 343);
+    positionElement(encumberance15, 446, 369);
+    positionElement(encumberance16, 446, 395);
+    positionElement(encumberance17, 446, 421);
+    positionElement(encumberance18, 446, 447);
+
+    for (var element of encumberanceElements){
+	centerElement(element, formElements);
+    }
+
+    positionElement(otherEquipment1, 5, 511);
+    positionElement(otherEquipment2, 5, 537);
+    positionElement(otherEquipment3, 5, 563);
+    positionElement(otherEquipment4, 5, 589);
+    positionElement(otherEquipment5, 5, 615);
+    
+}
+
 
 function positionElement(elem,left,top,existingstyle=""){
     elem.setAttribute("style",existingstyle+"left:"+left+"px;top:"+top+"px;");
+}
+
+function shrinkText(elem, maxHeight, formElements){
+    var currFontSize = parseInt((elem.style.fontSize).slice(0,-2));
+    var currTop = parseInt((elem.style.top).slice(0,-2));
+
+    while (($("#form_element_"+formElements.indexOf(elem)).height()>maxHeight)&& currFontSize>1){
+	currFontSize--;
+	currTop++;
+//	alert("Shrinking to "+currFontSize+" px font!");
+	elem.style.fontSize = currFontSize+"px";
+	elem.style.top = currTop+"px";
+    }
+    
 }
 
   
@@ -2906,8 +3213,6 @@ function displayBonus(val){
     return "+"+val
 }
 
-function fillOutSheet_page2(){
-    $("#character_sheet p").remove();
-
-    
+function centerElement(elem,formElements){
+    elem.style.left = (parseInt(elem.style.left.slice(0,-2))-($("#form_element_"+formElements.indexOf(elem)).width())/2)+"px";
 }
