@@ -389,12 +389,13 @@ input[type=checkbox]{
 .tooltip .tooltiptext {
     font-style:normal;
     visibility: hidden;
-    width: 500px;
+    /*width: 500px;*/
+    white-space: nowrap;
     background-color: #555;
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 2px;
+    padding: 5px 5px;
     position: absolute;
     z-index: 1;
     top: 100%;
@@ -487,7 +488,7 @@ input[type=checkbox]{
 
 .dotbox .tooltiptext {
   visibility: hidden;
-  width: 400px;  
+  width: 410px;  
   background-color: #555;
   color: #fff;
   text-align: center;
