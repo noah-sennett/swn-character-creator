@@ -3389,8 +3389,8 @@ function fillOutSheetPage1_jspdf(){
     console.log(divHeight);
     var ratio = divHeight / divWidth;
     html2canvas(document.getElementById("character_sheet_img"), {
-//	height: divHeight,
-	//	width: divWidth,
+	height: divHeight,
+	width: divWidth,
 	allowTaint:true,
 	useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
 	onrendered: function(canvas) {
@@ -3407,7 +3407,7 @@ function fillOutSheetPage1_jspdf(){
 	    console.log(width);
 	    console.log(height);
             height = ratio * width;
-            doc.addImage(image, 'png', 0, 0, width-20, height-10);
+            doc.addImage(image, 'png', 0, 0, width, height);
             doc.save('myPage.pdf'); //Download the rendered PDF.
 	}
     });
