@@ -6,15 +6,15 @@ $(document).ready(function () {
 
     $("button").click(function(){
 	fillOutSheetPage1();
-//	$("#character_sheet").show();
 	$("#character_sheet_img").show();
 	$("#character_sheet_img2").hide();
         $("#character_sheet").printThis({
             debug: false,             
-            importCSS: false,            
+            importCSS: true,            
             importStyle: false,         
-            printContainer: true,      
-	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+            printContainer: true,
+	    loadCSS: "",
+//	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
 //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
             pageTitle: "",             
             removeInline: false,    
@@ -47,8 +47,8 @@ $(document).ready(function () {
 		    canvas: false,              
 		    doctypeString: "",      
 		    removeScripts: false,       
-		    copyTagClasses: false
-//		    afterPrint: function(){$("#character_sheet").hide();}
+		    copyTagClasses: false,
+		    afterPrint: function(){$("#character_sheet_img2").hide();}
 		});
 	    }
 	});
@@ -2905,13 +2905,13 @@ function fillOutSheetPage1(){
 
     portrait.setAttribute("id","form_portrait");
     var portraitSource = $("#portrait_holder").attr('src');
-    // For some browsers, `attr` is undefined; for others,
-    // `attr` is false.  Check for both.
-    if (typeof attr !== typeof undefined && attr !== false) {
+    // For some browsers, `portraitSource` is undefined; for others,
+    // `portraitSource` is false.  Check for both.
+    if (typeof portraitSource !== typeof undefined && portraitSource !== false) {
 	portrait.src = $("#portrait_holder").attr("src");
 	portrait.setAttribute("style","max-height:253px; max-width:236px; height:auto; width:auto;left:5px;top:82px;position:absolute;");
-	centerPortrait(portrait);
 	elem.appendChild(portrait);
+	centerPortrait(portrait);
     }
 	
     positionElement(name,105,17);
