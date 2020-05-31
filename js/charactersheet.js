@@ -3388,7 +3388,7 @@ function fillOutSheetPage1_jspdf(){
     console.log(divWidth);
     console.log(divHeight);
     var ratio = divHeight / divWidth;
-    html2canvas(document.getElementById("character_sheet_img"), {
+    html2canvas(document.getElementById("character_sheet"), {
 	height: divHeight,
 	width: divWidth,
 	allowTaint:true,
