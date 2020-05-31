@@ -2861,13 +2861,14 @@ function fillOutSheetPage1(){
 
     portrait.setAttribute("id","form_portrait");
     var portraitSource = $("#portrait_holder").attr('src');
+
     // For some browsers, `portraitSource` is undefined; for others,
     // `portraitSource` is false.  Check for both.
     if (typeof portraitSource !== typeof undefined && portraitSource !== false) {
 	portrait.src = $("#portrait_holder").attr("src");
-	portrait.setAttribute("style","max-height:253px; max-width:236px; height:auto; width:auto;left:39px;top:94px;position:absolute;");
-	centerPortrait(portrait);
+	portrait.setAttribute("style","max-height:240px; max-width:223px; height:auto; width:auto;left:41px;top:120px;position:absolute;");
 	elem.appendChild(portrait);
+	centerPortrait(portrait);
     }
 	
     positionElement(name,136,56);
@@ -3338,8 +3339,9 @@ function centerElement(elem,formElements){
 }
 
 function centerPortrait(portrait){
-    portrait.style.left = (parseInt(portrait.style.left.slice(0,-2))+(236-portrait.clientWidth)/2)+"px";
-    portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(253-portrait.clientHeight)/2)+"px";
+    alert((223-portrait.clientWidth)/2);
+    portrait.style.left = (parseInt(portrait.style.left.slice(0,-2))+(223-portrait.clientWidth)/2)+"px";
+    portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(240-portrait.clientHeight)/2)+"px";
 }
 
 function saveCharacterSheet(){
