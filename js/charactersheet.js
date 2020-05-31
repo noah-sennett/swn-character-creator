@@ -5,53 +5,54 @@ $(document).ready(function () {
 
 
     $("button").click(function(){
-	fillOutSheetPage1();
-//	$("#character_sheet").show();
 	$("#character_sheet_img").show();
-	$("#character_sheet_img2").hide();
-        $("#character_sheet").printThis({
-            debug: false,             
-            importCSS: false,            
-            importStyle: false,         
-            printContainer: true,      
-	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-//	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-            pageTitle: "",             
-            removeInline: false,    
-            printDelay: 4000,      
-            header: null,        
-            footer: null,            
-            base: false ,              
-            formValues: true,          
-            canvas: false,              
-            doctypeString: "",      
-            removeScripts: false,       
-            copyTagClasses: false,
-	    afterPrint: function(){
-		$("#character_sheet_img").hide();
-		$("#character_sheet_img2").show();
-		fillOutSheetPage2();
-		$("#character_sheet").printThis({
-		    debug: false,             
-		    importCSS: false,            
-		    importStyle: false,         
-		    printContainer: true,      
-		    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-		    pageTitle: "",             
-		    removeInline: false,    
-		    printDelay: 4000,      
-		    header: null,        
-		    footer: null,            
-		    base: false ,              
-		    formValues: true,          
-		    canvas: false,              
-		    doctypeString: "",      
-		    removeScripts: false,       
-		    copyTagClasses: false
-//		    afterPrint: function(){$("#character_sheet").hide();}
-		});
-	    }
-	});
+	fillOutSheetPage1_jspdf();
+//	$("#character_sheet").show();
+//	$("#character_sheet_img").show();
+// 	$("#character_sheet_img2").hide();
+//         $("#character_sheet").printThis({
+//             debug: false,             
+//             importCSS: false,            
+//             importStyle: false,         
+//             printContainer: true,      
+// 	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+// //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
+//             pageTitle: "",             
+//             removeInline: false,    
+//             printDelay: 4000,      
+//             header: null,        
+//             footer: null,            
+//             base: false ,              
+//             formValues: true,          
+//             canvas: false,              
+//             doctypeString: "",      
+//             removeScripts: false,       
+//             copyTagClasses: false,
+// 	    afterPrint: function(){
+// 		$("#character_sheet_img").hide();
+// 		$("#character_sheet_img2").show();
+// 		fillOutSheetPage2();
+// 		$("#character_sheet").printThis({
+// 		    debug: false,             
+// 		    importCSS: false,            
+// 		    importStyle: false,         
+// 		    printContainer: true,      
+// 		    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+// 		    pageTitle: "",             
+// 		    removeInline: false,    
+// 		    printDelay: 4000,      
+// 		    header: null,        
+// 		    footer: null,            
+// 		    base: false ,              
+// 		    formValues: true,          
+// 		    canvas: false,              
+// 		    doctypeString: "",      
+// 		    removeScripts: false,       
+// 		    copyTagClasses: false
+// //		    afterPrint: function(){$("#character_sheet").hide();}
+// 		});
+// 	    }
+// 	});
 
     });             
 
@@ -3376,3 +3377,47 @@ function centerPortrait(portrait){
     portrait.style.left = (parseInt(portrait.style.left.slice(0,-2))+(236-portrait.clientWidth)/2)+"px";
     portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(253-portrait.clientHeight)/2)+"px";
 }
+
+function fillOutSheetPage1_jspdf(){
+
+
+    var divHeight = $('#character_sheet').height();
+    var divWidth = $('#character_sheet').width();
+    console.log(divWidth);
+    console.log(divHeight);
+    var ratio = divHeight / divWidth;
+    html2canvas(document.getElementById("character_sheet_img"), {
+//	height: divHeight,
+	//	width: divWidth,
+	allowTaint:true,
+	useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
+	onrendered: function(canvas) {
+            var image = canvas.toDataURL("image/png");
+//	    var image = canvas.toDataURL();
+
+	    window.open(image);
+	      
+
+	    
+            // var doc = new jsPDF("landscape"); // using defaults: orientation=portrait, unit=mm, size=A4
+            // var width = doc.internal.pageSize.width;    
+            // var height = doc.internal.pageSize.height;
+	    // console.log(width);
+	    // console.log(height);
+            // height = ratio * width;
+            // doc.addImage(image, 'png', 0, 0, width-20, height-10);
+            // doc.save('myPage.pdf'); //Download the rendered PDF.
+	}
+    });
+    
+    
+}
+
+/**
+ * Display a base64 URL inside an iframe in another window.
+ */
+function debugBase64(base64URL){
+    var win = window.open();
+    win.document.write('<iframe src="' + base64URL  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
+}
+
