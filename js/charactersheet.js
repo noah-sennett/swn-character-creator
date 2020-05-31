@@ -6,6 +6,7 @@ $(document).ready(function () {
 
     $("button").click(function(){
 	$("#character_sheet_img").show();
+	fillOutSheetPage1();
 	fillOutSheetPage1_jspdf();
 //	$("#character_sheet").show();
 //	$("#character_sheet_img").show();
