@@ -3339,7 +3339,6 @@ function centerElement(elem,formElements){
 }
 
 function centerPortrait(portrait){
-    alert((223-portrait.clientWidth)/2);
     portrait.style.left = (parseInt(portrait.style.left.slice(0,-2))+(223-portrait.clientWidth)/2)+"px";
     portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(240-portrait.clientHeight)/2)+"px";
 }
