@@ -5,57 +5,7 @@ $(document).ready(function () {
 
 
     $("button").click(function(){
-	$("#character_sheet_img").show();
-	fillOutSheetPage1();
-	fillOutSheetPage2();
-//	fillOutSheetPage1_jspdf();
-//	$("#character_sheet").show();
-//	$("#character_sheet_img").show();
-// 	$("#character_sheet_img2").hide();
-//         $("#character_sheet").printThis({
-//             debug: false,             
-//             importCSS: false,            
-//             importStyle: false,         
-//             printContainer: true,      
-// 	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-// //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-//             pageTitle: "",             
-//             removeInline: false,    
-//             printDelay: 4000,      
-//             header: null,        
-//             footer: null,            
-//             base: false ,              
-//             formValues: true,          
-//             canvas: false,              
-//             doctypeString: "",      
-//             removeScripts: false,       
-//             copyTagClasses: false,
-// 	    afterPrint: function(){
-// 		$("#character_sheet_img").hide();
-// 		$("#character_sheet_img2").show();
-// 		fillOutSheetPage2();
-// 		$("#character_sheet").printThis({
-// 		    debug: false,             
-// 		    importCSS: false,            
-// 		    importStyle: false,         
-// 		    printContainer: true,      
-// 		    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-// 		    pageTitle: "",             
-// 		    removeInline: false,    
-// 		    printDelay: 4000,      
-// 		    header: null,        
-// 		    footer: null,            
-// 		    base: false ,              
-// 		    formValues: true,          
-// 		    canvas: false,              
-// 		    doctypeString: "",      
-// 		    removeScripts: false,       
-// 		    copyTagClasses: false
-// //		    afterPrint: function(){$("#character_sheet").hide();}
-// 		});
-// 	    }
-// 	});
-
+	showCharacterSheet().then(fillOutCharacterSheet).then(saveCharacterSheet).then(hideCharacterSheet);
     });             
 
     
@@ -2374,6 +2324,7 @@ function computeEffort(){
 }
 
 function fillOutSheetPage1(){
+//    var d = $.Deferred();
     var elem = document.getElementById("character_sheet");  
     $("#character_sheet p").remove();
     $("#character_sheet #form_portrait").remove();
@@ -3042,11 +2993,14 @@ function fillOutSheetPage1(){
     positionElement(technique, 935, 617,"font-size:17px;width:427px;");
     shrinkText(technique,323,formElements);
 
-//    callback();
+//    d.resolve();
+    
+//    return  d.promise();
 
 }
 
 function fillOutSheetPage2(){
+//    var d = $.Deferred();
     var elem = document.getElementById("character_sheet2");  
     $("#character_sheet2 p").remove();
 
@@ -3344,6 +3298,11 @@ function fillOutSheetPage2(){
     positionElement(otherEquipment4, 44, 591);
     positionElement(otherEquipment5, 44, 616);
     
+//    d.resolve();
+    
+//    return  d.promise();
+
+
 }
 
 
@@ -3384,61 +3343,114 @@ function centerPortrait(portrait){
     portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(253-portrait.clientHeight)/2)+"px";
 }
 
-function fillOutSheetPage1_jspdf(){
+function saveCharacterSheet(){
+    var d = $.Deferred();
 
 
-    var divWidth = $('#character_sheet').width();
-    var divHeight = $('#character_sheet').height();
-    var ratio = divHeight / divWidth;
+	var divWidth = $('#character_sheet').width();
+	var divHeight = $('#character_sheet').height();
+	var ratio = divHeight / divWidth;
+	
+	var doc = new jsPDF("landscape", "cm", "letter"); // using defaults: orientation=portrait, unit=mm, size=A4
+	
+	html2canvas(document.getElementById("character_sheet"), {
+	    width: divWidth,
+	    allowTaint:true,
+	    useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
+	    onrendered: function(canvas) {
+		var image = canvas.toDataURL("image/png");
+		//	    var image = canvas.toDataURL();
+		
+		//	    window.open(image);
+		
+		
+		
+		
+		var width = doc.internal.pageSize.width;    
+		var height = doc.internal.pageSize.height;
+		height = ratio * width;
+		doc.addImage(image, 'png', 0, 0, width, height);
+		
+		html2canvas(document.getElementById("character_sheet2"), {
+		    width: divWidth,
+		    allowTaint:true,
+		    useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
+		    onrendered: function(canvas) {
+			var image2 = canvas.toDataURL("image/png");
+			//	    var image = canvas.toDataURL();
+			
+			//	    window.open(image);
+			
+			
+			
+			
+			var width2 = doc.internal.pageSize.width;    
+			var height2 = doc.internal.pageSize.height;
+			height2 = ratio * width2;
+			doc.addPage();
+			doc.addImage(image2, 'png', 0, 0, width2, height2);
+			
 
-    var doc = new jsPDF("landscape", "cm", "letter"); // using defaults: orientation=portrait, unit=mm, size=A4
+			var filename ='character_sheet.pdf';
+			if($("#name").val()!="") filename=$("#name").val()+"_character_sheet.pdf";
+			doc.save(filename); //Download the rendered PDF.
+
+			d.resolve();
+		    }
+		});
+		
+		
+	    }
+	});
+	
+	
+    return  d.promise();
     
-    html2canvas(document.getElementById("character_sheet"), {
-	width: divWidth,
-	allowTaint:true,
-	useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
-	onrendered: function(canvas) {
-            var image = canvas.toDataURL("image/png");
-	    //	    var image = canvas.toDataURL();
-	    
-	    //	    window.open(image);
-	    
-	    
-	    
-	    
-            var width = doc.internal.pageSize.width;    
-            var height = doc.internal.pageSize.height;
-            height = ratio * width;
-            doc.addImage(image, 'png', 0, 0, width, height);
-	    
-	    html2canvas(document.getElementById("character_sheet2"), {
-		width: divWidth,
-		allowTaint:true,
-		useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
-		onrendered: function(canvas) {
-		    var image2 = canvas.toDataURL("image/png");
-		    //	    var image = canvas.toDataURL();
-		    
-		    //	    window.open(image);
-		    
-		    
-		    
-		    
-		    var width2 = doc.internal.pageSize.width;    
-		    var height2 = doc.internal.pageSize.height;
-		    height2 = ratio * width2;
-		    doc.addPage();
-		    doc.addImage(image2, 'png', 0, 0, width2, height2);
-		    
-	    
-		    doc.save('myPage.pdf'); //Download the rendered PDF.    
-		}
-	    });
-	    
+}
 
-	}
-    });  
 
+
+function hideCharacterSheet(){
+    var d = $.Deferred();
+    setTimeout(function(){
+	$("#character_sheet").hide();
+	$("#character_sheet2").hide();
+
+	d.resolve();
+    },1);
+
+    return d.promise();
 
 }
 
+function showCharacterSheet(){
+    var d = $.Deferred();
+
+    setTimeout(function(){
+	$("#character_sheet").show();
+	$("#character_sheet2").show();
+	
+	d.resolve();
+    },1);
+    
+    return d.promise();
+
+
+//    cb1(cb2,cb3);
+    
+}
+
+function fillOutCharacterSheet(){
+    var d = $.Deferred();
+
+    setTimeout(function(){
+	fillOutSheetPage1();
+	fillOutSheetPage2();
+
+	d.resolve();
+    },1);
+    
+    return  d.promise();
+
+}   
+    
