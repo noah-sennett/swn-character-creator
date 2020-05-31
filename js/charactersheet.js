@@ -5,55 +5,7 @@ $(document).ready(function () {
 
 
     $("button").click(function(){
-	$("#character_sheet_img").show();
-	fillOutSheetPage1(function(){fillOutSheetPage1_jspdf();});
-//	$("#character_sheet").show();
-//	$("#character_sheet_img").show();
-// 	$("#character_sheet_img2").hide();
-//         $("#character_sheet").printThis({
-//             debug: false,             
-//             importCSS: false,            
-//             importStyle: false,         
-//             printContainer: true,      
-// 	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-// //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-//             pageTitle: "",             
-//             removeInline: false,    
-//             printDelay: 4000,      
-//             header: null,        
-//             footer: null,            
-//             base: false ,              
-//             formValues: true,          
-//             canvas: false,              
-//             doctypeString: "",      
-//             removeScripts: false,       
-//             copyTagClasses: false,
-// 	    afterPrint: function(){
-// 		$("#character_sheet_img").hide();
-// 		$("#character_sheet_img2").show();
-// 		fillOutSheetPage2();
-// 		$("#character_sheet").printThis({
-// 		    debug: false,             
-// 		    importCSS: false,            
-// 		    importStyle: false,         
-// 		    printContainer: true,      
-// 		    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-// 		    pageTitle: "",             
-// 		    removeInline: false,    
-// 		    printDelay: 4000,      
-// 		    header: null,        
-// 		    footer: null,            
-// 		    base: false ,              
-// 		    formValues: true,          
-// 		    canvas: false,              
-// 		    doctypeString: "",      
-// 		    removeScripts: false,       
-// 		    copyTagClasses: false
-// //		    afterPrint: function(){$("#character_sheet").hide();}
-// 		});
-// 	    }
-// 	});
-
+	showCharacterSheet().then(fillOutCharacterSheet).then(saveCharacterSheet).then(hideCharacterSheet);
     });             
 
     
@@ -2371,10 +2323,11 @@ function computeEffort(){
     elemEffort.innerHTML = maxEffort;
 }
 
-function fillOutSheetPage1(callback){
+function fillOutSheetPage1(){
+//    var d = $.Deferred();
     var elem = document.getElementById("character_sheet");  
-//    $("#character_sheet p").remove();
-//    $("#character_sheet #form_portrait").remove();
+    $("#character_sheet p").remove();
+    $("#character_sheet #form_portrait").remove();
     
     
     var name = document.createElement("p");
@@ -2459,17 +2412,18 @@ function fillOutSheetPage1(callback){
     var technique = document.createElement("p");
     var range_close = document.createElement("p");
     var range_far = document.createElement("p");
-
+    var test = document.createElement("p");
+    
     var portrait = document.createElement("img");
 
 
     var skillElements = [administer, connect, exert, fix, heal, know, lead, notice, perform, pilot, program, punch, shoot, sneak, stab, survive, talk, trade, work, biopsionics, metapsionics, precognition, telekinesis, telepathy, teleportation];
     
-    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC, armor3_name, armor3_AC, armor4_name, armor4_AC,credits, technique, range_close, range_far].concat(skillElements);
+    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC, armor3_name, armor3_AC, armor4_name, armor4_AC,credits, technique, range_close, range_far, test].concat(skillElements);
     
     for (var element of formElements){
 	element.setAttribute("class","formText");
-	element.setAttribute("id","form_element_"+formElements.indexOf(element));
+	element.setAttribute("id","form_element_page1_"+formElements.indexOf(element));
 	elem.appendChild(element);
     }
     
@@ -2516,22 +2470,23 @@ function fillOutSheetPage1(callback){
     var sorted_picks = picked_foci;
     sorted_picks.sort();
     for (var i =0; i< 3; i++){
-	if(i< sorted_picks.length){
-	    if(usedFoci.includes(sorted_picks[i])){
-		fociElems[i].innerHTML = "<strong>"+foci[sorted_picks[i]]["name"]+":</strong> "+foci[sorted_picks[i]]["level2abbreviated"];
-		fociLevelElems[i].innerHTML = "2";
-	    }
-	    else{
-		fociElems[i].innerHTML = "<strong>"+foci[sorted_picks[i]]["name"]+":</strong> "+foci[sorted_picks[i]]["level1abbreviated"];
-		fociLevelElems[i].innerHTML = "1";
-	    }
-	    usedFoci.push(sorted_picks[i]);
-	}
-	else{
-	    fociElems[i].innerHTML = "";
-	    fociLevelElems[i].innerHTML = "";
-	}
-    }  
+    	if(i< sorted_picks.length){
+    	    if(usedFoci.includes(sorted_picks[i])){
+    		fociElems[i].innerHTML = "<strong>"+foci[sorted_picks[i]]["name"]+":</strong> "+foci[sorted_picks[i]]["level2abbreviated"];
+    		fociLevelElems[i].innerHTML = "2";
+    	    }
+    	    else{
+    		fociElems[i].innerHTML = "<strong>"+foci[sorted_picks[i]]["name"]+":</strong> "+foci[sorted_picks[i]]["level1abbreviated"];
+    		fociLevelElems[i].innerHTML = "1";
+    	    }
+    	    usedFoci.push(sorted_picks[i]);
+    	}
+    	else{
+    	    fociElems[i].innerHTML = "";
+    	    fociLevelElems[i].innerHTML = "";
+    	}
+    }
+    
     
     var skillKeys = Object.keys(skills);
     
@@ -2906,145 +2861,148 @@ function fillOutSheetPage1(callback){
 
     portrait.setAttribute("id","form_portrait");
     var portraitSource = $("#portrait_holder").attr('src');
+
     // For some browsers, `attr` is undefined; for others,
     // `attr` is false.  Check for both.
     if (typeof attr !== typeof undefined && attr !== false) {
 	portrait.src = $("#portrait_holder").attr("src");
-	portrait.setAttribute("style","max-height:253px; max-width:236px; height:auto; width:auto;left:5px;top:82px;position:absolute;");
+	portrait.setAttribute("style","max-height:253px; max-width:236px; height:auto; width:auto;left:39px;top:94px;position:absolute;");
 	centerPortrait(portrait);
 	elem.appendChild(portrait);
     }
 	
-    positionElement(name,105,17);
-    positionElement(background,345,56);
-    positionElement(Class,344,186);
-    positionElement(subclass,265,216);
-    positionElement(level,326,276);
-    positionElement(homeworld,105,327);
-    positionElement(employer,105,366);
-    positionElement(species,105,405);
-    positionElement(hp, 1173,29);
+    positionElement(name,136,56);
+    positionElement(background,364,93);
+    positionElement(Class,364,216);
+    positionElement(subclass,288,247);
+    positionElement(level,344,301);
+    positionElement(homeworld,136,351);
+    positionElement(employer,136,389);
+    positionElement(species,136,426);
+    positionElement(hp, 1147,67);
     centerElement(hp,formElements);
-    positionElement(strain, 1173,185);
+    positionElement(strain, 1147,214);
     centerElement(strain,formElements);
-    positionElement(physical, 985, 354);
+    positionElement(physical, 970, 374);
     centerElement(physical, formElements);
-    positionElement(evasion, 1065, 354);
+    positionElement(evasion, 1047, 374);
     centerElement(evasion,formElements);
-    positionElement(mental, 1147, 354);
+    positionElement(mental, 1125, 374);
     centerElement(mental, formElements);
-    positionElement(strength, 1312, 82);
+    positionElement(strength, 1280, 118);
     centerElement(strength, formElements);
-    positionElement(strength_mod, 1344, 82);
-    positionElement(dexterity, 1287, 134);
+    positionElement(strength_mod, 1310, 118);
+    positionElement(dexterity, 1258, 167);
     centerElement(dexterity, formElements);
-    positionElement(dexterity_mod, 1319, 134);
-    positionElement(constitution, 1312, 185);
+    positionElement(dexterity_mod, 1288, 167);
+    positionElement(constitution, 1280, 216);
     centerElement(constitution, formElements);
-    positionElement(constitution_mod, 1344, 185);
-    positionElement(intelligence, 1287, 237);
+    positionElement(constitution_mod, 1310, 216);
+    positionElement(intelligence, 1258, 265);
     centerElement(intelligence, formElements);
-    positionElement(intelligence_mod, 1319, 237);
-    positionElement(wisdom, 1312, 289);
+    positionElement(intelligence_mod, 1288, 265);
+    positionElement(wisdom, 1280, 314);
     centerElement(wisdom, formElements);
-    positionElement(wisdom_mod, 1344, 289);
-    positionElement(charisma, 1287, 341);
+    positionElement(wisdom_mod, 1310, 314);
+    positionElement(charisma, 1258, 363);
     centerElement(charisma, formElements);
-    positionElement(charisma_mod, 1319, 341);
-    positionElement(effort, 1379, 936);
+    positionElement(charisma_mod, 1288, 363);
+    positionElement(effort, 1342, 927);
     centerElement(effort,formElements);
-    positionElement(BAB,605,302);
+    positionElement(BAB,610,326);
     centerElement(BAB, formElements);
-    positionElement(foci1, 482, 397,"font-size:18px;width:405px;");
-    positionElement(foci1_level, 920, 407);
+    positionElement(foci1, 493, 419,"font-size:18px;width:385px;");
+    positionElement(foci1_level, 897, 424);
     centerElement(foci1_level, formElements);
-    positionElement(foci2, 482, 462,"font-size:18px;width:405px;");
-    positionElement(foci2_level, 920, 472);
-    centerElement(foci1_level, formElements);
-    positionElement(foci3, 482, 527,"font-size:18px;width:405px;");
-    positionElement(foci3_level, 920, 537);
-    centerElement(foci1_level, formElements);
+    positionElement(foci2, 493, 481,"font-size:18px;width:385px;");
+    positionElement(foci2_level, 897, 486);
+    centerElement(foci2_level, formElements);
+    positionElement(foci3, 493, 543,"font-size:18px;width:385px;");
+    positionElement(foci3_level, 897, 548);
+    centerElement(foci3_level, formElements);
 
     for (var fociElem of fociElems){
-	shrinkText(fociElem, 55, formElements);
+	shrinkText(fociElem, 50, formElements);
     }
     
 
-    positionElement(administer, 598, 17);
-    positionElement(connect, 598, 42);
-    positionElement(exert, 598, 68);
-    positionElement(fix, 598, 94);
-    positionElement(heal, 598, 120);
-    positionElement(know, 598, 146);
-    positionElement(lead, 598, 172);
-    positionElement(notice, 598, 198);
-    positionElement(perform, 598, 224);
+    positionElement(administer, 603, 56);
+    positionElement(connect, 603, 81);
+    positionElement(exert, 603, 106);
+    positionElement(fix, 603, 130);
+    positionElement(heal, 603, 155);
+    positionElement(know, 603, 180);
+    positionElement(lead, 603, 204);
+    positionElement(notice, 603, 228);
+    positionElement(perform, 603, 253);
 
-    positionElement(pilot, 754, 17);
-    positionElement(program, 754, 42);
-    positionElement(punch, 754, 68);
-    positionElement(shoot, 754, 94);
-    positionElement(sneak, 754, 120);
-    positionElement(stab, 754, 146);
-    positionElement(survive, 754, 172);
-    positionElement(talk, 754, 198);
-    positionElement(trade, 754, 224);
+    positionElement(pilot, 751, 56);
+    positionElement(program, 751, 81);
+    positionElement(punch, 751, 106);
+    positionElement(shoot, 751, 130);
+    positionElement(sneak, 751, 155);
+    positionElement(stab, 751, 180);
+    positionElement(survive, 751, 204);
+    positionElement(talk, 751, 228);
+    positionElement(trade, 751, 253);
 
-    positionElement(work, 910, 17);
-    positionElement(biopsionics, 910, 42);
-    positionElement(metapsionics, 910, 68);
-    positionElement(precognition, 910, 94);
-    positionElement(telekinesis, 910, 120);
-    positionElement(telepathy, 910, 146);
-    positionElement(teleportation, 910, 172);
+    positionElement(work, 899, 56);
+    positionElement(biopsionics, 899, 81);
+    positionElement(metapsionics, 899, 106);
+    positionElement(precognition, 899, 130);
+    positionElement(telekinesis, 899, 155);
+    positionElement(telepathy, 899, 1180);
+    positionElement(teleportation, 899, 204);
 
     for (var elem of skillElements){
 	centerElement(elem, formElements);
     }
     
-    positionElement(weapon1_name, 80, 485);
-    positionElement(weapon2_name, 80, 550);
-    positionElement(weapon3_name, 80, 615);
+    positionElement(weapon1_name, 110, 498);
+    positionElement(weapon2_name, 110, 561);
+    positionElement(weapon3_name, 110, 624);
 
-    positionElement(weapon1_bonus,350,495);
-    positionElement(weapon2_bonus,350,560);
-    positionElement(weapon3_bonus,350,625);
+    positionElement(weapon1_bonus,365,510);
+    positionElement(weapon2_bonus,365,573);
+    positionElement(weapon3_bonus,365,646);
     centerElement(weapon1_bonus,formElements);
     centerElement(weapon2_bonus,formElements);
     centerElement(weapon3_bonus,formElements);
 
-    positionElement(weapon1_damage,385, 495);
-    positionElement(weapon2_damage,385, 560);
-    positionElement(weapon3_damage,385, 625);
+    positionElement(weapon1_damage,397, 510);
+    positionElement(weapon2_damage,397, 573);
+    positionElement(weapon3_damage,397, 646);
 
-    positionElement(weapon1_shock,370,530,"font-size:14px;");
-    positionElement(weapon2_shock,370,595,"font-size:14px;");
-    positionElement(weapon3_shock,370,660,"font-size:14px;");
+    positionElement(weapon1_shock,384,544,"font-size:14px;");
+    positionElement(weapon2_shock,384,607,"font-size:14px;");
+    positionElement(weapon3_shock,384,670,"font-size:14px;");
 
-    positionElement(range_close,272,496,"font-size:14px;");
-    positionElement(range_far,304,496,"font-size:14px;");
+    positionElement(range_close,294,512,"font-size:14px;");
+    positionElement(range_far,323,512,"font-size:14px;");
     
-    positionElement(armor1_name, 80, 847);
-    positionElement(armor2_name, 80, 912);
+    positionElement(armor1_name, 110, 843);
+    positionElement(armor2_name, 110, 905);
 
-    positionElement(armor1_AC, 440, 858);
-    positionElement(armor2_AC, 440, 923);
+    positionElement(armor1_AC, 452, 856);
+    positionElement(armor2_AC, 452, 915);
     centerElement(armor1_AC,formElements);
     centerElement(armor2_AC,formElements);
 
-    positionElement(credits , 490, 978);
+    positionElement(credits , 490, 965);
 
-    positionElement(technique, 944, 610,"font-size:17px;width:450px;");
-    shrinkText(technique,330,formElements);
+    positionElement(technique, 935, 617,"font-size:17px;width:427px;");
+    shrinkText(technique,323,formElements);
 
-    callback();
+//    d.resolve();
+    
+//    return  d.promise();
 
 }
 
 function fillOutSheetPage2(){
-    var elem = document.getElementById("character_sheet");  
-    $("#character_sheet p").remove();
-    $("#character_sheet #form_portrait").remove();
+//    var d = $.Deferred();
+    var elem = document.getElementById("character_sheet2");  
+    $("#character_sheet2 p").remove();
 
     var goals = document.createElement("p");
     var notes = document.createElement("p");
@@ -3096,14 +3054,14 @@ function fillOutSheetPage2(){
 
     for (var element of formElements){
 	element.setAttribute("class","formText");
-	element.setAttribute("id","form_element_"+formElements.indexOf(element));
+	element.setAttribute("id","form_element_page2_"+formElements.indexOf(element));
 	elem.appendChild(element);
     }
 
 
     goals.innerHTML = $("#goals").val();
     notes.innerHTML = $("#notes").val();
-    
+
     switch($("#equipment_packages").val()){
     case "barbarian":
     	stowedEquipment1.innerHTML = "Spear";
@@ -3286,60 +3244,65 @@ function fillOutSheetPage2(){
     	break;
     }
 
-    positionElement(goals,944, 840, "font-size:18px;width:450px;");
-    shrinkText(goals, 200, formElements);
+    positionElement(goals,935, 830, "font-size:18px;width:425px;");
+    shrinkText(goals, 190, formElements);
 
-    positionElement(notes,482, 10, "font-size:18px;width:450px;");
+    positionElement(notes,490, 43, "font-size:18px;width:426px;");
     shrinkText(notes, 280, formElements);
 
-    positionElement(stowedEquipment1, 5, 5);
-    positionElement(stowedEquipment2, 5, 31);
-    positionElement(stowedEquipment3, 5, 57);
-    positionElement(stowedEquipment4, 5, 83);
-    positionElement(stowedEquipment5, 5, 109);
-    positionElement(stowedEquipment6, 5, 135);
-    positionElement(stowedEquipment7, 5, 161);
-    positionElement(stowedEquipment8, 5, 187);
-    positionElement(stowedEquipment9, 5, 213);
-    positionElement(stowedEquipment10, 5, 239);
-    positionElement(stowedEquipment11, 5, 265);
-    positionElement(stowedEquipment12, 5, 291);
-    positionElement(stowedEquipment13, 5, 317);
-    positionElement(stowedEquipment14, 5, 343);
-    positionElement(stowedEquipment15, 5, 369);
-    positionElement(stowedEquipment16, 5, 395);
-    positionElement(stowedEquipment17, 5, 421);
-    positionElement(stowedEquipment18, 5, 447);
+    positionElement(stowedEquipment1, 44, 36);
+    positionElement(stowedEquipment2, 44, 61);
+    positionElement(stowedEquipment3, 44, 86);
+    positionElement(stowedEquipment4, 44, 111);
+    positionElement(stowedEquipment5, 44, 136);
+    positionElement(stowedEquipment6, 44, 161);
+    positionElement(stowedEquipment7, 44, 186);
+    positionElement(stowedEquipment8, 44, 211);
+    positionElement(stowedEquipment9, 44, 236);
+    positionElement(stowedEquipment10, 44, 261);
+    positionElement(stowedEquipment11, 44, 286);
+    positionElement(stowedEquipment12, 44, 311);
+    positionElement(stowedEquipment13, 44, 336);
+    positionElement(stowedEquipment14, 44, 361);
+    positionElement(stowedEquipment15, 44, 386);
+    positionElement(stowedEquipment16, 44, 411);
+    positionElement(stowedEquipment17, 44, 436);
+    positionElement(stowedEquipment18, 44, 461);
 
-    positionElement(encumberance1, 446, 5);
-    positionElement(encumberance2, 446, 31);
-    positionElement(encumberance3, 446, 57);
-    positionElement(encumberance4, 446, 83);
-    positionElement(encumberance5, 446, 109);
-    positionElement(encumberance6, 446, 135);
-    positionElement(encumberance7, 446, 161);
-    positionElement(encumberance8, 446, 187);
-    positionElement(encumberance9, 446, 213);
-    positionElement(encumberance10, 446, 239);
-    positionElement(encumberance11, 446, 265);
-    positionElement(encumberance12, 446, 291);
-    positionElement(encumberance13, 446, 317);
-    positionElement(encumberance14, 446, 343);
-    positionElement(encumberance15, 446, 369);
-    positionElement(encumberance16, 446, 395);
-    positionElement(encumberance17, 446, 421);
-    positionElement(encumberance18, 446, 447);
+    positionElement(encumberance1, 461, 36);
+    positionElement(encumberance2, 461, 61);
+    positionElement(encumberance3, 461, 86);
+    positionElement(encumberance4, 461, 111);
+    positionElement(encumberance5, 461, 136);
+    positionElement(encumberance6, 461, 161);
+    positionElement(encumberance7, 461, 186);
+    positionElement(encumberance8, 461, 211);
+    positionElement(encumberance9, 461, 236);
+    positionElement(encumberance10, 461, 261);
+    positionElement(encumberance11, 461, 286);
+    positionElement(encumberance12, 461, 311);
+    positionElement(encumberance13, 461, 336);
+    positionElement(encumberance14, 461, 361);
+    positionElement(encumberance15, 461, 386);
+    positionElement(encumberance16, 461, 411);
+    positionElement(encumberance17, 461, 436);
+    positionElement(encumberance18, 461, 461);
 
     for (var element of encumberanceElements){
 	centerElement(element, formElements);
     }
 
-    positionElement(otherEquipment1, 5, 511);
-    positionElement(otherEquipment2, 5, 537);
-    positionElement(otherEquipment3, 5, 563);
-    positionElement(otherEquipment4, 5, 589);
-    positionElement(otherEquipment5, 5, 615);
+    positionElement(otherEquipment1, 44, 516);
+    positionElement(otherEquipment2, 44, 541);
+    positionElement(otherEquipment3, 44, 566);
+    positionElement(otherEquipment4, 44, 591);
+    positionElement(otherEquipment5, 44, 616);
     
+//    d.resolve();
+    
+//    return  d.promise();
+
+
 }
 
 
@@ -3350,8 +3313,8 @@ function positionElement(elem,left,top,existingstyle=""){
 function shrinkText(elem, maxHeight, formElements){
     var currFontSize = parseInt((elem.style.fontSize).slice(0,-2));
     var currTop = parseInt((elem.style.top).slice(0,-2));
-
-    while (($("#form_element_"+formElements.indexOf(elem)).height()>maxHeight)&& currFontSize>1){
+    
+    while (($("#"+elem.id).height()>maxHeight)&& currFontSize>1){
 	currFontSize--;
 	currTop++;
 	elem.style.fontSize = currFontSize+"px";
@@ -3372,7 +3335,7 @@ function displayBonus(val){
 }
 
 function centerElement(elem,formElements){
-    elem.style.left = (parseInt(elem.style.left.slice(0,-2))-($("#form_element_"+formElements.indexOf(elem)).width())/2)+"px";
+    elem.style.left = (parseInt(elem.style.left.slice(0,-2))-($("#"+elem.id).width())/2)+"px";
 }
 
 function centerPortrait(portrait){
@@ -3380,38 +3343,114 @@ function centerPortrait(portrait){
     portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(253-portrait.clientHeight)/2)+"px";
 }
 
-function fillOutSheetPage1_jspdf(){
+function saveCharacterSheet(){
+    var d = $.Deferred();
 
 
-    var divHeight = $('#character_sheet').height();
-    var divWidth = $('#character_sheet').width();
-    console.log(divWidth);
-    console.log(divHeight);
-    var ratio = divHeight / divWidth;
-    html2canvas(document.getElementById("character_sheet"), {
-	height: divHeight,
-	width: divWidth,
-	allowTaint:true,
-	useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
-	onrendered: function(canvas) {
-            var image = canvas.toDataURL("image/png");
-//	    var image = canvas.toDataURL();
+	var divWidth = $('#character_sheet').width();
+	var divHeight = $('#character_sheet').height();
+	var ratio = divHeight / divWidth;
+	
+	var doc = new jsPDF("landscape", "cm", "letter"); // using defaults: orientation=portrait, unit=mm, size=A4
+	
+	html2canvas(document.getElementById("character_sheet"), {
+	    width: divWidth,
+	    allowTaint:true,
+	    useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
+	    onrendered: function(canvas) {
+		var image = canvas.toDataURL("image/png");
+		//	    var image = canvas.toDataURL();
+		
+		//	    window.open(image);
+		
+		
+		
+		
+		var width = doc.internal.pageSize.width;    
+		var height = doc.internal.pageSize.height;
+		height = ratio * width;
+		doc.addImage(image, 'png', 0, 0, width, height);
+		
+		html2canvas(document.getElementById("character_sheet2"), {
+		    width: divWidth,
+		    allowTaint:true,
+		    useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
+		    onrendered: function(canvas) {
+			var image2 = canvas.toDataURL("image/png");
+			//	    var image = canvas.toDataURL();
+			
+			//	    window.open(image);
+			
+			
+			
+			
+			var width2 = doc.internal.pageSize.width;    
+			var height2 = doc.internal.pageSize.height;
+			height2 = ratio * width2;
+			doc.addPage();
+			doc.addImage(image2, 'png', 0, 0, width2, height2);
+			
 
-//	    window.open(image);
-	      
+			var filename ='character_sheet.pdf';
+			if($("#name").val()!="") filename=$("#name").val()+"_character_sheet.pdf";
+			doc.save(filename); //Download the rendered PDF.
 
-	    
-            var doc = new jsPDF("landscape", "cm", "letter"); // using defaults: orientation=portrait, unit=mm, size=A4
-            var width = doc.internal.pageSize.width;    
-            var height = doc.internal.pageSize.height;
-	    console.log(width);
-	    console.log(height);
-            height = ratio * width;
-            doc.addImage(image, 'png', 0, 0, width, height);
-            doc.save('myPage.pdf'); //Download the rendered PDF.
-	}
-    });
-    
+			d.resolve();
+		    }
+		});
+		
+		
+	    }
+	});
+	
+	
+    return  d.promise();
     
 }
 
+
+
+function hideCharacterSheet(){
+    var d = $.Deferred();
+    setTimeout(function(){
+	$("#character_sheet").hide();
+	$("#character_sheet2").hide();
+
+	d.resolve();
+    },1);
+
+    return d.promise();
+
+}
+
+function showCharacterSheet(){
+    var d = $.Deferred();
+
+    setTimeout(function(){
+	$("#character_sheet").show();
+	$("#character_sheet2").show();
+	
+	d.resolve();
+    },1);
+    
+    return d.promise();
+
+
+//    cb1(cb2,cb3);
+    
+}
+
+function fillOutCharacterSheet(){
+    var d = $.Deferred();
+
+    setTimeout(function(){
+	fillOutSheetPage1();
+	fillOutSheetPage2();
+
+	d.resolve();
+    },1);
+    
+    return  d.promise();
+
+}   
+    
