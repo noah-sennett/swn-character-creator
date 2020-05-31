@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title> Character Builder </title>
 
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Play&family=Source+Sans+Pro&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Play&family=Source+Sans+Pro&display=swap" rel="stylesheet">
     
     
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -17,7 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
     
     <script src="js/charactersheet.js"></script>
-    <!-- <script src="js/printThis.js"></script> -->
+    <script src="js/printThis.js"></script>
 
 
     
@@ -83,7 +83,7 @@
 		  </span>
 		</div>
 		<div class="item val">  <span id="strength_attr"></span>
-		  <!-- <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"> -->
+		  <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true">
 		</div>
 		<div class="item mod"><span id="strength_mod">+0 </span></div>
 
@@ -93,7 +93,7 @@
 		</div>
 		<div class="item val">
 		  <span id="dexterity_attr"></span>
-		  <!-- <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"> -->
+		  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true">
 		</div>
 		<div class="item mod"><span id="dexterity_mod">+0 </span></div>
 		
@@ -103,7 +103,7 @@
 		</div>
 		<div class="item val">
 		  <span id="constitution_attr"></span>
-		  <!-- <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"> -->
+		  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true">
 		</div>
 		<div class="item mod"><span id="constitution_mod">+0 </span></div>
 	      	
@@ -113,7 +113,7 @@
 		</div>
 		<div class="item val">
 		  <span id="intelligence_attr"></span>
-		  <!-- <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"> -->
+		  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true">
 		</div>
 		<div class="item mod"><span id="intelligence_mod">+0 </span></div>
 		
@@ -123,7 +123,7 @@
 		</div>
 		<div class="item val">
 		  <span id="wisdom_attr"></span>
-		  <!-- <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"> -->
+		  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true">
 		</div>
 		<div class="item mod"><span id="wisdom_mod">+0 </span></div>
 		
@@ -133,7 +133,7 @@
 		</div>
 		<div class="item val">
 		  <span id="charisma_attr"></span>
-		  <!-- <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"> -->
+		  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true">
 		</div>
 		<div class="item mod"><span id="charisma_mod">+0 </span></div>
 		
@@ -239,7 +239,7 @@
 	  </div>
 	  <div id="topRowRightContainer" style="position:relative">
 	    <div id="topRowRight" class="topRowRight">
-	      <!-- <div style="width:100%;height:10px;"></div> -->
+	      <div style="width:100%;height:10px;"></div>
 	      <div style="display:inline-grid; grid-template-columns: 90px 101px 70px 100px 105px 101px;">
 		<div style="font-size: 1.5em; padding-left: 8px;" class="heading"> Skill </div>
 		<div style="font-size:1.5em" class="heading">Rank</div>
@@ -387,8 +387,8 @@
 		      <div class="topLayer" id="growth_button" style="font-size:1.1em;width:100%;position:relative;"> <strong> Roll on Growth Table </strong></div>
 		      <div class="topLayer" id="learning_button" style="font-size:1.1em;width:100%;position:relative;"> <strong> Roll on Learning Table </strong></div>
 		    </div>
-		    <!-- <button id="growth_button" onclick="rollGrowth();">Roll on Growth Table</button> -->
-		    <!-- <button id="learning_button" onclick="rollLearning();">Roll on Learning Table </button> -->
+		    <button id="growth_button" onclick="rollGrowth();">Roll on Growth Table</button>
+		    <button id="learning_button" onclick="rollLearning();">Roll on Learning Table </button>
 		  </div>
 		</div>
 	      </div>	    
@@ -864,7 +864,7 @@
     </div>
 
     <div  id="character_sheet" style="display:block;position:relative;width:1400px">
-      <!-- test -->
+      test
       <img src="https://noah-sennett.github.io/swn-character-creator/assets/StarsWithoutNumberRevised-Character_Sheet-Form.png" alt="Character Sheet" style="width:100%;display:block" id="character_sheet_img" crossorigin="anonymous">
       <!-- <img src="https://noah-sennett.github.io/swn-character-creator/assets/StarsWithoutNumberRevised-Character_Sheet-Form_page2.png" alt="Character Sheet" style="width:100%;display:none;" id="character_sheet_img2"> -->
     </div>

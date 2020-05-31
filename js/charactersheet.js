@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     $("button").click(function(){
 	$("#character_sheet_img").show();
-	fillOutSheetPage1();
+	fillOutSheetPage1(function(){fillOutSheetPage1_jspdf();});
 //	$("#character_sheet").show();
 //	$("#character_sheet_img").show();
 // 	$("#character_sheet_img2").hide();
@@ -2371,7 +2371,7 @@ function computeEffort(){
     elemEffort.innerHTML = maxEffort;
 }
 
-function fillOutSheetPage1(){
+function fillOutSheetPage1(callback){
     var elem = document.getElementById("character_sheet");  
     $("#character_sheet p").remove();
     $("#character_sheet #form_portrait").remove();
@@ -3037,7 +3037,8 @@ function fillOutSheetPage1(){
     positionElement(technique, 944, 610,"font-size:17px;width:450px;");
     shrinkText(technique,330,formElements);
 
-    fillOutSheetPage1_jspdf();
+    callback();
+
 }
 
 function fillOutSheetPage2(){
