@@ -2377,7 +2377,7 @@ function fillOutSheetPage1(callback){
 //    $("#character_sheet #form_portrait").remove();
     
     
-    var name = document.createElement("p");
+    var name = document.createElement("div");
     var background = document.createElement("p");
     var Class  = document.createElement("p");
     var subclass  = document.createElement("p");
@@ -2473,7 +2473,7 @@ function fillOutSheetPage1(callback){
 	elem.appendChild(element);
     }
     
-    name.innerHTML = $("#name").val();
+    name.innerHTML = "<p>"+$("#name").val()+"</p>";
     background.innerHTML = $("#backgrounds_mirror option:selected").text();
 
     if($("#class_mirror option:selected").text().includes("/")){
