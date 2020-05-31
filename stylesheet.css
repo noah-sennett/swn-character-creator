@@ -716,7 +716,7 @@ h2{
 .formText{
     position:absolute;
     font-family: 'Source Sans Pro', sans-serif;
-    font-size:22px;
+    font-size:44px;
 }
 
 
@@ -727,10 +727,10 @@ h2{
     right: 10px;
 }
 
-@media print {
-    #character_sheet {
-        display: block;
-	position:relative;
-	width:800px
-   }
-}
+/* @media print { */
+/*     #character_sheet { */
+/*         display: block; */
+/* 	position:relative; */
+/* 	width:800px */
+/*    } */
+/* } */
