@@ -5,53 +5,54 @@ $(document).ready(function () {
 
 
     $("button").click(function(){
-	fillOutSheetPage1();
 	$("#character_sheet_img").show();
-	$("#character_sheet_img2").hide();
-        $("#character_sheet").printThis({
-            debug: false,             
-            importCSS: true,            
-            importStyle: false,         
-            printContainer: true,
-	    loadCSS: "",
-//	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-//	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
-            pageTitle: "",             
-            removeInline: false,    
-            printDelay: 4000,      
-            header: null,        
-            footer: null,            
-            base: false ,              
-            formValues: true,          
-            canvas: false,              
-            doctypeString: "",      
-            removeScripts: false,       
-            copyTagClasses: false,
-	    afterPrint: function(){
-		$("#character_sheet_img").hide();
-		$("#character_sheet_img2").show();
-		fillOutSheetPage2();
-		$("#character_sheet").printThis({
-		    debug: false,             
-		    importCSS: false,            
-		    importStyle: false,         
-		    printContainer: true,      
-		    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
-		    pageTitle: "",             
-		    removeInline: false,    
-		    printDelay: 4000,      
-		    header: null,        
-		    footer: null,            
-		    base: false ,              
-		    formValues: true,          
-		    canvas: false,              
-		    doctypeString: "",      
-		    removeScripts: false,       
-		    copyTagClasses: false,
-		    afterPrint: function(){$("#character_sheet_img2").hide();}
-		});
-	    }
-	});
+	fillOutSheetPage1(function(){fillOutSheetPage1_jspdf();});
+//	$("#character_sheet").show();
+//	$("#character_sheet_img").show();
+// 	$("#character_sheet_img2").hide();
+//         $("#character_sheet").printThis({
+//             debug: false,             
+//             importCSS: false,            
+//             importStyle: false,         
+//             printContainer: true,      
+// 	    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+// //	    loadCSS: "/home/noah/js_projects/swn-character-creator/stylesheet.css",
+//             pageTitle: "",             
+//             removeInline: false,    
+//             printDelay: 4000,      
+//             header: null,        
+//             footer: null,            
+//             base: false ,              
+//             formValues: true,          
+//             canvas: false,              
+//             doctypeString: "",      
+//             removeScripts: false,       
+//             copyTagClasses: false,
+// 	    afterPrint: function(){
+// 		$("#character_sheet_img").hide();
+// 		$("#character_sheet_img2").show();
+// 		fillOutSheetPage2();
+// 		$("#character_sheet").printThis({
+// 		    debug: false,             
+// 		    importCSS: false,            
+// 		    importStyle: false,         
+// 		    printContainer: true,      
+// 		    loadCSS: "https://noah-sennett.github.io/swn-character-creator/stylesheet.css",
+// 		    pageTitle: "",             
+// 		    removeInline: false,    
+// 		    printDelay: 4000,      
+// 		    header: null,        
+// 		    footer: null,            
+// 		    base: false ,              
+// 		    formValues: true,          
+// 		    canvas: false,              
+// 		    doctypeString: "",      
+// 		    removeScripts: false,       
+// 		    copyTagClasses: false
+// //		    afterPrint: function(){$("#character_sheet").hide();}
+// 		});
+// 	    }
+// 	});
 
     });             
 
@@ -2370,10 +2371,10 @@ function computeEffort(){
     elemEffort.innerHTML = maxEffort;
 }
 
-function fillOutSheetPage1(){
+function fillOutSheetPage1(callback){
     var elem = document.getElementById("character_sheet");  
-    $("#character_sheet p").remove();
-    $("#character_sheet #form_portrait").remove();
+//    $("#character_sheet p").remove();
+//    $("#character_sheet #form_portrait").remove();
     
     
     var name = document.createElement("p");
@@ -2905,13 +2906,13 @@ function fillOutSheetPage1(){
 
     portrait.setAttribute("id","form_portrait");
     var portraitSource = $("#portrait_holder").attr('src');
-    // For some browsers, `portraitSource` is undefined; for others,
-    // `portraitSource` is false.  Check for both.
-    if (typeof portraitSource !== typeof undefined && portraitSource !== false) {
+    // For some browsers, `attr` is undefined; for others,
+    // `attr` is false.  Check for both.
+    if (typeof attr !== typeof undefined && attr !== false) {
 	portrait.src = $("#portrait_holder").attr("src");
 	portrait.setAttribute("style","max-height:253px; max-width:236px; height:auto; width:auto;left:5px;top:82px;position:absolute;");
-	elem.appendChild(portrait);
 	centerPortrait(portrait);
+	elem.appendChild(portrait);
     }
 	
     positionElement(name,105,17);
@@ -3035,7 +3036,9 @@ function fillOutSheetPage1(){
 
     positionElement(technique, 944, 610,"font-size:17px;width:450px;");
     shrinkText(technique,330,formElements);
-    
+
+    callback();
+
 }
 
 function fillOutSheetPage2(){
@@ -3376,3 +3379,39 @@ function centerPortrait(portrait){
     portrait.style.left = (parseInt(portrait.style.left.slice(0,-2))+(236-portrait.clientWidth)/2)+"px";
     portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(253-portrait.clientHeight)/2)+"px";
 }
+
+function fillOutSheetPage1_jspdf(){
+
+
+    var divHeight = $('#character_sheet').height();
+    var divWidth = $('#character_sheet').width();
+    console.log(divWidth);
+    console.log(divHeight);
+    var ratio = divHeight / divWidth;
+    html2canvas(document.getElementById("character_sheet"), {
+	height: divHeight,
+	width: divWidth,
+	allowTaint:true,
+	useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
+	onrendered: function(canvas) {
+            var image = canvas.toDataURL("image/png");
+//	    var image = canvas.toDataURL();
+
+//	    window.open(image);
+	      
+
+	    
+            var doc = new jsPDF("landscape", "cm", "letter"); // using defaults: orientation=portrait, unit=mm, size=A4
+            var width = doc.internal.pageSize.width;    
+            var height = doc.internal.pageSize.height;
+	    console.log(width);
+	    console.log(height);
+            height = ratio * width;
+            doc.addImage(image, 'png', 0, 0, width, height);
+            doc.save('myPage.pdf'); //Download the rendered PDF.
+	}
+    });
+    
+    
+}
+
