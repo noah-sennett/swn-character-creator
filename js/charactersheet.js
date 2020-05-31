@@ -2377,7 +2377,7 @@ function fillOutSheetPage1(callback){
 //    $("#character_sheet #form_portrait").remove();
     
     
-    var name = document.createElement("div");
+    var name = document.createElement("p");
     var background = document.createElement("p");
     var Class  = document.createElement("p");
     var subclass  = document.createElement("p");
@@ -2473,7 +2473,7 @@ function fillOutSheetPage1(callback){
 	elem.appendChild(element);
     }
     
-    name.innerHTML = "<p>"+$("#name").val()+"</p>";
+    name.innerHTML = $("#name").val();
     background.innerHTML = $("#backgrounds_mirror option:selected").text();
 
     if($("#class_mirror option:selected").text().includes("/")){
@@ -3397,18 +3397,18 @@ function fillOutSheetPage1_jspdf(){
             var image = canvas.toDataURL("image/png");
 //	    var image = canvas.toDataURL();
 
-	    window.open(image);
+//	    window.open(image);
 	      
 
 	    
-            // var doc = new jsPDF("landscape"); // using defaults: orientation=portrait, unit=mm, size=A4
-            // var width = doc.internal.pageSize.width;    
-            // var height = doc.internal.pageSize.height;
-	    // console.log(width);
-	    // console.log(height);
-            // height = ratio * width;
-            // doc.addImage(image, 'png', 0, 0, width-20, height-10);
-            // doc.save('myPage.pdf'); //Download the rendered PDF.
+            var doc = new jsPDF("landscape"); // using defaults: orientation=portrait, unit=mm, size=A4
+            var width = doc.internal.pageSize.width;    
+            var height = doc.internal.pageSize.height;
+	    console.log(width);
+	    console.log(height);
+            height = ratio * width;
+            doc.addImage(image, 'png', 0, 0, width-20, height-10);
+            doc.save('myPage.pdf'); //Download the rendered PDF.
 	}
     });
     
