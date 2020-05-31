@@ -3401,7 +3401,7 @@ function fillOutSheetPage1_jspdf(){
 	      
 
 	    
-            var doc = new jsPDF("landscape"); // using defaults: orientation=portrait, unit=mm, size=A4
+            var doc = new jsPDF("landscape", "letter"); // using defaults: orientation=portrait, unit=mm, size=A4
             var width = doc.internal.pageSize.width;    
             var height = doc.internal.pageSize.height;
 	    console.log(width);
