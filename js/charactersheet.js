@@ -3339,7 +3339,6 @@ function centerElement(elem,formElements){
 }
 
 function centerPortrait(portrait){
-    alert((223-portrait.clientWidth)/2);
     portrait.style.left = (parseInt(portrait.style.left.slice(0,-2))+(223-portrait.clientWidth)/2)+"px";
     portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(240-portrait.clientHeight)/2)+"px";
 }
@@ -3360,13 +3359,7 @@ function saveCharacterSheet(){
 	    useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
 	    onrendered: function(canvas) {
 		var image = canvas.toDataURL("image/png");
-		//	    var image = canvas.toDataURL();
-		
-		//	    window.open(image);
-		
-		
-		
-		
+
 		var width = doc.internal.pageSize.width;    
 		var height = doc.internal.pageSize.height;
 		height = ratio * width;
@@ -3378,12 +3371,6 @@ function saveCharacterSheet(){
 		    useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
 		    onrendered: function(canvas) {
 			var image2 = canvas.toDataURL("image/png");
-			//	    var image = canvas.toDataURL();
-			
-			//	    window.open(image);
-			
-			
-			
 			
 			var width2 = doc.internal.pageSize.width;    
 			var height2 = doc.internal.pageSize.height;
@@ -3454,4 +3441,4 @@ function fillOutCharacterSheet(){
     return  d.promise();
 
 }   
-    
+
