@@ -7,6 +7,7 @@ $(document).ready(function () {
     $("button").click(function(){
 	$("#character_sheet_img").show();
 	fillOutSheetPage1();
+	fillOutSheetPage2();
 //	fillOutSheetPage1_jspdf();
 //	$("#character_sheet").show();
 //	$("#character_sheet_img").show();
@@ -2471,7 +2472,7 @@ function fillOutSheetPage1(){
     
     for (var element of formElements){
 	element.setAttribute("class","formText");
-	element.setAttribute("id","form_element_"+formElements.indexOf(element));
+	element.setAttribute("id","form_element_page1_"+formElements.indexOf(element));
 	elem.appendChild(element);
     }
     
@@ -2959,13 +2960,13 @@ function fillOutSheetPage1(){
     centerElement(effort,formElements);
     positionElement(BAB,610,326);
     centerElement(BAB, formElements);
-    positionElement(foci1, 494, 419,"font-size:18px;width:386px;");
+    positionElement(foci1, 493, 419,"font-size:18px;width:385px;");
     positionElement(foci1_level, 897, 424);
     centerElement(foci1_level, formElements);
-    positionElement(foci2, 494, 481,"font-size:18px;width:386px;");
+    positionElement(foci2, 493, 481,"font-size:18px;width:385px;");
     positionElement(foci2_level, 897, 486);
     centerElement(foci2_level, formElements);
-    positionElement(foci3, 494, 543,"font-size:18px;width:386px;");
+    positionElement(foci3, 493, 543,"font-size:18px;width:385px;");
     positionElement(foci3_level, 897, 548);
     centerElement(foci3_level, formElements);
 
@@ -3046,9 +3047,8 @@ function fillOutSheetPage1(){
 }
 
 function fillOutSheetPage2(){
-    var elem = document.getElementById("character_sheet");  
-    $("#character_sheet p").remove();
-    $("#character_sheet #form_portrait").remove();
+    var elem = document.getElementById("character_sheet2");  
+    $("#character_sheet2 p").remove();
 
     var goals = document.createElement("p");
     var notes = document.createElement("p");
@@ -3100,14 +3100,14 @@ function fillOutSheetPage2(){
 
     for (var element of formElements){
 	element.setAttribute("class","formText");
-	element.setAttribute("id","form_element_"+formElements.indexOf(element));
+	element.setAttribute("id","form_element_page2_"+formElements.indexOf(element));
 	elem.appendChild(element);
     }
 
 
     goals.innerHTML = $("#goals").val();
     notes.innerHTML = $("#notes").val();
-    
+
     switch($("#equipment_packages").val()){
     case "barbarian":
     	stowedEquipment1.innerHTML = "Spear";
@@ -3290,59 +3290,59 @@ function fillOutSheetPage2(){
     	break;
     }
 
-    positionElement(goals,944, 840, "font-size:18px;width:450px;");
-    shrinkText(goals, 200, formElements);
+    positionElement(goals,935, 830, "font-size:18px;width:425px;");
+    shrinkText(goals, 190, formElements);
 
-    positionElement(notes,482, 10, "font-size:18px;width:450px;");
+    positionElement(notes,490, 43, "font-size:18px;width:426px;");
     shrinkText(notes, 280, formElements);
 
-    positionElement(stowedEquipment1, 5, 5);
-    positionElement(stowedEquipment2, 5, 31);
-    positionElement(stowedEquipment3, 5, 57);
-    positionElement(stowedEquipment4, 5, 83);
-    positionElement(stowedEquipment5, 5, 109);
-    positionElement(stowedEquipment6, 5, 135);
-    positionElement(stowedEquipment7, 5, 161);
-    positionElement(stowedEquipment8, 5, 187);
-    positionElement(stowedEquipment9, 5, 213);
-    positionElement(stowedEquipment10, 5, 239);
-    positionElement(stowedEquipment11, 5, 265);
-    positionElement(stowedEquipment12, 5, 291);
-    positionElement(stowedEquipment13, 5, 317);
-    positionElement(stowedEquipment14, 5, 343);
-    positionElement(stowedEquipment15, 5, 369);
-    positionElement(stowedEquipment16, 5, 395);
-    positionElement(stowedEquipment17, 5, 421);
-    positionElement(stowedEquipment18, 5, 447);
+    positionElement(stowedEquipment1, 44, 36);
+    positionElement(stowedEquipment2, 44, 61);
+    positionElement(stowedEquipment3, 44, 86);
+    positionElement(stowedEquipment4, 44, 111);
+    positionElement(stowedEquipment5, 44, 136);
+    positionElement(stowedEquipment6, 44, 161);
+    positionElement(stowedEquipment7, 44, 186);
+    positionElement(stowedEquipment8, 44, 211);
+    positionElement(stowedEquipment9, 44, 236);
+    positionElement(stowedEquipment10, 44, 261);
+    positionElement(stowedEquipment11, 44, 286);
+    positionElement(stowedEquipment12, 44, 311);
+    positionElement(stowedEquipment13, 44, 336);
+    positionElement(stowedEquipment14, 44, 361);
+    positionElement(stowedEquipment15, 44, 386);
+    positionElement(stowedEquipment16, 44, 411);
+    positionElement(stowedEquipment17, 44, 436);
+    positionElement(stowedEquipment18, 44, 461);
 
-    positionElement(encumberance1, 446, 5);
-    positionElement(encumberance2, 446, 31);
-    positionElement(encumberance3, 446, 57);
-    positionElement(encumberance4, 446, 83);
-    positionElement(encumberance5, 446, 109);
-    positionElement(encumberance6, 446, 135);
-    positionElement(encumberance7, 446, 161);
-    positionElement(encumberance8, 446, 187);
-    positionElement(encumberance9, 446, 213);
-    positionElement(encumberance10, 446, 239);
-    positionElement(encumberance11, 446, 265);
-    positionElement(encumberance12, 446, 291);
-    positionElement(encumberance13, 446, 317);
-    positionElement(encumberance14, 446, 343);
-    positionElement(encumberance15, 446, 369);
-    positionElement(encumberance16, 446, 395);
-    positionElement(encumberance17, 446, 421);
-    positionElement(encumberance18, 446, 447);
+    positionElement(encumberance1, 461, 36);
+    positionElement(encumberance2, 461, 61);
+    positionElement(encumberance3, 461, 86);
+    positionElement(encumberance4, 461, 111);
+    positionElement(encumberance5, 461, 136);
+    positionElement(encumberance6, 461, 161);
+    positionElement(encumberance7, 461, 186);
+    positionElement(encumberance8, 461, 211);
+    positionElement(encumberance9, 461, 236);
+    positionElement(encumberance10, 461, 261);
+    positionElement(encumberance11, 461, 286);
+    positionElement(encumberance12, 461, 311);
+    positionElement(encumberance13, 461, 336);
+    positionElement(encumberance14, 461, 361);
+    positionElement(encumberance15, 461, 386);
+    positionElement(encumberance16, 461, 411);
+    positionElement(encumberance17, 461, 436);
+    positionElement(encumberance18, 461, 461);
 
     for (var element of encumberanceElements){
 	centerElement(element, formElements);
     }
 
-    positionElement(otherEquipment1, 5, 511);
-    positionElement(otherEquipment2, 5, 537);
-    positionElement(otherEquipment3, 5, 563);
-    positionElement(otherEquipment4, 5, 589);
-    positionElement(otherEquipment5, 5, 615);
+    positionElement(otherEquipment1, 44, 516);
+    positionElement(otherEquipment2, 44, 541);
+    positionElement(otherEquipment3, 44, 566);
+    positionElement(otherEquipment4, 44, 591);
+    positionElement(otherEquipment5, 44, 616);
     
 }
 
@@ -3354,8 +3354,8 @@ function positionElement(elem,left,top,existingstyle=""){
 function shrinkText(elem, maxHeight, formElements){
     var currFontSize = parseInt((elem.style.fontSize).slice(0,-2));
     var currTop = parseInt((elem.style.top).slice(0,-2));
-
-    while (($("#form_element_"+formElements.indexOf(elem)).height()>maxHeight)&& currFontSize>1){
+    
+    while (($("#"+elem.id).height()>maxHeight)&& currFontSize>1){
 	currFontSize--;
 	currTop++;
 	elem.style.fontSize = currFontSize+"px";
@@ -3376,7 +3376,7 @@ function displayBonus(val){
 }
 
 function centerElement(elem,formElements){
-    elem.style.left = (parseInt(elem.style.left.slice(0,-2))-($("#form_element_"+formElements.indexOf(elem)).width())/2)+"px";
+    elem.style.left = (parseInt(elem.style.left.slice(0,-2))-($("#"+elem.id).width())/2)+"px";
 }
 
 function centerPortrait(portrait){
@@ -3431,15 +3431,13 @@ function fillOutSheetPage1_jspdf(){
 		    doc.addImage(image2, 'png', 0, 0, width2, height2);
 		    
 	    
-	    doc.save('myPage.pdf'); //Download the rendered PDF.    
+		    doc.save('myPage.pdf'); //Download the rendered PDF.    
 		}
 	    });
 	    
 
 	}
-    });
-    
-    
+    });  
 
 
 }
