@@ -7,7 +7,6 @@ $(document).ready(function () {
     $("button").click(function(){
 	$("#character_sheet_img").show();
 	fillOutSheetPage1();
-	fillOutSheetPage1_jspdf();
 //	$("#character_sheet").show();
 //	$("#character_sheet_img").show();
 // 	$("#character_sheet_img2").hide();
@@ -3037,7 +3036,8 @@ function fillOutSheetPage1(){
 
     positionElement(technique, 944, 610,"font-size:17px;width:450px;");
     shrinkText(technique,330,formElements);
-    
+
+    fillOutSheetPage1_jspdf();
 }
 
 function fillOutSheetPage2(){
