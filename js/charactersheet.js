@@ -2373,8 +2373,8 @@ function computeEffort(){
 
 function fillOutSheetPage1(callback){
     var elem = document.getElementById("character_sheet");  
-    $("#character_sheet p").remove();
-    $("#character_sheet #form_portrait").remove();
+//    $("#character_sheet p").remove();
+//    $("#character_sheet #form_portrait").remove();
     
     
     var name = document.createElement("p");
