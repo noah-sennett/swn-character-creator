@@ -2861,7 +2861,7 @@ function fillOutSheetPage1(){
 
     portrait.setAttribute("id","form_portrait");
     var portraitSource = $("#portrait_holder").attr('src');
-
+    console.log(portraitSource);
     // For some browsers, `attr` is undefined; for others,
     // `attr` is false.  Check for both.
     if (typeof attr !== typeof undefined && attr !== false) {
