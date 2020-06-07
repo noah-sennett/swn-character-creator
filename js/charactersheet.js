@@ -4,9 +4,19 @@ $(document).ready(function () {
 
 
 
-    $("button").click(function(){
+    $("#printButton").click(function(){
 	showCharacterSheet().then(fillOutCharacterSheet).then(saveCharacterSheet).then(hideCharacterSheet);
-    });             
+    });
+
+    $("#randomCharacterButton").click(function(){
+	pickRandomName();
+	pickRandomAttributes();
+	pickRandomClass();
+	pickRandomBackground();
+	pickRandomEquipmentPackage();
+	pickRandomSkills();
+
+    });
 
     
     $(".dialog_window").dialog({
@@ -3453,5 +3463,319 @@ function fillOutCharacterSheet(){
     
     return  d.promise();
 
-}   
+}  
+
+/*
+Roll random attributes (as if the #rollAttrsTopLayer was clicked), and then set the minimum rolled attribute to 14.
+*/
+function pickRandomAttributes(){
+    $("#rollAttrsTopLayer").click();
+
+    var attributeScores = [];
+    for (var attr of attrs){
+	attributeScores.push(parseInt($('#'+attr+'_attr').html()));
+    }
+
+    var minIndex = attributeScores.indexOf(Math.min.apply(Math,attributeScores));
+    var elem = document.getElementById('14attrList');
     
+    $('#14attrList').selectmenu().val(attrs[minIndex]);
+    $('#14attrList').selectmenu("refresh");
+    $('#14attrList').trigger('change');
+}
+
+/*
+Choose a class randomly according to the following rates: Expert 25%, Psychic 25%, Warrior 25%, Expert/Psychic 8.33%, Expert/Warrior 8.33%, Psychic/Warrior 8.33%
+*/
+function pickRandomClass(){
+    var roll = rollDie(12);
+    var Class;
+    if (roll <= 3){
+	Class = "expert";
+	pickRandomGeneralFocus();
+	pickRandomNonCombatFocus();
+    }
+    else if(roll <= 6){
+	Class = "psychic";
+	pickRandomGeneralFocus();
+    }
+    else if(roll <= 9){
+	Class = "warrior";
+	pickRandomGeneralFocus();
+	pickRandomCombatFocus();
+    }
+    else if(roll == 10){
+	Class = "exp_psy";
+	pickRandomGeneralFocus();
+	pickRandomNonCombatFocus();
+    }
+    else if (roll == 11){
+	Class = "war_exp";
+	pickRandomGeneralFocus();
+	pickRandomCombatFocus();
+	pickRandomNonCombatFocus();
+    }
+    else if (roll == 12){
+	Class = "war_psy";
+	pickRandomGeneralFocus();
+	pickRandomCombatFocus();
+    }
+
+    $('#class_mirror').selectmenu().val(Class);
+    $('#class_mirror').selectmenu("refresh");
+    document.getElementById("class").value = Class;
+    $('#class').trigger('change');
+
+}
+
+/*Choose a random background.*/
+function pickRandomBackground(){
+    var backgroundKeys = Object.keys(backgrounds);
+    var roll = rollDie(backgroundKeys.length-1);
+    var background = backgroundKeys[roll-1];
+    
+    $('#backgrounds_mirror').selectmenu().val(background);
+    $('#backgrounds_mirror').selectmenu("refresh");
+    document.getElementById("backgrounds").value = background;
+    $('#backgrounds').trigger('change');
+
+    rollLearning();
+    rollLearning();
+    rollLearning();
+}
+
+/*Choose a random general focus. If the option is currently disabled (not eligible because of class or already selected twice), then reroll to pick a different random focus.*/
+function pickRandomGeneralFocus(){
+
+    var elem = document.getElementById("foci");
+    var options = elem.options;
+    var roll = rollDie(options.length-1);
+
+    if(options[roll].hasAttribute("disabled")){
+	pickRandomGeneralFocus();
+    }
+    else{
+	elem.value = options[roll].value;
+	$('#foci').trigger('change');
+    }
+}
+
+/*Choose a random combat focus. If the option is currently disabled (not eligible because of class or already selected twice), then reroll to pick a different random focus.*/
+function pickRandomCombatFocus(){
+
+    var elem = document.getElementById("combat_foci");
+    var options = elem.options;
+    var roll = rollDie(options.length-1);
+
+    if(options[roll].hasAttribute("disabled")){
+	pickRandomGeneralFocus();
+    }
+    else{
+	elem.value = options[roll].value;
+	$('#foci').trigger('change');
+    }    
+}
+
+/*Choose a random noncombat focus. If the option is currently disabled (not eligible because of class or already selected twice), then reroll to pick a different random focus.*/
+function pickRandomNonCombatFocus(){
+
+    var elem = document.getElementById("noncombat_foci");
+    var options = elem.options;
+    var roll = rollDie(options.length-1);
+
+    if(options[roll].hasAttribute("disabled")){
+	pickRandomGeneralFocus();
+    }
+    else{
+	elem.value = options[roll].value;
+	$('#foci').trigger('change');
+    }       
+}
+
+function pickRandomEquipmentPackage(){
+    var packageKeys = Object.keys(packages);
+    var roll = rollDie(packageKeys.length);
+    
+    document.getElementById("equipment_packages").value = packageKeys[roll-1];
+    $('#equipment_packages').trigger('change');
+}
+
+function pickRandomSkills(){
+
+    while(combat_skill_remaining > 0){
+	pickRandomCombatSkill();
+	useCombatSkill();
+    }
+
+    while(noncombat_skill_remaining > 0){
+	pickRandomNonCombatSkill();
+	useNonCombatSkill();
+    }
+    while(psychic_skill_remaining > 0){
+	pickRandomPsychicSkill();
+	usePsychicSkill();
+    }
+    while(any_skill_remaining > 0){
+	pickRandomNonPsychicSkill();
+	useAnySkill();
+    }
+      
+}
+
+function pickRandomNonPsychicSkill(){
+    var skillKeys = Object.keys(skills);
+
+    var anySkills = [];
+    for (var skillKey of skillKeys){
+//	console.log(skillKey);
+	if(!(skills[skillKey]["psychic"])) anySkills.push(skillKey);
+    }
+
+    var roll=rollDie(anySkills.length);
+    console.log(roll);
+    console.log(anySkills[roll-1]);
+    incrementSkill(anySkills[roll-1]);
+}
+
+function pickRandomCombatSkill(){
+    var skillKeys = Object.keys(skills);
+
+    var combatSkills = [];
+    for (var skillKey of skillKeys){
+//	console.log(skillKey);
+	if(skills[skillKey]["combat"]) combatSkills.push(skillKey);
+    }
+
+    var roll=rollDie(combatSkills.length);
+    console.log(roll);
+    console.log(combatSkills[roll-1]);
+    incrementSkill(combatSkills[roll-1]);
+}
+
+function pickRandomNonCombatSkill(){
+    var skillKeys = Object.keys(skills);
+
+    var nonCombatSkills = [];
+    for (var skillKey of skillKeys){
+//	console.log(skillKey);
+	if(!(skills[skillKey]["combat"]||skills[skillKey]["psychic"])) nonCombatSkills.push(skillKey);
+    }
+
+    var roll=rollDie(nonCombatSkills.length);
+    console.log(roll);
+    console.log(nonCombatSkills[roll-1]);
+    incrementSkill(nonCombatSkills[roll-1]);
+}
+
+function pickRandomPsychicSkill(){
+    var skillKeys = Object.keys(skills);
+
+    var psychicSkills = [];
+    for (var skillKey of skillKeys){
+//	console.log(skillKey);
+	if(skills[skillKey]["psychic"]) psychicSkills.push(skillKey);
+    }
+
+    var roll=rollDie(psychicSkills.length);
+    console.log(roll);
+    console.log(psychicSkills[roll-1]);
+    incrementSkill(psychicSkills[roll-1]);
+}
+
+/*Generate a random name using the Namey! random name generator https://namey.muffinlabs.com/*/
+function pickRandomName(){
+    namey.get({with_surname:true, callback:function(n) { $("#name").val(n[0]);$("#name_mirror").val(n[0]);}});
+}
+
+
+/** namey */
+window.namey = {
+    /**
+     * API for namey random name generator.  There's two basic ways to use it.  First, just call namey.get with a callback:
+     *
+     * namey.get(function(n) { console.log(n); }); => ["John Clark"]
+     *
+     * The call returns an array because there's an option to request more than one random name. For example:
+     *
+     * namey.get({ count: 3, callback: function(n) { console.log(n); }}); ; => ["John Cook", "Ruth Fisher", "Donna Collins"]
+     *
+     * Here's the full list of parameters:
+     * 
+     * count -- how many names you would like (default: 1)
+     *
+     * type -- what sort of name you want 'female', 'male', 'surname', or leave blank if you want both genders
+     *
+     * with_surname -- true/false, if you want surnames with the first
+     * name. If false, you'll just get first names.  Default is true.
+     *
+     * frequency -- 'common', 'rare', 'all' -- default is 'common'. This
+     * picks a subset of names from the database -- common names are
+     * names that occur frequently, rare is names that occur rarely.
+     * 
+     * min_freq/max_freq  -- specific values to get back a really
+     * specific subset of the names db. values should be between 0 and
+     * 100. You probably don't need this, but here's an example:
+     * namey.get({ count: 3, min_freq: 30, max_freq: 50, callback: function(n) { console.log(n); }});
+     * => ["Crystal Zimmerman", "Joshua Rivas", "Tina Bryan"]
+     *
+     * callback -- a function to do something with the data.  The data
+     * passed in will be an array of names -- use them wisely.
+     * 
+     */
+    get : function(options) {
+	var callback;
+	var tmp_params = {};
+	var host = "namey.muffinlabs.com";
+	//var host = window.location.host;
+	var query;
+	
+	if ( typeof(options) == "function" ) {
+	    callback = options;
+	}
+	else if ( typeof(options) == "object" ) {
+	    callback = options.callback;
+	    
+	    if ( typeof(options.host) !== "undefined" ) {
+		host = options.host;
+	    }
+	    
+	    if ( typeof(options.count) == "undefined" ) {
+		options.count = 1;
+	    }
+	    tmp_params.count = options.count;
+	    
+	    if ( typeof(options.type) != "undefined" && options.type != "both" ) {
+		tmp_params.type = options.type;
+	    };
+	    
+	    if ( options.type != "surname" && typeof(options.with_surname) != "undefined" ) {
+		tmp_params.with_surname = options.with_surname;
+	    }
+	    if ( options.min_freq ) {
+		tmp_params.min_freq = options.min_freq;
+		tmp_params.max_freq = options.max_freq;
+	    }
+	    else if ( typeof(options.frequency) != "undefined" ) {
+		tmp_params.frequency = options.frequency;
+	    }
+	}
+
+
+	query = Object.keys(tmp_params)
+            .map(function(k) {
+                return encodeURIComponent(k) + '=' + encodeURIComponent(tmp_params[k]);
+            })
+            .join('&');
+	
+	window.fetch('https://namey.muffinlabs.com/name.json?' + query, { mode: 'cors' })
+            .then(function(d) { return d.json(); })
+            .then(function(d) {
+	        if ( typeof(callback) == "function" ) {
+		    callback(d);
+	        }
+	        else {
+		    console.log(d);
+	        }
+	    });
+    }
+}

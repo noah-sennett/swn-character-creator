@@ -16,6 +16,10 @@
     <script src="js/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
     
+    <script src="https://unpkg.com/unfetch/polyfill"></script>
+    <script>
+      self.fetch||(self.fetch=function(e,n){return n=n||{},new Promise(function(t,s){var r=new XMLHttpRequest,o=[],u=[],i={},a=function(){return{ok:2==(r.status/100|0),statusText:r.statusText,status:r.status,url:r.responseURL,text:function(){return Promise.resolve(r.responseText)},json:function(){return Promise.resolve(JSON.parse(r.responseText))},blob:function(){return Promise.resolve(new Blob([r.response]))},clone:a,headers:{keys:function(){return o},entries:function(){return u},get:function(e){return i[e.toLowerCase()]},has:function(e){return e.toLowerCase()in i}}}};for(var c in r.open(n.method||"get",e,!0),r.onload=function(){r.getAllResponseHeaders().replace(/^(.*?):[^\S\n]*([\s\S]*?)$/gm,function(e,n,t){o.push(n=n.toLowerCase()),u.push([n,t]),i[n]=i[n]?i[n]+","+t:t}),t(a())},r.onerror=s,r.withCredentials="include"==n.credentials,n.headers)r.setRequestHeader(c,n.headers[c]);r.send(n.body||null)})});
+    </script>
     <script src="js/charactersheet.js"></script>
     <!-- <script src="js/printThis.js"></script> -->
 
@@ -855,7 +859,8 @@
 	  <label for="stabshoot_shoot">Shoot</label>
 	  <input type="radio" name="stabshoot" value="shoot" id="stabshoot_shoot">
 	</div>
-	<button class="fixedButton">Download Character Sheet<br><i>Caution: File is ~50MB</i></button>
+	<button class="fixedButton" id="randomCharacterButton" style="right:10px;bottom:75px">Generate Random Character</button>
+	<button class="fixedButton" id="printButton">Download Character Sheet<br><i>Caution: File is ~50MB</i></button>
 
       </div>
       <div class="sidebar">
