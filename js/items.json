@@ -1,0 +1,596 @@
+{
+    "ammo":{
+	"type":"ammo_and_power",
+	"name":"Ammunition, 20 rounds",
+	"cost":"10",
+	"enc":"1",
+	"packable":true,
+	"TL":"2",
+	"description":"A few worlds are too primitive or too resource-poor to manufacture ammunition, but the vast majority of worlds provide cartridges in almost every conceivable caliber and make. Most local gunsmiths can load ammunition to any specification required by a buyer."
+    },
+    "ammo_missle":{
+	"type":"ammo_and_power",
+	"name":"Ammunition, missle",
+	"cost":"50",
+	"enc":"1",
+	"packable":false,
+	"TL":"3",
+	"description":"Some characters might have reason to pack along a man-portable rocket launcher, or have one mounted on their favorite gravcar. Heavy weapons and their ammunition are usually outlawed for civilians on most worlds, but this price is for locales where missiles can be bought."
+    },
+    "power_cell_type_a":{
+	"type":"ammo_and_power",
+	"name":"Power cell, type A",
+	"cost":"10",
+	"enc":"1",
+	"packable":true,
+	"TL":"4",
+	"description":"One of the few standardized artifacts inherited from before the Silence, power cells are small cylindrical objects designed to take and hold electrical charges. Type A cells are usually used for personal equipment. Power cells can be recharged off a ship’s power plant or other grid; recharging requires 30 minutes for a type A cell."
+    },
+    "power_cell_type_b":{
+	"type":"ammo_and_power",
+	"name":"Power cell, type B",
+	"cost":"100",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"One of the few standardized artifacts inherited from before the Silence, power cells are small cylindrical objects designed to take and hold electrical charges. Type B cells for vehicles and heavy gear. Power cells can be recharged off a ship’s power plant or other grid; recharging requires 24 hours for a type B cell."
+    },
+    "solar_recharger":{
+	"type":"ammo_and_power",
+	"name":"Solar recharger",
+	"cost":"500",
+	"enc":"3",
+	"packable":false,
+	"TL":"4",
+	"description":"This recharger unfolds into a 2 meter by 2 meter square field of solar cells. Granted a primary star of roughly Earth-like intensity, it can recharge one type A power cell per day."
+    },
+    "telekinetic_generator":{
+	"type":"ammo_and_power",
+	"name":"Telekinetic generator",
+	"cost":"250",
+	"enc":"2",
+	"packable":false,
+	"TL":"4",
+	"description":"While this device assumes the presence of a trained telekinetic, it isn’t strictly psitech, as its operation is quite simple. A telekinetic user pushes a resistance bar within the generator, causing a flow of electricity to recharge an attached power cell. Any telekinetic with Telekinesis-1 skill or better can recharge a cell with fifteen minutes of concentration. In an emergency, a character with at least Strength 10 can operate the generator manually, though they need to succeed on a difficulty 8 Con/Exert skill check in order to keep up the pace for an hour. Failure means that the character must rest for at least an hour before trying again. The generator can charge one type A power cell at a time."
+    },
+    "comm_server":{
+	"type":"communications",
+	"name":"Comm server",
+	"cost":"1000",
+	"enc":"3",
+	"packable":false,
+	"TL":"4",
+	"description":"A powerful base unit for providing communications without comsats. The server provides service between up to three dozen compads within 300 kilometers of the unit. Server usage can be locked to specific compads, and all transmissions are heavily encrypted. A comm server can function for several months on a type B cell."
+    },
+    "commpad":{
+	"type":"communications",
+	"name":"Compad",
+	"cost":"100",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"description":"One of a host of different hand-held portable communications devices. Most TL4 worlds have global comm coverage, but primitive worlds render these devices useless without a nearby comm server to provide connectivity."
+    },
+    "field_radio":{
+	"type":"communications",
+	"name":"Field radio",
+	"cost":"200",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"On worlds too primitive to have a comm grid, adventurers often fall back on these headset-mounted field radios. A single type A cell powers them for months of use. Urban or rugged terrain limits their range to about two kilometers, while flat plains give a maximum range of thirty kilometers. Someone with at least Program-0 skill can use the radio’s shortwave functionality to communicate with a prepared target at continental distances if given ten minutes for tuning."
+    },
+    "translator_torc":{
+	"type":"communications",
+	"name":"Translator torc",
+	"cost":"200",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"description":"Each translator torc is keyed for two languages, and will automatically translate what it hears in one into speech in the other. The translations are eccentric in many cases, and there is always a several-second delay between each statement and its translation. Any attempts to exert social skills or Charisma through a translator torc suffer a -2 skill check penalty. The torc is powered by one type A power cell, which lasts for one week of regular use."
+    },
+    "black_slab":{
+	"type":"computing_gear",
+	"name":"Black slab",
+	"cost":"10000",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"While a \"black slab\" appears to be a normal dataslab to casual examination, these devices are packed with intrusion-optimization hardware and integral line tapping tools. They function as a metatool for purposes of accessing data lines and grant a +1 bonus to all hacking attempts made with them. They are also quite illegal on most worlds, available only from black market dealers and private sales from hackers."
+    },
+    "data_phase_tap":{
+	"type":"computing_gear",
+	"name":"Data phase tap",
+	"cost":"5000",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"This handheld device is normally illegal outside the possession of licensed data line repair technicians. The tap can detect data lines within five meters through up to ten centimeters of ordinary walls, and can generate an energy manipulation field that allows tapping that data line for hacking purposes without physically damaging the wall."
+    },
+    "data_protocol":{
+	"type":"computing_gear",
+	"name":"Data protocol",
+	"cost":"1000",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"description":"Not so much a device as a collection of standard manuals on a world’s particular data formats and security methodologies. The price listed here are for black-market manuals on worlds where this information is rigidly restricted. On less paranoid planets, the equivalent information can be acquired for free."
+    },
+    "dataslab":{
+	"type":"computing_gear",
+	"name":"Dataslab",
+	"cost":"300",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"A palm-sized computing device that can unfold into a thin slab roughly one-third of a meter on a side. It can perform all the functions of a compad or handheld computer and can communicate wirelessly with nearby devices."
+    },
+    "line_shunt":{
+	"type":"computing_gear",
+	"name":"Line shunt",
+	"cost":"100",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"description":"These palm-sized discs are roughly one centimeter in thickness, with an adhesive side that will stick to virtually anything and a polychromatic phased compound on its shell which will shift color to blend with its surroundings. One or more line shunts must be applied at specific locations within a site to access the more well-defended varieties of computerized systems. Shunts employ phased energy manipulation tech, and so do not need to be directly in contact with a data line but only within a few centimeters. Line shunts are single-use, and keep functioning until removed."
+    },
+    "remote_link_unit":{
+	"type":"computing_gear",
+	"name":"Remote link unit",
+	"cost":"250",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"These data broadcast link units have been preloaded with one-time pad security measures, advanced stealth circuitry, and sophisticated data progression algorithms. Two of these links can allow a user to maintain contact with a remote data storage unit. The connection is too \"stiff\" to allow for easy hacking, however, and it applies a -2 penalty to any attempts to hack through it. Professional-grade security systems often have means to detect the broadcast of a remote link unit."
+    },
+    "stiletto_charge":{
+	"type":"computing_gear",
+	"name":"Stiletto charge",
+	"cost":"",
+	"enc":"1",
+	"packable":false,
+	"TL":"5",
+	"description":"These ancient Mandate-era polymorphic intrusion charges were originally made to allow Mandate agents to easily overcome primitive colonial data security measures. Each charge is a small interface plug the size of a human thumb. When used as part of a hack against a TL4 system, it causes the skill check to automatically succeed regardless of the difficulty. Without line shunts, however, the duration of the hack is still no more than the usual 1d4 rounds plus the hacker’s Program skill. These devices are single-use, and are prized so highly that they are almost always unavailable for conventional purchase. Favors to the right people and the looting of Mandate remnants are the only normal ways to acquire these devices."
+    },
+    "storage_unit":{
+	"type":"computing_gear",
+	"name":"Storage unit",
+	"cost":"500",
+	"enc":"3",
+	"packable":false,
+	"TL":"4",
+	"description":"While conventional dataslabs have ample space to hold any reasonable amount of data, sometimes a party needs to store or acquire a truly huge dataset. This standard TL4 storage unit is a portable but clumsy case hardened against anything short of intentional damage with a firearm, capable of interfacing with a wide variety of hardware to receive and upload data. A single storage unit can hold a tremendous amount of data that has been carefully compressed and optimized for it. If the user is simply ripping a database off a network and stuffing it into the unit, it can absorb up to a small corporation’s complete files."
+    },
+    "tightbeam_link_unit":{
+	"type":"computing_gear",
+	"name":"Tightbeam link unit",
+	"cost":"1000",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"Much like a remote link unit, a tightbeam unit uses a laser to connect via line-of-sight transmission. Unlike a remote link unit, there’s almost no chance for a conventional security system to detect this link, but it requires that the infiltrators get a clear line of sight between the unit and the receiving end. Commercial satellite reception units can be employed for skyward aiming at 500 credits/hour if a second land unit is unavailable, but indoor use is impossible."
+    },
+    "atmofilter":{
+	"type":"field_equipment",
+	"name":"Atmofilter",
+	"cost":"100",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"This face mask can filter out most atmospheric toxins. Attaching a standard vacc suit oxygen bottle to a belt-mounted feed will also supply a breathable atmosphere for up to six hours."
+    },
+    "backpack_tl0":{
+	"type":"field_equipment",
+	"name":"Backpack (TL0)",
+	"cost":"5",
+	"enc":"1",
+	"packable":false,
+	"TL":"0",
+	"description":"A worn backpack counts as a readied item, though objects stowed inside it still require the usual round to dig free. Characters without backpacks or similar carrying devices might have difficulty justifying the hauling of large amounts of gear."
+    },
+    "backpack_tl4":{
+	"type":"field_equipment",
+	"name":"Backpack (TL4)",
+	"cost":"50",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"description":"A worn backpack counts as a readied item, though objects stowed inside it still require the usual round to dig free. Characters without backpacks or similar carrying devices might have difficulty justifying the hauling of large amounts of gear."
+    },
+    "binoculars_tl3":{
+	"type":"field_equipment",
+	"name":"Binoculars (TL3)",
+	"cost":"20",
+	"enc":"1",
+	"packable":false,
+	"TL":"3",
+	"description":"Standard 7x50 binoculars."
+    },
+    "binoculars_tl4":{
+	"type":"field_equipment",
+	"name":"Binoculars (TL4)",
+	"cost":"200",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"Binoculars with integral low-light optics and up to 25x150 power. TL4 binocs require a type A power cell for up to a week of regular usage."
+    },
+    "climbing_harness":{
+	"type":"field_equipment",
+	"name":"Climbing harness",
+	"cost":"50",
+	"enc":"1",
+	"packable":false,
+	"TL":"3",
+	"description":"A collection of straps, ropes, pitons, and other climbing aids that grant a +1 bonus on any Exert climbing skill test. Using a climbing harness is noisy, and any Sneak skill checks while climbing with one suffer a -2 penalty."
+    },
+    "glowbug":{
+	"type":"field_equipment",
+	"name":"glowbug",
+	"cost":"5",
+	"enc":"",
+	"packable":false,
+	"TL":"3",
+	"description":"A palm-sized disc that can adhere to any non-porous surface. When turned on, it emits a white light, illuminating everything within ten meters for twenty-four hours. A hundred glowbugs can be recharged off a single type A cell."
+    },
+    "grapnel_launcher":{
+	"type":"field_equipment",
+	"name":"Grapnel launcher",
+	"cost":"200",
+	"enc":"1",
+	"packable":false,
+	"TL":"3",
+	"description":"This launcher fires a rope up to forty meters. The rope can bear up to a metric ton of weight, though extremely heavy weights or a precarious hit can cause the grapnel to pull free. A Type A power cell fuels six shots from a launcher."
+    },
+    "grav_chute_tl4":{
+	"type":"field_equipment",
+	"name":"Grav chute (TL4)",
+	"cost":"300",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"When this cylinder is strapped to a person or object and activated, it smoothly modulates falling speeds for up to 1000 meters. The chute can safely slow up to 300 kilos of weight. Burns out after one use."
+    },
+    "grav_chute_tl5":{
+	"type":"field_equipment",
+	"name":"Grav chute (TL5)",
+	"cost":"1000",
+	"enc":"1",
+	"packable":false,
+	"TL":"5",
+	"description":"When this cylinder is strapped to a person or object and activated, it smoothly modulates falling speeds for up to 1000 meters. The chute can safely slow up to 300 kilos of weight. TL5 versions can operate from orbital heights. Burns out after one use."
+    },
+    "instapanel":{
+	"type":"field_equipment",
+	"name":"Instapanel",
+	"cost":"50",
+	"enc":"1",
+	"packable":true,
+	"TL":"4",
+	"description":"In its compressed form, an instapanel is a two-kilo cube of ceraplast five centimeters on a side. When a type A power cell is inserted in the cube’s side, it immediately expands to an opaque, waterproof ceraplast sheet 2 meters on each side and a centimeter thick. Five minutes later the ceraplast hardens into a tough, rigid shape, but until then it can be folded or bent by hand. Instapanels can be bonded to one another with a metatool or a toolkit. Breaking an instapanel requires inflicting at least twelve points of damage on it."
+    },
+    "grav_harness":{
+	"type":"field_equipment",
+	"name":"Grav harness",
+	"cost":"5000",
+	"enc":"3",
+	"packable":false,
+	"TL":"5",
+	"description":"This advanced gravitic harness allows clumsy flight at a rate of 20 meters per round as a Main Action. It requires a Type B power cell to fuel it, and the miniaturized electronics are rapacious, consuming the cell in five minutes of operation. It can lift up to 200 kilos."
+    },
+    "low_light_goggles":{
+	"type":"field_equipment",
+	"name":"Low-light goggles",
+	"cost":"200",
+	"enc":"1",
+	"packable":false,
+	"TL":"3",
+	"description":"These goggles provide a monochrome but serviceable view out to the wearer’s normal visual distance, provided that there is any illumination available at all. A type A power cell will operate these goggles for a week."
+    },
+    "navcomp":{
+	"type":"field_equipment",
+	"name":"Navcomp",
+	"cost":"500",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"A combination of low-tech compasses, automappers, astronomic charts, and gyroscopes packed into a flat, one-kilo case. A character with a navcomp will never get lost on worlds with GPS satellites. They can also make a crude but serviceable automatic map of all buildings or landscapes they travel through. Other terrestrial navigation skill checks are made at a +1 bonus."
+    },
+    "portabox":{
+	"type":"field_equipment",
+	"name":"Portabox",
+	"cost":"50",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"A small cube of ceraplast attached to an electronic keycard. When a type A power cell is inserted, the portabox immediately unfolds into a rigid locker with 1.5 x 1 x 1 meter dimensions. The portabox is air-tight and has a simple electronic lock which can only be opened with the keycard or a successful difficulty 8 Sneak or Fix skill check. Failing the check will cause the lock to short-circuit and seal the box until it can be cut open with a metatool or broken open with twenty points of damage."
+    },
+    "pressure_tent":{
+	"type":"field_equipment",
+	"name":"Pressure tent",
+	"cost":"100",
+	"enc":"4",
+	"packable":false,
+	"TL":"3",
+	"description":"This tent maintains a breathable atmosphere, tolerable temperature and serviceable sleeping quarters for up to five very friendly occupants. Advanced filtration and cracking tech allows a single standard vacc suit oxygen tank to provide breathable air for the occupants for up to 24 hours. The tent requires a type A power cell for each day in which this filter is employed."
+    },
+    "rations":{
+	"type":"field_equipment",
+	"name":"Rations, 1 day",
+	"cost":"5",
+	"enc":"1",
+	"packable":true,
+	"TL":"1",
+	"description":"Dried or otherwise preserved foodstuffs sufficient for one day. If water is not otherwise available, add another item’s worth of encumbrance for the water necessary for a person’s daily needs."
+    },
+    "rope_tl0":{
+	"type":"field_equipment",
+	"name":"Rope (TL0), 20 meters",
+	"cost":"4",
+	"enc":"2",
+	"packable":false,
+	"TL":"0",
+	"description":"Light and sturdy."
+    },
+    "rope_tl4":{
+	"type":"field_equipment",
+	"name":"Rope (TL4), 20 meters",
+	"cost":"40",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"Light and sturdy. A metatool can be used to cut and join the synthetics used in TL4 rope, which counts as one encumbrance item per 40 meters and costs 40 credits."
+    },
+    "scout_report":{
+	"type":"field_equipment",
+	"name":"Scout report",
+	"cost":"200",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"description":"A collation of survey scans and merchant reports on a particular lost world or isolated colony. Scouting reports are available for all but the most unknown worlds and provide maps, basic information, and note any critical cultural taboos."
+    },
+    "survey_scanner":{
+	"type":"field_equipment",
+	"name":"Survey scanner",
+	"cost":"250",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"A multipurpose scanner that can take atmospheric and gravitic readings, provide basic chemical analysis of samples of up to one cubic centimeter in size, and record up to two hundred hours of video information or ten times that amount of audio. Know skill checks are necessary for any but the most basic analysis."
+    },
+    "survival_kit":{
+	"type":"field_equipment",
+	"name":"Survival kit",
+	"cost":"60",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"A standard belt-worn kit with fire lighter, water filter, three thermal flares, knife, thermal blanket, a brightly-colored 3 x 3 meter waterproof tarp, a glowbug, and a radio beacon that can transmit a distress signal up to fifty kilometers for one month on the included type A power cell. Survival kits sold on a particular world will usually also include a small booklet on specific dangers or edible organics. Possession of a survival kit grants a +1 to all relevant Survive skill checks, assuming its contents are helpful on a given planet. Survival kits are well-organized, and count as only one item for encumbrance purposes."
+    },
+    "telescoping_pole":{
+	"type":"field_equipment",
+	"name":"Telescoping pole",
+	"cost":"10",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"description":"Retracting to a 30-centimeter baton, this pole extends and locks into a 3.048-meter extension that can bear as much as a thousand kilograms of weight or serve as a makeshift club."
+    },
+    "thermal_flare":{
+	"type":"field_equipment",
+	"name":"Thermal flare",
+	"cost":"5",
+	"enc":"",
+	"packable":false,
+	"TL":"3",
+	"description":"If triggered in one mode, the flare burns with a bright white light for two hours, illuminating up to twenty meters around the holder. If the guidance fins are extended first, the flare launches up to 200 meters and explodes in a bright white flash. A launched flare does 1d6 damage to anyone it hits, though the clumsy flight gives a -4 penalty on any attempts to hit something with it."
+    },
+    "trade_goods":{
+	"type":"field_equipment",
+	"name":"Trade goods",
+	"cost":"50",
+	"enc":"1",
+	"packable":true,
+	"TL":"4",
+	"description":"Glowbugs, ceramic fire lighters, antibiotics, ceraplast tools, and the other fruits of a TL4 civilization that might be valuable on more primitive worlds. A kilo of trade goods can usually be traded for at least a hundred credits worth of local products on more primitive worlds that are not well-served by interstellar merchants. The profit margin shrinks rapidly as interstellar trade becomes more common, and there is always the difficulty of finding local products that are actually worth a merchant’s journey."
+    },
+    "trade_metals":{
+	"type":"field_equipment",
+	"name":"Trade metals",
+	"cost":"10",
+	"enc":"1",
+	"packable":true,
+	"TL":"4",
+	"description":"The fruit of common TL4 asteroid mining, trade metals include gold, platinum, artificial gemstones, and other substances precious on many lost worlds and trivially valuable on spacefaring ones. A kilo worth of trade metals can be exchanged for as much as a thousand credits worth of local products on metal-poor worlds isolated from interstellar trade. Markets flood rapidly, however, and it usually doesn’t take more than a few merchant trips to persuade the locals to demand trade goods or credits."
+    },
+    "vacc_fresher":{
+	"type":"field_equipment",
+	"name":"Vacc fresher",
+	"cost":"400",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"This three-kilo tube filters and compresses atmosphere to refill vacc suit oxygen tanks. It can extract oxygen from any atmosphere which contains it, even in the form of carbon dioxide. Refilling a standard vacc suit tank requires ten minutes of operation and consumes one type A power cell. Most vacc freshers are also equipped with an emergency hand crank power source, though it requires at least two hours of cranking."
+    },
+    "vacc_skin":{
+	"type":"field_equipment",
+	"name":"Vacc skin",
+	"cost":"1000",
+	"enc":"1",
+	"packable":false,
+	"TL":"5",
+	"description":"A more advanced TL5 version of the vacc suit, this skin-tight suit can be worn as a readied item in conjunction with armor, though it grants no Armor Class bonus itself. It requires no oxygen tank, automatically cracking and recycling the wearer’s respiration, and can even recycle the wearer’s bodily waste into drinkable water if necessary. Vacc skins apply no penalty to hit rolls or skill checks for wearers. It suffers tears in the same way as a normal vacc suit, and requires a type A power cell for each 24 hours of operation."
+    },
+    "vacc_suit":{
+	"type":"field_equipment",
+	"name":"Vacc suit",
+	"cost":"100",
+	"enc":"2",
+	"packable":false,
+	"TL":"4",
+	"description":"The standard TL4 vacc suit is designed to allow the wearer to survive in both hard vacuum and on most inhospitable planetary surfaces. The suit protects against ordinary levels of cosmic radiation and provides a temperature-controlled atmosphere. Vacc suits are equipped with radios that have a ten-kilometer range. A vacc suit oxygen tank weighs 1 encumbrance, included with the weight of the suit, and functions for six hours.<br><br>Vacc suits are cumbersome, and apply a -2 penalty to all hit rolls and skill checks that require movement. Those with at least a month of zero-gee experience can ignore this penalty. No armor can be worn with a vacc suit, though the suit itself grants AC 13 to its wearers. A vacc suit requires one type A power cell for each twelve hours of operation.<br><br>Vacc suits have a self-healing exterior that can seal the puncture wounds caused by bullets, arrows, or energy beams, but a strike from an edged weapon can overwhelm the repair system. If a character with 10 or fewer hit points is struck by an edged weapon, there is a 50% chance the suit is torn. Suits are equipped with emergency repair patches, but it requires a Main Action to apply one. Exposure to vacuum is described on page 58."
+    },
+    "bezoar":{
+	"type":"pharmaceuticals",
+	"name":"Bezoar",
+	"cost":"200",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"level":"1",
+	"description":"A complex antibiotic cocktail, Bezoar is an effective default treatment for a wide variety of infectious diseases. When applied to a sufferer, roll 1d6; on a 1, this victim cannot be helped by Bezoar, while otherwise the affliction is cured within 24 hours. Each application of Bezoar adds 1 System Strain to the target, and it cannot cure cancers, bioweapons, or congenital diseases."
+    },
+    "brainwave":{
+	"type":"pharmaceuticals",
+	"name":"Brainwave",
+	"cost":"1000",
+	"enc":"",
+	"packable":false,
+	"TL":"5",
+	"level":"2",
+	"description":"This psitech drug requires advanced TL5 facilities to compound, and the few remaining doses from pre-Silence periods are rarely available on the open market. Application of Brainwave gives a psychic 2 extra maximum Effort for one hour. At the end of that hour, they suffer 4 points of System Strain. If their Strain is maximized by this, they go unconscious for one hour. Only one dose can be active at a time."
+    },
+    "hush":{
+	"type":"pharmaceuticals",
+	"name":"Hush",
+	"cost":"200",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"level":"0",
+	"description":"An extremely heavy neurotranquilizer, Hush leaves the subject awake and responsive to simple, untaxing commands. They cannot fight or communicate while affected by Hush, but will walk, eat, sit, and perform simple actions as directed by the last person to speak to them. A Hush dose lasts for an hour plus three per Heal level of the person applying the stim, and the subject retains no memories while under the effect. A subject must be immobilized or willing to be affected by Hush; violent physical movement immediately after application disrupts the neurological effects."
+    },
+    "lift":{
+	"type":"pharmaceuticals",
+	"name":"Lift",
+	"cost":"50",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"level":"0",
+	"description":"A Lift stim augments and amplifies the body’s natural response to physical injury and ehaustion. This boost speeds natural recovery drastically and heals 1d8 plus the user’s Heal skill in hit points after five minutes of rest. Lift stims do not work on PCs who are mortally wounded; they need to be stabilized before the Lift can help them, though application to a stabilized target will get them back on their feet and active again. Each application adds 1 System Strain to the target. Each additional application of Lift to a target the same day increases the minimum Heal skill needed by 1."
+    },
+    "psych":{
+	"type":"pharmaceuticals",
+	"name":"Psych",
+	"cost":"25",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"level":"",
+	"description":"A military drug duplicated in rougher form by many street chemists, Psych fills the user with an intense sense of confidence and reckless courage. Unfortunately, it also cripples their judgment regarding danger. A person affected by Psych immediately gains a Morale score of 12 and a +1 bonus on all skill checks, but will ignore cover during combat and cannot decide not to attempt a skill check after learning its difficulty. The effect lasts fifteen minutes, adds 1 System Strain to the user, and is highly psychologically addictive."
+    },
+    "pretech_cosmetic":{
+	"type":"pharmaceuticals",
+	"name":"Pretech cosmetic",
+	"cost":"1000",
+	"enc":"",
+	"packable":false,
+	"TL":"5",
+	"level":"",
+	"description":"Before the Silence stims existed for a host of cosmetic, hygiene, and health purposes. While these effects are trivial, the basic pretech stim substrate also works to heal 1d6 lost hit points in the user at a cost of 1 System Strain."
+    },
+    "reverie":{
+	"type":"pharmaceuticals",
+	"name":"Reverie",
+	"cost":"100",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"level":"1",
+	"description":"This very dangerous combat drug completely subdues the subject’s fear centers and adrenaline production, leaving them perfectly calm and relaxed even in the midst of mortal danger. Their reaction speed is much slower as a consequence, and they may act only on even-numbered combat rounds; so on the second, fourth, and sixth rounds and so forth. Any damage they suffer is doubled as well due to their lack of vigilance. Their perfect calm allows them to shoot as if on the target range, however, and they can make Dex/Shoot skill checks to hit a target instead of hit rolls; the difficulty is 7 at point blank, 9 at normal ranges, and 11 at long ranges for the weapon. The target’s Armor Class is ignored. Melee attacks made under Reverie always hit. Reverie lasts for ten minutes and adds 2 System Strain to the target."
+    },
+    "squeal":{
+	"type":"pharmaceuticals",
+	"name":"Squeal",
+	"cost":"300",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"level":"1",
+	"description":"This \"truth serum\" is unreliable but still one of the best available options for field interrogations. The subject must be immobilized or willing to be affected by it. For five minutes afterwards they will be unable to avoid answering questions about facts known to them; they will be unable to exercise anything resembling a hypothesis or a judgment, but they will answer specific questions about facts known to them truthfully. Unwilling victims can attempt a Physical saving throw; on a success, they can simply refuse to speak about one particular topic of their choice. Targets pass out for 1d6 hours after the drug wears off and are immune to it for a week thereafter."
+    },
+    "tsunami":{
+	"type":"pharmaceuticals",
+	"name":"Tsunami",
+	"cost":"50",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"level":"1",
+	"description":"An emergency combat stim used to juice certain expendable soldiers before an assault, Tsunami fills them with a reckless disregard for pain and an intense aggressiveness. The short effect duration and difficult application limits its wider use, however. Subjects gain a Morale score of 12, 10 extra hit points for ten minutes and a +2 bonus on all hit rolls. At the end of the duration, they immediately lose those 10 hit points, which may leave them mortally wounded. Each application adds 2 System Strain to the target."
+    },
+    "bioscanner":{
+	"type":"tools_and_medical",
+	"name":"Bioscanner",
+	"cost":"300",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"While an untrained user can use this tool to discern internal bleeding, gross physical distress, or toxins in a plant or animal, it requires Heal-0 skill to use this tool to its fullest. Such operators can use the bioscanner for a full spectrum of diagnosis and DNA sequencing achievable in minutes. One type A power cell will power it for up to twenty-four hours of regular usage."
+    },
+    "lazarus_patch":{
+	"type":"tools_and_medical",
+	"name":"Lazarus patch",
+	"cost":"30",
+	"enc":"1",
+	"packable":true,
+	"TL":"4",
+	"description":"A vital tool for adventurers, the lazarus patch is a heavy compress laced with antibiotics, coagulants, system stabilizers, plasma, and a one-shot diagnostic suite. If the patch is applied to a character that has fallen to 0 hit points, the user can make an Int/Heal or Dex/Heal skill check against difficulty 6 to stabilize the subject. The more time between injury and application, the less chance the patch has to work. Each round after the first, an additional -1 penalty is applied to the skill check. The patch is no use after six rounds. If the medic fails the first skill check, they can keep trying the check once per round until the victim is revived or time runs out.<br><br>Lazarus patches are no use on victims that have died of disease, poison, or have been mangled beyond surgical repair by Heavy weapons or similar trauma. Only one patch can be applied to a victim. Revived victims are critically wounded until sufficient medical help has been tendered; see the Systems chapter for details."
+    },
+    "medkit":{
+	"type":"tools_and_medical",
+	"name":"Medkit",
+	"cost":"100",
+	"enc":"2",
+	"packable":false,
+	"TL":"4",
+	"description":"Containing a broad supply of pharmaceuticals, spray bandages, glue sutures, and a succinct handbook of injury care, the medkit is designed for handling sudden and drastic injuries. It also contains all the necessary tools for providing long-term recuperative care for critically injured characters. After each day of granting long-term recuperative care, roll 2d6 per patient treated; on a 12, the kit has run out of some vital pharmaceutical and has become useless."
+    },
+    "metatool":{
+	"type":"tools_and_medical",
+	"name":"Metatool",
+	"cost":"200",
+	"enc":"1",
+	"packable":false,
+	"TL":"4",
+	"description":"This wrist-mounted housing contains a myriad of small, useful tools designed to handle the widest possible range of technical needs. While a metatool is too limited to handle major jobs, it is usually sufficient to manage jury-rigged repairs and temporary fixes until the tech has time to apply a larger wrench to the problem."
+    },
+    "spare_parts":{
+	"type":"tools_and_medical",
+	"name":"Spare parts",
+	"cost":"50",
+	"enc":"1",
+	"packable":true,
+	"TL":"4",
+	"description":"This is a general category for a number of small TL4 components and repair materials. While a simple toolkit or metatool is often enough to fix a damaged object, severely broken devices may need replacement parts. Rather than keep a catalog of bits and pieces, a technician can simply bring along one or more units of spare parts, subtracting one whenever the GM decides that a repair effort requires more than existing salvage can support. A unit of spare parts can also be used to jury-rig some basic, uncomplicated tool or weapon from the equipment list with ten or fifteen minutes of assembly and at least Fix-0 skill. Such bodged devices rarely last longer than one scene."
+    },
+    "tailored_antiallergens":{
+	"type":"tools_and_medical",
+	"name":"Tailored antiallergens",
+	"cost":"5",
+	"enc":"",
+	"packable":false,
+	"TL":"4",
+	"description":"A dose of tailored antiallergens can be used to render a local world’s organics largely edible by humans and its atmosphere breathable without severe allergic reactions. While many worlds have been seeded with Terran life forms or have produced organics that are edible by humans, others are toxic without the appropriate chemical augmentation. A dose of these antiallergens lasts for twenty-four hours."
+    },
+    "toolkit_postech":{
+	"type":"tools_and_medical",
+	"name":"Toolkit/Postech",
+	"cost":"300",
+	"enc":"3",
+	"packable":false,
+	"TL":"4",
+	"description":"Containing a wide range of necessary tools for a particular skill set, toolkits can handle almost any job that doesn’t require a full-scale shop or lab. A standard postech toolkit can handle electronics, small welding jobs, and basic repair on ordinary TL4 goods. More sophisticated pretech tools are necessary for working on advanced TL5 artifacts, and the tools themselves are very rare and difficult to obtain."
+    },
+    "toolkit_pretech":{
+	"type":"tools_and_medical",
+	"name":"Toolkit/Pretech",
+	"cost":"1000",
+	"enc":"1",
+	"packable":false,
+	"TL":"5",
+	"description":"Containing a wide range of necessary tools for a particular skill set, toolkits can handle almost any job that doesn’t require a full-scale shop or lab. A pretech toolkit can handle standard tasks\u2014electronics work, small welding jobs, and basic repair on ordinary TL4 goods\u2014as well as work on advanced TL5 artifacts."
+    }
+}

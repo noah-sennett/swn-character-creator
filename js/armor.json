@@ -1,0 +1,164 @@
+{
+    "shield":{
+	"name":"Shield",
+	"type":"Primitive",
+	"AC":"13/+1",
+	"cost":"10",
+	"enc":"2",
+	"TL":"0",
+	"description":"Shields are an ancient yet extremely useful adjunct to body armor. Primitive shields are usually of wood or stretched hide, while more modern riot shields tend toward clear plastic. A shield renders the bearer immune to the first instance of melee Shock damage they take each round, assuming the shield is effective against the weapon being used."
+    },
+    "primitive_hide_armor":{
+	"name":"Primitive hide armor",
+	"type":"Primitive",
+	"AC":"13",
+	"cost":"10",
+	"enc":"1",
+	"TL":"0",
+	"description":"Primitive light armor, such as leather jacks, thick hides, quilted armor, etc."
+    },
+    "primitive_medium_armor":{
+	"name":"Primitive medium armor",
+	"type":"Primitive",
+	"AC":"15",
+	"cost":"50",
+	"enc":"1",
+	"TL":"1",
+	"description":"Primitive medium armor, such as cuirass, brigandine, half-plate, etc."
+    },
+    "primitive_heavy_armor":{
+	"name":"Primitive heavy armor",
+	"type":"Primitive",
+	"AC":"17",
+	"cost":"100",
+	"enc":"2",
+	"TL":"1",
+	"description":"Primitive heavy armor, such as full plate, layered mail, etc."
+    },
+    "warpaint":{
+	"name":"Warpaint",
+	"type":"Street",
+	"AC":"12",
+	"cost":"300",
+	"enc":"0",
+	"TL":"4",
+	"description":"Warpaint is the common term for the bizarre combat fashions and scrap-built street harness of gangers, cult enforcers, street toughs, and other marginal sorts with little money but much need for protection. Most warpaint is fashioned of scrounged scraps of TL4 materials that are exceptionally tough or rigid, filled out with gang colors, body paint, intimidating tattoos, and the usual threatening grimace. It is often exceedingly impractical but inspirational to its wearer; an NPC in warpaint that is meaningful to them gains a +1 Morale bonus. Most warpaint is either pieced together over years or taken from the dead. Actually purchasing a finished suit comes at the listed price, assuming someone can be found willing to part with theirs."
+    },
+    "armored_undersuit":{
+	"name":"Armored undersuit",
+	"type":"Street",
+	"AC":"13",
+	"cost":"600",
+	"enc":"0",
+	"TL":"4",
+	"description":"An armored undersuit is a skin-tight bodysuit woven of advanced TL4 fibers with exceptional shock-activated rigidity and impact dispersion capabilities. Transparent panels allow for it to be worn with almost any outfit without drawing notice or being detected without a close tactile examination."
+    },
+    "secure_clothing":{
+	"name":"Secure clothing",
+	"type":"Street",
+	"AC":"13",
+	"cost":"300",
+	"enc":"1",
+	"TL":"4",
+	"description":"Secure clothing comes in assorted styles and fashions ranging from casual street wear to haute couture. Normal fabrics and components are replaced with light, flexible armor components that are only slightly hindering to the wearer. Only close tactile examination can distinguish secure clothing from ordinary couture."
+    },
+    "armored_vacc_suit":{
+	"name":"Armored vacc suit",
+	"type":"Street",
+	"AC":"13",
+	"cost":"400",
+	"enc":"2",
+	"TL":"4",
+	"description":"An armored vacc suit has traded off some comfort and flexibility for additional protective thickness. Aside from functioning as a normal vacc suit, it has only half the usual chance to tear when hit by an edged weapon or suit ripper. The choice between armored or standard suits is a common debate in spacer bars."
+    },
+    "deflector_array":{
+	"name":"Deflector array",
+	"type":"Street",
+	"AC":"18",
+	"cost":"30000",
+	"enc":"0",
+	"TL":"5",
+	"description":"A deflector array consists of several force field nodes worn beneath ordinary clothing. The invisible shield it produces flares only when dangerous energies or impact is impending, glowing a brief, bright blue as it deflects the attack."
+    },
+    "force_pavis":{
+	"name":"Force pavis",
+	"type":"Combat",
+	"AC":"15/+1",
+	"cost":"10000",
+	"enc":"1",
+	"TL":"5",
+	"description":"A force pavis is a small pretech force disc projector that absorbs all manner of small arms fire. It is carried as a shield. A force pavis renders the bearer immune to the first instance of melee Shock damage they take each round, assuming it is effective against the weapon being used."
+    },
+    "security_armor":{
+	"name":"Security armor",
+	"type":"Combat",
+	"AC":"14",
+	"cost":"700",
+	"enc":"1",
+	"TL":"4",
+	"description":"Security armor is the ordinary working uniform of most law enforcement officials and security personnel. Various rigid plates and anti-ballistic panels provide protection for the wearer at minimal extra weight."
+    },
+    "woven_body_armor":{
+	"name":"Woven body armor",
+	"type":"Combat",
+	"AC":"15",
+	"cost":"400",
+	"enc":"2",
+	"TL":"3",
+	"description":"Woven body armor represents the best armor that a TL3 world can manufacture, or an up-armored version of security armor used by TL4 high-threat response teams. The design is significantly more cumbersome, but allows for multiple layers of protection."
+    },
+    "combat_field_uniform":{
+	"name":"Combat field uniform",
+	"type":"Combat",
+	"AC":"16",
+	"cost":"1000",
+	"enc":"1",
+	"TL":"4",
+	"description":"A combat field uniform is sophisticated battle dress fabricated from TL4 ablative coatings, rigid plates, and shock-activated soft components. The CFU is the standard uniform for well-equipped TL4 front-line soldiers."
+    },
+    "icarus_harness":{
+	"name":"Icarus harness",
+	"type":"Combat",
+	"AC":"16",
+	"cost":"8000",
+	"enc":"1",
+	"TL":"4",
+	"description":"The Icarus harness is an upgrade to combat field armor for paratroopers, and replaces a conventional parachute with a crude gravity damper that allows the wearer to fall an unlimited distance without harm. Each fall over 3 meters drains a type A power cell. The suit also functions as a vacc suit for up to 30 minutes per vacc refresh."
+    },
+    "vestimentum":{
+	"name":"Vestimentum",
+	"type":"Powered",
+	"AC":"18",
+	"cost":"15000",
+	"enc":"0",
+	"TL":"5",
+	"description":"A \"vestimentum\" is a catch-all term for one of the many ancient Mandate ceremonial armors meant chiefly for parade guards, ritual officiants, cultural ereenactors, or other roles that put elaborate style at a premium. While these outfits often look wildly unmilitary, their hyper-advanced components and micronized force fields give them the same protection against primitive weapons as any other powered armor."
+    },
+    "assault_suit":{
+	"name":"Assault suit",
+	"type":"Powered",
+	"AC":"18",
+	"cost":"10000",
+	"enc":"2",
+	"TL":"4",
+	"description":"An assault suit represents the most sophisticated armor in common use among TL4 worlds. An assault suit requires a type B power cell for 24 hours of operation, and provides integral encrypted military comms, low-light and infrared vision, and a built-in energy feed interface. The latter allows the wearer to connect the suit to any one weapon or device that uses a type A power cell as a Main Action. So long as the device remains connected to the suit, it is treated as having unlimited ammunition or operation time. The suit also functions as a vacc suit so long as it remains powered, one that cannot be torn by edged weapons."
+    },
+    "storm_armor":{
+	"name":"Storm armor",
+	"type":"Powered",
+	"AC":"19",
+	"cost":"20000",
+	"enc":"2",
+	"TL":"5",
+	"description":"Storm armor is a more advanced form of assault suit, one that can be fabricated only by those worlds that have retained some degree of Mandate-grade technical infrastructure. Aside from functioning as an assault suit, the storm armor’s exo-augments allow the wearer to treat their Strength as 4 points higher for encumbrance purposes. Integral gravitic boosters allow the wearer to leap up to 20 meters as a Move action, either horizontally or vertically, and allow the wearer to fall up to 40 meters without suffering harm. An on-board medical computer can attempt last-ditch stabilization of the wearer if all other efforts fail; when the wearer would normally die from an untreated mortal wound, they can make a Physical save to self-stabilize. Storm armor requires the same type B power cell as an assault suit, and each cell powers it for 24 hours."
+    },
+    "field_emitter_panoply":{
+	"name":"Field emitter panoply",
+	"type":"Powered",
+	"AC":"20",
+	"cost":"40000",
+	"enc":"1",
+	"TL":"5",
+	"description":"A field emitter panoply is a heavy-duty pretech defensive system composed of a half-dozen worn emitter nodes that sheath the wearer in a nimbus of close-fitting damper fields. The FEP’s pale glow is obvious, but it provides all the benefits of storm armor with no power source required. The FEP is particularly effective at filtering radiation, and renders the wearer immune to any dose that wouldn’t kill them in seconds. Many FEPs project intimidating holographic skins over the wearer when in operation."
+    }
+}
