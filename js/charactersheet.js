@@ -2932,7 +2932,7 @@ function fillOutSheetPage1(){
     centerElement(foci3_level, formElements);
 
     for (var fociElem of fociElems){
-	shrinkText(fociElem, 50, formElements);
+	shrinkText(fociElem, 100, formElements);
     }
     
 
@@ -3001,7 +3001,7 @@ function fillOutSheetPage1(){
     positionElement(credits , 980, 1930);
 
     positionElement(technique, 1870, 1234,"font-size:34px;width:854px;");
-    shrinkText(technique,646,formElements);
+    shrinkText(technique,620,formElements);
 
 //    d.resolve();
     
@@ -3323,8 +3323,9 @@ function positionElement(elem,left,top,existingstyle=""){
 function shrinkText(elem, maxHeight, formElements){
     var currFontSize = parseInt((elem.style.fontSize).slice(0,-2));
     var currTop = parseInt((elem.style.top).slice(0,-2));
-    
+
     while (($("#"+elem.id).height()>maxHeight)&& currFontSize>1){
+	console.log(currFontSize);
 	currFontSize--;
 	currTop++;
 	elem.style.fontSize = currFontSize+"px";
@@ -3632,8 +3633,8 @@ function pickRandomNonPsychicSkill(){
     }
 
     var roll=rollDie(anySkills.length);
-    console.log(roll);
-    console.log(anySkills[roll-1]);
+//    console.log(roll);
+//    console.log(anySkills[roll-1]);
     incrementSkill(anySkills[roll-1]);
 }
 
@@ -3647,8 +3648,8 @@ function pickRandomCombatSkill(){
     }
 
     var roll=rollDie(combatSkills.length);
-    console.log(roll);
-    console.log(combatSkills[roll-1]);
+//    console.log(roll);
+//    console.log(combatSkills[roll-1]);
     incrementSkill(combatSkills[roll-1]);
 }
 
@@ -3662,8 +3663,8 @@ function pickRandomNonCombatSkill(){
     }
 
     var roll=rollDie(nonCombatSkills.length);
-    console.log(roll);
-    console.log(nonCombatSkills[roll-1]);
+//    console.log(roll);
+//    console.log(nonCombatSkills[roll-1]);
     incrementSkill(nonCombatSkills[roll-1]);
 }
 
@@ -3677,8 +3678,8 @@ function pickRandomPsychicSkill(){
     }
 
     var roll=rollDie(psychicSkills.length);
-    console.log(roll);
-    console.log(psychicSkills[roll-1]);
+//    console.log(roll);
+//    console.log(psychicSkills[roll-1]);
     incrementSkill(psychicSkills[roll-1]);
 }
 
