@@ -39,19 +39,19 @@
 	  <div class="topRowLeft" id="topRowLeft">
 	    <div>
 	      <label for="name_mirror" class="heading">Name:</label>
-	      <input id="name_mirror" type="text" size="12" onchange="updateFromMirrors(this.id)" style="width:168px;">
+	      <input id="name_mirror" type="text" size="12" oninput="updateFromMirrors(this.id);updateStatus9();" style="width:168px;">
 	    </div>
 	    <div>
-	      <label for="name" class="heading">Background:</label>
-	      <select id="backgrounds_mirror" onchange="updateFromMirrors(this.id);">
+	      <label for="backgrounds_mirror" class="heading">Background:</label>
+	      <select id="backgrounds_mirror" onchange="updateFromMirrors(this.id);updateStatus2();">
 		<option value=""></option>
 	      </select>
 	    </div>
 
 
 	    <div>
-	      <label for="name" class="heading">Class:</label>
-	      <select id="class_mirror" onchange="updateFromMirrors(this.id);">
+	      <label for="class_mirror" class="heading">Class:</label>
+	      <select id="class_mirror" onchange="updateFromMirrors(this.id);updateStatus4();updateStatus5();">
 		<option value=""></option>
 		<option value="expert">Expert</option>
 		<option value="psychic">Psychic</option>
@@ -86,8 +86,9 @@
 		    <div class="tooltiptext attribute" style="width:435px;left:65px;"> Describes physical power, melee prowess, carrying capacity, etc.</div>
 		  </span>
 		</div>
-		<div class="item val">  <span id="strength_attr"></span>
-		  <!-- <input type="number" id="strength_attr" onchange="updateMod('strength')" disabled="true"> -->
+		<div class="item val">
+		  <span id="strength_attr"></span>
+		  <input type="number" id="strength_attr_input" onchange="updateMod('strength')" style="display:none">
 		</div>
 		<div class="item mod"><span id="strength_mod">+0 </span></div>
 
@@ -97,7 +98,7 @@
 		</div>
 		<div class="item val">
 		  <span id="dexterity_attr"></span>
-		  <!-- <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" disabled="true"> -->
+		  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" style="display:none">
 		</div>
 		<div class="item mod"><span id="dexterity_mod">+0 </span></div>
 		
@@ -107,7 +108,7 @@
 		</div>
 		<div class="item val">
 		  <span id="constitution_attr"></span>
-		  <!-- <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" disabled="true"> -->
+		  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" style="display:none">
 		</div>
 		<div class="item mod"><span id="constitution_mod">+0 </span></div>
 	      	
@@ -117,7 +118,7 @@
 		</div>
 		<div class="item val">
 		  <span id="intelligence_attr"></span>
-		  <!-- <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" disabled="true"> -->
+		  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" style="display:none">
 		</div>
 		<div class="item mod"><span id="intelligence_mod">+0 </span></div>
 		
@@ -127,7 +128,7 @@
 		</div>
 		<div class="item val">
 		  <span id="wisdom_attr"></span>
-		  <!-- <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" disabled="true"> -->
+		  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" style="display:none">
 		</div>
 		<div class="item mod"><span id="wisdom_mod">+0 </span></div>
 		
@@ -137,7 +138,7 @@
 		</div>
 		<div class="item val">
 		  <span id="charisma_attr"></span>
-		  <!-- <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" disabled="true"> -->
+		  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" style="display:none">
 		</div>
 		<div class="item mod"><span id="charisma_mod">+0 </span></div>
 		
@@ -275,7 +276,7 @@
 	<br>
 	
 	<div class="accordion">
-	  <h3>1. Determine attributes </h3>
+	  <h3>1. Determine attributes <img src="assets/redx.png" alt="" class="statusicon" id="accordion1StatusIcon"></h3>
 	  <div>
 	    
 	    <p>Six attributes&mdash;<i>Strength, Dexterity, Constitution, Intelligence, Wisdom,</i> and <i>Charisma</i>&mdash;describe the raw potential of your hero. Select one of the methods below to assign your character's <strong>attribute scores</strong>. </p>
@@ -327,11 +328,11 @@
 	  </div>
 	</div>
 	<div class="accordion">
-	  <h3>2. Choose background</h3>
+	  <h3>2. Choose background <img src="assets/redx.png" alt="" class="statusicon" id="accordion2StatusIcon"></h3>
 	  <div>
 	    <p>Pick the <strong>background</strong> from the list below that most closely reflects your hero’s past experiences. You gain rank-0 competency in the listed <strong> Free Skill </strong>, which equates to an ordinary working knowledge.</p>
 	    <div style="display:grid; grid-template-columns:120px auto;" id="backgroundPanel">
-	      <select id="backgrounds" style="height:327px;border:1px solid black;" size="15" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);updateMirrors(this.id);">
+	      <select id="backgrounds" style="height:327px;border:1px solid black;" size="15" onchange="displayBackground(this.value);removeSkillDots();updateSkills();populateLearning(this.value);populateGrowth(this.value);updateMirrors(this.id);updateStatus2();">
 		<option value="" disabled selected>Choose one</option>
 	      </select>
 	      
@@ -342,7 +343,7 @@
 	  </div>
 	</div>
 	<div class="accordion">
-	  <h3>3. Determine skills</h3>
+	  <h3>3. Determine skills <img src="assets/redx.png" alt="" class="statusicon" id="accordion3StatusIcon"></h3>
 	  <div>
 	    <div style="display:grid;grid-template-columns: auto 230px;column-gap:20px ">
 	      <div>
@@ -364,7 +365,7 @@
 		<div style="display:inline-block">
 		  <label for="learning"><strong>Learning</strong></label><br>
 		  <div class="bloc">
-		    <select id="learning" size="8" style="width:130px" disabled="true" multiple>
+		    <select id="learning" size="8" style="width:130px" disabled="true" onchange="updateStatus3();" multiple>
 		    </select>
 		  </div>
 		</div>
@@ -421,12 +422,12 @@
 	  </div>
 	</div>
 	<div class="accordion">
-	  <h3>4. Choose class</h3>
+	  <h3>4. Choose class <img src="assets/redx.png" alt="" class="statusicon" id="accordion4StatusIcon"></h3>
 	  <div>
 	    <p>Choose your hero's <strong>class</strong>, representing their talents most relevant to adventuring. If your hero isn’t well-described as a Warrior, Expert, or Psychic, you can mix class abilities by choosing one of the Adventurer varieties.</p>
 	    <div style="display:grid; grid-template-columns:140px auto;" id="classPanel">
 
-	      <select id="class" onchange="tabulateFoci(); displayClass(); updateSkills(); updateMirrors(this.id);" size="15" style="height:327px;border:1px solid black;overflow:hidden">
+	      <select id="class" onchange="tabulateFoci(); displayClass(); updateSkills(); updateMirrors(this.id);updateStatus4();updateStatus5();" size="15" style="height:327px;border:1px solid black;overflow:hidden">
 		<option value="" disabled selected>Choose one</option>
 		<option value="expert">Expert</option>
 		<option value="psychic">Psychic</option>
@@ -445,7 +446,7 @@
 	  </div>
 	</div>
 	<div class="accordion">
-	  <h3>5. Choose foci</h3>
+	  <h3>5. Choose foci <img src="assets/redx.png" alt="" class="statusicon" id="accordion5StatusIcon"></h3>
 	  <div>
 	    <p>Choose your hero's <strong>foci</strong>, representing their side talents or particular specializations. All characters gain one focus of their choice at first level.</p>
 	    <p>Characters with the Expert class or the Partial Expert feature of the Adventurer class get an additional non-psychic, non-combat focus; characters with the Warrior class or Partial Warrior feature of the Adventurer class can do the same with a non-psychic, combat focus.</p>
@@ -457,7 +458,7 @@
 		  <a href="#tab-1">
 		    <div style="text-align:center">
 		      <label for="foci">General Focus</label><br>
-		      <select id="foci" onchange="tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills()" style="width:200px;">
+		      <select id="foci" onchange="tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills(); updateStatus5();" style="width:200px;">
 			<option value=""></option>
 		      </select>
 		    </div>
@@ -467,7 +468,7 @@
 		  <a href="#tab-1">
 		    <div style="text-align:center">
 		      <label for="combat_foci">Combat Focus</label><br>
-		      <select id="combat_foci" onchange="tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills()" style="width:200px;">
+		      <select id="combat_foci" onchange="tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills(); updateStatus5();" style="width:200px;">
 			<option value=""></option>
 		      </select>
 		    </div>
@@ -477,7 +478,7 @@
 		  <a href="#tab-1">
 		    <div style="text-align:center">
 		      <label for="noncombat_foci">Non-combat Focus</label><br>
-		      <select id="noncombat_foci" onchange="tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills()" style="width:200px;">
+		      <select id="noncombat_foci" onchange="tabulateFoci(); displayFoci(this.value); isolateFoci(); updateSkills(); updateStatus5();" style="width:200px;">
 			<option value=""></option>
 		      </select>
 		    </div>
@@ -491,7 +492,7 @@
 	  </div>
 	</div>
 	<div class="accordion">
-	  <h3>6. Choose psionic techniques</h3>
+	  <h3>6. Choose psionic techniques <img src="assets/checkmark.png" alt="" class="statusicon" id="accordion6StatusIcon"></h3>
 	  <div>
 	    <p>Characters with Psychic class or the Partial Psychic feature of the Adventurer class gain techniques associated with the psionic disciplines in which they are proficient.</p>
 	    <p>Upon attaining rank-0 expertise in a psychic skill, your hero automatically learns the <strong>Core Technique</strong> for that discipline. The power of that technique is described under <strong>Level-0</strong>.</p>
@@ -551,7 +552,7 @@
 		<br>
 		<label for="biopsionicsLevel1Panel" class="techniqueLabel" id="biopsionics_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="biopsionicsLevel1Panel">
-		  <select id="biopsionics_level1" onchange="displayTechniqueInfo('biopsionics',this.value)" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
+		  <select id="biopsionics_level1" onchange="displayTechniqueInfo('biopsionics',this.value); updateStatus6();" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="biopsionics_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -567,7 +568,7 @@
 		<br>
 		<label for="metapsionicsLevel1Panel" class="techniqueLabel" id="metapsionics_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="metapsionicsLevel1Panel">
-		  <select id="metapsionics_level1" onchange="displayTechniqueInfo('metapsionics',this.value)" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
+		  <select id="metapsionics_level1" onchange="displayTechniqueInfo('metapsionics',this.value); updateStatus6();" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="metapsionics_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -583,7 +584,7 @@
 		<br>
 		<label for="precognitionLevel1Panel" class="techniqueLabel" id="precognition_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="precognitionLevel1Panel">
-		  <select id="precognition_level1" onchange="displayTechniqueInfo('precognition',this.value)" style="display:none;overflow:hidden;" size="6">
+		  <select id="precognition_level1" onchange="displayTechniqueInfo('precognition',this.value); updateStatus6();" style="display:none;overflow:hidden;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="precognition_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -599,7 +600,7 @@
 		<br>
 		<label for="telekinesisLevel1Panel" class="techniqueLabel" id="telekinesis_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="telekinesisLevel1Panel">
-		  <select id="telekinesis_level1" onchange="displayTechniqueInfo('telekinesis',this.value)" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
+		  <select id="telekinesis_level1" onchange="displayTechniqueInfo('telekinesis',this.value); updateStatus6();" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="telekinesis_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -615,7 +616,7 @@
 		<br>
 		<label for="telepathyLevel1Panel" class="techniqueLabel" id="telepathy_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="telepathyLevel1Panel">
-		  <select id="telepathy_level1" onchange="displayTechniqueInfo('telepathy',this.value)" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
+		  <select id="telepathy_level1" onchange="displayTechniqueInfo('telepathy',this.value); updateStatus6();" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="telepathy_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -631,7 +632,7 @@
 		<br>
 		<label for="teleportationLevel1Panel" class="techniqueLabel" id="teleportation_level1_heading" style="display:none">Level-1 Techniques</label><br>
 		<div style="display:grid; grid-template-columns:217px auto;" id="teleportationLevel1Panel">
-		  <select id="teleportation_level1" onchange="displayTechniqueInfo('teleportation',this.value)" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
+		  <select id="teleportation_level1" onchange="displayTechniqueInfo('teleportation',this.value); updateStatus6();" style="display:none;overflow:hidden;height:152px;border:1px solid black;" size="6">
 		    <option value="" selected disabled>Choose one</option>
 		  </select>
 		  <div id="teleportation_level1_description" class="descriptionBox" style="width:100%;height:150px;display:none">
@@ -647,7 +648,7 @@
 	  
 	</div>
 	<div class="accordion">
-	  <h3>7. Roll hit points</h3>
+	  <h3>7. Roll hit points <img src="assets/redx.png" alt="" class="statusicon" id="accordion7StatusIcon"></h3>
 	  <div>
 	    <p> Your hero's <strong>hit points</strong> represent their overall health, stamina, and luck. If brought to zero hit points, your hero is defeated; whether they are dead, dying, unconscious, or merely incapacitated depends on how their hit points are lost.</p> 
 
@@ -689,7 +690,7 @@
 	  </div>
 	</div>
 	<div class="accordion">
-	  <h3>8. Choose equipment</h3>
+	  <h3>8. Choose equipment <img src="assets/redx.png" alt="" class="statusicon" id="accordion8StatusIcon"></h3>
 	  <div>
 	    <p>Your hero begins their adventure with some equipment and (modest) wealth.</p>
 	    <p>Choose one of the equipment packages below. Selecting the "Custom" package provides your character with  2d6 x 100 starting credits with which to buy gear.</p>
@@ -697,7 +698,7 @@
 
 	    <div style="display:grid; grid-template-columns:100px auto;" id="equipmentPanel">
 
-	      <select id="equipment_packages" onchange="displayEquipmentPackage(this.value)" size="10" style="overflow:hidden;height:272px;border:1px solid black;">
+	      <select id="equipment_packages" onchange="displayEquipmentPackage(this.value);updateStatus8();" size="10" style="overflow:hidden;height:272px;border:1px solid black;">
 		<option value="" selected disabled>Choose one</option>
 	      </select>
 
@@ -711,27 +712,27 @@
 	</div>
 	
 	<div class="accordion">
-	  <h3>9. Add finishing touches</h3>
+	  <h3>9. Add finishing touches <img src="assets/warning.png" alt="" class="statusicon" id="accordion9StatusIcon"></h3>
 	  <div>
 	    <p>Your hero is more than just a block of stats. Flesh out your character by filling out the following information.</p>
 
 	    <div style="display:grid; grid-template-columns:1fr 1fr">
 	      <div>
 		<label for="name">Name</label>	
-		<input id="name" type="text" onchange="updateMirrors(this.id)" style="width:168px;">
+		<input id="name" type="text" oninput="updateMirrors(this.id);updateStatus9();" style="width:168px;">
 	      </div>
 	      <div>
 		<label for="homeworld">Homeworld</label>	
-		<input id="homeworld" type="text">
+		<input id="homeworld" type="text" oninput="updateStatus9();">
 	      </div>
 	      <div>
 		<label for="employer">Employer</label>	
-		<input id="employer" type="text">
+		<input id="employer" type="text" oninput="updateStatus9();">
 	      </div>
 
 	      <div>
 		<label for="species">Species</label>	
-		<input id="species" type="text">
+		<input id="species" type="text" oninput="updateStatus9();">
 	      </div>
 
 	      <br>
@@ -739,7 +740,7 @@
 	    <div style="display:grid;text-align:left">
 	      <div>
 		<label for="portrait" style="width:170px;height:1.3em;padding:3px;z-index:0" class="topLayer">Upload character portrait</label>
-		<p><input type="file"  accept="image/*" name="portrait" id="portrait" style="display: none;" onchange="loadFile(event)" ></p>
+		<p><input type="file"  accept="image/*" name="portrait" id="portrait" style="display: none;" onchange="loadFile(event);updateStatus9();" ></p>
 	      </div>
 	      <div>
 		<p><i>(Use a picture with aspect ratio close to 1:1 for best results)</i><p>
@@ -760,12 +761,12 @@
 	    <div style="display:grid; grid-template-columns:1fr 1fr;column-gap:10px">
 	      <div style="display:inline-block">
 		<label for="goals">Goals</label><br>
-		<textarea id="goals" style="width:100%;height:100px"></textarea>
+		<textarea id="goals" style="width:100%;height:100px" oninput="updateStatus9();"></textarea>
 	      </div>
 	      
 	      <div style="display:inline-block">
 		<label for="notes">Notes</label><br>
-		<textarea id="notes" style="width:100%;height:100px"></textarea>
+		<textarea id="notes" style="width:100%;height:100px" oninput="updateStatus9();"></textarea>
 	      </div>
 	    </div>
 
