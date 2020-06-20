@@ -2,8 +2,6 @@
 
 $(document).ready(function () {
 
-
-
     $("#printButton").click(function(){
 	showCharacterSheet().then(fillOutCharacterSheet).then(saveCharacterSheet).then(hideCharacterSheet);
     });
@@ -15,7 +13,18 @@ $(document).ready(function () {
 	pickRandomBackground();
 	pickRandomEquipmentPackage();
 	pickRandomSkills();
-
+	$("#rollHPButton").click();
+	$("#rollHPTopLayer").click();
+	
+	updateStatus1();
+	updateStatus2();
+	updateStatus3();
+	updateStatus4();
+	updateStatus5();
+	updateStatus6();
+	updateStatus7();
+	updateStatus8();
+	
     });
 
     
@@ -99,10 +108,14 @@ $(document).ready(function () {
     
     $("#rollAttrsTopLayer").on("click",function(){
 	attrs.forEach(rollAttr);hideAttrSelects();show14Attr();resetTemps();
+	$("#14attrList").selectmenu("refresh");
+	updateStatus1();
     });
 
     $("#fixAttrsTopLayer").on("click",function(){
 	attrs.forEach(resetAttr);hide14Attr();showAttrSelects();resetTemps();
+	$("select[id*='_select']").selectmenu("refresh");
+	updateStatus1();
     });
 
     var box3active = false;
@@ -158,11 +171,13 @@ $(document).ready(function () {
     
     $("#rollSkillsTopLayer").on("click",function(){
 	showGrowthButtons();
+	updateStatus3();
     });
 
     $("#pickSkillsTopLayer").on("click",function(){
 	hideGrowthButtons();
 	enableLearningChoices();
+	updateStatus3();
     });
 
     var box5active = false;
@@ -183,6 +198,7 @@ $(document).ready(function () {
     $("#rollHPTopLayer").on("click",function(){
 	rollHP();
 	totalHP();
+	updateStatus7();
     });
 
 //    $('#name_mirror').addClass("ui-widget");;
@@ -198,6 +214,7 @@ $(document).ready(function () {
 
     $("#14attrList").on("selectmenuchange",function(){
 	attrTo14(this.value);
+	updateStatus1();
     });
 
     $("select[id*='_select']").on("selectmenuchange",function(){
@@ -205,6 +222,7 @@ $(document).ready(function () {
 	setAttr(attribute,this.value);
 	updateAttrSelects(attribute,this.value);
 	$("select[id*='_select']").selectmenu("refresh");
+	updateStatus1();
     });
 
     // $("select[id*='foci']").on("selectmenuchange",function(){
@@ -263,6 +281,170 @@ var class_hp_bonus = 0;
 var foci_hp_bonus = 0;
 var foci_effort_bonus = 0;
 var technique_effort_bonus = 0;
+
+function updateStatus1(){
+    var elemIcon = document.getElementById("accordion1StatusIcon");
+    
+    var elem = document.getElementById("14attrList");
+
+    var statsAssigned = true;
+    
+    for(var attr of attrs){
+	var elemSelect = document.getElementById(attr+"_select");
+	statsAssigned = statsAssigned && (elemSelect.value != "");
+    }
+    
+    if(elem.value!=""||statsAssigned){
+	elemIcon.src = "assets/checkmark.png"
+    }
+    else{
+	elemIcon.src= "assets/redx.png"
+    }
+    
+}
+
+function updateStatus2(){
+    var elemIcon = document.getElementById("accordion2StatusIcon");
+    
+    var elem = document.getElementById("backgrounds");
+
+    if(elem.value!=""){
+	elemIcon.src = "assets/checkmark.png"
+    }
+    else{
+	elemIcon.src= "assets/redx.png"
+    }    	
+}
+
+function updateStatus3(){
+    var elemIcon = document.getElementById("accordion3StatusIcon");
+
+    elemIcon.src= "assets/redx.png"
+    
+    if(any_skill_remaining==0 && combat_skill_remaining==0 && noncombat_skill_remaining==0 && psychic_skill_remaining ==0){
+	if(remainingRolls == 0 || learning_choice_index.length == 2){
+	    elemIcon.src = "assets/checkmark.png"
+	}
+    }
+}
+
+function updateStatus4(){
+    var elemIcon = document.getElementById("accordion4StatusIcon");
+    
+    var elem = document.getElementById("class");
+
+    if(elem.value!=""){
+	elemIcon.src = "assets/checkmark.png"
+    }
+    else{
+	elemIcon.src= "assets/redx.png"
+    }    	
+}
+
+function updateStatus5(){
+    var elemIcon = document.getElementById("accordion5StatusIcon");
+    
+    var elemGeneralFoci = document.getElementById("foci");
+    var elemCombatFoci = document.getElementById("combat_foci");
+    var elemNonCombatFoci = document.getElementById("noncombat_foci");
+
+    var elemClass = document.getElementById("class");
+
+
+    elemIcon.src= "assets/redx.png";
+    
+    if(elemClass.value==""||elemClass.value=="psychic"){
+	if(elemGeneralFoci.value!=""){
+	    elemIcon.src = "assets/checkmark.png";
+	}
+    }
+    else if(elemClass.value=="warrior"||elemClass.value=="war_psy"){
+	if(elemGeneralFoci.value!="" && elemCombatFoci.value!=""){
+	    elemIcon.src = "assets/checkmark.png";
+	}
+    }
+    else if(elemClass.value=="expert"||elemClass.value=="exp_psy"){
+	if(elemGeneralFoci.value!="" && elemNonCombatFoci.value!=""){
+	    elemIcon.src = "assets/checkmark.png";
+	}
+    }
+    else if(elemClass.value=="war_exp"){
+	if(elemGeneralFoci.value!="" && elemCombatFoci.value!="" && elemNonCombatFoci.value!=""){
+	    elemIcon.src = "assets/checkmark.png";
+	}
+    }
+}
+
+function updateStatus6(){
+    var elemIcon = document.getElementById("accordion6StatusIcon");
+    
+    var psionicsChosen = true;
+    
+    for (var discipline of psionic_disciplines){
+	var elem = document.getElementById(discipline+"_level1");	
+	psionicsChosen = psionicsChosen && (elem.style.display == "none" || elem.value !="");
+    }
+
+    if(psionicsChosen){
+	elemIcon.src = "assets/checkmark.png"
+    }
+    else{
+	elemIcon.src= "assets/redx.png"
+    }    	    
+}
+
+
+function updateStatus7(){
+    var elemIcon = document.getElementById("accordion7StatusIcon");
+    
+    var elem = document.getElementById("hp_roll");
+
+    if(elem.value!=""){
+	elemIcon.src = "assets/checkmark.png"
+    }
+    else{
+	elemIcon.src= "assets/redx.png"
+    }    	
+}
+
+function updateStatus8(){
+    var elemIcon = document.getElementById("accordion8StatusIcon");
+    
+    var elem = document.getElementById("equipment_packages");
+
+    if(elem.value!=""){
+	elemIcon.src = "assets/checkmark.png"
+    }
+    else{
+	elemIcon.src= "assets/redx.png"
+    }    	
+}
+
+function updateStatus9(){
+    var elemIcon = document.getElementById("accordion9StatusIcon");
+    
+    var elemName = document.getElementById("name");
+    var elemHomeworld = document.getElementById("homeworld");
+    var elemEmployer = document.getElementById("employer");
+    var elemSpecies = document.getElementById("species");
+
+    var elemGoals = document.getElementById("goals");
+    var elemNotes = document.getElementById("notes");
+
+    var portraitSource = $("#portrait_holder").attr('src');
+
+    // For some browsers, `portraitSource` is undefined; for others,
+    // `portraitSource` is false.  Check for both.
+    var portraitUploaded = (typeof portraitSource !== typeof undefined && portraitSource !== false)
+    
+    if(elemName.value!="" && elemHomeworld.value!="" && elemEmployer.value!="" && elemSpecies.value!=""&&elemGoals.value!="" && elemNotes.value!="" && portraitUploaded){
+	elemIcon.src = "assets/checkmark.png"
+    }
+    else{
+	elemIcon.src= "assets/warning.png"
+    }    	
+}
+
 
 function rollDie(sides=6){
     return 1+Math.floor(sides*Math.random());
@@ -762,7 +944,7 @@ function generateSkillTable(skills){
 		    
 		    box.setAttribute("type","checkbox");
 		    box.setAttribute("id",skillKey+'_rank_box_'+parseInt(boxes.indexOf(box)));
-		    box.setAttribute("onchange","updateSkillBoxes(this.id);");
+		    box.setAttribute("onchange","updateSkillBoxes(this.id);updateStatus3();");
 		    checkboxLabel.append(box);
 		    
 		    var innerSpan=document.createElement('span');
@@ -1022,6 +1204,8 @@ function hideGrowthButtons(){
     growth_skills = [];
     learning_skills = [];
 
+    remainingRolls = 3;
+    
     updateSkills();
     
 }
@@ -1092,6 +1276,7 @@ function rollGrowth(){
 	elemGrowthButton.setAttribute("class","deactivated");
 	elemLearningButton.setAttribute("class","deactivated");
     }
+    updateStatus3();
 }
 
 function rollLearning(){
@@ -1111,7 +1296,8 @@ function rollLearning(){
 	let elemLearningButton = document.getElementById("learning_button");
 	elemGrowthButton.setAttribute("class","deactivated");
 	elemLearningButton.setAttribute("class","deactivated");
-    }   
+    }
+    updateStatus3();
 }
 
 
@@ -1654,6 +1840,8 @@ function updateSkills(){
     
     for(var discipline of psionic_disciplines) anyPsychic = (displayTechniques(discipline) || anyPsychic);    
     displayTechniquesTabs(anyPsychic);
+
+    updateStatus3();
 }
 
 function updateMirrors(id){
@@ -2020,8 +2208,10 @@ function displayTechniques(discipline){
 	    elemLevel1Text.style.display = 'block';
 	    elemCoreLevel1Text.style.opacity = '1';
 	}
+	updateStatus6();
 	return true;
     }
+    updateStatus6();
     return false;
 }
 
