@@ -23,6 +23,11 @@
     <script src="js/charactersheet.js"></script>
     <!-- <script src="js/printThis.js"></script> -->
 
+    <script src="js/pdfform.minipdf.dist.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.3/pako.min.js" integrity="sha256-X7u/eQo6oIgWqc5jOmTjQn3loM8Lse0ock76Gkkn/Ro=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.0.0/FileSaver.min.js"></script>
+
 
     
   </head>
@@ -861,7 +866,7 @@
 	  <input type="radio" name="stabshoot" value="shoot" id="stabshoot_shoot">
 	</div>
 	<button class="fixedButton" id="randomCharacterButton" style="right:10px;bottom:75px">Generate Random Character</button>
-	<button class="fixedButton" id="printButton">Download Character Sheet<br><i>Caution: File is ~50MB</i></button>
+	<button class="fixedButton" id="printButton">Download Character Sheet</button>
 
       </div>
       <div class="sidebar">
@@ -875,5 +880,6 @@
     <div id="character_sheet2" style="display:none;position:relative;width:2800px">
       <img src="assets/StarsWithoutNumberRevised-Character_Sheet-Form_Fillable_page2.png" alt="Character Sheet" style="width:100%;display:block" id="character_sheet_img2" crossorigin="anonymous">
     </div>
+
   </body>
 </html>
