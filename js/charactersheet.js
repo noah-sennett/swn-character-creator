@@ -3,7 +3,7 @@
 $(document).ready(function () {
 
     $("#printButton").click(function(){
-	showCharacterSheet().then(fillOutCharacterSheet).then(saveCharacterSheet).then(hideCharacterSheet);
+	fillOutCharacterSheet();
     });
 
     $("#randomCharacterButton").click(function(){
@@ -2523,987 +2523,6 @@ function computeEffort(){
     elemEffort.innerHTML = maxEffort;
 }
 
-function fillOutSheetPage1(){
-//    var d = $.Deferred();
-    var elem = document.getElementById("character_sheet");  
-    $("#character_sheet p").remove();
-    $("#character_sheet #form_portrait").remove();
-    
-    
-    var name = document.createElement("p");
-    var background = document.createElement("p");
-    var Class  = document.createElement("p");
-    var subclass  = document.createElement("p");
-    var level = document.createElement("p");
-    var homeworld = document.createElement("p");
-    var employer = document.createElement("p");
-    var species = document.createElement("p");
-    var hp = document.createElement("p");
-    var strain = document.createElement("p");
-    var physical = document.createElement("p");
-    var mental = document.createElement("p");
-    var evasion = document.createElement("p");
-    var strength = document.createElement("p");
-    var dexterity = document.createElement("p");
-    var constitution = document.createElement("p");
-    var intelligence = document.createElement("p");
-    var wisdom  = document.createElement("p");
-    var charisma  = document.createElement("p");
-    var effort = document.createElement("p");
-    var BAB = document.createElement("p");
-    var strength_mod = document.createElement("p");
-    var dexterity_mod = document.createElement("p");
-    var constitution_mod = document.createElement("p");
-    var intelligence_mod = document.createElement("p");
-    var wisdom_mod = document.createElement("p");
-    var charisma_mod = document.createElement("p");
-    var foci1 = document.createElement("p");
-    var foci1_level = document.createElement("p");
-    var foci2 = document.createElement("p");
-    var foci2_level = document.createElement("p");
-    var foci3 = document.createElement("p");
-    var foci3_level = document.createElement("p");
-    var administer = document.createElement("p");
-    var connect = document.createElement("p");
-    var exert = document.createElement("p");
-    var fix = document.createElement("p");
-    var heal = document.createElement("p");
-    var know = document.createElement("p");
-    var lead = document.createElement("p");
-    var notice  = document.createElement("p");
-    var perform = document.createElement("p");
-    var pilot = document.createElement("p");
-    var program = document.createElement("p");
-    var punch = document.createElement("p");
-    var shoot = document.createElement("p");
-    var sneak = document.createElement("p");
-    var stab = document.createElement("p");
-    var survive = document.createElement("p");
-    var talk = document.createElement("p");
-    var trade = document.createElement("p");
-    var work = document.createElement("p");
-    var biopsionics = document.createElement("p");
-    var metapsionics = document.createElement("p");
-    var precognition = document.createElement("p");
-    var telekinesis = document.createElement("p");
-    var telepathy = document.createElement("p");
-    var teleportation = document.createElement("p");
-    var weapon1_name  = document.createElement("p");
-    var weapon1_bonus  = document.createElement("p");
-    var weapon1_damage = document.createElement("p");
-    var weapon1_shock  = document.createElement("p");
-    var weapon2_name  = document.createElement("p");
-    var weapon2_bonus  = document.createElement("p");
-    var weapon2_damage = document.createElement("p");
-    var weapon2_shock  = document.createElement("p");
-    var weapon3_name  = document.createElement("p");
-    var weapon3_bonus  = document.createElement("p");
-    var weapon3_damage = document.createElement("p");
-    var weapon3_shock  = document.createElement("p");
-    var armor1_name = document.createElement("p");
-    var armor1_AC  = document.createElement("p");
-    var armor2_name = document.createElement("p");
-    var armor2_AC = document.createElement("p");
-    var armor3_name = document.createElement("p");
-    var armor3_AC  = document.createElement("p");
-    var armor4_name = document.createElement("p");
-    var armor4_AC = document.createElement("p");
-    var credits =  document.createElement("p");
-    var technique = document.createElement("p");
-    var range_close = document.createElement("p");
-    var range_far = document.createElement("p");
-    var test = document.createElement("p");
-    
-    var portrait = document.createElement("img");
-
-
-    var skillElements = [administer, connect, exert, fix, heal, know, lead, notice, perform, pilot, program, punch, shoot, sneak, stab, survive, talk, trade, work, biopsionics, metapsionics, precognition, telekinesis, telepathy, teleportation];
-    
-    var formElements = [name, background, Class, subclass, level, homeworld, employer, species, hp, strain, physical, evasion, mental, strength, dexterity, constitution, intelligence, wisdom, charisma, effort, BAB, strength_mod, dexterity_mod, constitution_mod, intelligence_mod, wisdom_mod, charisma_mod, foci1, foci2, foci3, foci1_level, foci2_level, foci3_level, weapon1_name, weapon1_bonus, weapon1_damage, weapon1_shock, weapon2_name, weapon2_bonus, weapon2_damage, weapon2_shock, armor1_name, armor1_AC, armor2_name, armor2_AC, armor3_name, armor3_AC, armor4_name, armor4_AC,credits, technique, range_close, range_far, test].concat(skillElements);
-    
-    for (var element of formElements){
-	element.setAttribute("class","formText");
-	element.setAttribute("id","form_element_page1_"+formElements.indexOf(element));
-	elem.appendChild(element);
-    }
-    
-    name.innerHTML = $("#name").val();
-    background.innerHTML = $("#backgrounds_mirror option:selected").text();
-
-    if($("#class_mirror option:selected").text().includes("/")){
-	Class.innerHTML = "Adventurer";
-	subclass.innerHTML = ($("#class_mirror option:selected").text()+" ").slice(4,-1);
-	
-    }
-    else{
-	Class.innerHTML = $("#class_mirror option:selected").text();
-	subclass.innerHTML = "";
-    }
-
-    level.innerHTML="1";
-    homeworld.innerHTML = $("#homeworld").val();
-    employer.innerHTML = $("#employer").val();
-    species.innerHTML = $("#species").val();
-    hp.innerHTML = $("#hp_mirror1").html();
-    strain.innerHTML = $("#constitution_attr").html();
-    physical.innerHTML = $("#physical_saving_throw").html();
-    evasion.innerHTML = $("#evasion_saving_throw").html();
-    mental.innerHTML = $("#mental_saving_throw").html();
-    strength.innerHTML = $("#strength_attr").html();
-    strength_mod.innerHTML = $("#strength_mod").html();
-    dexterity.innerHTML = $("#dexterity_attr").html();
-    dexterity_mod.innerHTML = $("#dexterity_mod").html();
-    constitution.innerHTML = $("#constitution_attr").html();
-    constitution_mod.innerHTML = $("#constitution_mod").html();
-    intelligence.innerHTML = $("#intelligence_attr").html();
-    intelligence_mod.innerHTML = $("#intelligence_mod").html();
-    wisdom.innerHTML = $("#wisdom_attr").html();
-    wisdom_mod.innerHTML = $("#wisdom_mod").html();
-    charisma.innerHTML = $("#charisma_attr").html();
-    charisma_mod.innerHTML = $("#charisma_mod").html();
-    effort.innerHTML = $("#effort").html();
-    BAB.innerHTML = $("#attack_bonus").html();
-
-    var fociElems = [foci1, foci2, foci3];
-    var fociLevelElems = [foci1_level, foci2_level, foci3_level];
-    var usedFoci = [];
-    var sorted_picks = picked_foci;
-    sorted_picks.sort();
-    for (var i =0; i< 3; i++){
-    	if(i< sorted_picks.length){
-    	    if(usedFoci.includes(sorted_picks[i])){
-    		fociElems[i].innerHTML = "<strong>"+foci[sorted_picks[i]]["name"]+":</strong> "+foci[sorted_picks[i]]["level2abbreviated"];
-    		fociLevelElems[i].innerHTML = "2";
-    	    }
-    	    else{
-    		fociElems[i].innerHTML = "<strong>"+foci[sorted_picks[i]]["name"]+":</strong> "+foci[sorted_picks[i]]["level1abbreviated"];
-    		fociLevelElems[i].innerHTML = "1";
-    	    }
-    	    usedFoci.push(sorted_picks[i]);
-    	}
-    	else{
-    	    fociElems[i].innerHTML = "";
-    	    fociLevelElems[i].innerHTML = "";
-    	}
-    }
-    
-    
-    var skillKeys = Object.keys(skills);
-    
-    var zippedSkills = skillElements.map(function(e, i) {
-	return [e, skillKeys[i]];
-    });
-
-    for (var zip of zippedSkills){
-    	zip[0].innerHTML = $("#"+zip[1]+"_total").html();
-    }
-
-
-    var strengthMod = computeMod(parseInt(strength.innerHTML));
-    var dexterityMod = computeMod(parseInt(dexterity.innerHTML));
-    var attackMod = parseInt(($("#attack_bonus").html()).slice(1,2));
-    
-    var melee_bonus = attackMod+strengthMod;
-    var ranged_bonus = attackMod+dexterityMod;
-
-    var maxMod = Math.max(strengthMod,dexterityMod);
-
-    var stab_bonus = 0;
-    var shoot_bonus = 0;
-    var shock_bonus = 0;
-    var innate_AC = 0;
-    var unarmed_base;
-    var unarmed_shock;
-
-   
-    if(picked_foci.includes("armsman")) stab_bonus = parseInt(stab.innerHTML);
-    if(picked_foci.includes("gunslinger")) shoot_bonus = parseInt(shoot.innerHTML);
-
-    var count=0;
-    for (var foci_choice of picked_foci){
-	if (foci_choice=="shocking_assault") count++
-    }
-
-    if(count == 2) shock_bonus = 2;
-    
-    if(picked_foci.includes("unarmed_combatant")){
-	switch(punch.innerHTML){
-	case "0":
-	    unarmed_base = "1d6";
-	    unarmed_shock = "";
-	    break;
-	case "1":
-	    unarmed_base = "1d8";
-	    unarmed_shock = "Shock: "+(1+maxMod+shock_bonus)+"/AC15";
-	    break;
-	}
-    }
-    else{
-	unarmed_base = "1d2";
-	unarmed_shock = "";
-    }
-
-    if(picked_foci.includes("ironhide")){
-	innate_AC = 16;
-    }
-    else{
-	innate_AC = 10;
-    }
-    
-    switch($("#equipment_packages").val()){
-    case "barbarian":
-    	weapon1_name.innerHTML = "Spear";
-	weapon2_name.innerHTML = "Knife";
-
-	weapon1_damage.innerHTML = "1d6"+displayBonus((1+maxMod+stab_bonus));
-	weapon1_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon1_shock.innerHTML = "Shock: "+(2+maxMod+stab_bonus+shock_bonus)+"/AC13";
-    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod+stab_bonus);
-	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
-
-	armor1_name.innerHTML = "Primitive hide armor w/ shield";
-	armor2_name.innerHTML = "Primitive hide armor";
-	armor3_name.innerHTML = "Unarmored w/ shield"
-	armor4_name.innerHTML = "Unarmored"
-	
-	armor1_AC.innerHTML = 14+dexterityMod;
-	armor2_AC.innerHTML = 13+dexterityMod;
-	armor3_AC.innerHTML = innate_AC+dexterityMod+1;
-	armor4_AC.innerHTML = innate_AC+dexterityMod;
-
-	credits.innerHTML = 500+" credits";
-	break;
-    case "blade":
-    	weapon1_name.innerHTML = "Monoblade sword";
-	weapon2_name.innerHTML = "Thermal knife";
-
-	weapon1_damage.innerHTML = "1d8"+displayBonus((1+maxMod+stab_bonus));
-	weapon1_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon1_shock.innerHTML = "Shock: "+(2+maxMod+stab_bonus+shock_bonus)+"/AC13";
-    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod+stab_bonus);
-	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
-
-	armor1_name.innerHTML = "Woven body armor";
-	armor2_name.innerHTML = "Secure clothing";
-	armor3_name.innerHTML = "Unarmored";
-	
-	armor1_AC.innerHTML = 15+dexterityMod;
-	armor2_AC.innerHTML = 13+dexterityMod;
-	armor3_AC.innerHTML = innate_AC+dexterityMod;
-
-	credits.innerHTML = 50+" credits";
-	break;
-    case "thief":
-    	weapon1_name.innerHTML = "Laser pistol";
-	weapon2_name.innerHTML = "Monoblade knife";
-
-	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod+shoot_bonus));
-	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
-	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod+stab_bonus);
-	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
-	
-	range_close.innerHTML = "100";
-	range_far.innerHTML = "300";
-	
-	armor1_name.innerHTML = "Armored undersuit";
-	armor2_name.innerHTML = "Unarmored";
-	
-	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = innate_AC+dexterityMod;
-
-	credits.innerHTML = 25+" credits";
-	break;
-    case "hacker":
-    	weapon1_name.innerHTML = "Laser pistol";
-	weapon2_name.innerHTML = "";
-
-	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod+shoot_bonus));
-	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
-	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "";
-	weapon2_bonus.innerHTML = "";
-	weapon2_shock.innerHTML = "";
-
-	range_close.innerHTML = "100";
-	range_far.innerHTML = "300";
-
-	armor1_name.innerHTML = "Secure clothing";
-	armor2_name.innerHTML = "Unarmored";
-	
-	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = innate_AC+dexterityMod;
-
-	credits.innerHTML = 100+" credits";
-	break;
-    case "gunslinger":
-    	weapon1_name.innerHTML = "Laser pistol";
-	weapon2_name.innerHTML = "Monoblade knife";
-
-	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod+shoot_bonus));
-	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
-	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod+stab_bonus);
-	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
-	
-	armor1_name.innerHTML = "Armored undersuit";
-	armor2_name.innerHTML = "Unarmored";
-
-	range_close.innerHTML = "100";
-	range_far.innerHTML = "300";
-	
-	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = innate_AC+dexterityMod;
-
-	credits.innerHTML = 100+" credits";
-	break;
-    case "soldier":
-    	weapon1_name.innerHTML = "Combat rifle";
-	weapon2_name.innerHTML = "Knife";
-
-	weapon1_damage.innerHTML = "1d12"+displayBonus((dexterityMod+shoot_bonus));
-	weapon1_bonus.innerHTML = displayBonus((ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
-	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod+stab_bonus);
-	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
-
-	range_close.innerHTML = "100";
-	range_far.innerHTML = "300";
-
-	armor1_name.innerHTML = "Woven body armor";
-	armor2_name.innerHTML = "Unarmored";
-	
-	armor1_AC.innerHTML = 15+dexterityMod;
-	armor2_AC.innerHTML = innate_AC+dexterityMod;
-
-	credits.innerHTML = 100+" credits";
-	break;
-    case "scout":
-    	weapon1_name.innerHTML = "Laser rifle";
-	weapon2_name.innerHTML = "Knife";
-
-	weapon1_damage.innerHTML = "1d10"+displayBonus((dexterityMod+shoot_bonus));
-	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
-	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "1d4"+displayBonus(maxMod+stab_bonus);
-	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
-
-	range_close.innerHTML = "300";
-	range_far.innerHTML = "500";
-
-	armor1_name.innerHTML = "Armored vacc suit";
-	armor2_name.innerHTML = "Unarmored";
-	
-	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = innate_AC+dexterityMod;
-
-	credits.innerHTML = 25+" credits";
-	break;
-    case "medic":
-    	weapon1_name.innerHTML = "Laser pistol";
-	weapon2_name.innerHTML = "";
-
-	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod+shoot_bonus));
-	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
-	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "";
-	weapon2_bonus.innerHTML = "";
-	weapon2_shock.innerHTML = "";
-
-	range_close.innerHTML = "100";
-	range_far.innerHTML = "300";
-	
-	armor1_name.innerHTML = "Secure clothing";
-	armor2_name.innerHTML = "Unarmored";
-	
-	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = innate_AC+dexterityMod;
-
-	credits.innerHTML = 25+" credits";
-	break;
-    case "civilian":
-    	weapon1_name.innerHTML = "";
-	weapon2_name.innerHTML = "";
-
-	weapon1_damage.innerHTML = "";
-	weapon1_bonus.innerHTML = "";
-	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "";
-	weapon2_bonus.innerHTML = "";
-	weapon2_shock.innerHTML = "";
-		
-	armor1_name.innerHTML = "Secure clothing";
-	armor2_name.innerHTML = "Unarmored";
-	
-	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = innate_AC+dexterityMod;
-
-	credits.innerHTML = 700+" credits";
-	break;
-    case "technician":
-    	weapon1_name.innerHTML = "Laser pistol";
-	weapon2_name.innerHTML = "Monoblade knife";
-	
-	weapon1_damage.innerHTML = "1d6"+displayBonus((dexterityMod+shoot_bonus));
-	weapon1_bonus.innerHTML = displayBonus((1+ranged_bonus+skillToAttackBonus(shoot.innerHTML)));
-	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "1d6"+displayBonus(maxMod+stab_bonus);
-	weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(stab.innerHTML)));
-	weapon2_shock.innerHTML = "Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15";
-		
-	range_close.innerHTML = "100";
-	range_far.innerHTML = "300";
-
-	armor1_name.innerHTML = "Armored undersuit";
-	armor2_name.innerHTML = "Unarmored";
-	
-	armor1_AC.innerHTML = 13+dexterityMod;
-	armor2_AC.innerHTML = innate_AC+dexterityMod;
-
-	credits.innerHTML = 200+" credits";
-	break;
-    case "custom":
-    	weapon1_name.innerHTML = "";
-	weapon2_name.innerHTML = "";
-
-	weapon1_damage.innerHTML = "";
-	weapon1_bonus.innerHTML = "";
-	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "";
-	weapon2_bonus.innerHTML = "";
-	weapon2_shock.innerHTML = "";
-		
-	armor1_name.innerHTML = "Unarmored";
-	armor2_name.innerHTML = "";
-	
-	armor1_AC.innerHTML = innate_AC+dexterityMod;
-	armor2_AC.innerHTML = "";
-
-	credits.innerHTML = $("#equipment_packages_description ul li").html();
-	break;
-    default:
-    	weapon1_name.innerHTML = "";
-    	weapon2_name.innerHTML = "";
-
-    	weapon1_damage.innerHTML = "";
-    	weapon1_bonus.innerHTML = "";
-    	weapon1_shock.innerHTML = "";
-    	weapon2_damage.innerHTML = "";
-    	weapon2_bonus.innerHTML = "";
-    	weapon2_shock.innerHTML = "";
-
-	armor1_name.innerHTML = "Unarmored";
-	armor2_name.innerHTML = "";
-	
-	armor1_AC.innerHTML = innate_AC+dexterityMod;
-	armor2_AC.innerHTML = "";
-
-    	credits.innerHTML = "";
-    	break;
-    }
-
-    if(punch.innerHTML !=""){    
-
-	if((weapon1_name.innerHTML !="")){
-
-	    if(weapon2_name.innerHTML !=""){
-		
-		weapon3_name.innerHTML = "Unarmed attack";
-		weapon3_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(punch.innerHTML)));
-		weapon3_damage.innerHTML = unarmed_base + displayBonus(maxMod+parseInt(punch.innerHTML));
-		weapon3_shock.innerHTML = unarmed_shock;
-	    }
-	    else{
-		weapon2_name.innerHTML = "Unarmed attack";
-		weapon2_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(punch.innerHTML)));
-		weapon2_damage.innerHTML = unarmed_base + displayBonus(maxMod+parseInt(punch.innerHTML));
-		weapon2_shock.innerHTML = unarmed_shock;
-	    }
-	}
-	else{
-	    weapon1_name.innerHTML = "Unarmed attack";
-	    weapon1_bonus.innerHTML = displayBonus((attackMod+maxMod+skillToAttackBonus(punch.innerHTML)));
-	    weapon1_damage.innerHTML = unarmed_base + displayBonus(maxMod+parseInt(punch.innerHTML));
-	    weapon1_shock.innerHTML = unarmed_shock;
-	}
-	
-    }
-    
-
-    var technique_text = "";
-    
-    for(var discipline of psionic_disciplines){
-	var elemRankBox0 = document.getElementById(discipline+'_rank_box_0');
-	var elemRankBox1 = document.getElementById(discipline+'_rank_box_1');
-
-	if (elemRankBox1.checked){
-	    technique_text +="<strong><i>"+psionics[discipline]["name"]+"</i></strong><br><strong>"+psionics[discipline]["core"]["name"]+"</strong>: "+psionics[discipline]["core"]["descriptionabbreviated"]+"<br><i>Level-0</i>: "+psionics[discipline]["core"]["level0abbreviated"]+"<br><i>Level-1</i>: "+psionics[discipline]["core"]["level1abbreviated"]+"<br><br>";
-
-	    var level1technique = $("#"+discipline+"_level1").val();
-	    if(level1technique != null) {
-		technique_text+="<strong>"+level1technique+"</strong>: "+psionics[discipline]["level1abbreviated"][level1technique]+"<br><br>";
-	    }
-	    
-	}
-	else if (elemRankBox0.checked){
-	    technique_text+="<strong><i>"+psionics[discipline]["name"]+"</i></strong><br><strong>"+psionics[discipline]["core"]["name"]+"</strong>: "+psionics[discipline]["core"]["descriptionabbreviated"]+"<br><i>Level-0</i>: "+psionics[discipline]["core"]["level0abbreviated"]+"<br><br>";
-	}
-
-    }
-
-    technique.innerHTML = technique_text;
-
-    portrait.setAttribute("id","form_portrait");
-    var portraitSource = $("#portrait_holder").attr('src');
-
-    // For some browsers, `portraitSource` is undefined; for others,
-    // `portraitSource` is false.  Check for both.
-    if (typeof portraitSource !== typeof undefined && portraitSource !== false) {
-	portrait.src = $("#portrait_holder").attr("src");
-	portrait.setAttribute("style","max-height:480px; max-width:446px; height:auto; width:auto;left:82px;top:240px;position:absolute;");
-	elem.appendChild(portrait);
-	centerPortrait(portrait);
-    }
-	
-    positionElement(name,272,112);
-    positionElement(background,728,186);
-    positionElement(Class,728,432);
-    positionElement(subclass,576,494);
-    positionElement(level,688,602);
-    positionElement(homeworld,272,702);
-    positionElement(employer,272,778);
-    positionElement(species,272,852);
-    positionElement(hp, 2294,134);
-    centerElement(hp,formElements);
-    positionElement(strain, 2294,428);
-    centerElement(strain,formElements);
-    positionElement(physical, 1940, 748);
-    centerElement(physical, formElements);
-    positionElement(evasion, 2094, 748);
-    centerElement(evasion,formElements);
-    positionElement(mental, 2250, 748);
-    centerElement(mental, formElements);
-    positionElement(strength, 2560, 236);
-    centerElement(strength, formElements);
-    positionElement(strength_mod, 2620, 236);
-    positionElement(dexterity, 2516, 334);
-    centerElement(dexterity, formElements);
-    positionElement(dexterity_mod, 2576, 334);
-    positionElement(constitution, 2560, 432);
-    centerElement(constitution, formElements);
-    positionElement(constitution_mod, 2620, 432);
-    positionElement(intelligence, 2516, 530);
-    centerElement(intelligence, formElements);
-    positionElement(intelligence_mod, 2576, 530);
-    positionElement(wisdom, 2560, 628);
-    centerElement(wisdom, formElements);
-    positionElement(wisdom_mod, 2620, 628);
-    positionElement(charisma, 2516, 726);
-    centerElement(charisma, formElements);
-    positionElement(charisma_mod, 2576, 726);
-    positionElement(effort, 2684, 1854);
-    centerElement(effort,formElements);
-    positionElement(BAB,1220,652);
-    centerElement(BAB, formElements);
-    positionElement(foci1, 986, 838,"font-size:36px;width:770px;");
-    positionElement(foci1_level, 1794, 848);
-    centerElement(foci1_level, formElements);
-    positionElement(foci2, 986, 962,"font-size:36px;width:770px;");
-    positionElement(foci2_level, 1794, 972);
-    centerElement(foci2_level, formElements);
-    positionElement(foci3, 986, 1086,"font-size:36px;width:770px;");
-    positionElement(foci3_level, 1794, 1096);
-    centerElement(foci3_level, formElements);
-
-    for (var fociElem of fociElems){
-	shrinkText(fociElem, 100, formElements);
-    }
-    
-
-    positionElement(administer, 1206, 112);
-    positionElement(connect, 1206, 162);
-    positionElement(exert, 1206, 212);
-    positionElement(fix, 1206, 260);
-    positionElement(heal, 1206, 310);
-    positionElement(know, 1206, 360);
-    positionElement(lead, 1206, 408);
-    positionElement(notice, 1206, 456);
-    positionElement(perform, 1206, 506);
-
-    positionElement(pilot, 1502, 112);
-    positionElement(program, 1502, 162);
-    positionElement(punch, 1502, 212);
-    positionElement(shoot, 1502, 260);
-    positionElement(sneak, 1502, 310);
-    positionElement(stab, 1502, 360);
-    positionElement(survive, 1502, 408);
-    positionElement(talk, 1502, 456);
-    positionElement(trade, 1502, 506);
-
-    positionElement(work, 1798, 112);
-    positionElement(biopsionics, 1798, 162);
-    positionElement(metapsionics, 1798, 212);
-    positionElement(precognition, 1798, 260);
-    positionElement(telekinesis, 1798, 310);
-    positionElement(telepathy, 1798, 360);
-    positionElement(teleportation, 1798, 408);
-
-    for (var elem of skillElements){
-	centerElement(elem, formElements);
-    }
-    
-    positionElement(weapon1_name, 220, 996);
-    positionElement(weapon2_name, 220, 1122);
-    positionElement(weapon3_name, 220, 1248);
-
-    positionElement(weapon1_bonus,730,1020);
-    positionElement(weapon2_bonus,730,1146);
-    positionElement(weapon3_bonus,730,1292);
-    centerElement(weapon1_bonus,formElements);
-    centerElement(weapon2_bonus,formElements);
-    centerElement(weapon3_bonus,formElements);
-
-    positionElement(weapon1_damage,794, 1020);
-    positionElement(weapon2_damage,794, 1146);
-    positionElement(weapon3_damage,794, 1292);
-
-    positionElement(weapon1_shock,768,1088,"font-size:28px;");
-    positionElement(weapon2_shock,768,1214,"font-size:28px;");
-    positionElement(weapon3_shock,768,1340,"font-size:28px;");
-
-    positionElement(range_close,588,1024,"font-size:28px;");
-    positionElement(range_far,646,1024,"font-size:28px;");
-    
-    positionElement(armor1_name, 220, 1686);
-    positionElement(armor2_name, 220, 1810);
-
-    positionElement(armor1_AC, 904, 1712);
-    positionElement(armor2_AC, 904, 1830);
-    centerElement(armor1_AC,formElements);
-    centerElement(armor2_AC,formElements);
-
-    positionElement(credits , 980, 1930);
-
-    positionElement(technique, 1870, 1234,"font-size:34px;width:854px;");
-    shrinkText(technique,620,formElements);
-
-//    d.resolve();
-    
-//    return  d.promise();
-
-}
-
-function fillOutSheetPage2(){
-//    var d = $.Deferred();
-    var elem = document.getElementById("character_sheet2");  
-    $("#character_sheet2 p").remove();
-
-    var goals = document.createElement("p");
-    var notes = document.createElement("p");
-    var stowedEquipment1 = document.createElement("p");
-    var stowedEquipment2 = document.createElement("p");
-    var stowedEquipment3 = document.createElement("p");
-    var stowedEquipment4 = document.createElement("p");
-    var stowedEquipment5 = document.createElement("p");
-    var stowedEquipment6 = document.createElement("p");
-    var stowedEquipment7 = document.createElement("p");
-    var stowedEquipment8 = document.createElement("p");
-    var stowedEquipment9 = document.createElement("p");
-    var stowedEquipment10 = document.createElement("p");
-    var stowedEquipment11 = document.createElement("p");
-    var stowedEquipment12 = document.createElement("p");
-    var stowedEquipment13 = document.createElement("p");
-    var stowedEquipment14 = document.createElement("p");
-    var stowedEquipment15 = document.createElement("p");
-    var stowedEquipment16 = document.createElement("p");
-    var stowedEquipment17 = document.createElement("p");
-    var stowedEquipment18 = document.createElement("p");
-    var encumberance1 = document.createElement("p");
-    var encumberance2 = document.createElement("p");
-    var encumberance3 = document.createElement("p");
-    var encumberance4 = document.createElement("p");
-    var encumberance5 = document.createElement("p");
-    var encumberance6 = document.createElement("p");
-    var encumberance7 = document.createElement("p");
-    var encumberance8 = document.createElement("p");
-    var encumberance9 = document.createElement("p");
-    var encumberance10 = document.createElement("p");
-    var encumberance11 = document.createElement("p");
-    var encumberance12 = document.createElement("p");
-    var encumberance13 = document.createElement("p");
-    var encumberance14 = document.createElement("p");
-    var encumberance15 = document.createElement("p");
-    var encumberance16 = document.createElement("p");
-    var encumberance17 = document.createElement("p");
-    var encumberance18 = document.createElement("p");
-    var otherEquipment1 = document.createElement("p");
-    var otherEquipment2 = document.createElement("p");
-    var otherEquipment3 = document.createElement("p");
-    var otherEquipment4 = document.createElement("p");
-    var otherEquipment5 = document.createElement("p");
-
-    var encumberanceElements = [encumberance1, encumberance2, encumberance3, encumberance4, encumberance5, encumberance6, encumberance7, encumberance8, encumberance9, encumberance10, encumberance11, encumberance12, encumberance13, encumberance14, encumberance15, encumberance16, encumberance17, encumberance18];
-    var formElements = [goals, notes, stowedEquipment1, stowedEquipment2, stowedEquipment3, stowedEquipment4, stowedEquipment5, stowedEquipment6, stowedEquipment7, stowedEquipment8, stowedEquipment9, stowedEquipment10, stowedEquipment11, stowedEquipment12, stowedEquipment13, stowedEquipment14, stowedEquipment15, stowedEquipment16, stowedEquipment17, stowedEquipment18, otherEquipment1, otherEquipment1, otherEquipment2, otherEquipment3, otherEquipment4, otherEquipment5].concat(encumberanceElements);
-
-
-    for (var element of formElements){
-	element.setAttribute("class","formText");
-	element.setAttribute("id","form_element_page2_"+formElements.indexOf(element));
-	elem.appendChild(element);
-    }
-
-
-    goals.innerHTML = $("#goals").val();
-    notes.innerHTML = $("#notes").val();
-
-    switch($("#equipment_packages").val()){
-    case "barbarian":
-    	stowedEquipment1.innerHTML = "Spear";
-	stowedEquipment2.innerHTML = "Primitive hide armor";
-	stowedEquipment3.innerHTML = "Primitive shield";
-	stowedEquipment4.innerHTML = "Knife";
-	stowedEquipment5.innerHTML = "Backpack (TL0)";
-	stowedEquipment6.innerHTML = "7 days rations";
-	stowedEquipment7.innerHTML = "20m rope";
-
-	encumberance1.innerHTML = "1";
-	encumberance2.innerHTML = "1";
-	encumberance3.innerHTML = "2";
-	encumberance4.innerHTML = "1";
-	encumberance5.innerHTML = "1";
-	encumberance6.innerHTML = "3";
-	encumberance7.innerHTML = "2";
-	
-	break;
-    case "blade":
-	stowedEquipment1.innerHTML = "Monoblade sword";
-	stowedEquipment2.innerHTML = "Woven body armor";
-	stowedEquipment3.innerHTML = "Secure clothing";
-	stowedEquipment4.innerHTML = "Thermal knife";
-	stowedEquipment5.innerHTML = "Backpack (TL0)";
-	stowedEquipment6.innerHTML = "Lazarus patch";
-
-	encumberance1.innerHTML = "1";
-	encumberance2.innerHTML = "2";
-	encumberance3.innerHTML = "1";
-	encumberance4.innerHTML = "1";
-	encumberance5.innerHTML = "1";
-	encumberance6.innerHTML = "1";
-
-	otherEquipment1.innerHTML = "Compad";
-	
-	break;
-    case "thief":
-	stowedEquipment1.innerHTML = "Laser pistol";
-	stowedEquipment2.innerHTML = "Armored undersuit";
-	stowedEquipment3.innerHTML = "Monoblade knife";
-	stowedEquipment4.innerHTML = "Climbing harness";
-	stowedEquipment5.innerHTML = "Low-light goggles";
-	stowedEquipment6.innerHTML = "2 type A cells";
-	stowedEquipment7.innerHTML = "Backpack (TL0)";
-	stowedEquipment8.innerHTML = "Metatool";
-
-	encumberance1.innerHTML = "1";
-	encumberance2.innerHTML = "0";
-	encumberance3.innerHTML = "1";
-	encumberance4.innerHTML = "1";
-	encumberance5.innerHTML = "1";
-	encumberance6.innerHTML = "1";
-	encumberance7.innerHTML = "1";
-	encumberance8.innerHTML = "1";
-
-	otherEquipment1.innerHTML = "Compad";
-	break;
-    case "hacker":
-	stowedEquipment1.innerHTML = "Laser pistol";
-	stowedEquipment2.innerHTML = "Secure clothing";
-	stowedEquipment3.innerHTML = "Postech toolkit";
-	stowedEquipment4.innerHTML = "3 units of spare parts";
-	stowedEquipment5.innerHTML = "2 type A cells";
-	stowedEquipment6.innerHTML = "Dataslab";
-	stowedEquipment7.innerHTML = "Metatool";
-
-	encumberance1.innerHTML = "1";
-	encumberance2.innerHTML = "1";
-	encumberance3.innerHTML = "3";
-	encumberance4.innerHTML = "1";
-	encumberance5.innerHTML = "1";
-	encumberance6.innerHTML = "1";
-	encumberance7.innerHTML = "1";
-
-	otherEquipment1.innerHTML = "2 line shunts";
-	break;
-    case "gunslinger":
-	stowedEquipment1.innerHTML = "Laser pistol";
-	stowedEquipment2.innerHTML = "Armored undersuit";
-	stowedEquipment3.innerHTML = "Monoblade knife";
-	stowedEquipment4.innerHTML = "8 type A cells";
-	stowedEquipment5.innerHTML = "Backpack (TL0)";
-
-	encumberance1.innerHTML = "1";
-	encumberance2.innerHTML = "0";
-	encumberance3.innerHTML = "1";
-	encumberance4.innerHTML = "3";
-	encumberance5.innerHTML = "1";
-
-	otherEquipment1.innerHTML = "Compad";
-	break;
-    case "soldier":
-	stowedEquipment1.innerHTML = "Combat rifle";
-	stowedEquipment2.innerHTML = "Woven body armor";
-	stowedEquipment3.innerHTML = "Knife";
-	stowedEquipment4.innerHTML = "80 rounds ammo";
-	stowedEquipment5.innerHTML = "Backpack (TL0)";
-
-	encumberance1.innerHTML = "2";
-	encumberance2.innerHTML = "2";
-	encumberance3.innerHTML = "1";
-	encumberance4.innerHTML = "2";
-	encumberance5.innerHTML = "1";
-
-	otherEquipment1.innerHTML = "Compad";
-
-	break;
-    case "scout":
-	stowedEquipment1.innerHTML = "Laser rifle";
-	stowedEquipment2.innerHTML = "Armored vacc suit";
-	stowedEquipment3.innerHTML = "Knife";
-	stowedEquipment4.innerHTML = "Survey scanner";
-	stowedEquipment5.innerHTML = "Binoculars (TL3)";
-	stowedEquipment6.innerHTML = "8 type A cells";
-	stowedEquipment7.innerHTML = "Backpack (TL0)";
-
-	encumberance1.innerHTML = "2";
-	encumberance2.innerHTML = "2";
-	encumberance3.innerHTML = "1";
-	encumberance4.innerHTML = "1";
-	encumberance5.innerHTML = "1";
-	encumberance6.innerHTML = "3";
-	encumberance7.innerHTML = "1";
-
-	otherEquipment1.innerHTML = "Compad";
-	break;
-    case "medic":
-	stowedEquipment1.innerHTML = "Laser pistol";
-	stowedEquipment2.innerHTML = "Secure clothing";
-	stowedEquipment3.innerHTML = "4 Lazarus patches";
-	stowedEquipment4.innerHTML = "Backpack (TL0)";
-	stowedEquipment5.innerHTML = "Medkit";
-	stowedEquipment6.innerHTML = "Bioscanner";
-
-	encumberance1.innerHTML = "1";
-	encumberance2.innerHTML = "1";
-	encumberance3.innerHTML = "2";
-	encumberance4.innerHTML = "1";
-	encumberance5.innerHTML = "2";
-	encumberance6.innerHTML = "1";
-
-	otherEquipment1.innerHTML = "2 doses of Lift";
-	otherEquipment2.innerHTML = "Compad";
-
-	break;
-    case "civilian":
-	stowedEquipment1.innerHTML = "Secure clothing";
-
-	encumberance1.innerHTML = "1";
-
-	otherEquipment1.innerHTML = "Compad";
-	break;
-    case "technician":
-	stowedEquipment1.innerHTML = "Laser pistol";
-	stowedEquipment2.innerHTML = "Armored undersuit";
-	stowedEquipment3.innerHTML = "Monoblade knife";
-	stowedEquipment4.innerHTML = "Postech toolkit";
-	stowedEquipment5.innerHTML = "6 units of spare parts";
-	stowedEquipment6.innerHTML = "4 type A cells";
-	stowedEquipment7.innerHTML = "Backpack (TL0)";
-	stowedEquipment8.innerHTML = "Dataslab";
-	stowedEquipment9.innerHTML = "Metatool";
-
-	encumberance1.innerHTML = "1";
-	encumberance2.innerHTML = "0";
-	encumberance3.innerHTML = "1";
-	encumberance4.innerHTML = "3";
-	encumberance5.innerHTML = "2";
-	encumberance6.innerHTML = "2";
-	encumberance7.innerHTML = "1";
-	encumberance8.innerHTML = "1";
-	encumberance9.innerHTML = "1";
-
-
-	break;
-    case "custom":
-	break;
-    default:
-    	break;
-    }
-
-    positionElement(goals,1870, 1660, "font-size:36px;width:850px;");
-    shrinkText(goals, 380, formElements);
-
-    positionElement(notes,980, 86, "font-size:36px;width:850px;");
-    shrinkText(notes, 560, formElements);
-
-    positionElement(stowedEquipment1, 88, 72);
-    positionElement(stowedEquipment2, 88, 122);
-    positionElement(stowedEquipment3, 88, 172);
-    positionElement(stowedEquipment4, 88, 222);
-    positionElement(stowedEquipment5, 88, 272);
-    positionElement(stowedEquipment6, 88, 322);
-    positionElement(stowedEquipment7, 88, 372);
-    positionElement(stowedEquipment8, 88, 422);
-    positionElement(stowedEquipment9, 88, 472);
-    positionElement(stowedEquipment10, 88, 522);
-    positionElement(stowedEquipment11, 88, 572);
-    positionElement(stowedEquipment12, 88, 622);
-    positionElement(stowedEquipment13, 88, 672);
-    positionElement(stowedEquipment14, 88, 722);
-    positionElement(stowedEquipment15, 88, 772);
-    positionElement(stowedEquipment16, 88, 822);
-    positionElement(stowedEquipment17, 88, 872);
-    positionElement(stowedEquipment18, 88, 922);
-
-    positionElement(encumberance1, 922, 72);
-    positionElement(encumberance2, 922, 122);
-    positionElement(encumberance3, 922, 172);
-    positionElement(encumberance4, 922, 222);
-    positionElement(encumberance5, 922, 272);
-    positionElement(encumberance6, 922, 322);
-    positionElement(encumberance7, 922, 372);
-    positionElement(encumberance8, 922, 422);
-    positionElement(encumberance9, 922, 472);
-    positionElement(encumberance10, 922, 522);
-    positionElement(encumberance11, 922, 572);
-    positionElement(encumberance12, 922, 622);
-    positionElement(encumberance13, 922, 672);
-    positionElement(encumberance14, 922, 722);
-    positionElement(encumberance15, 922, 772);
-    positionElement(encumberance16, 922, 822);
-    positionElement(encumberance17, 922, 872);
-    positionElement(encumberance18, 922, 922);
-
-    for (var element of encumberanceElements){
-	centerElement(element, formElements);
-    }
-
-    positionElement(otherEquipment1, 88, 1032);
-    positionElement(otherEquipment2, 88, 1082);
-    positionElement(otherEquipment3, 88, 1132);
-    positionElement(otherEquipment4, 88, 1182);
-    positionElement(otherEquipment5, 88, 1232);
-    
-//    d.resolve();
-    
-//    return  d.promise();
-
-
-}
 
 
 function positionElement(elem,left,top,existingstyle=""){
@@ -3545,116 +2564,637 @@ function centerPortrait(portrait){
     portrait.style.top = (parseInt(portrait.style.top.slice(0,-2))+(240-portrait.clientHeight)/2)+"px";
 }
 
-function saveCharacterSheet(){
-    var d = $.Deferred();
 
-
-	var divWidth = $('#character_sheet').width();
-	var divHeight = $('#character_sheet').height();
-	var ratio = divHeight / divWidth;
-	
-	var doc = new jsPDF("landscape", "cm", "letter"); // using defaults: orientation=portrait, unit=mm, size=A4
-	
-	html2canvas(document.getElementById("character_sheet"), {
-	    width: divWidth,
-	    allowTaint:true,
-	    useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
-	    onrendered: function(canvas) {
-		var image = canvas.toDataURL("image/png");
-		//	    var image = canvas.toDataURL();
-		
-		//	    window.open(image);
-		
-		
-		
-		
-		var width = doc.internal.pageSize.width;    
-		var height = doc.internal.pageSize.height;
-		height = ratio * width;
-		doc.addImage(image, 'png', 0, 0, width, height);
-		
-		html2canvas(document.getElementById("character_sheet2"), {
-		    width: divWidth,
-		    allowTaint:true,
-		    useCORS: true, //By passing this option in function Cross origin images will be rendered properly in the downloaded version of the PDF
-		    onrendered: function(canvas) {
-			var image2 = canvas.toDataURL("image/png");
-			//	    var image = canvas.toDataURL();
-			
-			//	    window.open(image);
-			
-			
-			
-			
-			var width2 = doc.internal.pageSize.width;    
-			var height2 = doc.internal.pageSize.height;
-			height2 = ratio * width2;
-			doc.addPage();
-			doc.addImage(image2, 'png', 0, 0, width2, height2);
-			
-
-			var filename ='character_sheet.pdf';
-			if($("#name").val()!="") filename=$("#name").val()+"_character_sheet.pdf";
-			doc.save(filename); //Download the rendered PDF.
-
-			d.resolve();
-		    }
-		});
-		
-		
-	    }
-	});
-	
-	
-    return  d.promise();
-    
-}
-
-
-
-function hideCharacterSheet(){
-    var d = $.Deferred();
-    setTimeout(function(){
-	$("#character_sheet").hide();
-	$("#character_sheet2").hide();
-
-	d.resolve();
-    },1);
-
-    return d.promise();
-
-}
-
-function showCharacterSheet(){
-    var d = $.Deferred();
-
-    setTimeout(function(){
-	$("#character_sheet").show();
-	$("#character_sheet2").show();
-	
-	d.resolve();
-    },1);
-    
-    return d.promise();
-
-
-//    cb1(cb2,cb3);
-    
-}
 
 function fillOutCharacterSheet(){
-    var d = $.Deferred();
-
-    setTimeout(function(){
-	fillOutSheetPage1();
-	fillOutSheetPage2();
-
-	d.resolve();
-    },1);
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'assets/Fixed_Sheet.pdf', true);
+    xhr.responseType = 'arraybuffer';
     
-    return  d.promise();
+    var filled_pdf;
+    var fields = {};
 
-}  
+    fields['Name'] = [$("#name").val()];
+    fields['Background'] = [$("#backgrounds_mirror option:selected").text()];
+
+    if($("#class_mirror option:selected").text().includes("/")){
+	fields['Class'] = ["Adventurer"];
+	fields['Class Details'] = [($("#class_mirror option:selected").text()+" ").slice(4,-1)];
+	
+    }
+    else{
+	fields['Class'] = [$("#class_mirror option:selected").text()];
+	fields['Class Details'] = [""];
+    }
+
+    fields['Level']=["1"];
+    fields['Homeworld'] = [$("#homeworld").val()];
+    fields['Employer'] = [$("#employer").val()];
+    fields['Species'] = [$("#species").val()];
+    fields['Max Hit Points'] = [$("#hp_mirror1").html()];
+    fields['Max System Strain'] = [$("#constitution_attr").html()];
+    fields['Physical Save'] = [$("#physical_saving_throw").html()];
+    fields['Evasion Save'] = [$("#evasion_saving_throw").html()];
+    fields['Mental Save'] = [$("#mental_saving_throw").html()];
+    fields['Strength Score'] = [$("#strength_attr").html()];
+    fields['Strength Mod'] = [$("#strength_mod").html()];
+    fields['Dexterity Score'] = [$("#dexterity_attr").html()];
+    fields['Dexterity Modifier'] = [$("#dexterity_mod").html()];
+    fields['Constitution Score'] = [$("#constitution_attr").html()];
+    fields['Constitution Modifier'] = [$("#constitution_mod").html()];
+    fields['Intelligence Score'] = [$("#intelligence_attr").html()];
+    fields['Intelligence Modifier'] = [$("#intelligence_mod").html()];
+    fields['Wisdom Score'] = [$("#wisdom_attr").html()];
+    fields['Wisdom Modifier'] = [$("#wisdom_mod").html()];
+    fields['Charisma Score'] = [$("#charisma_attr").html()];
+    fields['Charisma Modifier'] = [$("#charisma_mod").html()];
+    fields['Max Effort'] = [$("#effort").html()];
+    fields['Base Attack Bonus'] = [$("#attack_bonus").html()];
+
+//    var fociElems = [foci1, foci2, foci3];
+//    var fociLevelElems = [foci1_level, foci2_level, foci3_level];
+    var usedFoci = [];
+    var sorted_picks = picked_foci;
+    sorted_picks.sort();
+    for (var i =0; i< 3; i++){
+    	if(i< sorted_picks.length){
+    	    if(usedFoci.includes(sorted_picks[i])){
+    		fields['Focus '+(i+1)] = [foci[sorted_picks[i]]["name"].toUpperCase()+": "+foci[sorted_picks[i]]["level2abbreviated"]];
+    		fields['Focus '+(i+1)+' Level'] = ["2"];
+    	    }
+    	    else{
+    		fields['Focus '+(i+1)] = [foci[sorted_picks[i]]["name"].toUpperCase()+": "+foci[sorted_picks[i]]["level1abbreviated"]];
+    		fields['Focus '+(i+1)+' Level'] = ["1"];
+    	    }
+    	    usedFoci.push(sorted_picks[i]);
+    	}
+    	else{
+    	    fields['Focus '+(i+1)] = [""];
+    	    fields['Focus '+(i+1)+' Level'] = [""];
+    	}
+    }
+    
+    
+    var skillKeys = Object.keys(skills);
+    
+    var zippedSkills = skillKeys.map(function(e, i) {
+	return [skillKeys[i].charAt(0).toUpperCase()+skillKeys[i].slice(1), skillKeys[i]];
+    });
+
+    for (var zip of zippedSkills){
+    	fields[zip[0] + ' Skill'] = [$("#"+zip[1]+"_total").html()];
+    }
+
+
+    var strengthMod = computeMod(parseInt($("#strength_attr").html()));
+    var dexterityMod = computeMod(parseInt($("#dexterity_attr").html()));
+    var attackMod = parseInt(($("#attack_bonus").html()).slice(1,2));
+    
+    var melee_bonus = attackMod+strengthMod;
+    var ranged_bonus = attackMod+dexterityMod;
+
+    var maxMod = Math.max(strengthMod,dexterityMod);
+
+    var stab_bonus = 0;
+    var shoot_bonus = 0;
+    var shock_bonus = 0;
+    var innate_AC = 0;
+    var unarmed_base;
+    var unarmed_shock;
+
+   
+    if(picked_foci.includes("armsman")) stab_bonus = parseInt(fields['Stab Skill'][0]);
+    if(picked_foci.includes("gunslinger")) shoot_bonus = parseInt(fields['Shoot Skill'][0]);
+
+    var count=0;
+    for (var foci_choice of picked_foci){
+	if (foci_choice=="shocking_assault") count++
+    }
+
+    if(count == 2) shock_bonus = 2;
+    
+    if(picked_foci.includes("unarmed_combatant")){
+	switch(fields['Punch Skill'][0]){
+	case "0":
+	    unarmed_base = "1d6";
+	    unarmed_shock = "";
+	    break;
+	case "1":
+	    unarmed_base = "1d8";
+	    unarmed_shock = "Shock: "+(1+maxMod+shock_bonus)+"/AC15";
+	    break;
+	}
+    }
+    else{
+	unarmed_base = "1d2";
+	unarmed_shock = "";
+    }
+
+    if(picked_foci.includes("ironhide")){
+	innate_AC = 16;
+    }
+    else{
+	innate_AC = 10;
+    }
+    
+    switch($("#equipment_packages").val()){
+    case "barbarian":
+    	fields["Weapon 1"] = ["Spear"];
+	fields["Weapon 2"] = ["Knife"];
+
+	fields["Weapon Total Bonus 1"] = ["1d6"+displayBonus((1+maxMod+stab_bonus))];
+	fields["Weapon Bonus 1"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Stab Skill"][0])))];
+	fields["Weapon Shock 1"] = ["Shock: "+(2+maxMod+stab_bonus+shock_bonus)+"/AC13"];
+    	fields["Weapon Total Bonus 2"] = ["1d4"+displayBonus(maxMod+stab_bonus)];
+	fields["Weapon Bonus 2"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Stab Skill"][0])))];
+	fields["Weapon Shock 2"] = ["Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15"];
+
+	fields['Armor 1'] = ["Primitive hide armor w/ shield"];
+	fields['Armor 2'] = ["Primitive hide armor"];
+	fields['Armor 3'] = ["Unarmored w/ shield"];
+//	armor4_name.innerHTML = "Unarmored"
+	
+	fields['AC 1'] = [String(14+dexterityMod)];
+	fields['AC 2'] = [String(13+dexterityMod)];
+	fields['AC 3'] = [String(innate_AC+dexterityMod+1)];
+//	armor4_AC.innerHTML = innate_AC+dexterityMod;
+
+	fields['Credits'] = [500+" credits"];
+
+	fields['Stowed Item 1'] = ["Spear"];
+	fields['Stowed Item 2'] = ["Primitive hide armor"];
+	fields['Stowed Item 3'] = ["Primitive shield"];
+	fields['Stowed Item 4'] = ["Knife"];
+	fields['Stowed Item 5'] = ["Backpack (TL0)"];
+	fields['Stowed Item 6'] = ["7 days rations"];
+	fields['Stowed Item 7'] = ["20m rope"];
+
+	fields['Stowed Enc 1'] = ["1"];
+	fields['Stowed Enc 2'] = ["1"];
+	fields['Stowed Enc 3'] = ["2"];
+	fields['Stowed Enc 4'] = ["1"];
+	fields['Stowed Enc 5'] = ["1"];
+	fields['Stowed Enc 6'] = ["3"];
+	fields['Stowed Enc 7'] = ["2"];
+
+	break;
+    case "blade":
+    	fields["Weapon 1"] = ["Monoblade sword"];
+	fields["Weapon 2"] = ["Thermal knife"];
+
+	fields["Weapon Total Bonus 1"] = ["1d8"+displayBonus((1+maxMod+stab_bonus))];
+	fields["Weapon Bonus 1"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Stab Skill"][0])))];
+	fields["Weapon Shock 1"] = ["Shock: "+(2+maxMod+stab_bonus+shock_bonus)+"/AC13"];
+    	fields["Weapon Total Bonus 2"] = ["1d6"+displayBonus(maxMod+stab_bonus)];
+	fields["Weapon Bonus 2"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Stab Skill"][0])))];
+	fields["Weapon Shock 2"] = ["Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15"];
+
+	fields['Armor 1'] = ["Woven body armor"];
+	fields['Armor 2'] = ["Secure clothing"];
+	fields['Armor 3'] = ["Unarmored"];
+	
+	fields['AC 1'] = [String(15+dexterityMod)];
+	fields['AC 2'] = [String(13+dexterityMod)];
+	fields['AC 3'] = [String(innate_AC+dexterityMod)];
+
+	fields['Credits'] = 50+" credits";
+
+	fields['Stowed Item 1'] = ["Monoblade sword"];
+	fields['Stowed Item 2'] = ["Woven body armor"];
+	fields['Stowed Item 3'] = ["Secure clothing"];
+	fields['Stowed Item 4'] = ["Thermal knife"];
+	fields['Stowed Item 5'] = ["Backpack (TL0)"];
+	fields['Stowed Item 6'] = ["Lazarus patch"];
+
+	fields['Stowed Enc 1'] = ["1"];
+	fields['Stowed Enc 2'] = ["2"];
+	fields['Stowed Enc 3'] = ["1"];
+	fields['Stowed Enc 4'] = ["1"];
+	fields['Stowed Enc 5'] = ["1"];
+	fields['Stowed Enc 6'] = ["1"];
+
+	fields['Free Equipment 1'] = ["Compad"];
+
+	break;
+    case "thief":
+    	fields["Weapon 1"] = ["Laser pistol"];
+	fields["Weapon 2"] = ["Monoblade knife"];
+
+	fields["Weapon Total Bonus 1"] = ["1d6"+displayBonus((dexterityMod+shoot_bonus))];
+	fields["Weapon Bonus 1"] = [displayBonus((1+ranged_bonus+skillToAttackBonus(fields["Shoot Skill"][0])))];
+	fields["Weapon Shock 1"] = [""];
+    	fields["Weapon Total Bonus 2"] = ["1d6"+displayBonus(maxMod+stab_bonus)];
+	fields["Weapon Bonus 2"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Stab Skill"][0])))];
+	fields["Weapon Shock 2"] = ["Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15"];
+	
+	fields['Standard Range 1'] = ["100"];
+	fields['Max Range 1'] = ["300"];
+	
+	fields['Armor 1'] = ["Armored undersuit"];
+	fields['Armor 2'] = ["Unarmored"];
+	
+	fields['AC 1'] = [String(13+dexterityMod)];
+	fields['AC 2'] = [String(innate_AC+dexterityMod)];
+
+	fields['Credits'] = [25+" credits"];
+
+	fields['Stowed Item 1'] = ["Laser pistol"];
+	fields['Stowed Item 2'] = ["Armored undersuit"];
+	fields['Stowed Item 3'] = ["Monoblade knife"];
+	fields['Stowed Item 4'] = ["Climbing harness"];
+	fields['Stowed Item 5'] = ["Low-light goggles"];
+	fields['Stowed Item 6'] = ["2 type A cells"];
+	fields['Stowed Item 7'] = ["Backpack (TL0)"];
+	fields['Stowed Item 8'] = ["Metatool"];
+
+	fields['Stowed Enc 1'] = ["1"];
+	fields['Stowed Enc 2'] = ["0"];
+	fields['Stowed Enc 3'] = ["1"];
+	fields['Stowed Enc 4'] = ["1"];
+	fields['Stowed Enc 5'] = ["1"];
+	fields['Stowed Enc 6'] = ["1"];
+	fields['Stowed Enc 7'] = ["1"];
+	fields['Stowed Enc 8'] = ["1"];
+
+	fields['Free Equipment 1'] = ["Compad"];
+
+	break;
+    case "hacker":
+    	fields["Weapon 1"] = ["Laser pistol"];
+	fields["Weapon 2"] = [""];
+
+	fields["Weapon Total Bonus 1"] = ["1d6"+displayBonus((dexterityMod+shoot_bonus))];
+	fields["Weapon Bonus 1"] = [displayBonus((1+ranged_bonus+skillToAttackBonus(fields["Shoot Skill"][0])))];
+	fields["Weapon Shock 1"] = [""];
+    	fields["Weapon Total Bonus 2"] = [""];
+	fields["Weapon Bonus 2"] = [""];
+	fields["Weapon Shock 2"] = [""];
+
+	fields['Standard Range 1'] = ["100"];
+	fields['Max Range 1'] = ["300"];
+
+	fields['Armor 1'] = ["Secure clothing"];
+	fields['Armor 2'] = ["Unarmored"];
+	
+	fields['AC 1'] = [String(13+dexterityMod)];
+	fields['AC 2'] = [String(innate_AC+dexterityMod)];
+
+	fields['Credits'] = [100+" credits"];
+
+	fields['Stowed Item 1'] = ["Laser pistol"];
+	fields['Stowed Item 2'] = ["Secure clothing"];
+	fields['Stowed Item 3'] = ["Postech toolkit"];
+	fields['Stowed Item 4'] = ["3 units of spare parts"];
+	fields['Stowed Item 5'] = ["2 type A cells"];
+	fields['Stowed Item 6'] = ["Dataslab"];
+	fields['Stowed Item 7'] = ["Metatool"];
+
+	fields['Stowed Enc 1'] = ["1"];
+	fields['Stowed Enc 2'] = ["1"];
+	fields['Stowed Enc 3'] = ["3"];
+	fields['Stowed Enc 4'] = ["1"];
+	fields['Stowed Enc 5'] = ["1"];
+	fields['Stowed Enc 6'] = ["1"];
+	fields['Stowed Enc 7'] = ["1"];
+
+	fields['Free Equipment 1'] = ["2 line shunts"];
+
+	break;
+    case "gunslinger":
+    	fields["Weapon 1"] = ["Laser pistol"];
+	fields["Weapon 2"] = ["Monoblade knife"];
+
+	fields["Weapon Total Bonus 1"] = ["1d6"+displayBonus((dexterityMod+shoot_bonus))];
+	fields["Weapon Bonus 1"] = [displayBonus((1+ranged_bonus+skillToAttackBonus(fields["Shoot Skill"][0])))];
+	fields["Weapon Shock 1"] = [""];
+    	fields["Weapon Total Bonus 2"] = ["1d6"+displayBonus(maxMod+stab_bonus)];
+	fields["Weapon Bonus 2"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Stab Skill"][0])))];
+	fields["Weapon Shock 2"] = ["Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15"];
+	
+	fields['Armor 1'] = ["Armored undersuit"];
+	fields['Armor 2'] = ["Unarmored"];
+
+	fields['Standard Range 1'] = ["100"];
+	fields['Max Range 1'] = ["300"];
+	
+	fields['AC 1'] = [String(13+dexterityMod)];
+	fields['AC 2'] = [String(innate_AC+dexterityMod)];
+
+	fields['Credits'] = [100+" credits"];
+
+	fields['Stowed Item 1'] = ["Laser pistol"];
+	fields['Stowed Item 2'] = ["Armored undersuit"];
+	fields['Stowed Item 3'] = ["Monoblade knife"];
+	fields['Stowed Item 4'] = ["8 type A cells"];
+	fields['Stowed Item 5'] = ["Backpack (TL0)"];
+
+	fields['Stowed Enc 1'] = ["1"];
+	fields['Stowed Enc 2'] = ["0"];
+	fields['Stowed Enc 3'] = ["1"];
+	fields['Stowed Enc 4'] = ["3"];
+	fields['Stowed Enc 5'] = ["1"];
+
+	fields['Free Equipment 1'] = ["Compad"];
+
+	break;
+    case "soldier":
+    	fields["Weapon 1"] = ["Combat rifle"];
+	fields["Weapon 2"] = ["Knife"];
+
+	fields["Weapon Total Bonus 1"] = ["1d12"+displayBonus((dexterityMod+shoot_bonus))];
+	fields["Weapon Bonus 1"] = [displayBonus((ranged_bonus+skillToAttackBonus(fields["Shoot Skill"][0])))];
+	fields["Weapon Shock 1"] = [""];
+    	fields["Weapon Total Bonus 2"] = ["1d4"+displayBonus(maxMod+stab_bonus)];
+	fields["Weapon Bonus 2"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Stab Skill"][0])))];
+	fields["Weapon Shock 2"] = ["Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15"];
+
+	fields['Standard Range 1'] = ["100"];
+	fields['Max Range 1'] = ["300"];
+
+	fields['Armor 1'] = ["Woven body armor"];
+	fields['Armor 2'] = ["Unarmored"];
+	
+	fields['AC 1'] = [String(15+dexterityMod)];
+	fields['AC 2'] = [String(innate_AC+dexterityMod)];
+
+	fields['Credits'] = [100+" credits"];
+
+	fields['Stowed Item 1'] = ["Combat rifle"];
+	fields['Stowed Item 2'] = ["Woven body armor"];
+	fields['Stowed Item 3'] = ["Knife"];
+	fields['Stowed Item 4'] = ["80 rounds ammo"];
+	fields['Stowed Item 5'] = ["Backpack (TL0)"];
+
+	fields['Stowed Enc 1'] = ["2"];
+	fields['Stowed Enc 2'] = ["2"];
+	fields['Stowed Enc 3'] = ["1"];
+	fields['Stowed Enc 4'] = ["2"];
+	fields['Stowed Enc 5'] = ["1"];
+
+	fields['Free Equipment 1'] = ["Compad"];
+
+	break;
+    case "scout":
+    	fields["Weapon 1"] = ["Laser rifle"];
+	fields["Weapon 2"] = ["Knife"];
+
+	fields["Weapon Total Bonus 1"] = ["1d10"+displayBonus((dexterityMod+shoot_bonus))];
+	fields["Weapon Bonus 1"] = [displayBonus((1+ranged_bonus+skillToAttackBonus(fields["Shoot Skill"][0])))];
+	fields["Weapon Shock 1"] = [""];
+    	fields["Weapon Total Bonus 2"] = ["1d4"+displayBonus(maxMod+stab_bonus)];
+	fields["Weapon Bonus 2"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Stab Skill"][0])))];
+	fields["Weapon Shock 2"] = ["Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15"];
+
+	fields['Standard Range 1'] = ["300"];
+	fields['Max Range 1'] = ["500"];
+
+	fields['Armor 1'] = ["Armored vacc suit"];
+	fields['Armor 2'] = ["Unarmored"];
+	
+	fields['AC 1'] = [String(13+dexterityMod)];
+	fields['AC 2'] = [String(innate_AC+dexterityMod)];
+
+	fields['Credits'] = [25+" credits"];
+
+		fields['Stowed Item 1'] = ["Laser rifle"];
+	fields['Stowed Item 2'] = ["Armored vacc suit"];
+	fields['Stowed Item 3'] = ["Knife"];
+	fields['Stowed Item 4'] = ["Survey scanner"];
+	fields['Stowed Item 5'] = ["Binoculars (TL3)"];
+	fields['Stowed Item 6'] = ["8 type A cells"];
+	fields['Stowed Item 7'] = ["Backpack (TL0)"];
+
+	fields['Stowed Enc 1'] = ["2"];
+	fields['Stowed Enc 2'] = ["2"];
+	fields['Stowed Enc 3'] = ["1"];
+	fields['Stowed Enc 4'] = ["1"];
+	fields['Stowed Enc 5'] = ["1"];
+	fields['Stowed Enc 6'] = ["3"];
+	fields['Stowed Enc 7'] = ["1"];
+
+	fields['Free Equipment 1'] = ["Compad"];
+
+	break;
+    case "medic":
+    	fields["Weapon 1"] = ["Laser pistol"];
+	fields["Weapon 2"] = [""];
+
+	fields["Weapon Total Bonus 1"] = ["1d6"+displayBonus((dexterityMod+shoot_bonus))];
+	fields["Weapon Bonus 1"] = [displayBonus((1+ranged_bonus+skillToAttackBonus(fields["Shoot Skill"][0])))];
+	fields["Weapon Shock 1"] = [""];
+    	fields["Weapon Total Bonus 2"] = [""];
+	fields["Weapon Bonus 2"] = [""];
+	fields["Weapon Shock 2"] = [""];
+
+	fields['Standard Range 1'] = ["100"];
+	fields['Max Range 1'] = ["300"];
+	
+	fields['Armor 1'] = ["Secure clothing"];
+	fields['Armor 2'] = ["Unarmored"];
+	
+	fields['AC 1'] = [String(13+dexterityMod)];
+	fields['AC 2'] = [String(innate_AC+dexterityMod)];
+
+	fields['Credits'] = [25+" credits"];
+
+		fields['Stowed Item 1'] = ["Laser pistol"];
+	fields['Stowed Item 2'] = ["Secure clothing"];
+	fields['Stowed Item 3'] = ["4 Lazarus patches"];
+	fields['Stowed Item 4'] = ["Backpack (TL0)"];
+	fields['Stowed Item 5'] = ["Medkit"];
+	fields['Stowed Item 6'] = ["Bioscanner"];
+
+	fields['Stowed Enc 1'] = ["1"];
+	fields['Stowed Enc 2'] = ["1"];
+	fields['Stowed Enc 3'] = ["2"];
+	fields['Stowed Enc 4'] = ["1"];
+	fields['Stowed Enc 5'] = ["2"];
+	fields['Stowed Enc 6'] = ["1"];
+
+	fields['Free Equipment 1'] = ["2 doses of Lift"];
+	fields['Free Equipment 2'] = ["Compad"];
+
+
+	break;
+    case "civilian":
+    	fields["Weapon 1"] = [""];
+	fields["Weapon 2"] = [""];
+
+	fields["Weapon Total Bonus 1"] = [""];
+	fields["Weapon Bonus 1"] = [""];
+	fields["Weapon Shock 1"] = [""];
+    	fields["Weapon Total Bonus 2"] = [""];
+	fields["Weapon Bonus 2"] = [""];
+	fields["Weapon Shock 2"] = [""];
+		
+	fields['Armor 1'] = ["Secure clothing"];
+	fields['Armor 2'] = ["Unarmored"];
+	
+	fields['AC 1'] = [String(13+dexterityMod)];
+	fields['AC 2'] = [String(innate_AC+dexterityMod)];
+
+	fields['Credits'] = [700+" credits"];
+
+	fields['Stowed Item 1'] = ["Secure clothing"];
+
+	fields['Stowed Enc 1'] = ["1"];
+
+	fields['Free Equipment 1'] = ["Compad"];
+
+	break;
+    case "technician":
+    	fields["Weapon 1"] = ["Laser pistol"];
+	fields["Weapon 2"] = ["Monoblade knife"];
+	
+	fields["Weapon Total Bonus 1"] = ["1d6"+displayBonus((dexterityMod+shoot_bonus))];
+	fields["Weapon Bonus 1"] = [displayBonus((1+ranged_bonus+skillToAttackBonus(fields["Shoot Skill"][0])))];
+	fields["Weapon Shock 1"] = [""];
+    	fields["Weapon Total Bonus 2"] = ["1d6"+displayBonus(maxMod+stab_bonus)];
+	fields["Weapon Bonus 2"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Stab Skill"][0])))];
+	fields["Weapon Shock 2"] = ["Shock: "+(1+maxMod+stab_bonus+shock_bonus)+"/AC15"];
+		
+	fields['Standard Range 1'] = ["100"];
+	fields['Max Range 1'] = ["300"];
+
+	fields['Armor 1'] = ["Armored undersuit"];
+	fields['Armor 2'] = ["Unarmored"];
+	
+	fields['AC 1'] = [String(13+dexterityMod)];
+	fields['AC 2'] = [String(innate_AC+dexterityMod)];
+
+	fields['Credits'] = [200+" credits"];
+	
+	fields['Stowed Item 1'] = ["Laser pistol"];
+	fields['Stowed Item 2'] = ["Armored undersuit"];
+	fields['Stowed Item 3'] = ["Monoblade knife"];
+	fields['Stowed Item 4'] = ["Postech toolkit"];
+	fields['Stowed Item 5'] = ["6 units of spare parts"];
+	fields['Stowed Item 6'] = ["4 type A cells"];
+	fields['Stowed Item 7'] = ["Backpack (TL0)"];
+	fields['Stowed Item 8'] = ["Dataslab"];
+	fields['Stowed Item 9'] = ["Metatool"];
+
+	fields['Stowed Enc 1'] = ["1"];
+	fields['Stowed Enc 2'] = ["0"];
+	fields['Stowed Enc 3'] = ["1"];
+	fields['Stowed Enc 4'] = ["3"];
+	fields['Stowed Enc 5'] = ["2"];
+	fields['Stowed Enc 6'] = ["2"];
+	fields['Stowed Enc 7'] = ["1"];
+	fields['Stowed Enc 8'] = ["1"];
+	fields['Stowed Enc 9'] = ["1"];
+
+
+	break;
+    case "custom":
+    	fields["Weapon 1"] = [""];
+	fields["Weapon 2"] = [""];
+
+	fields["Weapon Total Bonus 1"] = [""];
+	fields["Weapon Bonus 1"] = [""];
+	fields["Weapon Shock 1"] = [""];
+    	fields["Weapon Total Bonus 2"] = [""];
+	fields["Weapon Bonus 2"] = [""];
+	fields["Weapon Shock 2"] = [""];
+		
+	fields['Armor 1'] = ["Unarmored"];
+	fields['Armor 2'] = [""];
+	
+	fields['AC 1'] = [String(innate_AC+dexterityMod)];
+	fields['AC 2'] = [""];
+
+	fields['Credits'] = [$("#equipment_packages_description ul li").html()];
+	break;
+    default:
+    	fields["Weapon 1"] = [""];
+    	fields["Weapon 2"] = [""];
+
+    	fields["Weapon Total Bonus 1"] = [""];
+    	fields["Weapon Bonus 1"] = [""];
+    	fields["Weapon Shock 1"] = [""];
+    	fields["Weapon Total Bonus 2"] = [""];
+    	fields["Weapon Bonus 2"] = [""];
+    	fields["Weapon Shock 2"] = [""];
+
+	fields['Armor 1'] = ["Unarmored"];
+	fields['Armor 2'] = [""];
+	
+	fields['AC 1'] = [String(innate_AC+dexterityMod)];
+	fields['AC 2'] = [""];
+
+    	fields['Credits'] = [""];
+    	break;
+    }
+
+    fields['Current Goals'] = [$("#goals").val()];
+    fields['Notes to Remember'] = [$("#notes").val()];
+   
+    if(fields['Punch Skill'][0] !=""){    
+
+	if((fields["Weapon 1"][0] !="")){
+
+	    if(fields["Weapon 2"][0] !=""){
+		
+		fields['Weapon 3'] = ["Unarmed attack"];
+		fields["Weapon Bonus 3"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Punch Skill"][0])))];
+		fields['Weapon Total Bonus 3'] = [unarmed_base + displayBonus(maxMod+parseInt(fields['Punch Skill']))];
+		fields["Weapon Shock 3"] = [unarmed_shock];
+	    }
+	    else{
+		fields["Weapon 2"] = ["Unarmed attack"];
+		fields["Weapon Bonus 2"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Punch Skill"][0])))];
+		fields["Weapon Total Bonus 2"] = [unarmed_base + displayBonus(maxMod+parseInt(fields['Punch Skill']))];
+		fields["Weapon Shock 2"] = [unarmed_shock];
+	    }
+	}
+	else{
+	    fields["Weapon 1"] = ["Unarmed attack"];
+	    fields["Weapon Bonus 1"] = [displayBonus((attackMod+maxMod+skillToAttackBonus(fields["Punch Skill"][0])))];
+	    fields["Weapon Total Bonus 1"] = [unarmed_base + displayBonus(maxMod+parseInt(fields['Punch Skill']))];
+	    fields["Weapon Shock 1"] = [unarmed_shock];
+	}
+	
+    }
+    
+
+    var technique_text = "";
+    
+    for(var discipline of psionic_disciplines){
+	var elemRankBox0 = document.getElementById(discipline+'_rank_box_0');
+	var elemRankBox1 = document.getElementById(discipline+'_rank_box_1');
+
+	if (elemRankBox1.checked){
+	    technique_text +=psionics[discipline]["name"].toUpperCase()+"\n"+psionics[discipline]["core"]["name"]+": "+psionics[discipline]["core"]["descriptionabbreviated"]+"\nLevel-0: "+psionics[discipline]["core"]["level0abbreviated"]+"\nLevel-1: "+psionics[discipline]["core"]["level1abbreviated"]+"\n\n";
+
+	    var level1technique = $("#"+discipline+"_level1").val();
+	    if(level1technique != null) {
+		technique_text+=level1technique+": "+psionics[discipline]["level1abbreviated"][level1technique]+"\n\n";
+	    }
+	    
+	}
+	else if (elemRankBox0.checked){
+	    technique_text+=psionics[discipline]["name"].toUpperCase()+"\n"+psionics[discipline]["core"]["name"]+": "+psionics[discipline]["core"]["descriptionabbreviated"]+"\nLevel-0: "+psionics[discipline]["core"]["level0abbreviated"]+"\n\n";
+	}
+
+    }
+
+    fields['Technique 1'] = [technique_text];
+    
+    xhr.onload = function() {
+	if (this.status == 200) {
+	    filled_pdf = pdfform().transform(this.response, fields);
+	    var blob = new Blob([filled_pdf], {type: 'application/pdf'});
+	    var filename ='character_sheet.pdf';
+	    if($("#name").val()!="") filename=$("#name").val()+"_character_sheet.pdf";
+	    saveAs(blob, filename);
+	} else {
+	    alert('failed to load blank character sheet pdf (code: ' + this.status + ')');
+	}
+    };
+    
+    xhr.send();
+
+}
 
 /*
 Roll random attributes (as if the #rollAttrsTopLayer was clicked), and then set the minimum rolled attribute to 14.
