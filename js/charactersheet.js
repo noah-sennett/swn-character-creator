@@ -236,8 +236,8 @@ $(document).ready(function () {
 
     $("#learning_button").on("click",function(){
 	if ($("#learning_button").attr("class")=="topLayer") rollLearning();
-    });
-						      
+    });					     
+
 });
 
 const attrs = ["strength","dexterity","constitution","intelligence","wisdom","charisma"];
@@ -293,8 +293,22 @@ function updateStatus1(){
 	var elemSelect = document.getElementById(attr+"_select");
 	statsAssigned = statsAssigned && (elemSelect.value != "");
     }
+
+    var statsInURL = true;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
     
-    if(elem.value!=""||statsAssigned){
+    for(var attr of attrs){
+	if (urlParams.has(attr)){
+	    statsInURL = statsInURL && (parseInt(urlParams.get(attr))>=0);
+	}
+	else{
+	    statsInURL = false;
+	}
+    }
+    
+    
+    if(elem.value!=""||statsAssigned||statsInURL){
 	elemIcon.src = "assets/checkmark.png"
     }
     else{
@@ -703,6 +717,7 @@ function loadBackgrounds(){
     request.onload = function() {
 	backgrounds = request.response;
 	populateBackgroundList(backgrounds);
+
     }
 
     request.send();
@@ -1099,26 +1114,26 @@ function updateSkillBoxes(boxID){
 		    }
 		}
 		else if(isCombat){
-		    if(combat_skill_remaining < combat_skill_bank){
-			addCombatSkill();
-			combat_skill_bank--;
-		    }
-		    else if(any_skill_remaining < any_skill_bank){
+		    if(any_skill_remaining < any_skill_bank){
 			addAnySkill();
 			any_skill_bank--;
+		    }
+		    else if(combat_skill_remaining < combat_skill_bank){
+			addCombatSkill();
+			combat_skill_bank--;
 		    }
 		    else{
 			alert("Something went wrong!");
 		    }
 		}
 		else{
-		    if(noncombat_skill_remaining < noncombat_skill_bank){
-			addNonCombatSkill();
-			noncombat_skill_bank--;
-		    }
-		    else if(any_skill_remaining < any_skill_bank){
+		    if(any_skill_remaining < any_skill_bank){
 			addAnySkill();
 			any_skill_bank--;
+		    }
+		    else if(noncombat_skill_remaining < noncombat_skill_bank){
+			addNonCombatSkill();
+			noncombat_skill_bank--;
 		    }
 		    else{
 			alert("Something went wrong!");
@@ -1668,6 +1683,7 @@ function loadFoci(){
     request.onload = function() {
 	foci = request.response;
 	populateFociList(foci);
+
     }
 
     request.send();
@@ -1887,6 +1903,7 @@ function loadClasses(){
 
     request.onload = function() {
 	classes = request.response;
+
     }
 
     request.send();
@@ -2296,6 +2313,7 @@ function loadPackages(){
     request.onload = function() {
 	packages = request.response;
 	populatePackagesList(packages);
+	readURLParams();
     }
 
     request.send();
@@ -3299,11 +3317,11 @@ function pickRandomCombatFocus(){
     var roll = rollDie(options.length-1);
 
     if(options[roll].hasAttribute("disabled")){
-	pickRandomGeneralFocus();
+	pickRandomCombatFocus();
     }
     else{
 	elem.value = options[roll].value;
-	$('#foci').trigger('change');
+	$('#combat_foci').trigger('change');
     }    
 }
 
@@ -3315,11 +3333,11 @@ function pickRandomNonCombatFocus(){
     var roll = rollDie(options.length-1);
 
     if(options[roll].hasAttribute("disabled")){
-	pickRandomGeneralFocus();
+	pickRandomNonCombatFocus();
     }
     else{
 	elem.value = options[roll].value;
-	$('#foci').trigger('change');
+	$('#noncombat_foci').trigger('change');
     }       
 }
 
@@ -3411,6 +3429,219 @@ function pickRandomPsychicSkill(){
 //    console.log(roll);
 //    console.log(psychicSkills[roll-1]);
     incrementSkill(psychicSkills[roll-1]);
+}
+
+function readURLParams(){
+
+    readURLParam('name','name');
+    readURLParam('name','name_mirror');
+    readURLParam('employer','employer');
+    readURLParam('homeworld','homeworld');
+    readURLParam('species','species');
+    
+    readURLClassParams();
+
+    readURLBackgroundParams();
+
+    readURLAttributeParams();
+
+    readURLHPParams();
+
+    readURLFociParams();
+
+    readURLSkillParams();
+    
+    readURLTechniqueParams();
+    
+    readURLEquipmentParams();
+}
+
+function readURLParam(param, elemName){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    if (urlParams.has(param)){
+	$('#'+elemName).val(urlParams.get(param));
+    }
+}
+
+function readURLClassParams(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    if(urlParams.has('class')){
+	$('#class_mirror').val(urlParams.get('class'));
+	$('#class_mirror').selectmenu("refresh");
+	$('#class_mirror').trigger('change');
+    }
+}
+      
+
+function readURLBackgroundParams(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    if(urlParams.has('background')){
+	$('#backgrounds_mirror').val(urlParams.get('background'));
+	$('#backgrounds_mirror').selectmenu("refresh");
+	$('#backgrounds_mirror').trigger('change');
+    }
+}
+
+function readURLAttributeParams(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    for (var attr of attrs){
+        if (urlParams.has(attr)){
+	    $('#'+attr+'_attr').html(urlParams.get(attr));
+
+	    var ind=attrs.indexOf(attr);
+	    attrBases[ind]=urlParams.get(attr);
+
+	    updateMod(attr);
+	    updateStatus1();
+	}
+    }
+}
+
+function readURLHPParams(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    
+    if(urlParams.has('hp')){
+	$("#rollHPTopLayer").click();
+	$('#hp_roll').val(parseInt(urlParams.get('hp')));
+    }
+
+}
+
+function readURLFociParams(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    if(urlParams.has('focus1')){
+	$('#foci').val(urlParams.get('focus1'));
+	$('#foci').trigger('change');
+    }
+
+    if(urlParams.has('focus2')){
+	$('#combat_foci').val(urlParams.get('focus2'));
+	$('#combat_foci').trigger('change');
+
+    }
+
+    if(urlParams.has('focus3')){
+	$('#noncombat_foci').val(urlParams.get('focus3'));
+	$('#noncombat_foci').trigger('change');
+    }
+}
+
+function readURLTechniqueParams(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    if(urlParams.has('technique')){
+	var technique = decodeURI(urlParams.get('technique'));
+	for(var discipline of psionic_disciplines){
+	    if(Object.keys(psionics[discipline]['level1']).includes(technique)){
+		$('#'+discipline+'_level1').val(technique);
+		$('#'+discipline+'_level1').trigger('change');
+	    }
+	}
+    }
+}
+
+function readURLEquipmentParams(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    if(urlParams.has('equipment')){
+	$('#equipment_packages').val(urlParams.get('equipment'));
+	$('#equipment_packages').trigger('change');
+    }
+}
+
+function readURLSkillParams(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    if(urlParams.has('learning1')){
+	learning_skills.push(urlParams.get('learning1'));
+	remainingRolls--;
+    }
+
+    if(urlParams.has('learning2')){
+	learning_skills.push(urlParams.get('learning2'));
+	remainingRolls--;
+    }
+
+    if(urlParams.has('learning3')){
+	learning_skills.push(urlParams.get('learning3'));
+	remainingRolls--;
+    }
+
+    if(urlParams.has('growth1')){
+	var skill = decodeURI(urlParams.get('growth1'));
+	growth_skills.push(skill);
+	remainingRolls--;
+	
+	var substrings = skill.split(" ");
+	for (var substring of substrings){
+	    var ind = attrs.indexOf(substring);
+	    if (ind !=-1){
+		attrBonuses[ind]++;
+	    }
+	}	    
+    }
+
+    if(urlParams.has('growth2')){
+	var skill = decodeURI(urlParams.get('growth2'));
+	growth_skills.push(skill);
+	remainingRolls--;
+
+	var substrings = skill.split(" ");
+	for (var substring of substrings){
+	    var ind = attrs.indexOf(substring);
+	    if (ind !=-1){
+		attrBonuses[ind]++;
+	    }
+	}
+    }
+
+    if(urlParams.has('growth3')){
+	var skill = decodeURI(urlParams.get('growth3'));
+	growth_skills.push(skill);
+	remainingRolls--;
+
+	var substrings = skill.split(" ");
+	for (var substring of substrings){
+	    var ind = attrs.indexOf(substring);
+	    if (ind !=-1){
+		attrBonuses[ind]++;
+	    }
+	}
+    }
+
+    updateSkills();
+    
+    if(urlParams.has('picked')){
+	
+	var pickedSkills = urlParams.getAll('picked');
+
+	for (var ind=0; ind<pickedSkills.length; ind++){
+
+	    var skill=pickedSkills[ind];
+	    if (ind == pickedSkills.indexOf(skill)){
+		$('#'+skill+'_rank_box_0').prop( "checked", true );
+		$('#'+skill+'_rank_box_0').trigger("change");
+	    }
+	    else{
+	    	$('#'+skill+'_rank_box_1').prop( "checked", true );
+		$('#'+skill+'_rank_box_1').trigger("change");
+	    }
+	}
+    }
+
 }
 
 /*Generate a random name using the Namey! random name generator https://namey.muffinlabs.com/*/
