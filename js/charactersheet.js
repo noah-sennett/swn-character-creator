@@ -445,13 +445,14 @@ function updateStatus9(){
     var elemGoals = document.getElementById("goals");
     var elemNotes = document.getElementById("notes");
 
-    var portraitSource = $("#portrait_holder").attr('src');
+//    var portraitSource = $("#portrait_holder").attr('src');
 
     // For some browsers, `portraitSource` is undefined; for others,
     // `portraitSource` is false.  Check for both.
-    var portraitUploaded = (typeof portraitSource !== typeof undefined && portraitSource !== false)
+//    var portraitUploaded = (typeof portraitSource !== typeof undefined && portraitSource !== false)
     
-    if(elemName.value!="" && elemHomeworld.value!="" && elemEmployer.value!="" && elemSpecies.value!=""&&elemGoals.value!="" && elemNotes.value!="" && portraitUploaded){
+    //    if(elemName.value!="" && elemHomeworld.value!="" && elemEmployer.value!="" && elemSpecies.value!=""&&elemGoals.value!="" && elemNotes.value!="" && portraitUploaded){
+    if(elemName.value!="" && elemHomeworld.value!="" && elemEmployer.value!="" && elemSpecies.value!=""&&elemGoals.value!="" && elemNotes.value!=""){
 	elemIcon.src = "assets/checkmark.png"
     }
     else{
@@ -3454,6 +3455,8 @@ function readURLParams(){
     readURLTechniqueParams();
     
     readURLEquipmentParams();
+
+    generateExportURL();
 }
 
 function readURLParam(param, elemName){
@@ -3565,60 +3568,30 @@ function readURLSkillParams(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    if(urlParams.has('learning1')){
-	learning_skills.push(urlParams.get('learning1'));
-	remainingRolls--;
-    }
+    if(urlParams.has('learning')){
+	var learningSkills = urlParams.getAll('learning');
 
-    if(urlParams.has('learning2')){
-	learning_skills.push(urlParams.get('learning2'));
-	remainingRolls--;
-    }
+	for (var skill of learningSkills){
+	    learning_skills.push(decodeURI(skill));
+	    remainingRolls--;
 
-    if(urlParams.has('learning3')){
-	learning_skills.push(urlParams.get('learning3'));
-	remainingRolls--;
-    }
-
-    if(urlParams.has('growth1')){
-	var skill = decodeURI(urlParams.get('growth1'));
-	growth_skills.push(skill);
-	remainingRolls--;
-	
-	var substrings = skill.split(" ");
-	for (var substring of substrings){
-	    var ind = attrs.indexOf(substring);
-	    if (ind !=-1){
-		attrBonuses[ind]++;
-	    }
-	}	    
-    }
-
-    if(urlParams.has('growth2')){
-	var skill = decodeURI(urlParams.get('growth2'));
-	growth_skills.push(skill);
-	remainingRolls--;
-
-	var substrings = skill.split(" ");
-	for (var substring of substrings){
-	    var ind = attrs.indexOf(substring);
-	    if (ind !=-1){
-		attrBonuses[ind]++;
-	    }
 	}
     }
 
-    if(urlParams.has('growth3')){
-	var skill = decodeURI(urlParams.get('growth3'));
-	growth_skills.push(skill);
-	remainingRolls--;
+    if(urlParams.has('growth')){
+	var growthSkills = urlParams.getAll('growth');
 
-	var substrings = skill.split(" ");
-	for (var substring of substrings){
-	    var ind = attrs.indexOf(substring);
-	    if (ind !=-1){
-		attrBonuses[ind]++;
-	    }
+	for (var skill of growthSkills){
+	    growth_skills.push(decodeURI(skill));
+	    remainingRolls--;
+
+	    var substrings = decodeURI(skill).split(" ");
+	    for (var substring of substrings){
+		var ind = attrs.indexOf(substring);
+		if (ind !=-1){
+		    attrBonuses[ind]++;
+		}
+	    }	    
 	}
     }
 
@@ -3642,6 +3615,65 @@ function readURLSkillParams(){
 	}
     }
 
+}
+
+function generateExportURL(){
+    var name_string = ($('#name').val() == "") ? "" : ("name="+$('#name').val()+"&");
+    var background_string =  ($('#backgrounds').val() == "") ? "" : ("background="+$('#backgrounds').val()+"&");
+    var class_string = ($('#class').val() == "") ? "" : ("class="+$('#class').val()+"&");
+    var strength_string = "strength="+attrBases[0]+"&";
+    var dexterity_string = "dexterity="+attrBases[1]+"&";
+    var constitution_string = "constitution="+attrBases[2]+"&";
+    var intelligence_string = "intelligence="+attrBases[3]+"&";
+    var wisdom_string = "wisdom="+attrBases[4]+"&";
+    var charisma_string = "charisma="+attrBases[5]+"&";
+    var hp_string = ($('#hp_roll').val() == "") ? "" : ("hp="+$('#hp_roll').val()+"&");
+    var equipment_string = ($('#equipment_packages').val() == "") ? "" : ("equipment="+$('#equipment_packages').val()+"&");
+    var homeworld_string = ($('#homeworld').val() == "") ? "" : ("homeworld="+$('#homeworld').val()+"&");
+    var employer_string = ($('#employer').val() == "") ? "" : ("employer="+$('#employer').val()+"&");
+    var species_string = ($('#species').val() == "") ? "" : ("species="+$('#species').val()+"&");
+
+    var growth_string="";
+    for (var skill of growth_skills){
+	growth_string+="growth="+encodeURI(skill)+"&" 
+    }
+
+    var learning_string="";
+    for (var skill of learning_skills){
+	learning_string+="learning="+encodeURI(skill)+"&" 
+    }
+    
+    var picked_string="";
+    for (var skill of picked_skills){
+	picked_string+="picked="+skill+"&" 
+    }
+
+    var focus1_string = ($('#foci').val() == "") ? "" : ("focus1="+$('#foci').val()+"&");
+
+    var focus2_string;
+    if($('#class').val().includes('war')){
+	focus2_string = ($('#combat_foci').val() == "") ? "" : ("focus2="+$('#combat_foci').val()+"&");
+    }
+    else{
+	focus2_string="";
+    }
+
+    var focus3_string;
+    if($('#class').val().includes('exp')){
+	focus3_string = ($('#noncombat_foci').val() == "") ? "" : ("focus3="+$('#noncombat_foci').val()+"&");
+    }
+    else{
+	focus3_string="";
+    }
+
+    var technique_string="";
+    for (var discipline of psionic_disciplines){
+	if(picked_skills.indexOf(discipline)!=picked_skills.lastIndexOf(discipline)){
+	    technique_string+="technique="+encodeURI($('#'+discipline+'_level1').val())+'&';
+	}
+    }
+    
+    console.log("example.com/?"+name_string+background_string+class_string+strength_string+dexterity_string+constitution_string+intelligence_string+wisdom_string+charisma_string+hp_string+equipment_string+homeworld_string+employer_string+species_string+growth_string+learning_string+picked_string+focus1_string+focus2_string+focus3_string+technique_string);
 }
 
 /*Generate a random name using the Namey! random name generator https://namey.muffinlabs.com/*/
