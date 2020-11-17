@@ -733,7 +733,15 @@ h2{
     position: fixed;
     bottom: 10px;
     right: 10px;
-    width: 270px;
+    padding: 0.1em 0.2em
+	      /* width: 270px; */
+}
+
+.shareDialog {
+    background-color: #fff;
+    border: 1px solid #000
+    border-radius: 5px;
+    overflow-wrap: anywhere
 }
 
 /* @media print { */
