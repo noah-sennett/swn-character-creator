@@ -17,7 +17,6 @@ var mark = function (el) {
 }
 
 $(document).ready(function () {
-
     
     $("#printButton").click(function(){
 	fillOutCharacterSheet();
