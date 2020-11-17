@@ -5,7 +5,7 @@
     <title> Character Builder </title>
 
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Play&family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    
+    <script src="https://kit.fontawesome.com/37eb526597.js" crossorigin="anonymous"></script>
     
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
@@ -270,13 +270,14 @@
 	  </div>
 	  
 	</div>      
-	
-	<script> loadBackgrounds(); </script>
-	<script> loadSkills(); </script>
-	<script> loadClasses(); </script>
-	<script> loadFoci(); </script>
-	<script> loadPsionics(); </script>
-	<script> loadPackages(); </script>
+
+	<!-- <script> loadJSON(readURLParams); </script> -->
+	<!-- <script> loadBackgrounds(); </script> -->
+	<!-- <script> loadSkills(); </script> -->
+	<!-- <script> loadClasses(); </script> -->
+	<!-- <script> loadFoci(); </script> -->
+	<!-- <script> loadPsionics(); </script> -->
+	<!-- <script> loadPackages(); </script> -->
 
 	<br>
 	
@@ -865,8 +866,14 @@
 	  <label for="stabshoot_shoot">Shoot</label>
 	  <input type="radio" name="stabshoot" value="shoot" id="stabshoot_shoot">
 	</div>
-	<button class="fixedButton" id="randomCharacterButton" style="right:10px;bottom:75px">Generate Random Character</button>
-	<button class="fixedButton" id="printButton">Download Character Sheet</button>
+
+	<div id="url_dialog" class="shareDialog">
+	  <h2>Share this character via the following link:</h2>
+	  <div id="url_span"></div>
+	</div>
+	<button class="ui-button ui-widget ui-corner-all fixedButton" id="randomCharacterButton" style="right:210px"><i class="fas fa-random"></i> Random Character</button>
+	<button class="ui-button ui-widget ui-corner-all fixedButton" id="printButton" style="right:93px"><i class="fas fa-file-download"></i> Download</button>
+	<button class="ui-button ui-widget ui-corner-all fixedButton" id="shareButton"><i class="fas fa-share-alt"></i> Share</button>
 
       </div>
       <div class="sidebar">
