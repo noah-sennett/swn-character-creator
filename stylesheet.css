@@ -744,6 +744,13 @@ h2{
     overflow-wrap: anywhere
 }
 
+.shareDialog h3{
+    margin-bottom: 0;
+}
+.shareDialog p{
+    margin-top: 5px;
+}
+
 /* @media print { */
 /*     #character_sheet { */
 /*         display: block; */

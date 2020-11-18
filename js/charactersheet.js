@@ -16,6 +16,10 @@ $(document).ready(function () {
 	
     });
 
+    $("#infoButton").click(function(){
+	$( "#info_dialog" ).dialog( "open" );
+    });
+
     $("#randomCharacterButton").click(function(){
 	pickRandomName();
 	pickRandomAttributes();
@@ -56,6 +60,28 @@ $(document).ready(function () {
 		markText($('#url_span')[0]);
 		document.execCommand("copy");
 	    },
+            "Close": function() {
+		$( this ).dialog( "close" );}
+	},
+	show: {
+	    effect: "blind",
+	    direction: "down",
+	    duration: 500	    
+	},
+	hide: {
+	    effect: "blind",
+	    direction: "down",
+	    duration: 500	    
+	}
+    });
+
+    $("#info_dialog").dialog({
+	autoOpen: false,
+	modal: true,
+	dialogClass: 'no-close',
+	width: 840,
+	position:{my:"center bottom", at:"center bottom-48"},
+	buttons: {
             "Close": function() {
 		$( this ).dialog( "close" );}
 	},
