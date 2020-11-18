@@ -17,18 +17,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
     
     <script src="https://unpkg.com/unfetch/polyfill"></script>
+
+    <!-- Set up Namey -->
     <script>
       self.fetch||(self.fetch=function(e,n){return n=n||{},new Promise(function(t,s){var r=new XMLHttpRequest,o=[],u=[],i={},a=function(){return{ok:2==(r.status/100|0),statusText:r.statusText,status:r.status,url:r.responseURL,text:function(){return Promise.resolve(r.responseText)},json:function(){return Promise.resolve(JSON.parse(r.responseText))},blob:function(){return Promise.resolve(new Blob([r.response]))},clone:a,headers:{keys:function(){return o},entries:function(){return u},get:function(e){return i[e.toLowerCase()]},has:function(e){return e.toLowerCase()in i}}}};for(var c in r.open(n.method||"get",e,!0),r.onload=function(){r.getAllResponseHeaders().replace(/^(.*?):[^\S\n]*([\s\S]*?)$/gm,function(e,n,t){o.push(n=n.toLowerCase()),u.push([n,t]),i[n]=i[n]?i[n]+","+t:t}),t(a())},r.onerror=s,r.withCredentials="include"==n.credentials,n.headers)r.setRequestHeader(c,n.headers[c]);r.send(n.body||null)})});
     </script>
-    <script src="js/charactersheet.js"></script>
-    <!-- <script src="js/printThis.js"></script> -->
 
+    <script src="js/charactersheet.js"></script>
+    <script src="js/icon.js"></script>
+    <script src="js/readURL.js"></script>
+
+    <!-- Packages to support pdfform -->
     <script src="js/pdfform.minipdf.dist.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.3/pako.min.js" integrity="sha256-X7u/eQo6oIgWqc5jOmTjQn3loM8Lse0ock76Gkkn/Ro=" crossorigin="anonymous"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.0.0/FileSaver.min.js"></script>
 
-
+    <link rel="icon" href="favicon-light.ico" id="light-scheme-icon">
+    <link rel="icon" href="favicon-dark.ico" id="dark-scheme-icon">
     
   </head>
   <body>
@@ -879,13 +884,6 @@
       <div class="sidebar">
       </div>
 
-    </div>
-
-    <div  id="character_sheet" style="display:none;position:relative;width:2800px">
-      <img src="assets/StarsWithoutNumberRevised-Character_Sheet-Form_Fillable_page1.png" alt="Character Sheet" style="width:100%;display:block" id="character_sheet_img" crossorigin="anonymous">
-    </div>
-    <div id="character_sheet2" style="display:none;position:relative;width:2800px">
-      <img src="assets/StarsWithoutNumberRevised-Character_Sheet-Form_Fillable_page2.png" alt="Character Sheet" style="width:100%;display:block" id="character_sheet_img2" crossorigin="anonymous">
     </div>
 
   </body>
