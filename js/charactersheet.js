@@ -1,21 +1,5 @@
 'use strict'
 
-var mark = function (el) {
-    var range, selection;
-    
-    if (document.body.createTextRange) {
-	range = document.body.createTextRange();
-	range.moveToElementText(el);
-	range.select();
-    } else if (window.getSelection) {
-	selection = window.getSelection();
-	range = document.createRange();
-	range.selectNodeContents(el);
-	selection.removeAllRanges();
-	selection.addRange(range);
-    }
-}
-
 $(document).ready(function () {
     
     $("#printButton").click(function(){
@@ -28,11 +12,10 @@ $(document).ready(function () {
 
     	$( "#url_dialog" ).focus();
 
-	mark($('#url_span')[0]);	
+	markText($('#url_span')[0]);	
 	
     });
 
-    
     $("#randomCharacterButton").click(function(){
 	pickRandomName();
 	pickRandomAttributes();
@@ -70,7 +53,7 @@ $(document).ready(function () {
 	position:{my:"right bottom", at:"right top-10", of:"#shareButton"},
 	buttons: {
 	    "Copy to Clipboard": function(){
-		mark($('#url_span')[0]);
+		markText($('#url_span')[0]);
 		document.execCommand("copy");
 	    },
             "Close": function() {
@@ -344,6 +327,10 @@ var fociDeferred = $.Deferred();
 var psionicsDeferred = $.Deferred();
 var packagesDeferred = $.Deferred();
 
+/*
+Load info from js/backgrounds.json js/class.json js/foci.json  js/psionics.json js/equipment_packages.json js/skill.json and store in corresponding Objects.
+
+*/
 function loadJSON(){
     loadBackgrounds();
     loadSkills();
@@ -353,11 +340,14 @@ function loadJSON(){
     loadPackages();
 }
 
+/*
+Fill out character sheet with choices specified by string query parameters. This process requires the information from the js/*.json files to be properly loaded beforehand; Promises are used to ensure the asynchronous timing is ordered correctly.
+*/
 $.when( backgroundsDeferred, skillsDeferred, classesDeferred, fociDeferred, psionicsDeferred, packagesDeferred ).done(function ( v1, v2, v3, v4, v5, v6 ) {
     readURLParams();
 });
 
-
+/*The updateStatus methods control which icon is displayed on each tab depending on whether that section of character creation has been completed.*/
 function updateStatus1(){
     var elemIcon = document.getElementById("accordion1StatusIcon");
     
@@ -521,13 +511,6 @@ function updateStatus9(){
     var elemGoals = document.getElementById("goals");
     var elemNotes = document.getElementById("notes");
 
-//    var portraitSource = $("#portrait_holder").attr('src');
-
-    // For some browsers, `portraitSource` is undefined; for others,
-    // `portraitSource` is false.  Check for both.
-//    var portraitUploaded = (typeof portraitSource !== typeof undefined && portraitSource !== false)
-    
-    //    if(elemName.value!="" && elemHomeworld.value!="" && elemEmployer.value!="" && elemSpecies.value!=""&&elemGoals.value!="" && elemNotes.value!="" && portraitUploaded){
     if(elemName.value!="" && elemHomeworld.value!="" && elemEmployer.value!="" && elemSpecies.value!=""&&elemGoals.value!="" && elemNotes.value!=""){
 	elemIcon.src = "assets/checkmark.png"
     }
@@ -622,10 +605,9 @@ function resetAttr(attrname){
     setAttr(attrname,"");
 }
 
+/*For random ability generation, set given attribute to 14. Which attribute has been chosen and its old value are saved in tempAttr and tempAttrScore, respectively; these are saved so that when the user chooses a different attribute to 14, the current attribute can be correctly reset.*/
 function attrTo14(attrname){
     if (tempAttr != ""){
-//	var oldInd=attrs.indexOf(tempAttr);
-//	let oldElem = document.getElementById(tempAttr+'_attr');
 	setAttr(tempAttr, tempAttrScore);
     }
     let newElem = document.getElementById(attrname+'_attr');
@@ -640,6 +622,9 @@ function attrTo14(attrname){
     }
 }
 
+/*
+For 'fixed' ability generation, when an attribute value is selected from the menu, remove it from the list of options for the other attributes. When an attribute value is changed, add the previous value back to the list of options for other attributes.
+*/
 function updateAttrSelects(attrname, value){
     let oldOption = tempSelections[attrs.indexOf(attrname)];
     addAttrOtherSelects(attrname, oldOption);
@@ -691,6 +676,9 @@ function indexMatchingText(ele, text) {
     return undefined;
 }
 
+/*
+Method for sorting the attribute values in '#strength_select' , '#dexterity_select', etc. 
+*/
 function sortSelect(selElem) {
     var tmpAry = new Array();
     for (var i=0;i<selElem.options.length;i++) {
@@ -3598,192 +3586,6 @@ function pickRandomPsychicSkill(){
 //    incrementFixedSkill(psychicSkills[roll-1]);
 }
 
-function readURLParams(){
-
-    readURLParam('name','name');
-    readURLParam('name','name_mirror');
-    readURLParam('employer','employer');
-    readURLParam('homeworld','homeworld');
-    readURLParam('species','species');
-
-    readURLBackgroundParams();
-
-    readURLAttributeParams();
-
-    readURLHPParams();
-
-    readURLFociParams();
-
-    readURLClassParams();
-
-    readURLSkillParams();
-    
-    readURLTechniqueParams();
-    
-    readURLEquipmentParams();
-
-}
-
-function readURLParam(param, elemName){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    if (urlParams.has(param)){
-	$('#'+elemName).val(decodeURI(urlParams.get(param)));
-    }
-}
-
-function readURLClassParams(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    if(urlParams.has('class')){
-	$('#class_mirror').selectmenu().val(urlParams.get('class'));
-	$('#class_mirror').selectmenu("refresh");
-	$('#class_mirror').trigger('change');
-    }
-}
-      
-
-function readURLBackgroundParams(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    if(urlParams.has('background')){
-	$('#backgrounds_mirror').selectmenu().val(urlParams.get('background'));
-	$('#backgrounds_mirror').selectmenu("refresh");
-	$('#backgrounds_mirror').trigger('change');
-    }
-}
-
-function readURLAttributeParams(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    for (var attr of attrs){
-        if (urlParams.has(attr)){
-	    $('#'+attr+'_attr').html(urlParams.get(attr));
-
-	    var ind=attrs.indexOf(attr);
-	    attrBases[ind]=urlParams.get(attr);
-
-	    updateMod(attr);
-	    updateStatus1();
-	}
-    }
-}
-
-function readURLHPParams(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    
-    if(urlParams.has('hp')){
-	$("#rollHPTopLayer").click();
-	$('#hp_roll').val(parseInt(urlParams.get('hp')));
-    }
-
-}
-
-function readURLFociParams(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    if(urlParams.has('focus1')){
-	$('#foci').val(urlParams.get('focus1'));
-	$('#foci').trigger('change');
-    }
-
-    if(urlParams.has('focus2')){
-	$('#combat_foci').val(urlParams.get('focus2'));
-	$('#combat_foci').trigger('change');
-
-    }
-
-    if(urlParams.has('focus3')){
-	$('#noncombat_foci').val(urlParams.get('focus3'));
-	$('#noncombat_foci').trigger('change');
-    }
-}
-
-function readURLTechniqueParams(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    if(urlParams.has('technique')){
-	var technique = decodeURI(urlParams.get('technique'));
-	for(var discipline of psionic_disciplines){
-	    if(Object.keys(psionics[discipline]['level1']).includes(technique)){
-		$('#'+discipline+'_level1').val(technique);
-		$('#'+discipline+'_level1').trigger('change');
-	    }
-	}
-    }
-}
-
-function readURLEquipmentParams(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    if(urlParams.has('equipment')){
-	$('#equipment_packages').val(urlParams.get('equipment'));
-	$('#equipment_packages').trigger('change');
-    }
-}
-
-function readURLSkillParams(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    if(urlParams.has('learning')){
-	var learningSkills = urlParams.getAll('learning');
-
-	for (var skill of learningSkills){
-	    learning_skills.push(decodeURI(skill));
-	    remainingRolls--;
-
-	}
-    }
-
-    if(urlParams.has('growth')){
-	var growthSkills = urlParams.getAll('growth');
-
-	for (var skill of growthSkills){
-	    growth_skills.push(decodeURI(skill));
-	    remainingRolls--;
-
-	    var substrings = decodeURI(skill).split(" ");
-	    for (var substring of substrings){
-		var ind = attrs.indexOf(substring);
-		if (ind !=-1){
-		    attrBonuses[ind]++;
-		}
-	    }	    
-	}
-    }
-
-    updateSkills();
-    
-    if(urlParams.has('picked')){
-	
-	var pickedSkills = urlParams.getAll('picked');
-
-	for (var ind=0; ind<pickedSkills.length; ind++){
-
-	    var skill=pickedSkills[ind];
-
-	    incrementPickedSkill(skill);
-	    
-	    // if (ind == pickedSkills.indexOf(skill)){
-	    // 	$('#'+skill+'_rank_box_0').prop( "checked", true );
-	    // 	$('#'+skill+'_rank_box_0').trigger("change");
-	    // }
-	    // else{
-	    // 	$('#'+skill+'_rank_box_1').prop( "checked", true );
-	    // 	$('#'+skill+'_rank_box_1').trigger("change");
-	    // }
-	}
-    }
-
-}
 
 function generateExportURL(){
     var name_string = (!($('#name').val()) || $('#name').val() == "") ? "" : ("name="+encodeURI($('#name').val())+"&");
@@ -3848,6 +3650,23 @@ function generateExportURL(){
     $("#url_span").html(url);
 }
     
+
+function markText(el){
+    var range, selection;
+    
+    if (document.body.createTextRange) {
+	range = document.body.createTextRange();
+	range.moveToElementText(el);
+	range.select();
+    } else if (window.getSelection) {
+	selection = window.getSelection();
+	range = document.createRange();
+	range.selectNodeContents(el);
+	selection.removeAllRanges();
+	selection.addRange(range);
+    }
+}
+
 
 /*Generate a random name using the Namey! random name generator https://namey.muffinlabs.com/*/
 function pickRandomName(){
