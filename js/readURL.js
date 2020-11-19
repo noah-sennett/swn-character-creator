@@ -14,9 +14,9 @@ function readURLParams(){
 
     readURLHPParams();
 
-    readURLFociParams();
-
     readURLClassParams();
+    
+    readURLFociParams();
 
     readURLSkillParams();
     
