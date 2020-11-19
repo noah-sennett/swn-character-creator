@@ -1285,6 +1285,7 @@ function showGrowthButtons(){
     
     growth_skills = [];
     learning_skills = [];
+    picked_skills = [];
     
     let elemLearning=document.getElementById("learning");
     elemLearning.setAttribute("disabled","true");
@@ -1313,6 +1314,7 @@ function hideGrowthButtons(){
     
     growth_skills = [];
     learning_skills = [];
+    picked_skills = [];
 
     remainingRolls = 3;
     
