@@ -1585,7 +1585,7 @@ function incrementFixedSkill(skill){
 			learning_skills[ind]=choice;
 			$("input[name=stabshoot]").prop("checked",false).change();
 			incrementFixedSkill(choice);
-			shoot_stab = choice;
+			shoot_stab_choice = choice;
 			$(this).dialog("close");
 		    }
 		}
