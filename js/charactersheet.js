@@ -353,6 +353,9 @@ var fociDeferred = $.Deferred();
 var psionicsDeferred = $.Deferred();
 var packagesDeferred = $.Deferred();
 
+var punch_stab_choice = "";
+var shoot_stab_choice = "";
+
 /*
 Load info from js/backgrounds.json js/class.json js/foci.json  js/psionics.json js/equipment_packages.json js/skill.json and store in corresponding Objects.
 
@@ -1547,22 +1550,29 @@ function incrementFixedSkill(skill){
 	
     }
     else if (skill == "punch or stab"){
-	$('#punchstab_dialog').dialog({
-	    buttons: [{
-		text: "Submit",
-		click: function(){
-		    var ind=foci_skills.indexOf("punch or stab");
-		    var choice=$("input[name=punchstab]:checked").val();
-		    if(choice != undefined){
-			foci_skills[ind]=choice;
-			$("input[name=punchstab]").prop("checked",false).change();
-			incrementFixedSkill(choice);
-			$(this).dialog("close");
+	if (punch_stab_choice == ""){
+	    $('#punchstab_dialog').dialog({
+		buttons: [{
+		    text: "Submit",
+		    click: function(){
+			var ind=foci_skills.indexOf("punch or stab");
+			var choice=$("input[name=punchstab]:checked").val();
+			if(choice != undefined){
+			    foci_skills[ind]=choice;
+			    $("input[name=punchstab]").prop("checked",false).change();
+			    incrementFixedSkill(choice);
+			    punch_stab_choice = choice;
+			    $(this).dialog("close");
+			}
 		    }
-		}
-	    }]
-	}).dialog("open");
-	
+		}]
+	    }).dialog("open");
+	}
+	else{
+	    var ind=foci_skills.indexOf("punch or stab");
+	    foci_skills[ind]=punch_stab_choice;
+	    incrementFixedSkill(punch_stab_choice);
+	}
     }
     else if (skill == "stab or shoot"){
 	$('#stabshoot_dialog').dialog({
@@ -1575,6 +1585,7 @@ function incrementFixedSkill(skill){
 			learning_skills[ind]=choice;
 			$("input[name=stabshoot]").prop("checked",false).change();
 			incrementFixedSkill(choice);
+			shoot_stab = choice;
 			$(this).dialog("close");
 		    }
 		}
@@ -1938,7 +1949,9 @@ function tabulateFoci(){
     else{
 	foci_effort_bonus = 0;
     }
-    
+    if (!(picked_foci.includes("shocking_assault"))){
+	punch_stab_choice = "";
+    }
     var elemClassBonus = document.getElementById('class_hp_bonus');
     elemClassBonus.value = combineHPBonuses(class_hp_bonus,foci_hp_bonus);
 	
@@ -3646,19 +3659,35 @@ function generateExportURL(){
 	picked_string+="picked="+skill+"&" 
     }
 
-    var focus1_string = ($('#foci').val() == "") ? "" : ("focus1="+$('#foci').val()+"&");
+    var focus1_string;
+    if ($('#foci').val() != ""){
+	if ($('#foci').val() == "shocking_assault"){
+	    focus1_string=("focus1=shocking_assault_"+punch_stab_choice.slice(0,2)+"&");
+	}
+	else{
+	    focus1_string=("focus1="+$('#foci').val()+"&");
+	}
+    }
+    else{
+	focus1_string="";
+    }
 
     var focus2_string;
-    if($('#class').val() != null && $('#class').val().includes('war')){
-	focus2_string = ($('#combat_foci').val() == "") ? "" : ("focus2="+$('#combat_foci').val()+"&");
+    if($('#class').val() != null && $('#class').val().includes('war') && ($('#combat_foci').val() != "")){
+	if ($('#combat_foci').val() == "shocking_assault"){
+	    focus2_string=("focus2=shocking_assault_"+punch_stab_choice.slice(0,2)+"&");
+	}
+	else{
+	    focus2_string=("focus2="+$('#combat_foci').val()+"&");
+	}
     }
     else{
 	focus2_string="";
     }
-
+    
     var focus3_string;
-    if($('#class').val() != null && $('#class').val().includes('exp')){
-	focus3_string = ($('#noncombat_foci').val() == "") ? "" : ("focus3="+$('#noncombat_foci').val()+"&");
+    if($('#class').val() != null && $('#class').val().includes('exp') && ($('#noncombat_foci').val() != "")){
+	focus3_string = ("focus3="+$('#noncombat_foci').val()+"&");
     }
     else{
 	focus3_string="";

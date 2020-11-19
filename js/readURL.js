@@ -90,19 +90,43 @@ function readURLFociParams(){
     const urlParams = new URLSearchParams(queryString);
 
     if(urlParams.has('focus1')){
-	$('#foci').val(urlParams.get('focus1'));
+	if(urlParams.get('focus1').slice(-3)=='_pu'){
+	    punch_stab_choice = 'punch';
+	    $('#foci').val('shocking_assault');
+	}
+	else if (urlParams.get('focus1').slice(-3)=='_st'){
+	    punch_stab_choice = 'stab';
+	    $('#foci').val('shocking_assault');
+	}
+	else{
+	    $('#foci').val(urlParams.get('focus1'));
+	}
 	$('#foci').trigger('change');
+	$( "#tabs" ).tabs({ active: 0 });
+	
+	
     }
 
     if(urlParams.has('focus2')){
-	$('#combat_foci').val(urlParams.get('focus2'));
+	if(urlParams.get('focus2').slice(-3)=='_pu'){
+	    punch_stab_choice = 'punch';
+	    $('#combat_foci').val('shocking_assault');
+	}
+	else if (urlParams.get('focus2').slice(-3)=='_st'){
+	    punch_stab_choice = 'stab';
+	    $('#combat_foci').val('shocking_assault');
+	}
+	else{
+	    $('#combat_foci').val(urlParams.get('focus2'));
+	}
 	$('#combat_foci').trigger('change');
-
+	$( "#tabs" ).tabs({ active: 1 });
     }
-
+    
     if(urlParams.has('focus3')){
 	$('#noncombat_foci').val(urlParams.get('focus3'));
 	$('#noncombat_foci').trigger('change');
+	$( "#tabs" ).tabs({ active: 2 });
     }
 }
 
