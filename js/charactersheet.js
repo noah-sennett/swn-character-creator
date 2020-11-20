@@ -119,6 +119,8 @@ $(document).ready(function () {
 
     var box1active = false;
     var box2active =false;
+    var box1vactive = false;
+    var box2vactive = false;
     
     $("#rollAttrsButton").on("click",function(){
 	
@@ -137,9 +139,27 @@ $(document).ready(function () {
 	    $("#fixAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
 	    $("#fixAttrsText").show("blind",{},500);
 	}
+
+	if(box1vactive){
+	    $("#rollReorderAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#rollReorderAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#rollReorderAttrsText").show("blind",{},500);
+	}
+	
+	if(box2vactive){
+	    $("#manualAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#manualAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#manualAttrsText").show("blind",{},500);
+	}
 	
 	box1active = true;
 	box2active = false;
+	box1vactive = false;
+	box2vactive = false;
 	
 	
     });
@@ -161,21 +181,135 @@ $(document).ready(function () {
 	    $("#rollAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
 	    $("#rollAttrsText").show("blind",{},500);
 	}
-	
+
+	if(box1vactive){
+	    $("#rollReorderAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#rollReorderAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#rollReorderAttrsText").show("blind",{},500);
+	}
+
+	if(box2vactive){
+	    $("#manualAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#manualAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#manualAttrsText").show("blind",{},500);
+	}
+
 	box1active = false;
 	box2active = true;
+	box1vactive = false;
+	box2vactive = false;
 	
 	
     });
+
+    $("#rollReorderAttrsButton").on("click",function(){
+	
+	if(!box1vactive){
+	    $(this).children(".topLayer").animate({
+		height:40
+	    },500);
+	    $("#rollReorderAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#rollReorderAttrsText").hide("blind",{},500);
+	}
+	
+	if(box1active){
+	    $("#rollAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#rollAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#rollAttrsText").show("blind",{},500);
+	}
+	
+	if(box2active){
+	    $("#fixAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#fixAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#fixAttrsText").show("blind",{},500);
+	}
+	
+	if(box2vactive){
+	    $("#manualAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#manualAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#manualAttrsText").show("blind",{},500);
+	}
+	
+	box1active = false;
+	box2active = false;
+	box1vactive = true;
+	box2vactive = false;
+	
+    });
+
+        $("#manualAttrsButton").on("click",function(){
+	
+	if(!box2vactive){
+	    $(this).children(".topLayer").animate({
+		height:40
+	    },500);
+	    $("#manualAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#manualAttrsText").hide("blind",{},500);
+	}
+	
+	if(box1active){
+	    $("#rollAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#rollAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#rollAttrsText").show("blind",{},500);
+	}
+	
+	if(box2active){
+	    $("#fixAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#fixAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#fixAttrsText").show("blind",{},500);
+	}
+	
+	if(box1vactive){
+	    $("#rollReorderAttrsButton").children(".topLayer").animate({
+		height:150
+	    },500);
+	    $("#rollReorderAttrsHeader").toggleClass("persistentText-default-attr persistentText-active-attr",500)
+	    $("#rollReorderAttrsText").show("blind",{},500);
+	}
+	
+	box1active = false;
+	box2active = false;
+	box1vactive = false;
+	box2vactive = true;
+	
+    });
+
     
     $("#rollAttrsTopLayer").on("click",function(){
-	attrs.forEach(rollAttr);hideAttrSelects();show14Attr();resetTemps();
+	attrs.forEach(rollAttr);show14Attr();hideAttrSelects();hideScoreSelects();hideAttrInputs();resetTemps();
 	$("#14attrList").selectmenu("refresh");
 	updateStatus1();
     });
 
     $("#fixAttrsTopLayer").on("click",function(){
-	attrs.forEach(resetAttr);hide14Attr();showAttrSelects();resetTemps();
+	attrs.forEach(resetAttr);hide14Attr();showAttrSelects();hideScoreSelects();hideAttrInputs();resetTemps();
+	$("select[id*='_select']").selectmenu("refresh");
+	updateStatus1();
+    });
+
+    $("#rollReorderAttrsTopLayer").on("click",function(){
+	attrs.forEach(resetAttr);hide14Attr();hideAttrSelects();showScoreSelects();hideAttrInputs();resetTemps();
+	$("select[id*='_select']").selectmenu("refresh");
+	generateScoreSelects();
+	updateStatus1();
+    });
+
+    $("#manualAttrsTopLayer").on("click",function(){
+	attrs.forEach(resetAttr);hide14Attr();hideAttrSelects();hideScoreSelects();showAttrInputs();resetTemps();
 	$("select[id*='_select']").selectmenu("refresh");
 	updateStatus1();
     });
@@ -203,8 +337,7 @@ $(document).ready(function () {
 	
 	box3active = true;
 	box4active = false;
-	
-	
+		
     });
     
     $("#pickSkillsButton").on("click",function(){
@@ -267,6 +400,7 @@ $(document).ready(function () {
     $("#backgrounds_mirror").selectmenu({width:124.5}).selectmenu("menuWidget").addClass("overflow");
     $("#class_mirror").selectmenu({width:174});
     $("#14attrList").selectmenu({width:120});
+    $("#14scoreList").selectmenu({width:50});
     $("select[id*='_select']").selectmenu({width:50});
 //    $("select[id*='foci']").selectmenu({width:200}).selectmenu("menuWidget").addClass("overflow");
     
@@ -279,11 +413,24 @@ $(document).ready(function () {
 	updateStatus1();
     });
 
+    $("#14scoreList").on("selectmenuchange",function(){
+	scoreTo14(this.value);
+	updateStatus1();
+    });
+
     $("select[id*='_select']").on("selectmenuchange",function(){
-	var attribute = (this.id).slice(0,-7);
-	setAttr(attribute,this.value);
-	updateAttrSelects(attribute,this.value);
-	$("select[id*='_select']").selectmenu("refresh");
+	var trimmedId = (this.id).slice(0,-7);
+	if (attrs.indexOf(trimmedId) != -1){
+	    var attribute = trimmedId;
+	    setAttr(attribute,this.value);
+	    updateAttrSelects(attribute,this.value);
+	}
+	else{
+	    var attribute = trimmedId.slice(0,-6);
+	    setAttr(attribute,this.value);
+	    updateScoreSelects();
+	}
+	$("select[id*='_select']").selectmenu("refresh");    
 	updateStatus1();
     });
 
@@ -301,6 +448,7 @@ $(document).ready(function () {
     });					     
 
     loadJSON();
+
     
 });
 
@@ -310,6 +458,7 @@ const psionic_disciplines = ["biopsionics","metapsionics","precognition","teleki
 
 var tempAttr="";
 var tempAttrScore="";
+var tempScoreIndex=0;
 
 var tempSelections=["", "", "", "", "", ""];
 
@@ -381,12 +530,19 @@ function updateStatus1(){
     var elemIcon = document.getElementById("accordion1StatusIcon");
     
     var elem = document.getElementById("14attrList");
+    var elem2 = document.getElementById("14scoreList");
 
     var statsAssigned = true;
+    var scoresAssigned = (elem2.value!="");
+    var scoresEntered = true;
     
     for(var attr of attrs){
 	var elemSelect = document.getElementById(attr+"_select");
+	var elemScoreSelect = document.getElementById(attr+"_score_select");
+	var elemScoreInput = document.getElementById(attr+"_attr_input");
 	statsAssigned = statsAssigned && (elemSelect.value != "");
+	scoresAssigned = scoresAssigned && (elemScoreSelect.value != "");
+	scoresEntered = scoresEntered && (elemScoreInput.value != "");
     }
 
     var statsInURL = true;
@@ -403,7 +559,7 @@ function updateStatus1(){
     }
     
     
-    if(elem.value!=""||statsAssigned||statsInURL){
+    if(elem.value!=""||statsAssigned||scoresAssigned||scoresEntered||statsInURL){
 	elemIcon.src = "assets/checkmark.png"
     }
     else{
@@ -555,14 +711,16 @@ function rollDie(sides=6){
 
 function rollAttr(attrname){
     let attrElem = document.getElementById(attrname+'_attr');
+    let attrInputElem = document.getElementById(attrname+'_attr_input');
     let total = rollDie(6)+rollDie(6)+rollDie(6);
     attrBases[attrs.indexOf(attrname)] = total;
     attrElem.innerHTML=total + attrBonuses[attrs.indexOf(attrname)];
+    attrInputElem.value=total + attrBonuses[attrs.indexOf(attrname)];
     updateMod(attrname,total);    
 }
 
-function updateMod(attrname){
-    let total = parseInt(document.getElementById(attrname+'_attr').innerHTML);
+function updateMod(attrname, total){
+//    let total = parseInt(document.getElementById(attrname+'_attr').innerHTML);
     let modElem = document.getElementById(attrname+'_mod');
     modElem.innerHTML= displayMod(total);
 
@@ -613,13 +771,16 @@ function computeMod(roll){
 function setAttr(attrname, newValue){
     if (attrs.includes(attrname)){
 	let attrElem = document.getElementById(attrname+'_attr');
+	let attrInputElem = document.getElementById(attrname+'_attr_input');
 	var ind=attrs.indexOf(attrname);
 	attrBases[ind] = newValue;
 	if(newValue !=""){
 	    attrElem.innerHTML= parseInt(newValue) + attrBonuses[ind];
+	    attrInputElem.value= parseInt(newValue) + attrBonuses[ind];
 	}
 	else{
 	    attrElem.innerHTML= newValue;
+	    attrInputElem.value= newValue;
 	}
 	updateMod(attrname, newValue);
     }
@@ -633,6 +794,88 @@ function checkAttr(attrname){
 function resetAttr(attrname){
     setAttr(attrname,"");
 }
+
+function generateScoreSelects(){
+    $('#14scoreList option').remove();
+    $('#14scoreList').append($('<option/>', { 
+        value: "",
+        text : ""
+    }));
+
+    var totals = []
+    for (var i = 0; i<6; i++){
+	totals.push(rollDie(6)+rollDie(6)+rollDie(6));
+    }
+    totals.sort(function(a, b){return b-a});
+    
+    for (var i = 0; i<6; i++){
+      	$('#14scoreList').append("<option value='"+totals[i]+"'>"+totals[i]+"</option>").selectmenu();
+    }
+    $('#14scoreList').selectmenu("refresh");
+    
+    var scoreSelectElem = document.getElementById('14scoreList');
+    sortSelect(scoreSelectElem);
+
+    for (var j = 1; j<7; j++){
+    	for (var attr of attrs){
+    	    var selectElem = document.getElementById(attr+'_score_select');
+    	    selectElem.options[j].text = scoreSelectElem.options[j].text;
+    	    selectElem.options[j].value = scoreSelectElem.options[j].value;
+    	    $('#'+attr+'_score_select').selectmenu("refresh");
+    	}
+    }
+}
+
+function updateScoreSelects(){
+    $("select[id*='_score_select'] option").removeAttr("disabled");
+    
+    for (var attrI of attrs){
+	var ind = $('#'+attrI+'_score_select').prop("selectedIndex");
+	for (var attrJ of attrs){
+	    if (attrI != attrJ){
+		var elem = document.getElementById(attrJ+'_score_select');
+		if (ind != 0){
+		    elem.options[ind].setAttribute("disabled","true");
+		}
+	    }
+	}
+    }
+}
+
+function resetScoreSelects(){
+    $("select[id*='_score_select']").prop("selectedIndex",0);
+    $("select[id*='_score_select'] option").removeAttr("disabled");
+}
+
+function scoreTo14(score){
+    var scoreSelectElem = document.getElementById('14scoreList');
+    var ind = $('#14scoreList').prop("selectedIndex");
+
+    for (var attr of attrs){
+	var selectElem = document.getElementById(attr+'_score_select');
+	if(score != ""){
+	    
+	    if (tempScoreIndex != 0){
+		selectElem.options[tempScoreIndex].text = scoreSelectElem.options[tempScoreIndex].text;
+		selectElem.options[tempScoreIndex].value = scoreSelectElem.options[tempScoreIndex].value;
+	    }
+	    
+	    selectElem.options[ind].text = 14;
+	    selectElem.options[ind].value = 14;
+	    
+	}
+	else{
+	    if (tempScoreIndex != 0){
+		selectElem.options[tempScoreIndex].text = scoreSelectElem.options[tempScoreIndex].text;
+		selectElem.options[tempScoreIndex].value = scoreSelectElem.options[tempScoreIndex].value;
+	    }
+	}
+	$('#'+attr+'_score_select').selectmenu('refresh');
+	setAttr(attr, $('#'+attr+'_score_select').val());
+    }
+    tempScoreIndex = ind;
+}
+
 
 /*For random ability generation, set given attribute to 14. Which attribute has been chosen and its old value are saved in tempAttr and tempAttrScore, respectively; these are saved so that when the user chooses a different attribute to 14, the current attribute can be correctly reset.*/
 function attrTo14(attrname){
@@ -752,6 +995,30 @@ function hideAttrSelects(){
     $(".attrSelects").hide();
 }
 
+function showScoreSelects(){
+    $(".scoreSelects").show();
+}
+
+function hideScoreSelects(){
+    $(".scoreSelects").hide();
+}
+
+function showAttrInputs(){
+    for (var attr of attrs){
+	$('#'+attr+'_attr').hide();
+	$('#'+attr+'_attr_input').show();
+    }
+}
+
+function hideAttrInputs(){
+    for (var attr of attrs){
+	$('#'+attr+'_attr').show();
+	$('#'+attr+'_attr_input').hide();
+    }
+
+}
+
+
 function showSubclasses(){
     let elem=document.getElementById("adventurer_subclass");
     elem.style.display= 'inline-block';
@@ -774,11 +1041,14 @@ function resetTemps(){
 	updateAttrSelects(attrs[i],"");
     }
 
+    resetScoreSelects();
+
     var attr14Select = document.getElementById("14attrList");
     attr14Select.selectedIndex = "0";
     
     tempAttr="";
-    tempAttrScore=""
+    tempAttrScore="";
+    tempScoreIndex=0;
     tempSelections=["", "", "", "", "", ""];
 }
 

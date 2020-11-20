@@ -45,7 +45,9 @@ input[type=text]{
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
-    width: 30px
+    width: 30px;
+    border-width: 2px;
+    height: 15px;	       
 }
 
 body, option{
@@ -317,6 +319,15 @@ body{
 
 
 .attrSelects {
+    display: grid;
+    grid-template-columns: 40px;
+    row-gap: 2px;
+    column-gap: 10px;
+    grid-auto-rows: 22px;
+    padding:5px 0;
+}
+
+.scoreSelects {
     display: grid;
     grid-template-columns: 40px;
     row-gap: 2px;
@@ -750,6 +761,16 @@ h2{
 }
 .shareDialog p{
     margin-top: 5px;
+}
+
+.nestedAccordion .ui-state-active{
+    background: #F4E2FC;
+    color: #000;
+    border: 1px solid black;
+}
+
+.nestedAccordion .ui-state-active .ui-icon{
+    background-image: url(https://code.jquery.com/ui/1.12.1/themes/base/images/ui-icons_444444_256x240.png)
 }
 
 /* @media print { */

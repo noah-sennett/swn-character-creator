@@ -13,8 +13,8 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script src="js/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <!-- <script src="js/html2canvas.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script> -->
     
     <script src="https://unpkg.com/unfetch/polyfill"></script>
 
@@ -26,7 +26,7 @@
     <script src="js/charactersheet.js"></script>
     <script src="js/icon.js"></script>
     <script src="js/readURL.js"></script>
-
+    
     <!-- Packages to support pdfform -->
     <script src="js/pdfform.minipdf.dist.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.3/pako.min.js" integrity="sha256-X7u/eQo6oIgWqc5jOmTjQn3loM8Lse0ock76Gkkn/Ro=" crossorigin="anonymous"></script>
@@ -98,7 +98,7 @@
 		</div>
 		<div class="item val">
 		  <span id="strength_attr"></span>
-		  <input type="number" id="strength_attr_input" onchange="updateMod('strength')" style="display:none">
+		  <input type="number" id="strength_attr_input" onchange="setAttr('strength',this.value);updateStatus1();" style="display:none">
 		</div>
 		<div class="item mod"><span id="strength_mod">+0 </span></div>
 
@@ -108,7 +108,7 @@
 		</div>
 		<div class="item val">
 		  <span id="dexterity_attr"></span>
-		  <input type="number" id="dexterity_attr" min="3" max="18" onchange="updateMod('dexterity')" style="display:none">
+		  <input type="number" id="dexterity_attr_input" min="3" max="18" onchange="setAttr('dexterity',this.value);updateStatus1();" style="display:none">
 		</div>
 		<div class="item mod"><span id="dexterity_mod">+0 </span></div>
 		
@@ -118,7 +118,7 @@
 		</div>
 		<div class="item val">
 		  <span id="constitution_attr"></span>
-		  <input type="number" id="constitution_attr" min="3" max="18" onchange="updateMod('constitution')" style="display:none">
+		  <input type="number" id="constitution_attr_input" min="3" max="18" onchange="setAttr('constitution',this.value);updateStatus1();" style="display:none">
 		</div>
 		<div class="item mod"><span id="constitution_mod">+0 </span></div>
 	      	
@@ -128,7 +128,7 @@
 		</div>
 		<div class="item val">
 		  <span id="intelligence_attr"></span>
-		  <input type="number" id="intelligence_attr" min="3" max="18" onchange="updateMod('intelligence')" style="display:none">
+		  <input type="number" id="intelligence_attr_input" min="3" max="18" onchange="setAttr('intelligence',this.value);updateStatus1();" style="display:none">
 		</div>
 		<div class="item mod"><span id="intelligence_mod">+0 </span></div>
 		
@@ -138,7 +138,7 @@
 		</div>
 		<div class="item val">
 		  <span id="wisdom_attr"></span>
-		  <input type="number" id="wisdom_attr" min="3" max="18" onchange="updateMod('wisdom')" style="display:none">
+		  <input type="number" id="wisdom_attr_input" min="3" max="18" onchange="setAttr('wisdom',this.value);updateStatus1();" style="display:none">
 		</div>
 		<div class="item mod"><span id="wisdom_mod">+0 </span></div>
 		
@@ -148,7 +148,7 @@
 		</div>
 		<div class="item val">
 		  <span id="charisma_attr"></span>
-		  <input type="number" id="charisma_attr" min="3" max="18" onchange="updateMod('charisma')" style="display:none">
+		  <input type="number" id="charisma_attr_input" min="3" max="18" onchange="setAttr('charisma',this.value);updateStatus1();" style="display:none">
 		</div>
 		<div class="item mod"><span id="charisma_mod">+0 </span></div>
 		
@@ -227,8 +227,83 @@
 		</div>
 
 	      </div>
+	      
+	      <div class="scoreSelects">
+		<div class="attrSelectsItem"> </div>
+		<div>
+		  <select id="strength_score_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('strength',this.value); updateScoreSelects('strength',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+		<div>
+		  <select id="dexterity_score_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('dexterity',this.value); updateScoreSelects('dexterity',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+		
+		<div>
+		  <select id="constitution_score_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('constitution',this.value); updateScoreSelects('constitution',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+		
+		<div>
+		  <select id="intelligence_score_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('intelligence',this.value); updateScoreSelects('intelligence',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+		
+		<div>
+		  <select id="wisdom_score_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('wisdom',this.value); updateScoreSelects('wisdom',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+		
+		<div>
+		  <select id="charisma_score_select" class="attrSelectsItem" style="width: 38px" onchange="setAttr('charisma',this.value); updateScoreSelects('charisma',this.value);">
+		    <option value=""></option>
+		    <option value="14">14</option>
+		    <option value="12">12</option>
+		    <option value="11">11</option>
+		    <option value="10">10</option>
+		    <option value="9">9</option>
+		    <option value="7">7</option>
+		  </select>
+		</div>
+		
+	      </div>
 	    </div>
-
+	    
 	    
 	    <div style="display:grid;grid-template-columns:60px 1fr 1fr 1fr;width:95%;height:1.5em">
 	      <div class="heading"> Saving</div>
@@ -304,7 +379,7 @@
 		  <div  class="bottomText bottomText-attr" id="rollAttrsDescription">
  		    <div id="14attr" style="">
 		      <label for="14attrList">Select one attribute to set to 14</label>
-		      <select id="14attrList" onchange="attrTo14(this.value);">
+		      <select id="14attrList">
 			<option value=""></option>
 			<option value="strength">Strength</option>
 			<option value="dexterity">Dexterity</option>
@@ -336,6 +411,50 @@
 	      </div>
 	    </div>
 	    <p>These attribute scores influence your hero's chances of success when employing their skills and abilities. When making a roll to perform a task, add the modifier <span class="heading">(Mod)</span> of the most applicable attribute to the result.<p>
+
+	      <div class="accordion nestedAccordion">
+		<h3>Variant rules</h3>
+		<div>
+	    <p>Some tables prefer alternatives methods for generating attribute scores than those presented in the offical rules. Here are some possible variations</p>
+	    <div style="width:100%; display:grid ; grid-template-columns:1fr 1fr; column-gap:10px;">
+	      <div class="collapsibleButton collapsibleButton-attr" id="rollReorderAttrsButton">
+		<div class="topLayer" id="rollReorderAttrsTopLayer">
+		  <div class="persistentText-default persistentText-default-attr" id="rollReorderAttrsHeader">
+		    <strong>Random & Reorder</strong>
+		  </div>
+		  <div class="topText topText-attr" id="rollReorderAttrsText"> Roll 3d6 six times, then assign rolls to attributes in any order. You may then change one score to 14. </div>
+		</div>
+		<div class="bottomLayer">
+		  <div  class="bottomText bottomText-attr" id="rollReorderAttrsDescription">
+ 		    <div id="14score" style="">
+		      <label for="14scoreList">Select one roll to replace with a 14</label>
+		      <select id="14scoreList">
+			<option value=""></option>
+		      </select>
+		    </div>
+		  </div>
+		</div>
+	      </div>
+	      
+		  
+	      <div class="collapsibleButton collapsibleButton-attr" id="manualAttrsButton">
+		<div class="topLayer" id="manualAttrsTopLayer">
+		  <div class="persistentText-default persistentText-default-attr" id="manualAttrsHeader">
+		    <strong>Custom</strong>
+		  </div>
+		  <div class="topText topText-attr" id="manualAttrsText">
+		    Assign attribute scores manually.
+		  </div>
+		</div>
+		<div class="bottomLayer">
+		  <div class="bottomText bottomText-attr" id="manualAttrsDescription">
+		    Enter scores into the attribute block above.
+		  </div>
+		</div>
+	      </div>
+	      </div>
+	    </div>
+	    </div>
 	  </div>
 	</div>
 	<div class="accordion">
@@ -786,7 +905,7 @@
 	</div>
 
 
-	<script>hideAttrSelects();hideGrowthButtons();</script>    
+	<script>hideAttrSelects();hideScoreSelects();hideGrowthButtons();</script>    
 	
 
 
