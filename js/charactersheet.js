@@ -1064,22 +1064,22 @@ function resetTemps(){
     tempSelections=["", "", "", "", "", ""];
 }
 
-let backgroundURL = 'https://noah-sennett.github.io/swn-character-creator/js/backgrounds.json';
+let backgroundURL = 'https://www.swncharactercreator.com/js/backgrounds.json';
 var backgrounds;
 
-let skillURL = 'https://noah-sennett.github.io/swn-character-creator/js/skill.json';
+let skillURL = 'https://www.swncharactercreator.com/js/skill.json';
 var skills;
 
-let fociURL = 'https://noah-sennett.github.io/swn-character-creator/js/foci.json';
+let fociURL = 'https://www.swncharactercreator.com/js/foci.json';
 var foci;
 
-let classURL = 'https://noah-sennett.github.io/swn-character-creator/js/class.json';
+let classURL = 'https://www.swncharactercreator.com/js/class.json';
 var classes;
 
-let psionicsURL = 'https://noah-sennett.github.io/swn-character-creator/js/psionics.json';
+let psionicsURL = 'https://www.swncharactercreator.com/js/psionics.json';
 var psionics;
 
-let packagesURL = 'https://noah-sennett.github.io/swn-character-creator/js/equipment_packages.json';
+let packagesURL = 'https://www.swncharactercreator.com/js/equipment_packages.json';
 var packages;
 
 
@@ -3982,7 +3982,7 @@ function generateExportURL(){
 	}
     }
 
-    var url="https://noah-sennett.github.io/swn-character-creator/?"+name_string+background_string+class_string+strength_string+dexterity_string+constitution_string+intelligence_string+wisdom_string+charisma_string+hp_string+equipment_string+homeworld_string+employer_string+species_string+growth_string+learning_string+picked_string+focus1_string+focus2_string+focus3_string+technique_string;
+    var url="https://www.swncharactercreator/?"+name_string+background_string+class_string+strength_string+dexterity_string+constitution_string+intelligence_string+wisdom_string+charisma_string+hp_string+equipment_string+homeworld_string+employer_string+species_string+growth_string+learning_string+picked_string+focus1_string+focus2_string+focus3_string+technique_string;
 
     url = url.slice(0,-1);
     
