@@ -20,6 +20,18 @@ $(document).ready(function () {
 	$( "#info_dialog" ).dialog( "open" );
     });
 
+    $('#supportButton').click(function(){
+	var win = window.open('https://www.buymeacoffee.com/swnPCbuilder', '_blank');
+	if (win) {
+	    //Browser has allowed it to be opened
+	    win.focus();
+	} else {
+	    //Browser has blocked it
+	    alert('Please allow popups for this website');
+	}
+    });
+	
+
     $("#randomCharacterButton").click(function(){
 	pickRandomName();
 	pickRandomAttributes();
