@@ -3982,7 +3982,7 @@ function generateExportURL(){
 	}
     }
 
-    var url="https://www.swncharactercreator/?"+name_string+background_string+class_string+strength_string+dexterity_string+constitution_string+intelligence_string+wisdom_string+charisma_string+hp_string+equipment_string+homeworld_string+employer_string+species_string+growth_string+learning_string+picked_string+focus1_string+focus2_string+focus3_string+technique_string;
+    var url="https://www.swncharactercreator.com/?"+name_string+background_string+class_string+strength_string+dexterity_string+constitution_string+intelligence_string+wisdom_string+charisma_string+hp_string+equipment_string+homeworld_string+employer_string+species_string+growth_string+learning_string+picked_string+focus1_string+focus2_string+focus3_string+technique_string;
 
     url = url.slice(0,-1);
     
