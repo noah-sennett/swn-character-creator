@@ -66,7 +66,7 @@ $(document).ready(function () {
 	modal: true,
 	dialogClass: 'no-close',
 	width: 800,
-	position:{my:"right bottom", at:"right top-10", of:"#shareButton"},
+	position:{my:"center bottom", at:"center bottom-48"},
 	buttons: {
 	    "Copy to Clipboard": function(){
 		markText($('#url_span')[0]);
