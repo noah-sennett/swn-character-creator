@@ -53,6 +53,29 @@ $(document).ready(function () {
 	
     });
 
+    var collapsedButtons = false;
+
+    $("#collapseExpandButton").click(function(){
+	if(collapsedButtons){
+	    $("#collapseExpandButton").html("<i class='fas fa-angle-double-right'></i>");
+	    $("#randomCharacterButton").html("<i class='fas fa-random'></i> Random Character");
+	    $("#printButton").html("<i class='fas fa-file-download'></i> Download");
+	    $("#shareButton").html("<i class='fas fa-share-alt'></i> Share");
+	    $("#infoButton").html("<i class='far fa-question-circle'></i> Information");
+	    $("#supportButton").html("<div class='BMClogo'></div> Support me!");
+
+	}
+	else{
+	    $("#collapseExpandButton").html("<i class='fas fa-angle-double-left'></i>");
+	    $("#randomCharacterButton").html("<i class='fas fa-random'></i>");
+	    $("#printButton").html("<i class='fas fa-file-download'></i>");
+	    $("#shareButton").html("<i class='fas fa-share-alt'></i>");
+	    $("#infoButton").html("<i class='far fa-question-circle'></i>");
+	    $("#supportButton").html("<div class='BMClogo'></div>");
+	}
+	collapsedButtons = !collapsedButtons;
+    });
+    
     
     $(".dialog_window").dialog({
 	autoOpen: false,
