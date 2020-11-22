@@ -1284,10 +1284,59 @@ function generateSkillTable(skills){
 	tbl.appendChild(skillBlock);
     }
 
-    var skillKeys=Object.keys(skills);
+    var skillKeys=Object.keys(skills).sort();
 
-    for(var i = 0; i < 9; i++){
-        for(var j = 0; j < 3; j++){
+    var nonPsychicSkillKeys = [];
+    var psychicSkillKeys = [];
+
+    for (var skillKey of skillKeys){
+	if(skills[skillKey]["psychic"]){
+	    psychicSkillKeys.push(skillKey);
+	}
+	else{
+	    nonPsychicSkillKeys.push(skillKey);
+	}
+    }
+
+    var height = Math.ceil((skillKeys.length+1)/3);
+
+    var skillTable;
+    switch((skillKeys.length+1)%3){
+    case 0: //0 blanks
+	if(psychicSkillKeys.length == height){
+	    skillTable = nonPsychicSkillKeys.concat(["","HEADER"]).concat(psychicSkillKeys).concat(["",""]);
+	    height++;
+	}
+	else{
+	    skillTable = nonPsychicSkillKeys.concat(["HEADER"]).concat(psychicSkillKeys);
+	}
+ 	break;
+    case 1: //2 blanks
+	if((psychicSkillKeys.length == height)||(psychicSkillKeys.length == height-2)){
+	    skillTable = nonPsychicSkillKeys.concat(["","HEADER"]).concat(psychicSkillKeys).concat([""]);
+	}
+	if((psychicSkillKeys.length == height-3)){
+	    skillTable = nonPsychicSkillKeys.concat(["HEADER"]).concat(psychicSkillKeys).concat(["",""]);
+	}
+	else{
+	    skillTable = nonPsychicSkillKeys.concat(["","","HEADER"]).concat(psychicSkillKeys);
+	}
+	break;
+    case 2: //1 blank
+	if((psychicSkillKeys.length == height)||(psychicSkillKeys.length == height-2)){
+	    skillTable = nonPsychicSkillKeys.concat(["HEADER"]).concat(psychicSkillKeys).concat([""]);
+	}
+	else{
+	    skillTable = nonPsychicSkillKeys.concat(["","HEADER"]).concat(psychicSkillKeys);
+	}
+	break;
+    }
+
+    var lastNonPsychicInd = skillTable.indexOf(nonPsychicSkillKeys[nonPsychicSkillKeys.length-1]);
+    var firstPsychicInd = skillTable.indexOf(psychicSkillKeys[0]);
+
+    for(var i = 0; i < height; i++){
+	for(var j = 0; j < 3; j++){
 	    var skillBlock = document.createElement('div');
 	    skillBlock.setAttribute("class","skillBlock");
 	    
@@ -1300,15 +1349,10 @@ function generateSkillTable(skills){
 	    var skillKey;
 	    var node;
 	    var tooltipNode;
+
+	    skillKey = skillTable[i+j*height];
 	    
-	    if (j < 2 || i==0){
-		skillKey = skillKeys[i+j*9];
-	    }
-	    else{
-		skillKey = skillKeys[i-2+j*9];
-	    }
-	    
-	    if ((j<2||i==0)|| i>2){
+	    if (skillKeys.includes(skillKey)){
 		
 		skillName.setAttribute("id",skillKey+'_label');
 		skillTotal.setAttribute("id",skillKey+'_total');
@@ -1322,6 +1366,7 @@ function generateSkillTable(skills){
 		tooltipNode = document.createElement('span');
 		tooltipNode.setAttribute("id",skillKey+'_tooltip');
 		tooltipNode.innerHTML = skills[skillKey]["description"];
+		
 		switch(j){
 		case 0:
 		    tooltipNode.setAttribute("class","tooltiptext leftcolumn");
@@ -1344,7 +1389,7 @@ function generateSkillTable(skills){
 	    }
 	    
 	    
-	    if ((j<2||i==0)|| i>2){
+	    if (skillKeys.includes(skillKey)){
 		
 		var box0=document.createElement('input');
 		var box1=document.createElement('input');
@@ -1394,7 +1439,7 @@ function generateSkillTable(skills){
 		skillBlock.setAttribute("id",skillKey+'_box');
 
 	    }
-	    else if(i==2 && j==2){
+	    else if(skillKey == "HEADER"){
 		skillBlock.setAttribute("class","heading");
 		var psychicLabel = document.createElement("div");
 		psychicLabel.innerHTML = "Psychic";
