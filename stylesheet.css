@@ -273,7 +273,7 @@ body{
 .topRow {
     display: grid;
     grid-template-columns: 253px auto;
-    font-size:1.0em;
+    font-size:16px;
     /* grid-template-columns: 255px auto; */
 }
 
