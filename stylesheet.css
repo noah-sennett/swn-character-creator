@@ -745,6 +745,7 @@ h2{
     bottom: 10px;
     right: 10px;
     column-gap: 3px;
+    z-index: 2;
 }
 
 .fixedButton {
