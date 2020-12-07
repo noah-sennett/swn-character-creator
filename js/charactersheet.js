@@ -1687,25 +1687,69 @@ function enableLearningChoices(){
 
     learning_choice_index = [];
     $("#learning option").off("mousedown");
+    $("#learning option").off("contextmenu");
+    $("#learning option").contextmenu(function(e){return false;});
     $("#learning option").mousedown(function(e) {
 	e.preventDefault();
-	if(!(this.selected)){
-	    this.selected=true;
-	    learning_choice_index.push(Array.from(elemLearning.options).indexOf(this));
-	    if (learning_choice_index.length>2){
-		(Array.from(elemLearning.options))[learning_choice_index.shift()].selected=false;
+	switch(e.which){
+	case 1:
+	    if(!(this.selected)){
+		this.selected=true;
+		var index = Array.from(elemLearning.options).indexOf(this);
+		learning_choice_index.push(index);
+		if (learning_choice_index.length>2){
+		    if (learning_choice_index[0] == learning_choice_index [1]){
+			(Array.from(elemLearning.options))[learning_choice_index[0]].selected=false;
+			learning_choice_index = [index];
+		}
+		    else{
+			(Array.from(elemLearning.options))[learning_choice_index.shift()].selected=false;
+		    }
+		}
 	    }
+	    else if(this.selected){
+		if (learning_choice_index.length<2){
+		    learning_choice_index.push(Array.from(elemLearning.options).indexOf(this));
+		}
+		else if (learning_choice_index[0] == learning_choice_index[1]){
+		    this.selected=false;
+		    learning_choice_index = [];
+		}
+		else{
+		    var ind = learning_choice_index.indexOf(Array.from(elemLearning.options).indexOf(this));
+		    var otherIndArr = learning_choice_index.concat();
+		    otherIndArr.splice(ind,1);
+		    var otherInd = otherIndArr[0];
+		    (elemLearning.options[otherInd]).selected = false;
+		    
+		    learning_choice_index = [Array.from(elemLearning.options).indexOf(this), Array.from(elemLearning.options).indexOf(this)];
+		}
+		//	    var ind = learning_choice_index.indexOf(Array.from(elemLearning.options).indexOf(this));
+		//	    learning_choice_index.splice(ind,1);
+	    }
+	    break;
+	case 3:
+	    if(this.selected){
+		if (learning_choice_index[0] != learning_choice_index[1]){
+		    this.selected=false;
+		}
+		var ind = learning_choice_index.indexOf(Array.from(elemLearning.options).indexOf(this));
+		learning_choice_index.splice(ind,1);
+	    }
+	    break;
+	default:
 	}
-	else if(this.selected){
-	    this.selected=false;
-	    var ind = learning_choice_index.indexOf(Array.from(elemLearning.options).indexOf(this));
-	    learning_choice_index.splice(ind,1);
+
+//	var temp =($("#learning").val());
+	var temp = [];
+	
+	for (var ind of learning_choice_index){
+	    temp.push(elemLearning.options[ind].value);
 	}
 
-	var temp =($("#learning").val());
 
-	if(temp==null) temp=[];
-
+//	if(temp==null) temp=[];
+	
 	if (learning_skills.includes("stab")){
 	    temp[temp.indexOf("stab or shoot")] = "stab" 
 	}
@@ -1718,7 +1762,7 @@ function enableLearningChoices(){
 	updateSkills();
 	return false;
     });
-
+    
 }
 
 
