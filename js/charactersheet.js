@@ -811,15 +811,16 @@ function setAttr(attrname, newValue){
 	let attrInputElem = document.getElementById(attrname+'_attr_input');
 	var ind=attrs.indexOf(attrname);
 	attrBases[ind] = newValue;
+	var total;
 	if(newValue !=""){
-	    attrElem.innerHTML= parseInt(newValue) + attrBonuses[ind];
-	    attrInputElem.value= parseInt(newValue) + attrBonuses[ind];
+	    total = parseInt(newValue) + attrBonuses[ind];
 	}
 	else{
-	    attrElem.innerHTML= newValue;
-	    attrInputElem.value= newValue;
+	    total = newValue;
 	}
-	updateMod(attrname, newValue);
+	attrElem.innerHTML= total;
+	attrInputElem.value = total;
+	updateMod(attrname, total);
     }
 }
 
