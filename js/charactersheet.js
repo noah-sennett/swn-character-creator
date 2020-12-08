@@ -540,6 +540,8 @@ var packagesDeferred = $.Deferred();
 var punch_stab_choice = "";
 var shoot_stab_choice = "";
 
+var combatSkillsConverted = false;
+
 /*
 Load info from js/backgrounds.json js/class.json js/foci.json  js/psionics.json js/equipment_packages.json js/skill.json and store in corresponding Objects.
 
@@ -1517,6 +1519,9 @@ function updateSkillBoxes(boxID){
 		    if (useCombatSkill() || useAnySkill()){
 			elemBoxes[i].checked=true;
 			picked_skills.push(skill);
+			if(i==1){
+			    convertCombatSkills();
+			}
 		    }
 		    else{
 			alert("Out of combat skill points!");
@@ -1562,6 +1567,11 @@ function updateSkillBoxes(boxID){
 		    }
 		}
 		else if(isCombat){
+		    if (i==1 && combatSkillsConverted){
+			combatSkillsConverted = false;
+			updateSkills();
+			return;
+		    }
 		    if(any_skill_remaining < any_skill_bank){
 			addAnySkill();
 			any_skill_bank--;
@@ -1868,10 +1878,14 @@ function incrementFixedSkill(skill){
     }
     else if (skill == "any skill"){
 	addAnySkill();
-	
     }
     else if (skill == "any combat"){
-	addCombatSkill();
+	if(combatLevelOne()){
+	    addAnySkill();
+	}
+	else{
+	    addCombatSkill();
+	}
     } 
     else if (skill == "any noncombat"){
 	addNonCombatSkill();
@@ -1955,6 +1969,9 @@ function incrementFixedSkill(skill){
 			    foci_skills[ind]=choice;
 			    $("input[name=punchstab]").prop("checked",false).change();
 			    incrementFixedSkill(choice);
+			    if(combatLevelOne()){
+				convertCombatSkills();
+			    }
 			    punch_stab_choice = choice;
 			    $(this).dialog("close");
 			}
@@ -1979,6 +1996,9 @@ function incrementFixedSkill(skill){
 			learning_skills[ind]=choice;
 			$("input[name=stabshoot]").prop("checked",false).change();
 			incrementFixedSkill(choice);
+			if(combatLevelOne()){
+			    convertCombatSkills();
+			}
 			shoot_stab_choice = choice;
 			$(this).dialog("close");
 		    }
@@ -2014,6 +2034,15 @@ function addAnySkill(){
     elemSkillDotBox.appendChild(tooltipNode);
     
     elem.insertBefore(elemSkillDotBox,fillerElem);
+}
+
+function combatLevelOne(){
+
+    var elemShot = document.getElementById("shoot_rank_box_1");
+    var elemStab = document.getElementById("stab_rank_box_1");
+    var elemPunch = document.getElementById("punch_rank_box_1");
+    return (elemShot.checked||elemStab.checked||elemPunch.checked);
+    
 }
 
 function addCombatSkill(){
@@ -2110,6 +2139,20 @@ function useAnySkill(){
     else{
 	return false;
     }
+}
+
+function convertCombatSkills(){
+
+    var redDots = document.getElementsByClassName("reddot");
+    while (redDots.length>0){
+	redDots[0].parentElement.remove();
+	addAnySkill();
+    }
+    combat_skill_bank=0;
+    combat_skill_remaining=0;
+
+    combatSkillsConverted = true;
+
 }
 
 function useCombatSkill(){
@@ -2376,7 +2419,7 @@ function updateSkills(){
 
     var total_skills = background_skills.concat(foci_skills,learning_skills,growth_skills,class_skills);
     
-    for (var skill of total_skills) incrementFixedSkill(skill);
+    for (var skill of total_skills.sort().reverse()) incrementFixedSkill(skill);
 
     for (var attr of attrs) checkAttr(attr);
 
